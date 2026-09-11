@@ -1,0 +1,24 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Runtime logs and local settings
+logs/*
+!logs/.gitkeep
+Documents/
+/settings.json
+
+# Unreal generated output
+external/AirSim/Unreal/Environments/Blocks/Binaries/
+external/AirSim/Unreal/Environments/Blocks/Build/
+external/AirSim/Unreal/Environments/Blocks/Intermediate/
+external/AirSim/Unreal/Environments/Blocks/Saved/
+external/AirSim/Unreal/Environments/Blocks/DerivedDataCache/
+external/AirSim/Unreal/Environments/Blocks/Plugins/AirSim/Binaries/
+external/AirSim/Unreal/Environments/Blocks/Plugins/AirSim/Intermediate/
+
+# Native build output and downloaded archives
+external/AirSim/**/build/
+downloads/

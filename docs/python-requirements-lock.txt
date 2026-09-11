@@ -1,0 +1,7 @@
+-e git+https://github.com/microsoft/AirSim.git@d109f0dc25d4ae425eca7b279da33df5f5fcb42e#egg=airsim&subdirectory=pythonclient
+msgpack-python==0.5.6
+msgpack-rpc-python==0.4.1
+numpy==1.26.4
+opencv-contrib-python==4.10.0.84
+packaging==26.3
+tornado==4.5.3

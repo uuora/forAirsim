@@ -1,0 +1,12 @@
+{
+  "Timestamp": "2026-09-08T14:42:54.4606724+08:00",
+  "UnrealEditor": true,
+  "UnrealBuildScript": true,
+  "AirLibRelease": true,
+  "BlocksPlugin": true,
+  "BlocksPluginBinary": true,
+  "Python": true,
+  "WindowsSDK19041": false,
+  "FreeDiskGB": 44.8,
+  "AirSimCommit": "d109f0dc25d4ae425eca7b279da33df5f5fcb42e"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "BalloonTarget",
+  "position_ned_m": [0.0, 0.0, -3.0],
+  "scale": [1.2, 1.2, 1.5],
+  "color_rgb": [235, 35, 55],
+  "string_length_m": 1.8,
+  "segmentation_id": 42
+}

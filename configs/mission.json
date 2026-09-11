@@ -1,0 +1,29 @@
+{
+  "vehicles": ["DroneA", "DroneB"],
+  "target_name": "BalloonTarget",
+  "target_world_ned_m": [0.0, 0.0, -3.0],
+  "pads_world_ned_m": {
+    "DroneA": [-5.0, -4.0, -3.0],
+    "DroneB": [-5.0, 4.0, -3.0]
+  },
+  "staging_world_ned_m": {
+    "DroneA": [-5.0, -4.0, -3.0],
+    "DroneB": [-5.0, 4.0, -3.0]
+  },
+  "approach_world_ned_m": [-2.0, 0.0, -3.0],
+  "test_parameters": {
+    "deliberate_miss_offset_y_m": -2.0
+  },
+  "perception": {
+    "confirm_frames": 2,
+    "lost_frames": 3,
+    "alignment_deadband": 0.10,
+    "stop_distance_m": 1.50,
+    "role": "advisory_only"
+  },
+  "safety": {
+    "minimum_drone_separation_m": 2.0,
+    "maximum_waiting_drift_m": 0.5,
+    "contact_timeout_s": 18.0
+  }
+}
