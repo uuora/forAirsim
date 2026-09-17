@@ -1,0 +1,156 @@
+[
+  {
+    "key": "airsim_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/978-3-319-67361-5_40?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:43.223702+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/978-3-319-67361-5_40?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\airsim_s2.json",
+    "sha256": "6fece41b71595abb48e8120a04892140f3b68a8f4ddd11006179bab02c1ac43e",
+    "bytes": 2008
+  },
+  {
+    "key": "seadrones_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/wacv51458.2022.00374?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:43.224924+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/wacv51458.2022.00374?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\seadrones_s2.json",
+    "sha256": "222cebfd2840687ed6aaff06b54d42ce2180feb8422972256daaeac0bc97dfe7",
+    "bytes": 2246
+  },
+  {
+    "key": "mods_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/tits.2021.3124192?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:44.556670+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/tits.2021.3124192?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\mods_s2.json",
+    "sha256": "3b6ee3c01a966c47b1718319d13b12d41b3d35de5ff12c3fa33f4f3f1f73e73a",
+    "bytes": 2648
+  },
+  {
+    "key": "zhang_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/34.888718?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:45.278566+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/34.888718?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\zhang_s2.json",
+    "sha256": "0bd886532374ee8b63ae2e625c449ef084e6141cc1c0ea3ff099f36b86d9dc95",
+    "bytes": 911
+  },
+  {
+    "key": "kalibr_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/iros.2013.6696514?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:45.422526+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/iros.2013.6696514?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\kalibr_s2.json",
+    "sha256": "71ab1e3582c0b178af8f2d4b8472aca8f0fb46aabbc0ac996162d8cbd55e495f",
+    "bytes": 1043
+  },
+  {
+    "key": "vins_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/tro.2018.2853729?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:45.991495+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/tro.2018.2853729?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\vins_s2.json",
+    "sha256": "2613be0ae0b58aade57c5e5d1523fb264dc5874ee840bf81d1cad3c7a67cf7dd",
+    "bytes": 2610
+  },
+  {
+    "key": "orbslam3_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/tro.2021.3075644?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:46.317017+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/tro.2021.3075644?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\orbslam3_s2.json",
+    "sha256": "c2b430b1198a8a413f37d82b5b5ba3f5aca9a7e5d8fc41b83c11906e6af76cab",
+    "bytes": 2689
+  },
+  {
+    "key": "raftstereo_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/3dv53792.2021.00032?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:46.848366+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/3dv53792.2021.00032?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\raftstereo_s2.json",
+    "sha256": "1ad8a97337298b241dc092accfbf16db0f763cfd4a95e0d207186be90893693b",
+    "bytes": 1469
+  },
+  {
+    "key": "yolov7_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/cvpr52729.2023.00721?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:47.525422+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/cvpr52729.2023.00721?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\yolov7_s2.json",
+    "sha256": "cfcdd6e0af20b40c43c68359b13f17d31eca4a87c5aacd425884f38b8b148d46",
+    "bytes": 1751
+  },
+  {
+    "key": "bytetrack_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/978-3-031-20047-2_1?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:47.681273+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/978-3-031-20047-2_1?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\bytetrack_s2.json",
+    "sha256": "577b82481653d98284a3529850d43d0e47f39b674c0ea4f406ea959f6216bb5d",
+    "bytes": 2467
+  },
+  {
+    "key": "hota_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/s11263-020-01375-2?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:48.623896+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/s11263-020-01375-2?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\hota_s2.json",
+    "sha256": "1e10bad741fce4d43b1faafb62b46b6b2653197687d50ba2b9c65a6214e01cb4",
+    "bytes": 2124
+  },
+  {
+    "key": "react_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2210.03629?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:48.679867+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 429: ''>"
+  },
+  {
+    "key": "saycan_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2204.01691?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:49.358315+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 429: ''>"
+  },
+  {
+    "key": "aoi_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/jsac.2021.3065072?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:49.375379+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/jsac.2021.3065072?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\aoi_s2.json",
+    "sha256": "181869585e4628be9c3df50ad62e020c117613cf097a9120792f555c99757374",
+    "bytes": 2166
+  },
+  {
+    "key": "fresh_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/infcom.2012.6195689?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:50.067138+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/infcom.2012.6195689?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\fresh_s2.json",
+    "sha256": "a279b0854be96bbc44a2ae31a7af43e83d646879ca6e770869fbe44e42aa7374",
+    "bytes": 1088
+  },
+  {
+    "key": "searchrescue_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/ssrr.2019.8848932?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:50.409383+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/ssrr.2019.8848932?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\searchrescue_s2.json",
+    "sha256": "25f32a741c08a199dad2f7ee9d0b612ebfd25238f4e41419ef5544e07fc68310",
+    "bytes": 2392
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "categories": [{"id": 0, "name": "vessel"}, {"id": 1, "name": "balloon"}],
+  "targets": [
+    {"id": "vessel_001", "category_id": 0, "actor_pattern": "MH2_Vessel_(Hull|White|Deck|Windows|Orange|Metal|Rubber)(_[0-9]+)?", "expected_components": 7},
+    {"id": "balloon_001", "category_id": 1, "color": "red", "actor_pattern": "MH2_Balloon_0(_[0-9]+)?", "expected_components": 1},
+    {"id": "balloon_002", "category_id": 1, "color": "yellow", "actor_pattern": "MH2_Balloon_1(_[0-9]+)?", "expected_components": 1},
+    {"id": "balloon_003", "category_id": 1, "color": "red", "actor_pattern": "MH2_Balloon_2(_[0-9]+)?", "expected_components": 1}
+  ]
+}

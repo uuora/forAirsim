@@ -41,6 +41,9 @@ def start_camera_monitor():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scenario", choices=("a_hit", "fallback", "both", "vision", "visual_range", "visual_contact", "visual_fallback"), default="fallback")
+    parser.add_argument("--attempt-mode", choices=("fault_injection", "observation"),
+                        default="fault_injection",
+                        help="For visual_fallback: retain the injected A miss or assess it from observations")
     parser.add_argument("--check", action="store_true", help="Check launcher dependencies without starting or flying")
     args = parser.parse_args()
     for path in (EDITOR, PROJECT, ROOT / "python/setup_scene.py", ROOT / "python/run_balloon_mission.py",
@@ -83,7 +86,7 @@ def main():
             print('Visual handoff contact test completed. Both vehicles landed; simulation paused.')
             return
         if scenario == 'visual_fallback':
-            run_script('run_visual_fallback.py')
+            run_script('run_visual_fallback.py', '--attempt-mode', args.attempt_mode)
             print('Visual fallback test completed. Both vehicles landed; simulation paused.')
             return
         if scenario == "vision":

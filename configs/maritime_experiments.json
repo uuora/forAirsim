@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "map": "/Game/MaritimeHarborV2/Maps/MaritimeHarbor",
+  "seed": 20260915,
+  "seed_scope": "reserved for sampling; these profiles contain no random draws; UE render phase is not seeded",
+  "profiles": {
+    "baseline": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false},
+    "low_sun": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -8, "sun_yaw_deg": 35, "occlusion": false},
+    "raised_waves": {"wave_material": "M_OceanRaised", "wave_amplitude_bound_m": 0.645, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false},
+    "occlusion": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": true}
+  }
+}

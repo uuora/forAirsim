@@ -11,17 +11,26 @@ def summarize(rows):
     grouped = defaultdict(list)
     for row in rows:
         target_offset = tuple(row.get("target_offset_ned_m") or (0.0, 0.0, 0.0))
-        grouped[(row["scenario"], row.get("miss_offset_y_m"), target_offset)].append(row)
+        evaluation_mode = row.get("evaluation_mode", "UNKNOWN")
+        policy_id = row.get("policy_id", "legacy_unmarked")
+        grouped[(row["scenario"], evaluation_mode, policy_id,
+                 row.get("miss_offset_y_m"), target_offset)].append(row)
     output = []
-    for scenario, miss_offset, target_offset in sorted(
-            grouped, key=lambda key: (key[0], float("-inf") if key[1] is None else key[1], key[2])):
-        items = grouped[(scenario, miss_offset, target_offset)]
+    for scenario, evaluation_mode, policy_id, miss_offset, target_offset in sorted(
+            grouped, key=lambda key: (key[0], key[1], key[2],
+                                      float("-inf") if key[3] is None else key[3], key[4])):
+        items = grouped[(scenario, evaluation_mode, policy_id, miss_offset, target_offset)]
         separations = [float(x["min_separation_m"]) for x in items if x.get("min_separation_m") is not None]
         drifts = [float(x["max_waiting_drift_m"]) for x in items if x.get("max_waiting_drift_m") is not None]
         delays = [float(x["miss_to_dispatch_s"]) for x in items if x.get("miss_to_dispatch_s") is not None]
+        visual_modes = [x.get("visual_final_mode") for x in items if x.get("visual_final_mode")]
+        first_attempt_modes = [x.get("a_visual_final_mode") for x in items
+                               if x.get("a_visual_final_mode")]
         passed = sum(x["status"] == "PASS" for x in items)
         output.append({
             "scenario": scenario,
+            "evaluation_mode": evaluation_mode,
+            "policy_id": policy_id,
             "miss_offset_y_m": miss_offset,
             "target_offset_ned_m": list(target_offset),
             "runs": len(items),
@@ -32,23 +41,40 @@ def summarize(rows):
             "maximum_waiting_drift_m": max(drifts) if drifts else None,
             "mean_miss_to_dispatch_s": statistics.fmean(delays) if delays else None,
             "stdev_miss_to_dispatch_s": statistics.stdev(delays) if len(delays) >= 2 else None,
+            "visual_collision_runs": (sum(x == "visual_collision" for x in visual_modes)
+                                      if visual_modes else None),
+            "coordinate_contact_runs": (
+                sum(x == "visual_gate_coordinate_contact" for x in visual_modes)
+                if visual_modes else None),
+            "a_visual_collision_runs": (sum(x == "visual_collision" for x in first_attempt_modes)
+                                        if first_attempt_modes else None),
+            "a_visual_handoff_runs": (
+                sum(x == "handoff_after_visual_failure" for x in first_attempt_modes)
+                if first_attempt_modes else None),
         })
     return output
 
 
 def render_markdown(result):
     lines = ["# AirSim 批量验证汇总", "", f"唯一任务运行数：{result['unique_runs']}", "",
-             "| 场景 | 漏击偏差 Y (m) | 目标偏移 NED (m) | 通过/总数 | 通过率 | 最小间距 (m) | 最大待命漂移 (m) | 平均漏击到派发 (s) | 样本标准差 (s) |",
-             "| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
+             "| 场景 | 评估模式 | 策略 | 漏击偏差 Y (m) | 目标偏移 NED (m) | 通过/总数 | 通过率 | 最小间距 (m) | 最大待命漂移 (m) | 平均漏击到派发 (s) | 样本标准差 (s) | A视觉命中/接替；B纯视觉/坐标收尾 |",
+             "| --- | --- | --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for row in result["by_scenario"]:
         show = lambda value, digits=4: "—" if value is None else f"{value:.{digits}f}"
         offset = "未记录/不适用" if row["miss_offset_y_m"] is None else show(row["miss_offset_y_m"], 1)
         target = ", ".join(show(value, 1) for value in row["target_offset_ned_m"])
-        lines.append("| {scenario} | {offset} | [{target}] | {passed}/{runs} | {rate} | {sep} | {drift} | {delay} | {stdev} |".format(
-            scenario=row["scenario"], offset=offset, target=target, passed=row["passed"], runs=row["runs"],
+        final_modes = ("—" if row.get("visual_collision_runs") is None else
+                       f"{row['visual_collision_runs']}/{row['coordinate_contact_runs']}")
+        first_modes = ("—" if row.get("a_visual_collision_runs") is None else
+                       f"{row['a_visual_collision_runs']}/{row['a_visual_handoff_runs']}")
+        lines.append("| {scenario} | {mode} | {policy} | {offset} | [{target}] | {passed}/{runs} | {rate} | {sep} | {drift} | {delay} | {stdev} | {final_modes} |".format(
+            scenario=row["scenario"], mode=row.get("evaluation_mode", "UNKNOWN"),
+            policy=row.get("policy_id", "legacy_unmarked"), offset=offset, target=target,
+            passed=row["passed"], runs=row["runs"],
             rate=show(row["pass_rate"] * 100, 1) + "%", sep=show(row["minimum_separation_m"]),
             drift=show(row["maximum_waiting_drift_m"]), delay=show(row["mean_miss_to_dispatch_s"]),
-            stdev=show(row["stdev_miss_to_dispatch_s"])))
+            stdev=show(row["stdev_miss_to_dispatch_s"]),
+            final_modes=f"A {first_modes}; B {final_modes}"))
     lines.extend(["", "> 这些结果只覆盖已记录的固定 Blocks 场景，不能直接代表动态目标或新环境的成功率。", ""])
     return "\n".join(lines)
 

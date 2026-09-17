@@ -1,0 +1,32 @@
+[
+  {
+    "key": "seadrones_paper",
+    "url": "https://openaccess.thecvf.com/content/WACV2022/papers/Varga_SeaDronesSee_A_Maritime_Benchmark_for_Detecting_Humans_in_Open_Water_WACV_2022_paper.pdf",
+    "retrieved_at": "2026-09-15T12:48:21.678789+00:00",
+    "status": 200,
+    "final_url": "https://openaccess.thecvf.com/content/WACV2022/papers/Varga_SeaDronesSee_A_Maritime_Benchmark_for_Detecting_Humans_in_Open_Water_WACV_2022_paper.pdf",
+    "path": "sources\\seadrones_paper.pdf",
+    "sha256": "40a62d4493bff50da14c794c35d93b1a46eecff9ffa9e0bc201e283189a5946b",
+    "bytes": 4184266
+  },
+  {
+    "key": "airsim_paper",
+    "url": "https://arxiv.org/pdf/1705.05065",
+    "retrieved_at": "2026-09-15T12:48:21.679887+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/pdf/1705.05065",
+    "path": "sources\\airsim_paper.pdf",
+    "sha256": "c9666f7413abf1333c0f1386941d5cd1de65cca5d61c66639cf254d3d9365398",
+    "bytes": 10334025
+  },
+  {
+    "key": "raftstereo_paper",
+    "url": "https://arxiv.org/pdf/2109.07547",
+    "retrieved_at": "2026-09-15T12:48:21.680519+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/pdf/2109.07547",
+    "path": "sources\\raftstereo_paper.pdf",
+    "sha256": "5867f5510ebe460a241e4a44c60f79bdf9988859c626c9b49f484435361a5732",
+    "bytes": 12329144
+  }
+]

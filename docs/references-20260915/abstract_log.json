@@ -1,0 +1,86 @@
+[
+  {
+    "key": "seadrones_arxiv",
+    "url": "https://arxiv.org/abs/2105.01915",
+    "retrieved_at": "2026-09-15T12:46:11.304828+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2105.01915",
+    "path": "sources\\seadrones_arxiv.html",
+    "sha256": "393aef2c1a3a84118819d7764147de9a7b9a543889c6d44d403173ac130d3d61",
+    "bytes": 46389
+  },
+  {
+    "key": "vins_arxiv",
+    "url": "https://arxiv.org/abs/1708.03852",
+    "retrieved_at": "2026-09-15T12:46:11.305866+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/1708.03852",
+    "path": "sources\\vins_arxiv.html",
+    "sha256": "20b3479cf3fefaa3aa95cd21d5a2fda464865567af2f89558b964387463a3efe",
+    "bytes": 44461
+  },
+  {
+    "key": "orbslam3_arxiv",
+    "url": "https://arxiv.org/abs/2007.11898",
+    "retrieved_at": "2026-09-15T12:46:11.306433+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2007.11898",
+    "path": "sources\\orbslam3_arxiv.html",
+    "sha256": "1692f760aae68154d74c9dd2b58718e7d942614c62d6cea9a51907af14c47430",
+    "bytes": 45310
+  },
+  {
+    "key": "raftstereo_arxiv",
+    "url": "https://arxiv.org/abs/2109.07547",
+    "retrieved_at": "2026-09-15T12:46:31.563951+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2109.07547",
+    "path": "sources\\raftstereo_arxiv.html",
+    "sha256": "06311fffa2655f9b2d0933fbaf76f215caef4db6be983cd6b190ffc31b7ee2ba",
+    "bytes": 39676
+  },
+  {
+    "key": "yolov7_arxiv",
+    "url": "https://arxiv.org/abs/2207.02696",
+    "retrieved_at": "2026-09-15T12:46:34.680336+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2207.02696",
+    "path": "sources\\yolov7_arxiv.html",
+    "sha256": "363081e38367b838dcb443801b0e94b766343071ce9b9758def2def396894a84",
+    "bytes": 40664
+  },
+  {
+    "key": "bytetrack_arxiv",
+    "url": "https://arxiv.org/abs/2110.06864",
+    "retrieved_at": "2026-09-15T12:46:36.878914+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2110.06864",
+    "path": "sources\\bytetrack_arxiv.html",
+    "sha256": "26b4b6d533fa185f3507fcd92690f4c5ce28e5ed051f7d056db40713baf47329",
+    "bytes": 43701
+  },
+  {
+    "key": "hota_arxiv",
+    "url": "https://arxiv.org/abs/2009.07736",
+    "retrieved_at": "2026-09-15T12:46:37.405275+00:00",
+    "status": "unavailable",
+    "error": "URLError(TimeoutError('_ssl.c:1015: The handshake operation timed out'))"
+  },
+  {
+    "key": "aoi_arxiv",
+    "url": "https://arxiv.org/abs/2007.08564",
+    "retrieved_at": "2026-09-15T12:46:41.102770+00:00",
+    "status": "unavailable",
+    "error": "TimeoutError('The read operation timed out')"
+  },
+  {
+    "key": "mods_arxiv",
+    "url": "https://arxiv.org/abs/2105.02359",
+    "retrieved_at": "2026-09-15T12:46:44.383314+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2105.02359",
+    "path": "sources\\mods_arxiv.html",
+    "sha256": "27e0552422c3c11be036a1ad4e7f98b45422e138dcea98c39cee3beb1ec0661d",
+    "bytes": 45879
+  }
+]

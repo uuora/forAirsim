@@ -23,6 +23,26 @@
           "Roll": 0,
           "Yaw": 0
         }
+      },
+      "Sensors": {
+        "Imu": { "SensorType": 2, "Enabled": true },
+        "Barometer": { "SensorType": 1, "Enabled": true },
+        "Gps": { "SensorType": 3, "Enabled": true },
+        "Magnetometer": { "SensorType": 4, "Enabled": true },
+        "DistanceFront": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 20.0,
+          "X": 1.0, "Y": 0, "Z": 0,
+          "Yaw": 0, "Pitch": 0, "Roll": 0,
+          "ExternalController": false
+        },
+        "DistanceDown": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 10.0,
+          "X": 0, "Y": 0, "Z": 0,
+          "Yaw": 0, "Pitch": -90, "Roll": 0,
+          "ExternalController": false
+        }
       }
     },
     "DroneB": {
@@ -43,6 +63,26 @@
           "Pitch": 0,
           "Roll": 0,
           "Yaw": 0
+        }
+      },
+      "Sensors": {
+        "Imu": { "SensorType": 2, "Enabled": true },
+        "Barometer": { "SensorType": 1, "Enabled": true },
+        "Gps": { "SensorType": 3, "Enabled": true },
+        "Magnetometer": { "SensorType": 4, "Enabled": true },
+        "DistanceFront": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 20.0,
+          "X": 1.0, "Y": 0, "Z": 0,
+          "Yaw": 0, "Pitch": 0, "Roll": 0,
+          "ExternalController": false
+        },
+        "DistanceDown": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 10.0,
+          "X": 0, "Y": 0, "Z": 0,
+          "Yaw": 0, "Pitch": -90, "Roll": 0,
+          "ExternalController": false
         }
       }
     }

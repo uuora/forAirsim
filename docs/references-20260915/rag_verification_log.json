@@ -1,0 +1,74 @@
+[
+  {
+    "key": "adaptive_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.18653/v1/2024.naacl-long.389?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:54:01.204939+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 404: 'Not Found'>"
+  },
+  {
+    "key": "rag_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2005.11401?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:54:01.206384+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 429: ''>"
+  },
+  {
+    "key": "selfrag_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2310.11511?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:54:01.207137+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 429: ''>"
+  },
+  {
+    "key": "lora_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2106.09685?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:54:02.411401+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 429: ''>"
+  },
+  {
+    "key": "qwen_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2412.15115?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:54:02.633325+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 429: ''>"
+  },
+  {
+    "key": "latentrag_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2605.06285?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:54:03.141453+00:00",
+    "status": "unavailable",
+    "error": "<HTTPError 429: ''>"
+  },
+  {
+    "key": "adaptive_paper",
+    "url": "https://aclanthology.org/2024.naacl-long.389.pdf",
+    "retrieved_at": "2026-09-15T12:54:03.370844+00:00",
+    "status": 200,
+    "final_url": "https://aclanthology.org/2024.naacl-long.389.pdf",
+    "path": "sources\\adaptive_paper.pdf",
+    "sha256": "1e5abee712c5d8552416b2fd456bcf2c37a0ba518372e64302db2b7b7bdf643f",
+    "bytes": 436634
+  },
+  {
+    "key": "rag_paper",
+    "url": "https://arxiv.org/pdf/2005.11401",
+    "retrieved_at": "2026-09-15T12:54:04.148409+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/pdf/2005.11401",
+    "path": "sources\\rag_paper.pdf",
+    "sha256": "23e3249e9a1e75418d82efecab0ea8c4d033b89c93742f63208d47ce01f21233",
+    "bytes": 885323
+  },
+  {
+    "key": "lora_paper",
+    "url": "https://arxiv.org/pdf/2106.09685",
+    "retrieved_at": "2026-09-15T12:54:04.176646+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/pdf/2106.09685",
+    "path": "sources\\lora_paper.pdf",
+    "sha256": "e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a",
+    "bytes": 1609513
+  }
+]

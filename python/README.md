@@ -92,6 +92,18 @@ does not show a camera feed.
 The monitor moves the lens to `(X=1.0, Y=0, Z=-0.05)` in each vehicle's local
 NED frame so the rotor frame is outside the view.
 
+## YOLO saved-image and live snapshot baseline
+
+`yolo_detector.py` wraps official pretrained YOLO11n and explicitly maps COCO `boat`
+to the project `vessel` candidate and `sports ball` to `balloon`. It does not issue
+flight commands. `run_yolo_baseline.py` evaluates the saved five-view image set and
+writes separate JSONL predictions and previews. `capture_yolo_live_snapshot.py` reads
+one current frame from each AirSim vehicle without taking API control. Use
+`Run-YOLO-Baseline.cmd` and `Run-YOLO-Live-Snapshot.cmd`; see
+`docs/YOLO目标识别基线.md` for evidence and limitations. The provisional 0.25 mapping
+threshold is demonstration-only, and this detector has not replaced the mission's
+validated color-based control input.
+
 ## Basic framework modules
 
 - `configs/mission.json`: vehicle names, world-NED pads, staging/approach points and safety limits.
@@ -100,8 +112,25 @@ NED frame so the rotor frame is outside the view.
 - `perception_state.py`: converts consecutive camera observations into temporal tracking states.
 - `analyze_perception.py`: summarizes raw detections, tracking states and depth samples by phase and vehicle.
 - `guidance_advisor.py`: emits auditable `HOLD`, alignment, `ADVANCE` or `STOP` advice without commanding a vehicle.
+- `attempt_assessment.py`: labels one bounded visual contact attempt and exposes handoff/completion eligibility without reading target pose or issuing commands.
 - `recover_airborne.py`: returns both vehicles to their pads after an airborne abort, verifies landing, disarms and releases API control.
 - `coordinator.py`: flight-independent A-first/B-fallback arbitration. It refuses a B dispatch until A has missed and the corridor is explicitly clear.
+- `onboard_sensors.py`: advisory 1 Hz snapshots of each vehicle's named IMU,
+  barometer, GPS, magnetometer and front/down distance sensors, including raw
+  timestamps, validity, freshness and per-sensor error counts.
+
+## Onboard sensor telemetry
+
+Install `configs/settings.json` and restart Blocks after changing sensor definitions.
+Run `& .venv/python.exe python/check_onboard_sensors.py` for a one-shot RPC check;
+it writes `logs/sensors_<timestamp>/sensor_report.json`. Normal mission telemetry
+samples both vehicles at approximately 1 Hz and stores the accumulated health
+counts in `report.json`. This first integration is advisory: simulator pose and the
+existing controllers remain unchanged while sensor latency, noise and disagreement
+data are collected. A distance reading above its declared maximum is recorded as
+`saturated`; a reading below the declared minimum is flagged `below_minimum` because
+AirSim uses that minimum primarily as MAVLink metadata. Negative or non-finite
+distance remains invalid.
 
 The mission runner now reads its geometry, safety limits and perception thresholds
 from `MissionConfig`. Camera observations are logged alongside the collision-based
@@ -128,6 +157,21 @@ Use `--target-offset X Y Z` to move the balloon and the corresponding approach/c
 route together. The initial test harness limits X/Y to ±1.0 m and Z to ±0.5 m around
 the inspected target position. Batch summaries keep different target offsets in
 separate rows.
+
+For repeated center-target visual fallback validation, run
+`& .venv/python.exe python/batch_validate.py --repeats 3 --scenarios visual_fallback`.
+The batch report records visual-frame counts and whether the final segment reached
+collision under vision or used the validated coordinate-contact fallback. It stops
+at the first failure and intentionally rejects target/miss offsets until visual
+observation points have been calibrated for those cases.
+
+The default visual fallback keeps the deliberate A miss as a labelled fault
+injection. To exercise the new observation-assessed first attempt, run
+`& .venv/python.exe python/run_visual_fallback.py --attempt-mode observation`.
+The assessor records fresh tracking, temporary loss, unrecovered loss, timeout
+and target-collision states; it never treats target disappearance or object
+removal as a hit. The observation mode is an AirSim candidate path and must be
+validated with the T01–T12 cases before it is used for paper metrics.
 
 `configs/validation_matrix.json` lists named position cases. Run one case with
 `& .venv/python.exe python/matrix_validate.py --case y_plus_05`, or omit `--case`
@@ -162,15 +206,22 @@ validated three-dimensional localization. This demo does not touch the balloon.
 Double-click `Run-Visual-Fallback.cmd` to run the full two-vehicle handoff. The
 launcher restores the balloon and requires both vehicles landed with API control
 released. DroneA moves to its validated camera observation point, approaches with
-RGB/depth feedback, then the test deliberately marks A as a miss and clears the
-corridor. DroneB is dispatched only after that event, moves to its own validated
+RGB/depth feedback, then the default test deliberately marks A as a labelled
+fault-injection miss and clears the corridor. DroneB is dispatched only after that event, moves to its own validated
 observation point, performs the same visual approach and range stop, and then
-uses the tested final contact route. The final result is accepted only when a new
+starts a visually gated, distance-bounded final dash. Once the target is centered
+inside 1.5 m, the dash may continue through close-range camera occlusion for at
+most 1.35 m while altitude, separation and collision checks remain active. If no
+collision occurs inside that bound, the runner records the reason and uses the
+tested coordinate-contact fallback. The final result is accepted only when a new
 `BalloonTarget` collision names DroneB; both vehicles must then land and release
 API control. Reports and annotated RGB frames are written to
 `logs/mission_visual_fallback_<timestamp>/`.
 
 This is the first visual double-vehicle fallback integration. Visual perception
-controls approach gating and low-speed alignment; collision remains the authoritative
-hit judge. The deliberate A miss is a deterministic test branch, not a learned
-miss predictor.
+controls approach gating and low-speed alignment; the committed dash is based on
+the last valid visual lock but does not claim continuous visibility through body
+occlusion. Collision remains the authoritative hit judge. The deliberate A miss
+is a deterministic test branch, not a learned miss predictor. The optional
+`--attempt-mode observation` path replaces that branch with the independent
+contact-attempt assessment layer; it is not yet a claimed performance result.

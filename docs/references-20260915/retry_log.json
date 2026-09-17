@@ -1,0 +1,109 @@
+[
+  {
+    "key": "seadrones",
+    "url": "https://api.crossref.org/works?query.title=SeaDronesSee+A+Maritime+Benchmark+for+Detecting+Humans+in+Open+Water&rows=3",
+    "retrieved_at": "2026-09-15T12:45:19.915709+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=SeaDronesSee+A+Maritime+Benchmark+for+Detecting+Humans+in+Open+Water&rows=3",
+    "path": "sources\\seadrones.json",
+    "sha256": "3db929874ed64efade43ba29e700f21c18f5b8caa5de5925f1e16309325b6cf9",
+    "bytes": 25931
+  },
+  {
+    "key": "kalibr",
+    "url": "https://api.crossref.org/works?query.title=Unified+temporal+and+spatial+calibration+for+multi-sensor+systems&rows=3",
+    "retrieved_at": "2026-09-15T12:45:19.916658+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=Unified+temporal+and+spatial+calibration+for+multi-sensor+systems&rows=3",
+    "path": "sources\\kalibr.json",
+    "sha256": "8bf936dee7b92b387c99305f074649026a06735b8a23fb2df516eb6895540c9d",
+    "bytes": 29190
+  },
+  {
+    "key": "orbslam3",
+    "url": "https://api.crossref.org/works?query.title=ORB-SLAM3+An+Accurate+Open-Source+Library+for+Visual+Visual-Inertial+and+Multimap+SLAM&rows=3",
+    "retrieved_at": "2026-09-15T12:45:22.267138+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=ORB-SLAM3+An+Accurate+Open-Source+Library+for+Visual+Visual-Inertial+and+Multimap+SLAM&rows=3",
+    "path": "sources\\orbslam3.json",
+    "sha256": "603bd173adbc9eabc2c863b93c253f8fa23f41abaa58ec9cd18a4bc6a92fa9ee",
+    "bytes": 21997
+  },
+  {
+    "key": "yolov7",
+    "url": "https://api.crossref.org/works?query.title=YOLOv7+Trainable+bag-of-freebies+sets+new+state-of-the-art+for+real-time+object+detectors&rows=3",
+    "retrieved_at": "2026-09-15T12:45:23.009349+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=YOLOv7+Trainable+bag-of-freebies+sets+new+state-of-the-art+for+real-time+object+detectors&rows=3",
+    "path": "sources\\yolov7.json",
+    "sha256": "889c22564ca2aa61e14c544fe734c138d13e842f0b5742e21afd71bdd85e6eb3",
+    "bytes": 26656
+  },
+  {
+    "key": "bytetrack",
+    "url": "https://api.crossref.org/works?query.title=ByteTrack+Multi-Object+Tracking+by+Associating+Every+Detection+Box&rows=3",
+    "retrieved_at": "2026-09-15T12:45:24.792054+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=ByteTrack+Multi-Object+Tracking+by+Associating+Every+Detection+Box&rows=3",
+    "path": "sources\\bytetrack.json",
+    "sha256": "83d6bb301103ec5ccb5cac1b4c0406d2fbc78b92249d07dd9d2e73219d449333",
+    "bytes": 41250
+  },
+  {
+    "key": "hota",
+    "url": "https://api.crossref.org/works?query.title=HOTA+A+Higher+Order+Metric+for+Evaluating+Multi-object+Tracking&rows=3",
+    "retrieved_at": "2026-09-15T12:45:24.874034+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=HOTA+A+Higher+Order+Metric+for+Evaluating+Multi-object+Tracking&rows=3",
+    "path": "sources\\hota.json",
+    "sha256": "68e8e602b7a9c8de8b04156dea9d884f1c6a8b69bd3d6eeeb98ddeb9b9559d53",
+    "bytes": 40338
+  },
+  {
+    "key": "react",
+    "url": "https://api.crossref.org/works?query.title=ReAct+Synergizing+Reasoning+and+Acting+in+Language+Models&rows=3",
+    "retrieved_at": "2026-09-15T12:45:27.456475+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=ReAct+Synergizing+Reasoning+and+Acting+in+Language+Models&rows=3",
+    "path": "sources\\react.json",
+    "sha256": "0cbc032d159c9acbfb3c7c5a8075e241eba764a0a305cdd564f30a683ede5d4f",
+    "bytes": 75048
+  },
+  {
+    "key": "aoi",
+    "url": "https://api.crossref.org/works?query.title=Age+of+Information+An+Introduction+and+Survey&rows=3",
+    "retrieved_at": "2026-09-15T12:45:28.000899+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=Age+of+Information+An+Introduction+and+Survey&rows=3",
+    "path": "sources\\aoi.json",
+    "sha256": "b78ea57d4f7b0303e76029d0f408fb92fc18e2545bf602abe8ab9d51d07eee1f",
+    "bytes": 41085
+  },
+  {
+    "key": "fresh",
+    "url": "https://api.crossref.org/works?query.title=Real-time+status+How+often+should+one+update&rows=3",
+    "retrieved_at": "2026-09-15T12:45:30.517346+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works?query.title=Real-time+status+How+often+should+one+update&rows=3",
+    "path": "sources\\fresh.json",
+    "sha256": "aa466aa4b73df7b40ecb209c8f44aa832291724efbbaa4f4d08fc89658a7136e",
+    "bytes": 39711
+  },
+  {
+    "key": "lmucs_crossref",
+    "url": "https://api.crossref.org/works?query.title=LMUCS%20Lightweight%20LLM%20Driven%20UAV&rows=3",
+    "retrieved_at": "2026-09-15T12:45:31.312022+00:00",
+    "status": "unavailable",
+    "error": "TimeoutError('The read operation timed out')"
+  },
+  {
+    "key": "kalibr_arxiv",
+    "url": "https://arxiv.org/abs/1409.1073",
+    "retrieved_at": "2026-09-15T12:45:33.563720+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/1409.1073",
+    "path": "sources\\kalibr_arxiv.html",
+    "sha256": "9c8dda85e63453f574d23f0696bcea07863fcae4a7c4157b5149da488a21127e",
+    "bytes": 42903
+  }
+]

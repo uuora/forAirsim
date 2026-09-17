@@ -1,0 +1,195 @@
+{
+  "search_queries": {
+    "airsim": "AirSim High-Fidelity Visual and Physical Simulation for Autonomous Vehicles",
+    "seadrones": "SeaDronesSee A Maritime Benchmark for Detecting Humans in Open Water",
+    "mods": "MODS A USV-oriented object detection and obstacle segmentation benchmark",
+    "zhang": "A flexible new technique for camera calibration",
+    "kalibr": "Unified temporal and spatial calibration for multi-sensor systems",
+    "vins": "VINS-Mono A Robust and Versatile Monocular Visual-Inertial State Estimator",
+    "orbslam3": "ORB-SLAM3 An Accurate Open-Source Library for Visual Visual-Inertial and Multimap SLAM",
+    "raftstereo": "RAFT-Stereo Multilevel Recurrent Field Transforms for Stereo Matching",
+    "yolov7": "YOLOv7 Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors",
+    "bytetrack": "ByteTrack Multi-Object Tracking by Associating Every Detection Box",
+    "hota": "HOTA A Higher Order Metric for Evaluating Multi-object Tracking",
+    "react": "ReAct Synergizing Reasoning and Acting in Language Models",
+    "saycan": "Do As I Can Not As I Say Grounding Language in Robotic Affordances",
+    "aoi": "Age of Information An Introduction and Survey",
+    "fresh": "Real-time status How often should one update",
+    "searchrescue": "Unmanned aerial vehicles for maritime search and rescue"
+  },
+  "requests": [
+    {
+      "key": "seadrones",
+      "url": "https://api.crossref.org/works?query.title=SeaDronesSee+A+Maritime+Benchmark+for+Detecting+Humans+in+Open+Water&rows=3",
+      "retrieved_at": "2026-09-15T12:44:18.321998+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "mods",
+      "url": "https://api.crossref.org/works?query.title=MODS+A+USV-oriented+object+detection+and+obstacle+segmentation+benchmark&rows=3",
+      "retrieved_at": "2026-09-15T12:44:18.322743+00:00",
+      "status": 200,
+      "final_url": "https://api.crossref.org/works?query.title=MODS+A+USV-oriented+object+detection+and+obstacle+segmentation+benchmark&rows=3",
+      "path": "sources\\mods.json",
+      "sha256": "f51a624141fd0346e8004596220d9970a971788c3a7f7b852308c8284f8cc3e2",
+      "bytes": 28394
+    },
+    {
+      "key": "kalibr",
+      "url": "https://api.crossref.org/works?query.title=Unified+temporal+and+spatial+calibration+for+multi-sensor+systems&rows=3",
+      "retrieved_at": "2026-09-15T12:44:19.498297+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "airsim",
+      "url": "https://api.crossref.org/works?query.title=AirSim+High-Fidelity+Visual+and+Physical+Simulation+for+Autonomous+Vehicles&rows=3",
+      "retrieved_at": "2026-09-15T12:44:18.321095+00:00",
+      "status": 200,
+      "final_url": "https://api.crossref.org/works?query.title=AirSim+High-Fidelity+Visual+and+Physical+Simulation+for+Autonomous+Vehicles&rows=3",
+      "path": "sources\\airsim.json",
+      "sha256": "49850e592b0aa13a1b8a66ad3e0882dfa23d5eacd6e8fded1bfee15b351e08c1",
+      "bytes": 19956
+    },
+    {
+      "key": "zhang",
+      "url": "https://api.crossref.org/works?query.title=A+flexible+new+technique+for+camera+calibration&rows=3",
+      "retrieved_at": "2026-09-15T12:44:18.323432+00:00",
+      "status": 200,
+      "final_url": "https://api.crossref.org/works?query.title=A+flexible+new+technique+for+camera+calibration&rows=3",
+      "path": "sources\\zhang.json",
+      "sha256": "93d326806703bef0fe3e0cd9032d30f55810e5b871016323ef9bbfda0b7f371d",
+      "bytes": 23555
+    },
+    {
+      "key": "orbslam3",
+      "url": "https://api.crossref.org/works?query.title=ORB-SLAM3+An+Accurate+Open-Source+Library+for+Visual+Visual-Inertial+and+Multimap+SLAM&rows=3",
+      "retrieved_at": "2026-09-15T12:44:20.856974+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "yolov7",
+      "url": "https://api.crossref.org/works?query.title=YOLOv7+Trainable+bag-of-freebies+sets+new+state-of-the-art+for+real-time+object+detectors&rows=3",
+      "retrieved_at": "2026-09-15T12:44:21.497943+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "bytetrack",
+      "url": "https://api.crossref.org/works?query.title=ByteTrack+Multi-Object+Tracking+by+Associating+Every+Detection+Box&rows=3",
+      "retrieved_at": "2026-09-15T12:44:21.784332+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "vins",
+      "url": "https://api.crossref.org/works?query.title=VINS-Mono+A+Robust+and+Versatile+Monocular+Visual-Inertial+State+Estimator&rows=3",
+      "retrieved_at": "2026-09-15T12:44:20.586526+00:00",
+      "status": 200,
+      "final_url": "https://api.crossref.org/works?query.title=VINS-Mono+A+Robust+and+Versatile+Monocular+Visual-Inertial+State+Estimator&rows=3",
+      "path": "sources\\vins.json",
+      "sha256": "e56795aa168f16b5eed820d52d3caff577fa1bed8726a60541d2653e593ef2d7",
+      "bytes": 17275
+    },
+    {
+      "key": "hota",
+      "url": "https://api.crossref.org/works?query.title=HOTA+A+Higher+Order+Metric+for+Evaluating+Multi-object+Tracking&rows=3",
+      "retrieved_at": "2026-09-15T12:44:22.363152+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "react",
+      "url": "https://api.crossref.org/works?query.title=ReAct+Synergizing+Reasoning+and+Acting+in+Language+Models&rows=3",
+      "retrieved_at": "2026-09-15T12:44:22.648122+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "raftstereo",
+      "url": "https://api.crossref.org/works?query.title=RAFT-Stereo+Multilevel+Recurrent+Field+Transforms+for+Stereo+Matching&rows=3",
+      "retrieved_at": "2026-09-15T12:44:21.148391+00:00",
+      "status": 200,
+      "final_url": "https://api.crossref.org/works?query.title=RAFT-Stereo+Multilevel+Recurrent+Field+Transforms+for+Stereo+Matching&rows=3",
+      "path": "sources\\raftstereo.json",
+      "sha256": "d7968b6b47eaf008b4f8a710dd2fc8cbbb2da539a22d193640793c697b6b2513",
+      "bytes": 19713
+    },
+    {
+      "key": "aoi",
+      "url": "https://api.crossref.org/works?query.title=Age+of+Information+An+Introduction+and+Survey&rows=3",
+      "retrieved_at": "2026-09-15T12:44:23.252643+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "fresh",
+      "url": "https://api.crossref.org/works?query.title=Real-time+status+How+often+should+one+update&rows=3",
+      "retrieved_at": "2026-09-15T12:44:23.485638+00:00",
+      "status": "unavailable",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "saycan",
+      "url": "https://api.crossref.org/works?query.title=Do+As+I+Can+Not+As+I+Say+Grounding+Language+in+Robotic+Affordances&rows=3",
+      "retrieved_at": "2026-09-15T12:44:22.941003+00:00",
+      "status": 200,
+      "final_url": "https://api.crossref.org/works?query.title=Do+As+I+Can+Not+As+I+Say+Grounding+Language+in+Robotic+Affordances&rows=3",
+      "path": "sources\\saycan.json",
+      "sha256": "25cf4a2ef030632864b57b62b79f728f545f650e2435a9d4654dd7946c2ff411",
+      "bytes": 18786
+    },
+    {
+      "key": "lmucs_github",
+      "url": "https://api.github.com/repos/wp19991/LMUCS/readme",
+      "retrieved_at": "2026-09-15T12:44:24.264926+00:00",
+      "status": 200,
+      "final_url": "https://api.github.com/repos/wp19991/LMUCS/readme",
+      "path": "sources\\lmucs_github.json",
+      "sha256": "723f1883de22c7410759d0b671d5a750e60c833f041b1904a59e7a7a8f20db7e",
+      "bytes": 12545
+    },
+    {
+      "key": "searchrescue",
+      "url": "https://api.crossref.org/works?query.title=Unmanned+aerial+vehicles+for+maritime+search+and+rescue&rows=3",
+      "retrieved_at": "2026-09-15T12:44:24.118355+00:00",
+      "status": 200,
+      "final_url": "https://api.crossref.org/works?query.title=Unmanned+aerial+vehicles+for+maritime+search+and+rescue&rows=3",
+      "path": "sources\\searchrescue.json",
+      "sha256": "f3cf6a776ef8bafd59fc531b309006c724c7acc56e83b319ac2f2212f1b9b37c",
+      "bytes": 15061
+    },
+    {
+      "key": "saycan_arxiv",
+      "url": "https://arxiv.org/abs/2204.01691",
+      "retrieved_at": "2026-09-15T12:44:25.227728+00:00",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2204.01691",
+      "path": "sources\\saycan_arxiv.html",
+      "sha256": "6d5f957d099eff18d25746ad9c1ed054c9a13afdf927c2c89de94399f09ccae9",
+      "bytes": 50714
+    },
+    {
+      "key": "react_arxiv",
+      "url": "https://arxiv.org/abs/2210.03629",
+      "retrieved_at": "2026-09-15T12:44:24.900940+00:00",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2210.03629",
+      "path": "sources\\react_arxiv.html",
+      "sha256": "66a324b6bf6075b6534db3df10867474023791818c05099d5d6e7e776a624d87",
+      "bytes": 44231
+    },
+    {
+      "key": "airsim_arxiv",
+      "url": "https://arxiv.org/abs/1705.05065",
+      "retrieved_at": "2026-09-15T12:44:24.319248+00:00",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/1705.05065",
+      "path": "sources\\airsim_arxiv.html",
+      "sha256": "58d6e6ac074a7dcde5bf7503c1b6687c42421b61ed04f17f97ae6f06fad10274",
+      "bytes": 42761
+    }
+  ]
+}
