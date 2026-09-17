@@ -1,7 +1,13 @@
 -e git+https://github.com/microsoft/AirSim.git@d109f0dc25d4ae425eca7b279da33df5f5fcb42e#egg=airsim&subdirectory=pythonclient
 msgpack-python==0.5.6
+# Float depth needs locally rebuilt compiled extensions; see MessagePack加速重建.md.
 msgpack-rpc-python==0.4.1
 numpy==1.26.4
+opencv-python==4.10.0.84
 opencv-contrib-python==4.10.0.84
 packaging==26.3
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+ultralytics==8.4.153
 tornado==4.5.3
+# Install torch/torchvision from https://download.pytorch.org/whl/cu128.

@@ -22,3 +22,14 @@ external/AirSim/Unreal/Environments/Blocks/Plugins/AirSim/Intermediate/
 # Native build output and downloaded archives
 external/AirSim/**/build/
 downloads/
+
+# Local capture sessions and generated scene assets
+datasets/
+assets/
+models/
+
+# Downloaded publisher PDFs are kept locally, not redistributed
+docs/references-20260915/sources/*.pdf
+
+# Editor-local settings (absolute local paths)
+.vscode/

@@ -1,0 +1,1448 @@
+{
+  "schema": "bounded-bibliography-v1",
+  "last_searched_at": "2026-09-15",
+  "scope": "Lightweight language agent and adaptive RAG for maritime SAR; two UAVs are observation sources, not assumed stereo",
+  "entries": [
+    {
+      "key": "adaptive",
+      "title": "Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity",
+      "authors": [
+        {
+          "given": "Soyeong",
+          "family": "Jeong"
+        },
+        {
+          "given": "Jinheon",
+          "family": "Baek"
+        },
+        {
+          "given": "Sukmin",
+          "family": "Cho"
+        },
+        {
+          "given": "Sung Ju",
+          "family": "Hwang"
+        },
+        {
+          "given": "Jong",
+          "family": "Park"
+        }
+      ],
+      "year": 2024,
+      "doi": "10.18653/v1/2024.naacl-long.389",
+      "arxiv_id": null,
+      "venue": "Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)",
+      "pages": "7036-7050",
+      "publication_type": "proceedings-article",
+      "url": "https://aclanthology.org/2024.naacl-long.389/",
+      "metadata_source": "sources/adaptive_crossref.json",
+      "abstract": "Retrieval-Augmented Large Language Models (LLMs), which incorporate the non-parametric knowledge from external knowledge bases into LLMs, have emerged as a promising approach to enhancing response accuracy in several tasks, such as Question-Answering (QA). However, even though there are various approaches dealing with queries of different complexities, they either handle simple queries with unnecessary computational overhead or fail to adequately address complex multi-step queries; yet, not all user requests fall into only one of the simple or complex categories. In this work, we propose a novel adaptive QA framework that can dynamically select the most suitable strategy for (retrieval-augmented) LLMs from the simplest to the most sophisticated ones based on the query complexity. Also, this selection process is operationalized with a classifier, which is a smaller LM trained to predict the complexity level of incoming queries with automatically collected labels, obtained from actual predicted outcomes of models and inherent inductive biases in datasets. This approach offers a balanced strategy, seamlessly adapting between the iterative and single-step retrieval-augmented LLMs, as well as the no-retrieval methods, in response to a range of query complexities. We validate our model on a set of open-domain QA datasets, covering multiple query complexities, and show that ours enhances the overall efficiency and accuracy of QA systems, compared to relevant baselines including the adaptive retrieval approaches. Code is available at:  https://github.com/starsuzi/Adaptive-RAG .",
+      "abstract_source": "sources/adaptive_acl.html",
+      "verification_status": "ACL_AND_CROSSREF_METADATA_VERIFIED",
+      "category": "自适应检索",
+      "reading_order": 1,
+      "chapter_use": "第2章最近邻方法；第3章复杂度路由基线",
+      "reading_task": "按问题复杂度在无检索、单次与迭代检索间选择，用作必须比较的最近邻基线。",
+      "cannot_support": "换成海事语料本身不能构成创新；须比较观测时效/冲突信号是否带来额外价值。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "read_scope": "abstract_only",
+      "research_role": "主线"
+    },
+    {
+      "key": "rag",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors": [
+        {
+          "family": "Lewis",
+          "given": "Patrick"
+        },
+        {
+          "family": "Perez",
+          "given": "Ethan"
+        },
+        {
+          "family": "Piktus",
+          "given": "Aleksandra"
+        },
+        {
+          "family": "Petroni",
+          "given": "Fabio"
+        },
+        {
+          "family": "Karpukhin",
+          "given": "Vladimir"
+        },
+        {
+          "family": "Goyal",
+          "given": "Naman"
+        },
+        {
+          "family": "Küttler",
+          "given": "Heinrich"
+        },
+        {
+          "family": "Lewis",
+          "given": "Mike"
+        },
+        {
+          "family": "Yih",
+          "given": "Wen-tau"
+        },
+        {
+          "family": "Rocktäschel",
+          "given": "Tim"
+        },
+        {
+          "family": "Riedel",
+          "given": "Sebastian"
+        },
+        {
+          "family": "Kiela",
+          "given": "Douwe"
+        }
+      ],
+      "year": 2020,
+      "arxiv_id": "2005.11401",
+      "doi": null,
+      "venue": "arXiv",
+      "publication_type": "preprint",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "metadata_source": "sources/rag_arxiv.html",
+      "abstract": "Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.",
+      "abstract_source": "sources/rag_arxiv.html",
+      "verification_status": "ARXIV_METADATA_VERIFIED",
+      "category": "检索增强基础",
+      "reading_order": 2,
+      "chapter_use": "第2章 RAG；第3章单次检索基线",
+      "reading_task": "理解参数知识与非参数知识库的结合，确定检索证据与生成输出的关系。",
+      "cannot_support": "原始 RAG 训练体系不是任意本地脚本的直接复现；不能用其问答成绩证明海事报告正确。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "read_scope": "abstract_only",
+      "research_role": "主线"
+    },
+    {
+      "key": "selfrag",
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+      "authors": [
+        {
+          "family": "Asai",
+          "given": "Akari"
+        },
+        {
+          "family": "Wu",
+          "given": "Zeqiu"
+        },
+        {
+          "family": "Wang",
+          "given": "Yizhong"
+        },
+        {
+          "family": "Sil",
+          "given": "Avirup"
+        },
+        {
+          "family": "Hajishirzi",
+          "given": "Hannaneh"
+        }
+      ],
+      "year": 2023,
+      "arxiv_id": "2310.11511",
+      "doi": null,
+      "venue": "arXiv",
+      "publication_type": "preprint",
+      "url": "https://arxiv.org/abs/2310.11511",
+      "metadata_source": "sources/selfrag_arxiv.html",
+      "abstract": "Despite their remarkable capabilities, large language models (LLMs) often produce responses containing factual inaccuracies due to their sole reliance on the parametric knowledge they encapsulate. Retrieval-Augmented Generation (RAG), an ad hoc approach that augments LMs with retrieval of relevant knowledge, decreases such issues. However, indiscriminately retrieving and incorporating a fixed number of retrieved passages, regardless of whether retrieval is necessary, or passages are relevant, diminishes LM versatility or can lead to unhelpful response generation. We introduce a new framework called Self-Reflective Retrieval-Augmented Generation (Self-RAG) that enhances an LM's quality and factuality through retrieval and self-reflection. Our framework trains a single arbitrary LM that adaptively retrieves passages on-demand, and generates and reflects on retrieved passages and its own generations using special tokens, called reflection tokens. Generating reflection tokens makes the LM controllable during the inference phase, enabling it to tailor its behavior to diverse task requirements. Experiments show that Self-RAG (7B and 13B parameters) significantly outperforms state-of-the-art LLMs and retrieval-augmented models on a diverse set of tasks. Specifically, Self-RAG outperforms ChatGPT and retrieval-augmented Llama2-chat on Open-domain QA, reasoning and fact verification tasks, and it shows significant gains in improving factuality and citation accuracy for long-form generations relative to these models.",
+      "abstract_source": "sources/selfrag_arxiv.html",
+      "verification_status": "ARXIV_METADATA_VERIFIED",
+      "category": "自适应检索",
+      "reading_order": 3,
+      "chapter_use": "第2章检索决策/证据评价；第3章对照设计",
+      "reading_task": "参考按需检索与反思 token 对检索内容和生成内容的检查机制。",
+      "cannot_support": "论文的 7B/13B 实验不能直接作为 0.5B—1.5B 模型的效果或显存保证；简单提示检查不等于复现 Self-RAG。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "read_scope": "abstract_only",
+      "research_role": "主线"
+    },
+    {
+      "key": "lmucs",
+      "title": "LMUCS: Lightweight LLM-driven UAV control system with multimodal perception for autonomous material search and localization",
+      "authors": [
+        {
+          "given": "Peng",
+          "family": "Wang"
+        },
+        {
+          "given": "Zhenhao",
+          "family": "Shuai"
+        },
+        {
+          "given": "Kun",
+          "family": "Wang"
+        },
+        {
+          "given": "Qichao",
+          "family": "Li"
+        },
+        {
+          "given": "Liyu",
+          "family": "Liu"
+        },
+        {
+          "given": "Fangfu",
+          "family": "Ye"
+        },
+        {
+          "given": "Jianwei",
+          "family": "Shuai"
+        }
+      ],
+      "year": 2026,
+      "doi": "10.1016/j.ast.2026.112949",
+      "venue": "Aerospace Science and Technology",
+      "publication_type": "journal-article",
+      "volume": "177",
+      "issue": null,
+      "pages": "112949",
+      "metadata_source": "sources/lmucs_crossref.json",
+      "semantic_scholar_id": "25f0294b7186684d1bea4cd51de55ab2da13d087",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": null,
+      "arxiv_id": null,
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2026,
+            10
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1016/j.ast.2026.112949",
+      "abstract_source": null,
+      "read_scope": "unknown",
+      "category": "轻量 Agent",
+      "reading_order": 4,
+      "chapter_use": "第2章轻量无人机语言系统；第3章指令理解与延迟基线",
+      "reading_task": "参考仓库的指令解析、检测、单目深度模块划分；核对指令准确率和边缘延迟评价。",
+      "cannot_support": "论文元数据与仓库分别核验，未读论文正文；README 的 MiDaS 是单目深度，不能支持双机双目创新或本项目实机性能。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "publication_timing_note": "Crossref print issue 2026-10 is later than search date 2026-09-15; DOI registered 2026-06-22 and resolved. Do not infer exact online-publication date. Content notes derive only from repository README.",
+      "research_role": "主线"
+    },
+    {
+      "key": "lora",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": [
+        {
+          "family": "Hu",
+          "given": "Edward J."
+        },
+        {
+          "family": "Shen",
+          "given": "Yelong"
+        },
+        {
+          "family": "Wallis",
+          "given": "Phillip"
+        },
+        {
+          "family": "Allen-Zhu",
+          "given": "Zeyuan"
+        },
+        {
+          "family": "Li",
+          "given": "Yuanzhi"
+        },
+        {
+          "family": "Wang",
+          "given": "Shean"
+        },
+        {
+          "family": "Wang",
+          "given": "Lu"
+        },
+        {
+          "family": "Chen",
+          "given": "Weizhu"
+        }
+      ],
+      "year": 2021,
+      "arxiv_id": "2106.09685",
+      "doi": null,
+      "venue": "arXiv",
+      "publication_type": "preprint",
+      "url": "https://arxiv.org/abs/2106.09685",
+      "metadata_source": "sources/lora_arxiv.html",
+      "abstract": "An important paradigm of natural language processing consists of large-scale pre-training on general domain data and adaptation to particular tasks or domains. As we pre-train larger models, full fine-tuning, which retrains all model parameters, becomes less feasible. Using GPT-3 175B as an example -- deploying independent instances of fine-tuned models, each with 175B parameters, is prohibitively expensive. We propose Low-Rank Adaptation, or LoRA, which freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks. Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times. LoRA performs on-par or better than fine-tuning in model quality on RoBERTa, DeBERTa, GPT-2, and GPT-3, despite having fewer trainable parameters, a higher training throughput, and, unlike adapters, no additional inference latency. We also provide an empirical investigation into rank-deficiency in language model adaptation, which sheds light on the efficacy of LoRA. We release a package that facilitates the integration of LoRA with PyTorch models and provide our implementations and model checkpoints for RoBERTa, DeBERTa, and GPT-2 at https://github.com/microsoft/LoRA.",
+      "abstract_source": "sources/lora_arxiv.html",
+      "verification_status": "ARXIV_METADATA_VERIFIED",
+      "category": "轻量模型训练",
+      "reading_order": 5,
+      "chapter_use": "第2章参数高效微调；第3章训练设置",
+      "reading_task": "参考冻结基础权重、训练低秩适配参数的方式，将微调与检索增益分开实验。",
+      "cannot_support": "不能由可训练参数少推断 RTX 3070 8GB 一定可运行任意上下文/批量；实际显存与延迟必须测量。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "read_scope": "abstract_only",
+      "research_role": "主线"
+    },
+    {
+      "key": "qwen",
+      "title": "Qwen2.5 Technical Report",
+      "authors": [
+        {
+          "family": "Qwen",
+          "given": ""
+        },
+        {
+          "family": "Yang",
+          "given": "An"
+        },
+        {
+          "family": "Yang",
+          "given": "Baosong"
+        },
+        {
+          "family": "Zhang",
+          "given": "Beichen"
+        },
+        {
+          "family": "Hui",
+          "given": "Binyuan"
+        },
+        {
+          "family": "Zheng",
+          "given": "Bo"
+        },
+        {
+          "family": "Yu",
+          "given": "Bowen"
+        },
+        {
+          "family": "Li",
+          "given": "Chengyuan"
+        },
+        {
+          "family": "Liu",
+          "given": "Dayiheng"
+        },
+        {
+          "family": "Huang",
+          "given": "Fei"
+        },
+        {
+          "family": "Wei",
+          "given": "Haoran"
+        },
+        {
+          "family": "Lin",
+          "given": "Huan"
+        },
+        {
+          "family": "Yang",
+          "given": "Jian"
+        },
+        {
+          "family": "Tu",
+          "given": "Jianhong"
+        },
+        {
+          "family": "Zhang",
+          "given": "Jianwei"
+        },
+        {
+          "family": "Yang",
+          "given": "Jianxin"
+        },
+        {
+          "family": "Yang",
+          "given": "Jiaxi"
+        },
+        {
+          "family": "Zhou",
+          "given": "Jingren"
+        },
+        {
+          "family": "Lin",
+          "given": "Junyang"
+        },
+        {
+          "family": "Dang",
+          "given": "Kai"
+        },
+        {
+          "family": "Lu",
+          "given": "Keming"
+        },
+        {
+          "family": "Bao",
+          "given": "Keqin"
+        },
+        {
+          "family": "Yang",
+          "given": "Kexin"
+        },
+        {
+          "family": "Yu",
+          "given": "Le"
+        },
+        {
+          "family": "Li",
+          "given": "Mei"
+        },
+        {
+          "family": "Xue",
+          "given": "Mingfeng"
+        },
+        {
+          "family": "Zhang",
+          "given": "Pei"
+        },
+        {
+          "family": "Zhu",
+          "given": "Qin"
+        },
+        {
+          "family": "Men",
+          "given": "Rui"
+        },
+        {
+          "family": "Lin",
+          "given": "Runji"
+        },
+        {
+          "family": "Li",
+          "given": "Tianhao"
+        },
+        {
+          "family": "Tang",
+          "given": "Tianyi"
+        },
+        {
+          "family": "Xia",
+          "given": "Tingyu"
+        },
+        {
+          "family": "Ren",
+          "given": "Xingzhang"
+        },
+        {
+          "family": "Ren",
+          "given": "Xuancheng"
+        },
+        {
+          "family": "Fan",
+          "given": "Yang"
+        },
+        {
+          "family": "Su",
+          "given": "Yang"
+        },
+        {
+          "family": "Zhang",
+          "given": "Yichang"
+        },
+        {
+          "family": "Wan",
+          "given": "Yu"
+        },
+        {
+          "family": "Liu",
+          "given": "Yuqiong"
+        },
+        {
+          "family": "Cui",
+          "given": "Zeyu"
+        },
+        {
+          "family": "Zhang",
+          "given": "Zhenru"
+        },
+        {
+          "family": "Qiu",
+          "given": "Zihan"
+        }
+      ],
+      "year": 2024,
+      "arxiv_id": "2412.15115",
+      "doi": null,
+      "venue": "arXiv",
+      "publication_type": "preprint",
+      "url": "https://arxiv.org/abs/2412.15115",
+      "metadata_source": "sources/qwen_arxiv.html",
+      "abstract": "In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet diverse needs. Compared to previous iterations, Qwen 2.5 has been significantly improved during both the pre-training and post-training stages. In terms of pre-training, we have scaled the high-quality pre-training datasets from the previous 7 trillion tokens to 18 trillion tokens. This provides a strong foundation for common sense, expert knowledge, and reasoning capabilities. In terms of post-training, we implement intricate supervised finetuning with over 1 million samples, as well as multistage reinforcement learning. Post-training techniques enhance human preference, and notably improve long text generation, structural data analysis, and instruction following. To handle diverse and varied use cases effectively, we present Qwen2.5 LLM series in rich sizes. Open-weight offerings include base and instruction-tuned models, with quantized versions available. In addition, for hosted solutions, the proprietary models currently include two mixture-of-experts (MoE) variants: Qwen2.5-Turbo and Qwen2.5-Plus, both available from Alibaba Cloud Model Studio. Qwen2.5 has demonstrated top-tier performance on a wide range of benchmarks evaluating language understanding, reasoning, mathematics, coding, human preference alignment, etc. Specifically, the open-weight flagship Qwen2.5-72B-Instruct outperforms a number of open and proprietary models and demonstrates competitive performance to the state-of-the-art open-weight model, Llama-3-405B-Instruct, which is around 5 times larger. Qwen2.5-Turbo and Qwen2.5-Plus offer superior cost-effectiveness while performing competitively against GPT-4o-mini and GPT-4o respectively. Additionally, as the foundation, Qwen2.5 models have been instrumental in training specialized models such as Qwen2.5-Math, Qwen2.5-Coder, QwQ, and multimodal models.",
+      "abstract_source": "sources/qwen_arxiv.html",
+      "verification_status": "ARXIV_METADATA_VERIFIED",
+      "metadata_cleanup_note": "arXiv citation_author has a standalone colon separator; removed punctuation-only entry, retained Qwen group and named authors.",
+      "category": "轻量模型训练",
+      "reading_order": 6,
+      "chapter_use": "第2章基础模型；第3章模型选择",
+      "reading_task": "从模型系列技术报告追溯候选模型与训练背景，再核对具体 checkpoint 的模型卡和许可证。",
+      "cannot_support": "技术报告是作者自述的预印本；不能把系列最大模型成绩归到 0.5B/1.5B，也不保证当前硬件微调成功。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "read_scope": "abstract_only",
+      "research_role": "主线"
+    },
+    {
+      "key": "react",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": [
+        {
+          "family": "Yao",
+          "given": "Shunyu"
+        },
+        {
+          "family": "Zhao",
+          "given": "Jeffrey"
+        },
+        {
+          "family": "Yu",
+          "given": "Dian"
+        },
+        {
+          "family": "Du",
+          "given": "Nan"
+        },
+        {
+          "family": "Shafran",
+          "given": "Izhak"
+        },
+        {
+          "family": "Narasimhan",
+          "given": "Karthik"
+        },
+        {
+          "family": "Cao",
+          "given": "Yuan"
+        }
+      ],
+      "year": 2022,
+      "arxiv_id": "2210.03629",
+      "venue": "arXiv",
+      "publication_type": "preprint",
+      "doi": null,
+      "verification_status": "ARXIV_METADATA_VERIFIED",
+      "metadata_source": "sources/react_arxiv.html",
+      "abstract": "While large language models (LLMs) have demonstrated impressive capabilities across tasks in language understanding and interactive decision making, their abilities for reasoning (e.g. chain-of-thought prompting) and acting (e.g. action plan generation) have primarily been studied as separate topics. In this paper, we explore the use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans as well as handle exceptions, while actions allow it to interface with external sources, such as knowledge bases or environments, to gather additional information. We apply our approach, named ReAct, to a diverse set of language and decision making tasks and demonstrate its effectiveness over state-of-the-art baselines, as well as improved human interpretability and trustworthiness over methods without reasoning or acting components. Concretely, on question answering (HotpotQA) and fact verification (Fever), ReAct overcomes issues of hallucination and error propagation prevalent in chain-of-thought reasoning by interacting with a simple Wikipedia API, and generates human-like task-solving trajectories that are more interpretable than baselines without reasoning traces. On two interactive decision making benchmarks (ALFWorld and WebShop), ReAct outperforms imitation and reinforcement learning methods by an absolute success rate of 34% and 10% respectively, while being prompted with only one or two in-context examples. Project site with code: https://react-lm.github.io",
+      "read_scope": "abstract_only",
+      "abstract_source": "sources/react_arxiv.html",
+      "url": "https://arxiv.org/abs/2210.03629",
+      "category": "轻量 Agent",
+      "reading_order": 7,
+      "chapter_use": "第2章 Agent 工作流",
+      "reading_task": "参考推理与行动交替、根据外部反馈更新计划的任务组织方式。",
+      "cannot_support": "语言/交互任务上的收益不证明 UAV 闭环控制安全、实时或更高救援成功率。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "主线"
+    },
+    {
+      "key": "saycan",
+      "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+      "authors": [
+        {
+          "family": "Ahn",
+          "given": "Michael"
+        },
+        {
+          "family": "Brohan",
+          "given": "Anthony"
+        },
+        {
+          "family": "Brown",
+          "given": "Noah"
+        },
+        {
+          "family": "Chebotar",
+          "given": "Yevgen"
+        },
+        {
+          "family": "Cortes",
+          "given": "Omar"
+        },
+        {
+          "family": "David",
+          "given": "Byron"
+        },
+        {
+          "family": "Finn",
+          "given": "Chelsea"
+        },
+        {
+          "family": "Fu",
+          "given": "Chuyuan"
+        },
+        {
+          "family": "Gopalakrishnan",
+          "given": "Keerthana"
+        },
+        {
+          "family": "Hausman",
+          "given": "Karol"
+        },
+        {
+          "family": "Herzog",
+          "given": "Alex"
+        },
+        {
+          "family": "Ho",
+          "given": "Daniel"
+        },
+        {
+          "family": "Hsu",
+          "given": "Jasmine"
+        },
+        {
+          "family": "Ibarz",
+          "given": "Julian"
+        },
+        {
+          "family": "Ichter",
+          "given": "Brian"
+        },
+        {
+          "family": "Irpan",
+          "given": "Alex"
+        },
+        {
+          "family": "Jang",
+          "given": "Eric"
+        },
+        {
+          "family": "Ruano",
+          "given": "Rosario Jauregui"
+        },
+        {
+          "family": "Jeffrey",
+          "given": "Kyle"
+        },
+        {
+          "family": "Jesmonth",
+          "given": "Sally"
+        },
+        {
+          "family": "Joshi",
+          "given": "Nikhil J"
+        },
+        {
+          "family": "Julian",
+          "given": "Ryan"
+        },
+        {
+          "family": "Kalashnikov",
+          "given": "Dmitry"
+        },
+        {
+          "family": "Kuang",
+          "given": "Yuheng"
+        },
+        {
+          "family": "Lee",
+          "given": "Kuang-Huei"
+        },
+        {
+          "family": "Levine",
+          "given": "Sergey"
+        },
+        {
+          "family": "Lu",
+          "given": "Yao"
+        },
+        {
+          "family": "Luu",
+          "given": "Linda"
+        },
+        {
+          "family": "Parada",
+          "given": "Carolina"
+        },
+        {
+          "family": "Pastor",
+          "given": "Peter"
+        },
+        {
+          "family": "Quiambao",
+          "given": "Jornell"
+        },
+        {
+          "family": "Rao",
+          "given": "Kanishka"
+        },
+        {
+          "family": "Rettinghouse",
+          "given": "Jarek"
+        },
+        {
+          "family": "Reyes",
+          "given": "Diego"
+        },
+        {
+          "family": "Sermanet",
+          "given": "Pierre"
+        },
+        {
+          "family": "Sievers",
+          "given": "Nicolas"
+        },
+        {
+          "family": "Tan",
+          "given": "Clayton"
+        },
+        {
+          "family": "Toshev",
+          "given": "Alexander"
+        },
+        {
+          "family": "Vanhoucke",
+          "given": "Vincent"
+        },
+        {
+          "family": "Xia",
+          "given": "Fei"
+        },
+        {
+          "family": "Xiao",
+          "given": "Ted"
+        },
+        {
+          "family": "Xu",
+          "given": "Peng"
+        },
+        {
+          "family": "Xu",
+          "given": "Sichun"
+        },
+        {
+          "family": "Yan",
+          "given": "Mengyuan"
+        },
+        {
+          "family": "Zeng",
+          "given": "Andy"
+        }
+      ],
+      "year": 2022,
+      "arxiv_id": "2204.01691",
+      "venue": "arXiv",
+      "publication_type": "preprint",
+      "doi": null,
+      "verification_status": "ARXIV_METADATA_VERIFIED",
+      "metadata_source": "sources/saycan_arxiv.html",
+      "abstract": "Large language models can encode a wealth of semantic knowledge about the world. Such knowledge could be extremely useful to robots aiming to act upon high-level, temporally extended instructions expressed in natural language. However, a significant weakness of language models is that they lack real-world experience, which makes it difficult to leverage them for decision making within a given embodiment. For example, asking a language model to describe how to clean a spill might result in a reasonable narrative, but it may not be applicable to a particular agent, such as a robot, that needs to perform this task in a particular environment. We propose to provide real-world grounding by means of pretrained skills, which are used to constrain the model to propose natural language actions that are both feasible and contextually appropriate. The robot can act as the language model's \"hands and eyes,\" while the language model supplies high-level semantic knowledge about the task. We show how low-level skills can be combined with large language models so that the language model provides high-level knowledge about the procedures for performing complex and temporally-extended instructions, while value functions associated with these skills provide the grounding necessary to connect this knowledge to a particular physical environment. We evaluate our method on a number of real-world robotic tasks, where we show the need for real-world grounding and that this approach is capable of completing long-horizon, abstract, natural language instructions on a mobile manipulator. The project's website and the video can be found at https://say-can.github.io/.",
+      "read_scope": "abstract_only",
+      "abstract_source": "sources/saycan_arxiv.html",
+      "url": "https://arxiv.org/abs/2204.01691",
+      "category": "轻量 Agent",
+      "reading_order": 8,
+      "chapter_use": "第2章语言到可执行技能",
+      "reading_task": "参考用可执行技能与价值函数约束语言模型的动作选择。",
+      "cannot_support": "移动操作机器人实验不能直接迁移为海空协同证据；本轮使用 arXiv 版本，不冒称已核验会议版本。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "主线"
+    },
+    {
+      "key": "latentrag",
+      "title": "LatentRAG: Latent Reasoning and Retrieval for Efficient Agentic RAG",
+      "authors": [
+        {
+          "family": "Zheng",
+          "given": "Yijia"
+        },
+        {
+          "family": "Worring",
+          "given": "Marcel"
+        }
+      ],
+      "year": 2026,
+      "arxiv_id": "2605.06285",
+      "doi": null,
+      "venue": "arXiv",
+      "publication_type": "preprint",
+      "url": "https://arxiv.org/abs/2605.06285",
+      "metadata_source": "sources/latentrag_arxiv.html",
+      "abstract": "Single-step retrieval-augmented generation (RAG) provides an efficient way to incorporate external information for simple question answering tasks but struggles with complex questions. Agentic RAG extends this paradigm by replacing single-step retrieval with a multi-step process, in which the large language model (LLM) acts as a search agent that generates intermediate thoughts and subqueries to iteratively interact with the retrieval system. This iterative process incurs substantial latency due to the autoregressive generation of lengthy thoughts and subqueries. To address this limitation, we propose LatentRAG, a novel framework that shifts both reasoning and retrieval from discrete language space to continuous latent space. Unlike existing explicit methods that generate natural language thoughts or subqueries token-by-token, LatentRAG produces latent tokens for thoughts and subqueries directly from the hidden states in a single forward pass. We align LLMs with dense retrieval models in the latent space, enabling retrieval over latent subquery tokens and supporting end-to-end joint optimization. To improve transparency and encourage semantically meaningful latent representations, we incorporate a parallel latent decoding mechanism that translates latent tokens back into natural language. Extensive experiments on seven benchmark datasets show that LatentRAG achieves performance comparable to explicit agentic RAG methods while reducing inference latency by approximately 90%, substantially narrowing the latency gap with traditional single-step RAG.",
+      "abstract_source": "sources/latentrag_arxiv.html",
+      "verification_status": "ARXIV_METADATA_VERIFIED",
+      "category": "检索效率",
+      "reading_order": 9,
+      "chapter_use": "第2章近期 Agentic RAG；第4章延迟讨论",
+      "reading_task": "参考多轮自然语言推理/子查询生成导致开销的分析，以及潜在空间检索方案。",
+      "cannot_support": "2026 预印本尚未核验同行评审；摘要提速数字不能外推至当前模型、任务或硬件，也不要求本月实现该框架。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "read_scope": "abstract_only",
+      "research_role": "主线"
+    },
+    {
+      "key": "aoi",
+      "title": "Age of Information: An Introduction and Survey",
+      "authors": [
+        {
+          "given": "Roy D.",
+          "family": "Yates"
+        },
+        {
+          "given": "Yin",
+          "family": "Sun"
+        },
+        {
+          "given": "D. Richard",
+          "family": "Brown"
+        },
+        {
+          "given": "Sanjit K.",
+          "family": "Kaul"
+        },
+        {
+          "given": "Eytan",
+          "family": "Modiano"
+        },
+        {
+          "given": "Sennur",
+          "family": "Ulukus"
+        }
+      ],
+      "year": 2021,
+      "doi": "10.1109/jsac.2021.3065072",
+      "venue": "IEEE Journal on Selected Areas in Communications",
+      "publication_type": "journal-article",
+      "volume": "39",
+      "issue": "5",
+      "pages": "1183-1210",
+      "metadata_source": "sources/aoi.json",
+      "semantic_scholar_id": "8cc3d5801f6ab6737f93dc4267c9ac2d571e40f8",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "We summarize recent contributions in the broad area of age of information (AoI). In particular, we describe the current state of the art in the design and optimization of low-latency cyberphysical systems and applications in which sources send time-stamped status updates to interested recipients. These applications desire status updates at the recipients to be as timely as possible; however, this is typically constrained by limited system resources. We describe AoI timeliness metrics and present general methods of AoI evaluation analysis that are applicable to a wide variety of sources and systems. Starting from elementary single-server queues, we apply these AoI methods to a range of increasingly complex systems, including energy harvesting sensors transmitting over noisy channels, parallel server systems, queueing networks, and various single-hop and multi-hop wireless networks. We also explore how update age is related to MMSE methods of sampling, estimation and control of stochastic processes. The paper concludes with a review of efforts to employ age optimization in cyberphysical applications.",
+      "arxiv_id": "2007.08564",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2021,
+            5
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/jsac.2021.3065072",
+      "abstract_source": "sources/aoi_s2.json",
+      "read_scope": "abstract_only",
+      "category": "信息时效与通信",
+      "reading_order": 10,
+      "chapter_use": "第2章观测时效；第3章过期证据识别标签",
+      "reading_task": "定义报告生成时刻、船端接收时刻与信息年龄，整理 AoI 与估计/控制的关系。",
+      "cannot_support": "AoI 小不必然代表位置准确；本项目仍须联合记录位置误差与报告年龄，不能直接宣称时效策略创新成立。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "主线"
+    },
+    {
+      "key": "seadrones",
+      "title": "SeaDronesSee: A Maritime Benchmark for Detecting Humans in Open Water",
+      "authors": [
+        {
+          "given": "Leon Amadeus",
+          "family": "Varga"
+        },
+        {
+          "given": "Benjamin",
+          "family": "Kiefer"
+        },
+        {
+          "given": "Martin",
+          "family": "Messmer"
+        },
+        {
+          "given": "Andreas",
+          "family": "Zell"
+        }
+      ],
+      "year": 2022,
+      "doi": "10.1109/wacv51458.2022.00374",
+      "venue": "2022 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)",
+      "publication_type": "proceedings-article",
+      "volume": null,
+      "issue": null,
+      "pages": "3686-3696",
+      "metadata_source": "sources/seadrones.json",
+      "semantic_scholar_id": "11cfcf8f15fbbe14c63803ab0ae9a58e3037ce95",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "Unmanned Aerial Vehicles (UAVs) are of crucial importance in search and rescue missions in maritime environments due to their flexible and fast operation capabilities. Modern computer vision algorithms are of great interest in aiding such missions. However, they are dependent on large amounts of real-case training data from UAVs, which is only available for traffic scenarios on land. Moreover, current object detection and tracking data sets only provide limited environmental information or none at all, neglecting a valuable source of information. Therefore, this paper introduces a large-scaled visual object detection and tracking benchmark (SeaDronesSee) aiming to bridge the gap from land-based vision systems to sea-based ones. We collect and annotate over 54,000 frames with 400,000 instances captured from various altitudes and viewing angles ranging from 5 to 260 meters and 0 to 90° degrees while providing the respective meta information for altitude, viewing angle and other meta data. We evaluate multiple state-of-the-art computer vision algorithms on this newly established benchmark serving as baselines. We provide an evaluation server where researchers can upload their prediction and compare their results on a central leaderboard1.",
+      "arxiv_id": "2105.01922",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2022,
+            1
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/wacv51458.2022.00374",
+      "abstract_source": "sources/seadrones_s2.json",
+      "read_scope": "abstract_only",
+      "category": "海事任务与数据集",
+      "reading_order": 11,
+      "chapter_use": "第2章观测来源基础；第4章实验数据与传感器记录",
+      "reading_task": "参考海上人员检测/跟踪任务，以及高度、俯视角等采集变量。",
+      "cannot_support": "真实海上数据集的基线不能证明本项目仿真图像已具备同等难度；本文不支持由船/气球检测直接推出人员搜救性能。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "支撑"
+    },
+    {
+      "key": "airsim",
+      "title": "AirSim: High-Fidelity Visual and Physical Simulation for Autonomous Vehicles",
+      "authors": [
+        {
+          "given": "Shital",
+          "family": "Shah"
+        },
+        {
+          "given": "Debadeepta",
+          "family": "Dey"
+        },
+        {
+          "given": "Chris",
+          "family": "Lovett"
+        },
+        {
+          "given": "Ashish",
+          "family": "Kapoor"
+        }
+      ],
+      "year": 2018,
+      "doi": "10.1007/978-3-319-67361-5_40",
+      "venue": "Field and Service Robotics",
+      "publication_type": "book-chapter",
+      "volume": null,
+      "issue": null,
+      "pages": "621-635",
+      "metadata_source": "sources/airsim.json",
+      "semantic_scholar_id": "a20f3dfc9142b48b924e68ee22ba259a0d621bb2",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "Developing and testing algorithms for autonomous vehicles in real world is an expensive and time consuming process. Also, in order to utilize recent advances in machine intelligence and deep learning we need to collect a large amount of annotated training data in a variety of conditions and environments. We present a new simulator built on Unreal Engine that offers physically and visually realistic simulations for both of these goals. Our simulator includes a physics engine that can operate at a high frequency for real-time hardware-in-the-loop (HITL) simulations with support for popular protocols (e.g. MavLink). The simulator is designed from the ground up to be extensible to accommodate new types of vehicles, hardware platforms and software protocols. In addition, the modular design enables various components to be easily usable independently in other projects. We demonstrate the simulator by first implementing a quadrotor as an autonomous vehicle and then experimentally comparing the software components with real-world flights.",
+      "arxiv_id": "1705.05065",
+      "published_online": {
+        "date-parts": [
+          [
+            2017,
+            11,
+            3
+          ]
+        ]
+      },
+      "published_print": {
+        "date-parts": [
+          [
+            2018
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1007/978-3-319-67361-5_40",
+      "abstract_source": "sources/airsim_arxiv.html",
+      "read_scope": "abstract_only",
+      "category": "海事任务与数据集",
+      "reading_order": 12,
+      "chapter_use": "第2章观测来源基础；第4章实验数据与传感器记录",
+      "reading_task": "说明仿真平台选择与数据采集架构，区分平台能力与本项目已实测能力。",
+      "cannot_support": "原论文仿真验证不能证明当前海面、相机噪声和标注真实性，也不能替代实机验证。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "publication_timing_note": "Proceedings print year 2018; online and arXiv first publication 2017. BibTeX uses proceedings print version.",
+      "research_role": "支撑"
+    },
+    {
+      "key": "mods",
+      "title": "MODS—A USV-Oriented Object Detection and Obstacle Segmentation Benchmark",
+      "authors": [
+        {
+          "given": "Borja",
+          "family": "Bovcon"
+        },
+        {
+          "given": "Jon",
+          "family": "Muhovic"
+        },
+        {
+          "given": "Dusko",
+          "family": "Vranac"
+        },
+        {
+          "given": "Dean",
+          "family": "Mozetic"
+        },
+        {
+          "given": "Janez",
+          "family": "Pers"
+        },
+        {
+          "given": "Matej",
+          "family": "Kristan"
+        }
+      ],
+      "year": 2022,
+      "doi": "10.1109/tits.2021.3124192",
+      "venue": "IEEE Transactions on Intelligent Transportation Systems",
+      "publication_type": "journal-article",
+      "volume": "23",
+      "issue": "8",
+      "pages": "13403-13418",
+      "metadata_source": "sources/mods.json",
+      "semantic_scholar_id": "12281cb8736e60aa14562a350e97ef688729cc97",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "Small-sized unmanned surface vehicles (USV) are coastal water devices with a broad range of applications such as environmental control and surveillance. A crucial capability for autonomous operation is obstacle detection for timely reaction and collision avoidance, which has been recently explored in the context of camera-based visual scene interpretation. Owing to curated datasets, substantial advances in scene interpretation have been made in a related field of unmanned ground vehicles. However, the current maritime datasets do not adequately capture the complexity of real-world USV scenes and the evaluation protocols are not standardised, which makes cross-paper comparison of different methods difficult and hinders the progress. To address these issues, we introduce a new obstacle detection benchmark MODS, which considers two major perception tasks: maritime object detection and the more general maritime obstacle segmentation. We present a new diverse maritime evaluation dataset containing approximately 81k stereo images synchronized with an on-board IMU, with over 60k objects annotated. We propose a new obstacle segmentation performance evaluation protocol that reflects the detection accuracy in a way meaningful for practical USV navigation. Nineteen recent state-of-the-art object detection and obstacle segmentation methods are evaluated using the proposed protocol, creating a benchmark to facilitate development of the field. The proposed dataset, as well as evaluation routines, are made publicly available at vicos.si/resources.",
+      "arxiv_id": "2105.02359",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2022,
+            8
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/tits.2021.3124192",
+      "abstract_source": "sources/mods_arxiv.html",
+      "read_scope": "abstract_only",
+      "category": "海事任务与数据集",
+      "reading_order": 13,
+      "chapter_use": "第2章观测来源基础；第4章实验数据与传感器记录",
+      "reading_task": "参考船载障碍检测/分割及立体图像与 IMU 同步数据组织。",
+      "cannot_support": "USV 视角与无人机俯视视角不同；障碍分割性能不等同落水人员定位或救援成功率。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "支撑"
+    },
+    {
+      "key": "kalibr",
+      "title": "Unified temporal and spatial calibration for multi-sensor systems",
+      "authors": [
+        {
+          "given": "Paul",
+          "family": "Furgale"
+        },
+        {
+          "given": "Joern",
+          "family": "Rehder"
+        },
+        {
+          "given": "Roland",
+          "family": "Siegwart"
+        }
+      ],
+      "year": 2013,
+      "doi": "10.1109/iros.2013.6696514",
+      "venue": "2013 IEEE/RSJ International Conference on Intelligent Robots and Systems",
+      "publication_type": "proceedings-article",
+      "volume": null,
+      "issue": null,
+      "pages": "1280-1286",
+      "metadata_source": "sources/kalibr.json",
+      "semantic_scholar_id": "120ff265db7c9fcef97a5c99c0821d59196a1672",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": null,
+      "arxiv_id": null,
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2013,
+            11
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/iros.2013.6696514",
+      "abstract_source": null,
+      "read_scope": "unknown",
+      "category": "传感器与几何",
+      "reading_order": 14,
+      "chapter_use": "第2章观测来源基础；第4章实验数据与传感器记录",
+      "reading_task": "先精读时间偏移与空间外参的定义，列出两相机及 IMU 的时间基准、坐标变换。",
+      "cannot_support": "题名/元数据已核验；本轮未获得摘要，具体标定模型与公式待读原文。不能证明两台独立无人机具有恒定外参。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "支撑"
+    },
+    {
+      "key": "zhang",
+      "title": "A flexible new technique for camera calibration",
+      "authors": [
+        {
+          "given": "Z.",
+          "family": "Zhang"
+        }
+      ],
+      "year": 2000,
+      "doi": "10.1109/34.888718",
+      "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "publication_type": "journal-article",
+      "volume": "22",
+      "issue": "11",
+      "pages": "1330-1334",
+      "metadata_source": "sources/zhang.json",
+      "semantic_scholar_id": "6bdacaf992b0394cc73ff94fcbf6b31483406286",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": null,
+      "arxiv_id": null,
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2000
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/34.888718",
+      "abstract_source": null,
+      "read_scope": "unknown",
+      "category": "传感器与几何",
+      "reading_order": 15,
+      "chapter_use": "第2章观测来源基础；第4章实验数据与传感器记录",
+      "reading_task": "将相机内参、畸变参数与标定验收写入传感器清单。",
+      "cannot_support": "本轮仅核验元数据，须读原文再引用具体算法公式；单相机内参标定不能代替跨机时间同步。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "支撑"
+    },
+    {
+      "key": "raftstereo",
+      "title": "RAFT-Stereo: Multilevel Recurrent Field Transforms for Stereo Matching",
+      "authors": [
+        {
+          "given": "Lahav",
+          "family": "Lipson"
+        },
+        {
+          "given": "Zachary",
+          "family": "Teed"
+        },
+        {
+          "given": "Jia",
+          "family": "Deng"
+        }
+      ],
+      "year": 2021,
+      "doi": "10.1109/3dv53792.2021.00032",
+      "venue": "2021 International Conference on 3D Vision (3DV)",
+      "publication_type": "proceedings-article",
+      "volume": null,
+      "issue": null,
+      "pages": "218-227",
+      "metadata_source": "sources/raftstereo.json",
+      "semantic_scholar_id": "09c8d8249d9e61dace9bd1e0b3cd8042a7ef365d",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "We introduce RAFT-Stereo, a new deep architecture for rectified stereo based on the optical flow network RAFT. We introduce multi-level convolutional GRUs, which more efficiently propagate information across the image. A modified version of RAFT-Stereo can perform accurate real-time inference. RAFT-stereo ranks first on the Middlebury leaderboard, outperforming the next best method on 1px error by 29% and outperforms all published work on the ETH3D two-view stereo benchmark. Code is available at https://github.com/princeton-vl/RAFT-Stereo.",
+      "arxiv_id": "2109.07547",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2021,
+            12
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/3dv53792.2021.00032",
+      "abstract_source": "sources/raftstereo_arxiv.html",
+      "read_scope": "abstract_only",
+      "category": "传感器与几何",
+      "reading_order": 16,
+      "chapter_use": "可选感知扩展/展望，非当前语言主线必做",
+      "reading_task": "选作完成几何校正后的双目匹配候选基线，后续检查共同视野和视差质量。",
+      "cannot_support": "摘要明确面向 rectified stereo；不能把任意不同时间、不同姿态的两机图像直接输入并宣称得到可靠尺度深度。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "扩展"
+    },
+    {
+      "key": "bytetrack",
+      "title": "ByteTrack: Multi-object Tracking by Associating Every Detection Box",
+      "authors": [
+        {
+          "given": "Yifu",
+          "family": "Zhang"
+        },
+        {
+          "given": "Peize",
+          "family": "Sun"
+        },
+        {
+          "given": "Yi",
+          "family": "Jiang"
+        },
+        {
+          "given": "Dongdong",
+          "family": "Yu"
+        },
+        {
+          "given": "Fucheng",
+          "family": "Weng"
+        },
+        {
+          "given": "Zehuan",
+          "family": "Yuan"
+        },
+        {
+          "given": "Ping",
+          "family": "Luo"
+        },
+        {
+          "given": "Wenyu",
+          "family": "Liu"
+        },
+        {
+          "given": "Xinggang",
+          "family": "Wang"
+        }
+      ],
+      "year": 2022,
+      "doi": "10.1007/978-3-031-20047-2_1",
+      "venue": "Computer Vision – ECCV 2022",
+      "publication_type": "book-chapter",
+      "volume": null,
+      "issue": null,
+      "pages": "1-21",
+      "metadata_source": "sources/bytetrack.json",
+      "semantic_scholar_id": "7d1ff4ac2390759cbe60dd46b2b9bcabd4a90db4",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "Multi-object tracking (MOT) aims at estimating bounding boxes and identities of objects in videos. Most methods obtain identities by associating detection boxes whose scores are higher than a threshold. The objects with low detection scores, e.g. occluded objects, are simply thrown away, which brings non-negligible true object missing and fragmented trajectories. To solve this problem, we present a simple, effective and generic association method, tracking by associating almost every detection box instead of only the high score ones. For the low score detection boxes, we utilize their similarities with tracklets to recover true objects and filter out the background detections. When applied to 9 different state-of-the-art trackers, our method achieves consistent improvement on IDF1 score ranging from 1 to 10 points. To put forwards the state-of-the-art performance of MOT, we design a simple and strong tracker, named ByteTrack. For the first time, we achieve 80.3 MOTA, 77.3 IDF1 and 63.1 HOTA on the test set of MOT17 with 30 FPS running speed on a single V100 GPU. ByteTrack also achieves state-of-the-art performance on MOT20, HiEve and BDD100K tracking benchmarks. The source code, pre-trained models with deploy versions and tutorials of applying to other trackers are released at https://github.com/ifzhang/ByteTrack.",
+      "arxiv_id": "2110.06864",
+      "published_online": {
+        "date-parts": [
+          [
+            2022,
+            10,
+            23
+          ]
+        ]
+      },
+      "published_print": {
+        "date-parts": [
+          [
+            2022
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1007/978-3-031-20047-2_1",
+      "abstract_source": "sources/bytetrack_arxiv.html",
+      "read_scope": "abstract_only",
+      "category": "检测与跟踪",
+      "reading_order": 17,
+      "chapter_use": "可选感知扩展/展望，非当前语言主线必做",
+      "reading_task": "参考低分检测关联与轨迹恢复，设置遮挡条件下的跟踪基线。",
+      "cannot_support": "MOT17 等数据集结果不等于海事 UAV 结果；两个视角的目标身份关联仍需额外设计与评估。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "research_role": "扩展"
+    },
+    {
+      "key": "hota",
+      "title": "HOTA: A Higher Order Metric for Evaluating Multi-object Tracking",
+      "authors": [
+        {
+          "given": "Jonathon",
+          "family": "Luiten"
+        },
+        {
+          "given": "Aljos̆a",
+          "family": "Os̆ep"
+        },
+        {
+          "given": "Patrick",
+          "family": "Dendorfer"
+        },
+        {
+          "given": "Philip",
+          "family": "Torr"
+        },
+        {
+          "given": "Andreas",
+          "family": "Geiger"
+        },
+        {
+          "given": "Laura",
+          "family": "Leal-Taixé"
+        },
+        {
+          "given": "Bastian",
+          "family": "Leibe"
+        }
+      ],
+      "year": 2021,
+      "doi": "10.1007/s11263-020-01375-2",
+      "venue": "International Journal of Computer Vision",
+      "publication_type": "journal-article",
+      "volume": "129",
+      "issue": "2",
+      "pages": "548-578",
+      "metadata_source": "sources/hota.json",
+      "semantic_scholar_id": "6cdbe49de9f897530c34cd63e9ffa81d7f09b42a",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "Multi-object tracking (MOT) has been notoriously difficult to evaluate. Previous metrics overemphasize the importance of either detection or association. To address this, we present a novel MOT evaluation metric, higher order tracking accuracy (HOTA), which explicitly balances the effect of performing accurate detection, association and localization into a single unified metric for comparing trackers. HOTA decomposes into a family of sub-metrics which are able to evaluate each of five basic error types separately, which enables clear analysis of tracking performance. We evaluate the effectiveness of HOTA on the MOTChallenge benchmark, and show that it is able to capture important aspects of MOT performance not previously taken into account by established metrics. Furthermore, we show HOTA scores better align with human visual evaluation of tracking performance.",
+      "arxiv_id": "2009.07736",
+      "published_online": {
+        "date-parts": [
+          [
+            2020,
+            10,
+            8
+          ]
+        ]
+      },
+      "published_print": {
+        "date-parts": [
+          [
+            2021,
+            2
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1007/s11263-020-01375-2",
+      "abstract_source": "sources/hota_s2.json",
+      "read_scope": "abstract_only",
+      "category": "检测与跟踪",
+      "reading_order": 18,
+      "chapter_use": "可选感知扩展/展望，非当前语言主线必做",
+      "reading_task": "阅读检测、关联与定位误差分解，用于解释 ID 切换和丢失。",
+      "cannot_support": "HOTA 不是三维定位精度或任务成功率，应与定位误差、时延等指标分开报告。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false,
+      "publication_timing_note": "Print year 2021; online publication 2020. BibTeX uses journal issue version.",
+      "research_role": "扩展"
+    }
+  ],
+  "rejected_candidate_links": [
+    {
+      "path": "sources\\kalibr_arxiv.html",
+      "reason": "TITLE_MISMATCH; excluded from evidence",
+      "retrieved_title": [
+        "Performance Analysis on Evolutionary Algorithms for the Minimum Label Spanning Tree Problem"
+      ]
+    },
+    {
+      "path": "sources\\seadrones_arxiv.html",
+      "reason": "TITLE_MISMATCH; excluded from evidence",
+      "retrieved_title": [
+        "Long-term stellar activity variations and their effect on radial-velocity measurements"
+      ]
+    }
+  ],
+  "scope_authority": "D:/forAirsim/docs/海上搜救Agent_平台与研究范围决策.md"
+}

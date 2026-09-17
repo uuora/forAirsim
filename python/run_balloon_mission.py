@@ -19,6 +19,7 @@ from mission_config import MissionConfig
 from target_provider import CameraTargetProvider
 from perception_state import PerceptionTracker
 from guidance_advisor import advise
+from onboard_sensors import OnboardSensorMonitor
 
 
 class Experiment:
@@ -40,6 +41,7 @@ class Experiment:
         self.folder.mkdir(parents=True)
         self.client = airsim.MultirotorClient(timeout_value=10)
         self.camera_provider = CameraTargetProvider(self.client)
+        self.onboard_sensors = OnboardSensorMonitor(self.client)
         self.names = tuple(self.config.vehicles)
         self.perception_trackers = {name: PerceptionTracker(
                                         confirm_frames=self.config.perception_confirm_frames,
@@ -51,20 +53,41 @@ class Experiment:
         self.target = self.config.target_name
         self.hit = None
         self.timestamps = {}
+        evaluation_mode = {
+            "a_hit": "coordinate_first_attempt",
+            "fallback": "coordinate_fault_injection",
+            "visual_fallback": "visual_fault_injection",
+        }.get(scenario, "unknown")
         self.report = {"scenario": scenario, "status": "RUNNING", "events": [], "finish": "land",
+                       "evaluation": {
+                           "mode": evaluation_mode,
+                           "policy_id": "a_first_fallback_v1",
+                           "decision_source": "scenario_route",
+                           "completion_authority": "airsim_new_target_collision",
+                       },
+                       "truth_access": {
+                           "target_pose": {"used_for": ["scene_setup_check", "coordinate_route", "evaluation"]},
+                           "vehicle_pose": {"used_for": ["position_control", "separation_safety", "evaluation"]},
+                           "rgb_camera": {"used_for": ["target_detection", "visual_guidance"]},
+                           "depth_camera": {"used_for": ["relative_distance_advisory"]},
+                           "collision_feedback": {"used_for": ["completion_authority"]},
+                       },
                        "perception_transitions": [],
                        "perception_policy": {"confirm_frames": self.config.perception_confirm_frames,
                                              "lost_frames": self.config.perception_lost_frames,
                                              "alignment_deadband": self.config.perception_alignment_deadband,
                                              "stop_distance_m": self.config.perception_stop_distance_m,
-                                             "role": "advisory_only"}}
+                                             "role": "advisory_only"},
+                       "onboard_sensor_policy": {"sample_period_s": 1.0,
+                                                 "max_stale_s": 2.5,
+                                                 "role": "advisory_only"}}
         self.report["configuration"] = self.config.to_dict()
         self.report["runtime_overrides"] = {"deliberate_miss_offset_y_m": self.miss_offset_y,
                                             "target_offset_ned_m": self.target_offset.tolist()}
         self.report["source_sha256"] = {name: hashlib.sha256((ROOT / "python" / name).read_bytes()).hexdigest()
             for name in ("run_balloon_mission.py", "mission_config.py", "coordinator.py", "hit_judge.py",
                          "mission_state.py", "perception_state.py", "guidance_advisor.py",
-                         "target_provider.py", "balloon_detector.py")}
+                         "target_provider.py", "balloon_detector.py", "onboard_sensors.py")}
         self.report["collision_position_frame"] = "AirSim vehicle-local NED metres; telemetry positions are world NED"
         self.stream = (self.folder / "telemetry.jsonl").open("w", encoding="utf-8")
         self.log = logging.getLogger(str(self.folder))
@@ -80,6 +103,7 @@ class Experiment:
         self.ground_contacts = {}
         self.last_vision_s = 0.0
         self.vision_records = []
+        self.last_onboard_sensor_s = float("-inf")
 
     def event(self, name, **data):
         item = dict(event=name, wall_time=datetime.now().astimezone().isoformat(),
@@ -92,7 +116,7 @@ class Experiment:
     def state(self):
         return self.coordinator.state
 
-    def change(self, event):
+    def change(self, event, **metadata):
         previous = self.state.value
         if event == "start":
             dispatch = self.coordinator.start()
@@ -109,7 +133,8 @@ class Experiment:
         else:
             raise ValueError(f"Unknown coordinator event: {event}")
         self.event(event, previous_state=previous,
-                   coordinator_active_vehicle=self.coordinator.active_vehicle)
+                   coordinator_active_vehicle=self.coordinator.active_vehicle,
+                   **metadata)
 
     def observe(self):
         positions, speeds, landed = {}, {}, {}
@@ -140,6 +165,11 @@ class Experiment:
                 else:
                     raise RuntimeError(f"Unexpected collision: {name} / {collision.object_name}")
         now = time.monotonic()
+        onboard_snapshot = None
+        if now - self.last_onboard_sensor_s >= 1.0:
+            self.last_onboard_sensor_s = now
+            onboard_snapshot = self.onboard_sensors.read_all(self.names)
+            self.report["onboard_sensor_summary"] = self.onboard_sensors.summary()
         if now - self.last_vision_s >= 1.0:
             self.last_vision_s = now
             self.capture_vision(now)
@@ -158,7 +188,8 @@ class Experiment:
         self.stream.write(json.dumps({"time": time.time(), "phase": self.phase,
                                       "state": self.state.value,
                                       "world_ned_m": {n: p.tolist() for n, p in positions.items()},
-                                      "speed_m_s": speeds, "separation_m": separation}) + "\n")
+                                      "speed_m_s": speeds, "separation_m": separation,
+                                      "onboard_sensors": onboard_snapshot}) + "\n")
         self.stream.flush()
         for name in self.names:
             self.client.simPlotStrings([name + " - " + (self.phase if name == self.active else "STANDBY")],
@@ -251,7 +282,8 @@ class Experiment:
         result = self.drive({name: self.target_position}, speed=0.25,
                             timeout=self.config.contact_timeout_s, contact=True)
         if result:
-            self.change("hit")
+            self.change("hit", source="collision_feedback",
+                        reason_code="TARGET_COLLISION", evaluation_role="completion")
             self.report["hit_evidence"] = self.hit
             capture_overview(self.client, self.folder / "contact.png")
             # The disappearing balloon is a visual effect AFTER collision evidence.
@@ -340,11 +372,14 @@ class Experiment:
                 self.active = "DroneA"
                 self.phase = "DELIBERATE_MISS"
                 self.event("planned_miss", offset_y_m=self.miss_offset_y,
-                           description="A follows the configured offset route outside the balloon")
+                           description="A follows the configured offset route outside the balloon",
+                           source="test_injection", reason_code="INJECTED_MISS",
+                           evaluation_role="fault_injection")
                 miss = self.target_position.copy()
                 miss[1] += self.miss_offset_y
                 self.drive({"DroneA": miss}, speed=0.7)
-                self.change("miss")
+                self.change("miss", source="test_injection",
+                            reason_code="INJECTED_MISS", evaluation_role="fault_injection")
                 success = False
             if not success:
                 miss_time = time.monotonic()
@@ -372,6 +407,7 @@ class Experiment:
         except BaseException as exc:
             self.report.update(status="FAIL", error=str(exc), failed_phase=self.phase,
                                error_type=type(exc).__name__, state_before_abort=self.state.value)
+            self.report["failure_reason"] = str(exc)
             self.coordinator.abort()
             self.event("mission_aborted", reason=str(exc), phase=self.phase)
             self.log.exception("Experiment failed; freezing simulation for diagnosis")
@@ -384,6 +420,7 @@ class Experiment:
                 self.report.update(status="FAIL", paused=False, pause_error=str(exc),
                                    manual_stop_required=True)
             self.report["vision_records"] = self.vision_records
+            self.report["onboard_sensor_summary"] = self.onboard_sensors.summary()
             self.report.update(final_state=self.state.value, min_separation_m=self.min_separation,
                                max_waiting_drift_m=self.max_waiting_drift)
             if math.isfinite(self.min_miss_distance):

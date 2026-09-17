@@ -1,0 +1,124 @@
+[
+  {
+    "key": "kalibr_doi",
+    "url": "https://doi.org/10.1109/iros.2013.6696514",
+    "retrieved_at": "2026-09-15T12:51:17.726464+00:00",
+    "status": "unavailable",
+    "error": "ConnectionResetError(10054, '\u8fdc\u7a0b\u4e3b\u673a\u5f3a\u8feb\u5173\u95ed\u4e86\u4e00\u4e2a\u73b0\u6709\u7684\u8fde\u63a5\u3002', None, 10054, None)"
+  },
+  {
+    "key": "zhang_doi",
+    "url": "https://doi.org/10.1109/34.888718",
+    "retrieved_at": "2026-09-15T12:51:17.727580+00:00",
+    "status": "unavailable",
+    "error": "ConnectionResetError(10054, '\u8fdc\u7a0b\u4e3b\u673a\u5f3a\u8feb\u5173\u95ed\u4e86\u4e00\u4e2a\u73b0\u6709\u7684\u8fde\u63a5\u3002', None, 10054, None)"
+  },
+  {
+    "key": "seadrones_doi",
+    "url": "https://doi.org/10.1109/wacv51458.2022.00374",
+    "retrieved_at": "2026-09-15T12:51:17.728248+00:00",
+    "status": "unavailable",
+    "error": "URLError(ConnectionResetError(10054, '\u8fdc\u7a0b\u4e3b\u673a\u5f3a\u8feb\u5173\u95ed\u4e86\u4e00\u4e2a\u73b0\u6709\u7684\u8fde\u63a5\u3002', None, 10054, None))"
+  },
+  {
+    "key": "raftstereo_doi",
+    "url": "https://doi.org/10.1109/3dv53792.2021.00032",
+    "retrieved_at": "2026-09-15T12:51:19.408635+00:00",
+    "status": "unavailable",
+    "error": "URLError(ConnectionResetError(10054, '\u8fdc\u7a0b\u4e3b\u673a\u5f3a\u8feb\u5173\u95ed\u4e86\u4e00\u4e2a\u73b0\u6709\u7684\u8fde\u63a5\u3002', None, 10054, None))"
+  },
+  {
+    "key": "airsim_doi",
+    "url": "https://doi.org/10.1007/978-3-319-67361-5_40",
+    "retrieved_at": "2026-09-15T12:51:19.463952+00:00",
+    "status": 200,
+    "final_url": "https://link.springer.com/chapter/10.1007/978-3-319-67361-5_40?error=cookies_not_supported&code=5f41dd80-3401-4ea4-8707-f2e69638c444",
+    "path": "sources\\airsim_doi.html",
+    "sha256": "bd79705a7fce978d84402f8882aeed6240d0824dad437f6b93530dbf6ddd3053",
+    "bytes": 304502
+  },
+  {
+    "key": "mods_doi",
+    "url": "https://doi.org/10.1109/tits.2021.3124192",
+    "retrieved_at": "2026-09-15T12:51:19.504528+00:00",
+    "status": "unavailable",
+    "error": "URLError(ConnectionResetError(10054, '\u8fdc\u7a0b\u4e3b\u673a\u5f3a\u8feb\u5173\u95ed\u4e86\u4e00\u4e2a\u73b0\u6709\u7684\u8fde\u63a5\u3002', None, 10054, None))"
+  },
+  {
+    "key": "vins_doi",
+    "url": "https://doi.org/10.1109/tro.2018.2853729",
+    "retrieved_at": "2026-09-15T12:51:20.655925+00:00",
+    "status": 202,
+    "final_url": "https://ieeexplore.ieee.org/document/8421746/",
+    "path": "sources\\vins_doi.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "key": "orbslam3_doi",
+    "url": "https://doi.org/10.1109/tro.2021.3075644",
+    "retrieved_at": "2026-09-15T12:51:20.738980+00:00",
+    "status": 202,
+    "final_url": "https://ieeexplore.ieee.org/document/9440682/",
+    "path": "sources\\orbslam3_doi.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "key": "yolov7_doi",
+    "url": "https://doi.org/10.1109/cvpr52729.2023.00721",
+    "retrieved_at": "2026-09-15T12:51:22.255830+00:00",
+    "status": 202,
+    "final_url": "https://ieeexplore.ieee.org/document/10204762/",
+    "path": "sources\\yolov7_doi.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "key": "bytetrack_doi",
+    "url": "https://doi.org/10.1007/978-3-031-20047-2_1",
+    "retrieved_at": "2026-09-15T12:51:22.297311+00:00",
+    "status": 200,
+    "final_url": "https://link.springer.com/chapter/10.1007/978-3-031-20047-2_1?error=cookies_not_supported&code=1a0e308b-5403-40cd-b7e6-04f090ad3f85",
+    "path": "sources\\bytetrack_doi.html",
+    "sha256": "73d6c10606156835cb38b0936de0a2dc7229c5f02845aa39326eb4a524ae0bc7",
+    "bytes": 381000
+  },
+  {
+    "key": "hota_doi",
+    "url": "https://doi.org/10.1007/s11263-020-01375-2",
+    "retrieved_at": "2026-09-15T12:51:23.690198+00:00",
+    "status": 200,
+    "final_url": "https://link.springer.com/article/10.1007/s11263-020-01375-2?error=cookies_not_supported&code=695bb3b0-e796-48ee-837e-fe59d50dd0ac",
+    "path": "sources\\hota_doi.html",
+    "sha256": "ba300dd9130e66c39e342699e93c2884e78bbb9349502c94f717970e557ef063",
+    "bytes": 610726
+  },
+  {
+    "key": "aoi_doi",
+    "url": "https://doi.org/10.1109/jsac.2021.3065072",
+    "retrieved_at": "2026-09-15T12:51:29.028691+00:00",
+    "status": 202,
+    "final_url": "https://ieeexplore.ieee.org/document/9380899/",
+    "path": "sources\\aoi_doi.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "key": "fresh_doi",
+    "url": "https://doi.org/10.1109/infcom.2012.6195689",
+    "retrieved_at": "2026-09-15T12:51:30.561392+00:00",
+    "status": 202,
+    "final_url": "https://ieeexplore.ieee.org/document/6195689/",
+    "path": "sources\\fresh_doi.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "key": "searchrescue_doi",
+    "url": "https://doi.org/10.1109/ssrr.2019.8848932",
+    "retrieved_at": "2026-09-15T12:51:32.381895+00:00",
+    "status": "unavailable",
+    "error": "URLError(ConnectionResetError(10054, '\u8fdc\u7a0b\u4e3b\u673a\u5f3a\u8feb\u5173\u95ed\u4e86\u4e00\u4e2a\u73b0\u6709\u7684\u8fde\u63a5\u3002', None, 10054, None))"
+  }
+]

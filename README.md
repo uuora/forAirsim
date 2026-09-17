@@ -10,6 +10,9 @@ This project uses Unreal Engine 4.27.2, Microsoft AirSim and SimpleFlight to sim
 - The two-drone smoke test has passed: takeoff, separated movement, hover, descent and disarm.
 - Runtime logs are written to `logs/` and are ignored by Git.
 - Live RPC verification confirms both DroneA and DroneB; a red balloon and string can be recreated with `scripts/start-scene.ps1`.
+- Both vehicles explicitly configure named IMU, barometer, GPS, magnetometer,
+  forward-distance and downward-distance sensors. Missions record advisory 1 Hz
+  health snapshots without using them to change flight commands yet.
 
 ## Start the scene
 

@@ -21,6 +21,29 @@ class BatchAnalysisTests(unittest.TestCase):
         self.assertIsNotNone(result[("fallback", None)]["stdev_miss_to_dispatch_s"])
         self.assertIsNone(result[("a_hit", None)]["mean_miss_to_dispatch_s"])
 
+    def test_visual_final_modes_are_counted(self):
+        rows = [
+            {"scenario": "visual_fallback", "status": "PASS",
+             "visual_final_mode": "visual_collision"},
+            {"scenario": "visual_fallback", "status": "PASS",
+             "visual_final_mode": "visual_gate_coordinate_contact"},
+        ]
+        result = summarize(rows)[0]
+        self.assertEqual(result["visual_collision_runs"], 1)
+        self.assertEqual(result["coordinate_contact_runs"], 1)
+
+    def test_keeps_evaluation_modes_separate(self):
+        base = {"scenario": "visual_fallback", "status": "PASS",
+                "miss_offset_y_m": None, "target_offset_ned_m": [0.0, 0.0, 0.0]}
+        rows = [dict(base, evaluation_mode="visual_fault_injection",
+                     policy_id="visual_a_first_fallback_v1"),
+                dict(base, evaluation_mode="visual_observation_assessment",
+                     policy_id="visual_a_first_fallback_v1")]
+        result = summarize(rows)
+        self.assertEqual(len(result), 2)
+        self.assertEqual({row["evaluation_mode"] for row in result},
+                         {"visual_fault_injection", "visual_observation_assessment"})
+
     def test_keeps_different_offsets_separate(self):
         rows = [
             {"scenario": "fallback", "miss_offset_y_m": -2.5, "status": "PASS",

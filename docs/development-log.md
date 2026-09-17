@@ -1,5 +1,17 @@
 # 开发日志
 
+## 2026-09-13：接触尝试评估层与AirSim阶段入口
+
+- 新增 `python/attempt_assessment.py`，将一次视觉最终接触尝试独立标记为 `TRACKING`、`TEMPORARILY_LOST`、`UNCONFIRMED`、`FAILED` 或 `CONTACT_CONFIRMED`，并输出 `CONTINUE`、`REACQUIRE`、`HANDOFF_ELIGIBLE`、`COMPLETE` 等动作建议。该层不发送飞行命令；新 `BalloonTarget` 碰撞仍是唯一完成依据。
+- `python/run_visual_fallback.py` 保留默认的预设 A 漏击回归路径，同时新增 `--attempt-mode observation`。观测模式在A最终接触段记录观测新鲜度、时序跟踪、超时/遮挡边界及接替资格，再进入现有通道清空和B补位流程；尚未进行UE飞行验收。
+- 任务报告增加 `evaluation`、`truth_access`、`attempt_policy`、`attempt_assessments` 和带来源/原因的关键事件字段；批量行保留评估模式、策略编号、A尝试状态和失败原因，便于把故障注入与候选自主模式分开统计。
+- `python/launch_demo.py` 和 `python/batch_validate.py` 暴露 `--attempt-mode`，默认值不改变历史基线。`python/README.md` 与 `docs/research-plan-20260913/AirSim功能与测试清单.md` 增加运行和验收说明。
+- 重新运行 `& .venv\\python.exe -W error::ResourceWarning -m unittest discover -s python -p 'test_*.py'`：**77项通过，0失败**；另以 `py_compile` 检查新增/修改的Python入口通过。随后完成两次默认基线和一次观测模式AirSim运行；本轮未训练模型，不能把77项离线通过写成飞行成功率。
+
+下一步：检查这两类报告的逐帧轨迹和状态机事件，再按T01–T12补齐真实未完成、自然遮挡、恢复、接替、双失败和多种子批量测试。
+
+本轮AirSim验收已完成两次默认基线和一次观测模式：`mission_visual_fallback_20260913_120408_087100`（默认）与 `mission_visual_fallback_20260913_120849_614468`（观测）均为 PASS，最终状态为 `HIT_CONFIRMED`，命中机为 DroneB，双机均完成落地并释放控制。默认基线的 A 漏击事件来源为 `test_injection`；观测模式的 A 尝试经过 `TRACKING → TEMPORARILY_LOST → UNCONFIRMED/HANDOFF_ELIGIBLE → FAILED`，原因 `track_lost_before_authoritative_contact`，随后 B 接替。两次 B 最终段均为 `visual_gate_coordinate_contact`，即视觉门控后使用碰撞必需的坐标收尾；没有产生纯视觉命中结论。
+
 ## 2026-09-08：双机检查与气球场景
 
 - AirSim 实际返回 `DroneA` 和 `DroneB`，均可读取状态和世界坐标。
@@ -334,3 +346,25 @@ mission_visual_fallback_20260910_154835_598087 实际发送垂向修正后仍触
 ### 2026-09-10：最终验收通过
 
 `mission_visual_fallback_20260910_170402_075141` PASS：A 完成视觉接近后按测试分支漏击，B 自动补位；B 视觉阶段记录 44 帧，最终视觉记录 39 帧，目标检测和高度保持有效。近距离视觉冲刺后发生遮挡，系统按设计切换到已验证的短坐标接触收尾；新的 `BalloonTarget` 碰撞明确命名 DroneB，随后气球移除。两机均落地、解除武装并释放 API 控制，最小间距 4.0056m，最终状态 `HIT_CONFIRMED`。当前验收版本是“视觉门控接近 + 碰撞权威收尾”；纯视觉从 1m 内持续到碰撞仍属于后续视觉识别升级项。
+
+### 2026-09-11：视觉补位接入批量验证
+
+`batch_validate.py` 新增 `visual_fallback` 场景，逐轮恢复中心目标并调用视觉补位运行器；任一任务失败即停止并保留现场。批量行现在记录 A、B 和 B 最终段的视觉帧数、漏击到派发时间、最终段模式及视觉补位验收标志；总汇总区分纯视觉碰撞和视觉门控后的坐标接触收尾。目标偏移与漏击偏移在视觉批量模式中明确拒绝，避免将尚未标定的观察点误作已支持能力。离线回归测试增至 58 项并全部通过。
+
+真实冒烟批次 `batch_20260911_114941_572017` PASS，对应任务 `mission_visual_fallback_20260911_114943_368764`：A、B 和 B 最终段分别记录 41、43 和 41 帧；A 漏击到 B 派发 11.515 秒；DroneB 的新 `BalloonTarget` 碰撞得到确认；最小双机间距 4.0357 m，最大待命漂移 0.1644 m；两机落地、解除武装并释放 API 控制。最终段模式为 `visual_gate_coordinate_contact`，因此本轮增加的是批量执行链路与第二个完整视觉补位 PASS，不构成纯视觉接触通过。
+
+### 2026-09-11：有界遮挡冲刺直接碰撞通过
+
+对冒烟轮和后续三轮的 B 最终段逐帧复核显示：视觉冲刺在 `x≈-2.29` 开始，目标在 `x≈-1.49` 因贴近图像边缘被标记为裁剪，旧逻辑随即把速度清零；已验证的坐标收尾通常在 `x≈-1.11` 发生碰撞。四个旧策略视觉批次均 PASS，但最终段全部为 `visual_gate_coordinate_contact`。最低视觉深度曾达到约 0.27 m，这排除了“尚未接近”的单一解释。
+
+最终段改为视觉锁定后的有界承诺冲刺：目标在 1.5 m 内且水平居中时记录冲刺原点；随后即使机体导致近距离遮挡，也以 0.35 m/s 保持直行，最大累计位移 1.35 m，原有 15 秒时限、高度保持、双机间距检查和碰撞检查继续生效。超距或超时仍抛出 `TimeoutError`，并由现有坐标接触路径安全收尾。记录新增 `dash_travel_m` 和 `FINAL_DASH_OCCLUDED`，避免把遮挡期间描述为持续视觉观测。两项离线边界测试加入后，完整回归为 60 项通过。
+
+首轮 `batch_20260911_121136_737764` PASS，任务 `mission_visual_fallback_20260911_121138_406002` 在 4 个遮挡帧后直接碰撞，冲刺最大位移 1.1474 m，模式为 `visual_collision`，未进入坐标接触。后续批次 `batch_20260911_121603_945486` 3/3 PASS，三轮均为 `visual_collision`、坐标收尾 0 次；冲刺最大位移分别约 0.97、1.12 和 1.14 m，批次最小双机间距 3.9884 m，最大待命漂移 0.1619 m，平均 A 漏击到 B 派发 11.896 秒。四轮均确认 DroneB 新目标碰撞、气球移除、双机落地、解除武装和 API 释放。该结果证明中心固定目标下“视觉锁定 + 有界遮挡冲刺”的四轮重复通过，不等同于目标全程可见的纯视觉制导，也不外推到偏移目标或新环境。
+
+### 2026-09-11：机载传感器遥测第一阶段
+
+`configs/settings.json` 为 DroneA 和 DroneB 显式配置命名的 IMU、气压计、GPS、磁力计、前向距离和下向距离传感器；前向传感器位于机体前方 1 m，下向传感器按 AirSim 文档使用 `Pitch=-90`。新增 `onboard_sensors.py`，将六类 RPC 输出转换为统一 JSON 快照，记录原始时间戳、数值有效性、新鲜度、饱和/低于标称最小距离标志和累计错误计数。任务运行器按约 1 Hz 把双机快照写入 `telemetry.jsonl`，并把每机每传感器的 samples/valid/fresh/errors 汇总写入 `report.json`。本阶段明确为 `advisory_only`，不改变飞行控制或状态机终止条件。
+
+配置安装并重启独立 Blocks 后，`check_onboard_sensors.py` 一次性检查 PASS，双机 12 路命名传感器均可访问且时间戳新鲜。AirSim 1.8.2 的前向无命中距离会略高于声明的 20 m 最大值（实测约 20.10–20.25 m），因此在 1 m 明确容差内记录为 `saturated=true`，而不是误报故障；超出该容差仍无效。下向静止距离实测约 0.29–0.44 m。
+
+集成实飞 `mission_a_hit_20260911_143929_567908` PASS：DroneA 命中、气球移除、双机落地并解除武装。任务写入 202 条遥测，其中 57 条携带完整双机传感器快照，覆盖 TAKEOFF、STAGING、APPROACH、CONTACT、RETREAT、RETURN 和 LANDING。共 684 路样本全部 fresh，RPC errors 为 0；683 路数值 valid。唯一无效值是 CONTACT 阶段 DroneA 前向距离 `-0.0499 m`，发生在传感器安装点进入目标碰撞体时，保留为无效而不放宽负距离规则。离线测试增至 67 项并全部通过。该实验证明记录与健康分类链路可运行，不证明传感器已经参与飞行控制或故障处置。

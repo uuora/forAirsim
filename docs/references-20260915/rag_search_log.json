@@ -1,0 +1,72 @@
+[
+  {
+    "key": "adaptive_acl",
+    "url": "https://aclanthology.org/2024.naacl-long.389/",
+    "retrieved_at": "2026-09-15T12:52:55.779341+00:00",
+    "status": 200,
+    "final_url": "https://aclanthology.org/2024.naacl-long.389/",
+    "path": "sources\\adaptive_acl.html",
+    "sha256": "ba3a804f0aab005a15cfa271b6c509e02346ce3ff2d4972aa3a70ed149e47f06",
+    "bytes": 46526
+  },
+  {
+    "key": "adaptive_crossref",
+    "url": "https://api.crossref.org/works/10.18653/v1/2024.naacl-long.389",
+    "retrieved_at": "2026-09-15T12:52:55.780533+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works/10.18653/v1/2024.naacl-long.389",
+    "path": "sources\\adaptive_crossref.json",
+    "sha256": "8eac3e023ce958cd9518edd3a49837102f0460a75046d2c67610de62620a3025",
+    "bytes": 2382
+  },
+  {
+    "key": "rag_arxiv",
+    "url": "https://arxiv.org/abs/2005.11401",
+    "retrieved_at": "2026-09-15T12:52:55.781270+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2005.11401",
+    "path": "sources\\rag_arxiv.html",
+    "sha256": "8fe67b6e6cba908511e7a7bb688a6306cd15309ae9096b4e57970469dce23e55",
+    "bytes": 45835
+  },
+  {
+    "key": "selfrag_arxiv",
+    "url": "https://arxiv.org/abs/2310.11511",
+    "retrieved_at": "2026-09-15T12:52:57.574172+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2310.11511",
+    "path": "sources\\selfrag_arxiv.html",
+    "sha256": "6d3054cb5738cb8373d8b757eca3a5fba3f142304c8727e68476a5487272ca1c",
+    "bytes": 42906
+  },
+  {
+    "key": "lora_arxiv",
+    "url": "https://arxiv.org/abs/2106.09685",
+    "retrieved_at": "2026-09-15T12:52:58.602198+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2106.09685",
+    "path": "sources\\lora_arxiv.html",
+    "sha256": "70bb70b4fd6d41b8a0f53fc5148017bf6ef5b73acba822027397f861aee135c6",
+    "bytes": 44248
+  },
+  {
+    "key": "qwen_arxiv",
+    "url": "https://arxiv.org/abs/2412.15115",
+    "retrieved_at": "2026-09-15T12:53:21.748580+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2412.15115",
+    "path": "sources\\qwen_arxiv.html",
+    "sha256": "0f8c331e73817eefeb222aa5be49c515aed4c3ab74829555f8e0b2cde03c5be1",
+    "bytes": 49064
+  },
+  {
+    "key": "latentrag_arxiv",
+    "url": "https://arxiv.org/abs/2605.06285",
+    "retrieved_at": "2026-09-15T12:53:24.854075+00:00",
+    "status": 200,
+    "final_url": "https://arxiv.org/abs/2605.06285",
+    "path": "sources\\latentrag_arxiv.html",
+    "sha256": "88a3ede80e4ec4c6332c7b109e5df02a14a297aaeab761ba89a387929c14ccd2",
+    "bytes": 42111
+  }
+]

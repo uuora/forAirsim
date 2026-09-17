@@ -1,0 +1,10 @@
+{
+  "key": "lmucs_crossref",
+  "url": "https://api.crossref.org/works?query.title=LMUCS%3A+A+Lightweight+LLM-Driven+UAV+Control+System+with+Multimodal+Perception+for+an+Autonomous+Material+Search+and+Localization&rows=3",
+  "retrieved_at": "2026-09-15T12:46:42.442506+00:00",
+  "status": 200,
+  "final_url": "https://api.crossref.org/works?query.title=LMUCS%3A+A+Lightweight+LLM-Driven+UAV+Control+System+with+Multimodal+Perception+for+an+Autonomous+Material+Search+and+Localization&rows=3",
+  "path": "sources\\lmucs_crossref.json",
+  "sha256": "534f23d17d8e511d94fdcf067c326163895451002029feb1b52198938a736db1",
+  "bytes": 38808
+}

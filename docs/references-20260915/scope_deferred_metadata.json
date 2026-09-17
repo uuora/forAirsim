@@ -1,0 +1,301 @@
+{
+  "reason": "当前论文主线为轻量语言智能体与自适应RAG，以下仅保留检索记录，不计首批参考条目",
+  "entries": [
+    {
+      "key": "vins",
+      "title": "VINS-Mono: A Robust and Versatile Monocular Visual-Inertial State Estimator",
+      "authors": [
+        {
+          "given": "Tong",
+          "family": "Qin"
+        },
+        {
+          "given": "Peiliang",
+          "family": "Li"
+        },
+        {
+          "given": "Shaojie",
+          "family": "Shen"
+        }
+      ],
+      "year": 2018,
+      "doi": "10.1109/tro.2018.2853729",
+      "venue": "IEEE Transactions on Robotics",
+      "publication_type": "journal-article",
+      "volume": "34",
+      "issue": "4",
+      "pages": "1004-1020",
+      "metadata_source": "sources/vins.json",
+      "semantic_scholar_id": "9da965529ee3da77178ed99cf13d97be0fa85f6e",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "A monocular visual-inertial system (VINS), consisting of a camera and a low-cost inertial measurement unit (IMU), forms the minimum sensor suite for metric six degrees-of-freedom (DOF) state estimation. However, the lack of direct distance measurement poses significant challenges in terms of IMU processing, estimator initialization, extrinsic calibration, and nonlinear optimization. In this work, we present VINS-Mono: a robust and versatile monocular visual-inertial state estimator.Our approach starts with a robust procedure for estimator initialization and failure recovery. A tightly-coupled, nonlinear optimization-based method is used to obtain high accuracy visual-inertial odometry by fusing pre-integrated IMU measurements and feature observations. A loop detection module, in combination with our tightly-coupled formulation, enables relocalization with minimum computation overhead.We additionally perform four degrees-of-freedom pose graph optimization to enforce global consistency. We validate the performance of our system on public datasets and real-world experiments and compare against other state-of-the-art algorithms. We also perform onboard closed-loop autonomous flight on the MAV platform and port the algorithm to an iOS-based demonstration. We highlight that the proposed work is a reliable, complete, and versatile system that is applicable for different applications that require high accuracy localization. We open source our implementations for both PCs and iOS mobile devices.",
+      "arxiv_id": "1708.03852",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2018,
+            8
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/tro.2018.2853729",
+      "abstract_source": "sources/vins_arxiv.html",
+      "read_scope": "abstract_only",
+      "category": "传感器与几何",
+      "reading_order": 7,
+      "chapter_use": "第2章位姿估计；第4章实机传感器",
+      "reading_task": "理解相机与 IMU 融合、尺度位姿、初始化和外参对定位链路的要求。",
+      "cannot_support": "相机位姿估计不同于被观测目标的绝对位置；不能用系统自定位精度替代目标定位误差。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false
+    },
+    {
+      "key": "orbslam3",
+      "title": "ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual–Inertial, and Multimap SLAM",
+      "authors": [
+        {
+          "given": "Carlos",
+          "family": "Campos"
+        },
+        {
+          "given": "Richard",
+          "family": "Elvira"
+        },
+        {
+          "given": "Juan J. Gomez",
+          "family": "Rodriguez"
+        },
+        {
+          "given": "Jose M.",
+          "family": "M. Montiel"
+        },
+        {
+          "given": "Juan",
+          "family": "D. Tardos"
+        }
+      ],
+      "year": 2021,
+      "doi": "10.1109/tro.2021.3075644",
+      "venue": "IEEE Transactions on Robotics",
+      "publication_type": "journal-article",
+      "volume": "37",
+      "issue": "6",
+      "pages": "1874-1890",
+      "metadata_source": "sources/orbslam3.json",
+      "semantic_scholar_id": "77d7e439b3368875199a1327515a3ba212f0a359",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "This paper presents ORB-SLAM3, the first system able to perform visual, visual-inertial and multi-map SLAM with monocular, stereo and RGB-D cameras, using pin-hole and fisheye lens models. The first main novelty is a feature-based tightly-integrated visual-inertial SLAM system that fully relies on Maximum-a-Posteriori (MAP) estimation, even during the IMU initialization phase. The result is a system that operates robustly in real-time, in small and large, indoor and outdoor environments, and is 2 to 5 times more accurate than previous approaches. The second main novelty is a multiple map system that relies on a new place recognition method with improved recall. Thanks to it, ORB-SLAM3 is able to survive to long periods of poor visual information: when it gets lost, it starts a new map that will be seamlessly merged with previous maps when revisiting mapped areas. Compared with visual odometry systems that only use information from the last few seconds, ORB-SLAM3 is the first system able to reuse in all the algorithm stages all previous information. This allows to include in bundle adjustment co-visible keyframes, that provide high parallax observations boosting accuracy, even if they are widely separated in time or if they come from a previous mapping session. Our experiments show that, in all sensor configurations, ORB-SLAM3 is as robust as the best systems available in the literature, and significantly more accurate. Notably, our stereo-inertial SLAM achieves an average accuracy of 3.6 cm on the EuRoC drone and 9 mm under quick hand-held motions in the room of TUM-VI dataset, a setting representative of AR/VR scenarios. For the benefit of the community we make public the source code.",
+      "arxiv_id": "2007.11898",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2021,
+            12
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/tro.2021.3075644",
+      "abstract_source": "sources/orbslam3_arxiv.html",
+      "read_scope": "abstract_only",
+      "category": "传感器与几何",
+      "reading_order": 8,
+      "chapter_use": "第2章视觉定位；第4章迁移候选",
+      "reading_task": "比较单目、双目、视觉惯性配置，作为后续真实位姿来源的候选。",
+      "cannot_support": "原文报告来自特定基准；海面弱纹理、动态目标与本项目双机性能尚未验证。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false
+    },
+    {
+      "key": "yolov7",
+      "title": "YOLOv7: Trainable Bag-of-Freebies Sets New State-of-the-Art for Real-Time Object Detectors",
+      "authors": [
+        {
+          "given": "Chien-Yao",
+          "family": "Wang"
+        },
+        {
+          "given": "Alexey",
+          "family": "Bochkovskiy"
+        },
+        {
+          "given": "Hong-Yuan Mark",
+          "family": "Liao"
+        }
+      ],
+      "year": 2023,
+      "doi": "10.1109/cvpr52729.2023.00721",
+      "venue": "2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publication_type": "proceedings-article",
+      "volume": null,
+      "issue": null,
+      "pages": "7464-7475",
+      "metadata_source": "sources/yolov7.json",
+      "semantic_scholar_id": "3aed4648f7857c1d5e9b1da4c3afaf97463138c3",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "YOLOv7 surpasses all known object detectors in both speed and accuracy in the range from 5 FPS to 160 FPS and has the highest accuracy 56.8% AP among all known real-time object detectors with 30 FPS or higher on GPU V100. YOLOv7-E6 object detector (56 FPS V100, 55.9% AP) outperforms both transformer-based detector SWIN-L Cascade-Mask R-CNN (9.2 FPS A100, 53.9% AP) by 509% in speed and 2% in accuracy, and convolutional-based detector ConvNeXt-XL Cascade-Mask R-CNN (8.6 FPS A100, 55.2% AP) by 551% in speed and 0.7% AP in accuracy, as well as YOLOv7 outperforms: YOLOR, YOLOX, Scaled-YOLOv4, YOLOv5, DETR, Deformable DETR, DINO-5scale-R50, ViT-Adapter-B and many other object detectors in speed and accuracy. Moreover, we train YOLOv7 only on MS COCO dataset from scratch without using any other datasets or pre-trained weights. Source code is released in https://github.com/WongKinYiu/yolov7.",
+      "arxiv_id": "2207.02696",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2023,
+            6
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/cvpr52729.2023.00721",
+      "abstract_source": "sources/yolov7_arxiv.html",
+      "read_scope": "abstract_only",
+      "category": "检测与跟踪",
+      "reading_order": 9,
+      "chapter_use": "第2章目标检测；第3章检测对照",
+      "reading_task": "参考检测准确性、速度与训练策略的对照组织方式；工程模型可另选。",
+      "cannot_support": "不是 YOLOv11 的论文；不能用其性能或结构解释当前 YOLOv11 权重，也不能声称旧模型是当前最优。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false
+    },
+    {
+      "key": "fresh",
+      "title": "Real-time status: How often should one update?",
+      "authors": [
+        {
+          "given": "Sanjit",
+          "family": "Kaul"
+        },
+        {
+          "given": "Roy",
+          "family": "Yates"
+        },
+        {
+          "given": "Marco",
+          "family": "Gruteser"
+        }
+      ],
+      "year": 2012,
+      "doi": "10.1109/infcom.2012.6195689",
+      "venue": "2012 Proceedings IEEE INFOCOM",
+      "publication_type": "proceedings-article",
+      "volume": null,
+      "issue": null,
+      "pages": "2731-2735",
+      "metadata_source": "sources/fresh.json",
+      "semantic_scholar_id": "ab5d88de6f83e0e8ca9541ba5a079d758086d94e",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": null,
+      "arxiv_id": null,
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2012,
+            3
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/infcom.2012.6195689",
+      "abstract_source": null,
+      "read_scope": "unknown",
+      "category": "信息时效与通信",
+      "reading_order": 13,
+      "chapter_use": "第2章 AoI 理论背景",
+      "reading_task": "追溯状态更新频率问题的原始来源，精读后确认指标及队列假设。",
+      "cannot_support": "本轮仅元数据，未核验公式或实验；不能把特定更新模型结论直接推广到所有海事链路。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false
+    },
+    {
+      "key": "searchrescue",
+      "title": "Robust Cellular Communications for Unmanned Aerial Vehicles in Maritime Search and Rescue",
+      "authors": [
+        {
+          "given": "Philipp",
+          "family": "Gorczak"
+        },
+        {
+          "given": "Caner",
+          "family": "Bektas"
+        },
+        {
+          "given": "Fabian",
+          "family": "Kurtz"
+        },
+        {
+          "given": "Thomas",
+          "family": "Lubcke"
+        },
+        {
+          "given": "Christian",
+          "family": "Wietfeld"
+        }
+      ],
+      "year": 2019,
+      "doi": "10.1109/ssrr.2019.8848932",
+      "venue": "2019 IEEE International Symposium on Safety, Security, and Rescue Robotics (SSRR)",
+      "publication_type": "proceedings-article",
+      "volume": null,
+      "issue": null,
+      "pages": "229-234",
+      "metadata_source": "sources/searchrescue.json",
+      "semantic_scholar_id": "13d549fe6cdcfd32d6dbc7a6ba013ff8a6f5b3d9",
+      "s2_title_similarity": 1.0,
+      "verification_status": "CROSSREF_AND_S2_METADATA_MATCH",
+      "abstract": "Unmanned aerial vehicles (UAV) are a promising technology for fast, large scale survey operations such as maritime search and rescue (SAR). However, providing reliable communications over long distances remains a challenge. Cellular technology such as Long Term Evolution (LTE) is designed to perform well in the presence of fast-moving clients and highly dynamic channel conditions. Yet, its generic medium access mechanisms make it hard to support low-latency uplink traffic, which is needed for real-time command and control and similar applications. In this paper, we introduce an unmanned aerial system for maritime SAR, supported via an LTE data link. To mitigate drawbacks in uplink channel access, we develop a resource-guaranteed scheme based on persistent scheduling, using an open-source LTE stack. The approach is evaluated with a laboratory setup using software-defined radio modules. Measurements are taken on the application layer, using realworld telemetry data generated by an autopilot system in the presence of high bandwidth background traffic. Evaluations demonstrate that our system fulfills UAV requirements in terms of latency and reliability. Latency is further reduced to 6 ms on average and a 99.9th percentile of 10 ms by application-aware overprovisioning for mission-critical traffic and users.",
+      "arxiv_id": "1907.12307",
+      "published_online": null,
+      "published_print": {
+        "date-parts": [
+          [
+            2019,
+            9
+          ]
+        ]
+      },
+      "crossref_updates": {},
+      "url": "https://doi.org/10.1109/ssrr.2019.8848932",
+      "abstract_source": "sources/searchrescue_s2.json",
+      "read_scope": "abstract_only",
+      "category": "信息时效与通信",
+      "reading_order": 14,
+      "chapter_use": "第1章海上搜救通信；第3章延迟设置",
+      "reading_task": "参考海上 UAV 搜救通信的应用层延迟/可靠性评价。",
+      "cannot_support": "摘要中的低时延来自 LTE 实验室软件无线电设置；不能移植为本项目 AirSim 或真实海域的实测延迟。",
+      "full_text_read": false,
+      "human_read_attestation": false,
+      "method_quality": "NOT_ASSESSED_FULL_TEXT",
+      "coi": "NOT_CHECKED",
+      "retraction_status": "NOT_ASSESSED",
+      "source_acquired": true,
+      "source_verified_against_original": false
+    }
+  ]
+}

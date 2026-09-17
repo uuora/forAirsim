@@ -1,0 +1,32 @@
+[
+  {
+    "key": "seadrones_cvf",
+    "url": "https://openaccess.thecvf.com/content/WACV2022/html/Varga_SeaDronesSee_A_Maritime_Benchmark_for_Detecting_Humans_in_Open_Water_WACV_2022_paper.html",
+    "retrieved_at": "2026-09-15T12:47:15.475310+00:00",
+    "status": 200,
+    "final_url": "https://openaccess.thecvf.com/content/WACV2022/html/Varga_SeaDronesSee_A_Maritime_Benchmark_for_Detecting_Humans_in_Open_Water_WACV_2022_paper.html",
+    "path": "sources\\seadrones_cvf.html",
+    "sha256": "6df85565b0c7727d6b8b1efff751fe4f216cd64496544844ab7e3c15addb08e2",
+    "bytes": 6324
+  },
+  {
+    "key": "lmucs_doi",
+    "url": "https://doi.org/10.1016/j.ast.2026.112949",
+    "retrieved_at": "2026-09-15T12:47:15.476393+00:00",
+    "status": 200,
+    "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S1270963826013271",
+    "path": "sources\\lmucs_doi.html",
+    "sha256": "0272a1d9948c939c5f4dd21e3d6cb0fdedc67768c1c417a782b7709371e00bee",
+    "bytes": 2740
+  },
+  {
+    "key": "lmucs_s2",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.ast.2026.112949?fields=title,authors,year,externalIds,url,abstract",
+    "retrieved_at": "2026-09-15T12:47:15.477137+00:00",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.ast.2026.112949?fields=title,authors,year,externalIds,url,abstract",
+    "path": "sources\\lmucs_s2.json",
+    "sha256": "86123256f511cc6e8c832eb5e20f151029f5f58ea98cfb04095b30b0e241f9fb",
+    "bytes": 1176
+  }
+]

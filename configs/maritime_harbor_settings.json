@@ -1,0 +1,135 @@
+{
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "ApiServerPort": 41452,
+  "ViewMode": "Manual",
+  "ClockSpeed": 1,
+  "CameraDirector": {
+    "X": -10,
+    "Y": -28,
+    "Z": -13,
+    "Pitch": -22,
+    "Yaw": 48,
+    "Roll": 0
+  },
+  "Vehicles": {
+    "DroneA": {
+      "VehicleType": "SimpleFlight",
+      "X": 0,
+      "Y": -2,
+      "Z": 0,
+      "Cameras": {
+        "front_center": {
+          "CaptureSettings": [
+            {
+              "ImageType": 0,
+              "Width": 1280,
+              "Height": 720,
+              "FOV_Degrees": 70
+            },
+            {
+              "ImageType": 1,
+              "Width": 1280,
+              "Height": 720,
+              "FOV_Degrees": 70
+            }
+          ],
+          "X": 0.35,
+          "Y": 0,
+          "Z": -0.15,
+          "Pitch": -5,
+          "Yaw": 0,
+          "Roll": 0
+        }
+      },
+      "Sensors": {
+        "Imu": {"SensorType": 2, "Enabled": true},
+        "Barometer": {"SensorType": 1, "Enabled": true},
+        "Gps": {"SensorType": 3, "Enabled": true},
+        "Magnetometer": {"SensorType": 4, "Enabled": true},
+        "DistanceFront": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 20.0,
+          "X": 0.35, "Y": 0, "Z": -0.15,
+          "Yaw": 0, "Pitch": 0, "Roll": 0,
+          "ExternalController": false
+        },
+        "DistanceDown": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 10.0,
+          "X": 0, "Y": 0, "Z": 0,
+          "Yaw": 0, "Pitch": -90, "Roll": 0,
+          "ExternalController": false
+        }
+      }
+    },
+    "DroneB": {
+      "VehicleType": "SimpleFlight",
+      "X": 0,
+      "Y": 2,
+      "Z": 0,
+      "Cameras": {
+        "front_center": {
+          "CaptureSettings": [
+            {
+              "ImageType": 0,
+              "Width": 1280,
+              "Height": 720,
+              "FOV_Degrees": 70
+            },
+            {
+              "ImageType": 1,
+              "Width": 1280,
+              "Height": 720,
+              "FOV_Degrees": 70
+            }
+          ],
+          "X": 0.35,
+          "Y": 0,
+          "Z": -0.15,
+          "Pitch": -5,
+          "Yaw": 0,
+          "Roll": 0
+        }
+      },
+      "Sensors": {
+        "Imu": {"SensorType": 2, "Enabled": true},
+        "Barometer": {"SensorType": 1, "Enabled": true},
+        "Gps": {"SensorType": 3, "Enabled": true},
+        "Magnetometer": {"SensorType": 4, "Enabled": true},
+        "DistanceFront": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 20.0,
+          "X": 0.35, "Y": 0, "Z": -0.15,
+          "Yaw": 0, "Pitch": 0, "Roll": 0,
+          "ExternalController": false
+        },
+        "DistanceDown": {
+          "SensorType": 5, "Enabled": true,
+          "MinDistance": 0.2, "MaxDistance": 10.0,
+          "X": 0, "Y": 0, "Z": 0,
+          "Yaw": 0, "Pitch": -90, "Roll": 0,
+          "ExternalController": false
+        }
+      }
+    }
+  },
+  "ExternalCameras": {
+    "harbor_overview": {
+      "X": -10,
+      "Y": -28,
+      "Z": -13,
+      "Pitch": -22,
+      "Yaw": 48,
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 1280,
+          "Height": 720,
+          "FOV_Degrees": 70
+        }
+      ],
+      "Roll": 0
+    }
+  }
+}

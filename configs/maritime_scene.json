@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "scene_id": "maritime_fixture_v1",
+  "origin_world_ned_m": [55.0, 0.0, -200.0],
+  "asset_fidelity": "procedural_primitive_placeholder",
+  "environment_model": "static_visual_water_no_hydrodynamics",
+  "capture_mode": "staged_virtual_camera_not_airborne_observation",
+  "views": [
+    {"name": "view_a", "vehicle": "DroneA", "eye_relative_m": [-9, -11, -12], "look_at_relative_m": [0, 0, -0.4]},
+    {"name": "view_b", "vehicle": "DroneB", "eye_relative_m": [-9, 11, -12], "look_at_relative_m": [0, 0, -0.4]}
+  ],
+  "objects": [
+    {"instance_id": "rescue_vessel_01", "class_name": "vessel", "position_relative_m": [3, -3, 0], "segmentation_id": 181},
+    {"instance_id": "lifebuoy_01", "class_name": "lifebuoy", "position_relative_m": [-3, -3, 0], "segmentation_id": 182},
+    {"instance_id": "supply_crate_01", "class_name": "floating_supply", "position_relative_m": [-3, 3, 0], "segmentation_id": 183},
+    {"instance_id": "rescue_dummy_01", "class_name": "person_proxy", "position_relative_m": [2, 3, 0], "segmentation_id": 184},
+    {"instance_id": "floating_debris_01", "class_name": "floating_debris", "position_relative_m": [-5, 0, 0], "segmentation_id": 185}
+  ]
+}
