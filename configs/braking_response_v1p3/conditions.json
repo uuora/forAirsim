@@ -1,0 +1,55 @@
+{
+  "kind": "BRAKING_MODEL_CANDIDATE_FREEZE",
+  "status": "PREPARED_NOT_EXECUTED",
+  "prepared_local": "2026-10-03T22:45:24.862723+08:00",
+  "formal_thesis_effect_results": false,
+  "configurations": [
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p3\\zero_short.json",
+      "sha256": "ff2970d6fafa8e7e0d1cd9a64ec497e6f448564c6d78ea29cae511a346350e37",
+      "mode": "zero_hold_gate",
+      "planned_pulses": 0
+    },
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p3\\low_gate.json",
+      "sha256": "9b14e009d9fa95532289fc26d12bf8e04bd29231b5c9507aa353e0aab89e3e73",
+      "mode": "pulse_measurement",
+      "planned_pulses": 4
+    },
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p3\\session_forward.json",
+      "sha256": "a65e3e9bb28a314d2608321f3157b79bb0ba9e6ce33cebfa828e581e137ca930",
+      "mode": "pulse_measurement",
+      "planned_pulses": 8
+    },
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p3\\session_reverse.json",
+      "sha256": "226b4ff923472904ef53528dfa0104268ed6ba929ddcb5667a2cbe8b4bb75f72",
+      "mode": "pulse_measurement",
+      "planned_pulses": 8
+    }
+  ],
+  "candidate_horizon_s": 1.0,
+  "minimum_h_for_each_calibration_pulse_s": [
+    0.3577692210131102,
+    0.34704925371564027,
+    0.34076801957155045,
+    0.34395181415582415,
+    0.7297665672198843,
+    0.7400247364669796,
+    0.7291438620375988,
+    0.7350867376041577
+  ],
+  "calibration_audit": "D:\\forAirsim\\logs\\braking_campaign_20261003_223639_9536884\\analysis\\summary.json",
+  "calibration_audit_sha256": "e6ba7299d0e0e82cb09a17c2c8bcb157f9cad7d1c896f8bc49074f54dcd00fba",
+  "calibration_report": "D:\\forAirsim\\logs\\braking_response_20261003_223651_879172\\report.json",
+  "calibration_report_sha256": "6049d15fb628811a0cb56da46860cd0dde74b693a33f189334930cb5c74715a1",
+  "offline_command_replay_count": 795,
+  "offline_command_mismatches": 0,
+  "offline_counts_as_new_flight": false,
+  "decision": "One equivalent-window candidate 1.0 s exceeds all observed minimum windows plus the frozen 0.25 s query-gap cap. Keep a=.15 and reserve=.02; independent validation required.",
+  "gates": "new zero short, then held-out forward full whose .03 pulses precede .06, audit before reverse full; separate low-only configuration remains not dispatched",
+  "full_planned_flights": 2,
+  "full_planned_pulses": 16,
+  "ai_assistance": "Calibration candidate preparation assisted by AI; no validation result yet"
+}

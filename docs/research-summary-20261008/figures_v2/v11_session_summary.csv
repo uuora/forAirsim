@@ -1,0 +1,4 @@
+﻿session_id,correct,no_output,unknown,wrong,not_started,complete,started,planned,net_xy_mm,original_qualification
+t1_process_zero_v11_20261007,20,0,0,0,0,20,20,20,0.0,PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT
+t1_process_50_v11_20261007,380,20,0,0,0,400,400,400,58.67631733640207,PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT
+t1_process_50_v11_rep1_20261007,382,7,1,0,10,389,390,400,,FAIL_SCALED_MOTION_EVIDENCE

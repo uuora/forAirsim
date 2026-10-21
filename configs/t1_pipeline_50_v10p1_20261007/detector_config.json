@@ -1,0 +1,20 @@
+{
+  "status": "FROZEN_T1_IDENTITY_FLIGHT_PILOT_RUNTIME",
+  "class_names": {
+    "0": "balloon"
+  },
+  "backend": "specialist_balloon_detector.SpecialistBalloonDetector",
+  "weights": "D:\\forAirsim\\configs\\t1_pipeline_50_v10p1_20261007\\source_bundle\\model\\specialist_best.pt",
+  "weights_sha256": "92b0dc0f4e17ff14e9c1e110b9cad9ef249274136ee9a28d99b7885dfb396844",
+  "training_receipt": "D:\\forAirsim\\configs\\t1_pipeline_50_v10p1_20261007\\training_receipt.json",
+  "training_receipt_sha256": "f98db6fb0f916bd00ea74ee36596fb222d662f3a913d36610d9e96aa7c4b22a5",
+  "imgsz": 640,
+  "confidence": 0.25,
+  "nms_iou": 0.5,
+  "device": "0",
+  "vlx_adapter_injection": "YoloVlxBackend(detector=SpecialistBalloonDetector(...), vlx_client=...)",
+  "designated_identity_established_by_detection": false,
+  "flight_integration_verified": false,
+  "runtime_diagnostic": "D:/forAirsim/logs/t1_continuous_runtime_profile_20261004/receipt.json",
+  "interpretation": "Same frozen trained checkpoint and thresholds; CPU detector evaluation remains separately recorded. CUDA inference needs new UE timing verification."
+}

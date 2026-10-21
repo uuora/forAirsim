@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-13T03:12:51.360+00:00",
+  "status": "PASS_RUNTIME_UNTETHERED_3D_REGION",
+  "scene_version": "untethered_3d_f2a5da95d1db",
+  "region": {
+    "x_m": [
+      42.0,
+      49.0
+    ],
+    "y_m": [
+      -7.0,
+      -1.5
+    ],
+    "z_m": [
+      2.4,
+      5.0
+    ]
+  },
+  "balloon_count": 3,
+  "engine_identity": {
+    "pid": 13784,
+    "created": 1791854512.32692
+  },
+  "truth_used_as_control_input": false,
+  "map_modified": false,
+  "original_baseline_available": false,
+  "restored_initial_balloon_positions": true,
+  "layout_seed": null,
+  "layout_mode": "restored_fixed"
+}

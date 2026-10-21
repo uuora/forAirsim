@@ -1,0 +1,163 @@
+{
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "ApiServerPort": 41453,
+  "ClockSpeed": 1,
+  "ViewMode": "Manual",
+  "CameraDirector": {
+    "X": -16,
+    "Y": -33,
+    "Z": -31,
+    "Pitch": -28,
+    "Yaw": 39,
+    "Roll": 0
+  },
+  "Vehicles": {
+    "DroneA": {
+      "VehicleType": "SimpleFlight",
+      "X": 0,
+      "Y": -1.8,
+      "Z": 0,
+      "Yaw": 0,
+      "Cameras": {
+        "front_center": {
+          "X": 0.35,
+          "Y": 0,
+          "Z": -0.12,
+          "Pitch": 0,
+          "Yaw": 0,
+          "Roll": 0,
+          "CaptureSettings": [
+            {
+              "ImageType": 0,
+              "Width": 1600,
+              "Height": 900,
+              "FOV_Degrees": 70,
+              "MotionBlurAmount": 0,
+              "AutoExposureSpeed": 100
+            },
+            {
+              "ImageType": 2,
+              "Width": 640,
+              "Height": 480,
+              "FOV_Degrees": 70
+            }
+          ]
+        }
+      }
+    },
+    "DroneB": {
+      "VehicleType": "SimpleFlight",
+      "X": 0,
+      "Y": 1.8,
+      "Z": 0,
+      "Yaw": 0,
+      "Cameras": {
+        "front_center": {
+          "X": 0.35,
+          "Y": 0,
+          "Z": -0.12,
+          "Pitch": 0,
+          "Yaw": 0,
+          "Roll": 0,
+          "CaptureSettings": [
+            {
+              "ImageType": 0,
+              "Width": 1600,
+              "Height": 900,
+              "FOV_Degrees": 70,
+              "MotionBlurAmount": 0,
+              "AutoExposureSpeed": 100
+            },
+            {
+              "ImageType": 2,
+              "Width": 640,
+              "Height": 480,
+              "FOV_Degrees": 70
+            }
+          ]
+        }
+      }
+    }
+  },
+  "ExternalCameras": {
+    "lab_overhead": {
+      "X": 24,
+      "Y": 0,
+      "Z": -61,
+      "Pitch": -90.0,
+      "Yaw": 90,
+      "Roll": 0,
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 1800,
+          "Height": 1200,
+          "FOV_Degrees": 65,
+          "AutoExposureSpeed": 100,
+          "AutoExposureBias": 0,
+          "MotionBlurAmount": 0,
+          "ProjectionMode": "orthographic",
+          "OrthoWidth": 66
+        }
+      ]
+    },
+    "lab_overview": {
+      "X": -16,
+      "Y": -33,
+      "Z": -31,
+      "Pitch": -30.4628559340133,
+      "Yaw": 39.52263127117112,
+      "Roll": 0,
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 1800,
+          "Height": 1100,
+          "FOV_Degrees": 68,
+          "AutoExposureSpeed": 100,
+          "AutoExposureBias": 0,
+          "MotionBlurAmount": 0
+        }
+      ]
+    },
+    "lab_target_close": {
+      "X": 42,
+      "Y": -7,
+      "Z": -4,
+      "Pitch": -13.78813646380861,
+      "Yaw": 50.19442890773481,
+      "Roll": 0,
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 1600,
+          "Height": 1000,
+          "FOV_Degrees": 62,
+          "AutoExposureSpeed": 100,
+          "AutoExposureBias": 0,
+          "MotionBlurAmount": 0
+        }
+      ]
+    },
+    "lab_start_close": {
+      "X": -4,
+      "Y": -8,
+      "Z": -3,
+      "Pitch": -19.685730102414364,
+      "Yaw": 63.43494882292201,
+      "Roll": 0,
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 1400,
+          "Height": 900,
+          "FOV_Degrees": 65,
+          "AutoExposureSpeed": 100,
+          "AutoExposureBias": 0,
+          "MotionBlurAmount": 0
+        }
+      ]
+    }
+  }
+}

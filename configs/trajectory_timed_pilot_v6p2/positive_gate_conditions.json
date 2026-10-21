@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "V6P2_SEPARATE_POSITIVE_DIAGNOSTIC_CONFIG_FREEZE",
+  "preparation_status": "PREPARED_NOT_EXECUTED",
+  "formal_thesis_effect_results": false,
+  "prepared_local": "2026-10-03T18:29:40.338781+08:00",
+  "planned_sessions": 1,
+  "planned_flights": 2,
+  "conditions": [
+    {
+      "condition_id": "target_y_plus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p2\\target_y_plus_0p4.json",
+      "configuration_sha256": "d0f0943bebcadb8ce0cc39ef19546b9aecdf88817fca0b85a82e2f70f1f0140d",
+      "planned_repetitions": 1
+    }
+  ],
+  "session_plan": [
+    {
+      "planned_session_index": 1,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p2\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ]
+    }
+  ],
+  "separate_short_gate": {
+    "path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p2\\center_short.json",
+    "sha256": "e84be622e1f1d07b8870368dc2e3e4868d966a6d15001e18e412cb439568de5f",
+    "planned_flights": 2
+  },
+  "parent_freeze": {
+    "path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p1\\conditions.json",
+    "sha256": "8d45f5442f5683140038e16c29738f883d6086f2a88efa94af74126e30b17a67"
+  },
+  "current_flight_source_sha256": {
+    "single_drone_experiment.py": "0f55e1d3d5afcb55cb372350df848fb8789279824fc3d905f3d477a37fa7ca1b",
+    "visual_servo.py": "35cd56bdf03aa8abd8338b865371e8c5e922ea1383fbe900b5fc6e0d2b1fb19e",
+    "target_provider.py": "7be594dfdd2e9de9485e5266aa7e42acc4fd90a78b3c66275ae20d46521899e6",
+    "balloon_detector.py": "8aea879e56ecddea5652ec817ea77ee9f1eea382a17843daafd4a42959fd46a0",
+    "trajectory_single_experiment.py": "d5e32903b597db556c0d5ffc6201f1edea38c6b24b7ca0d8e5a02487c2de44fb",
+    "perception_trajectory_planner.py": "4ed043f0f3e60451f9683950572f6f75738f3c564b261026829ff5291d1c26b4",
+    "timestamped_target_provider.py": "d00e3025c7a25cb9196f9bb9b2b91bd838010efb156f947aafc4458e8109ecd7",
+    "matched_trajectory_start.py": "3148f30a73f00dc53db2b5bed8c6ddbace7617a3fde4c830987cc80455cf7c53",
+    "trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+    "trajectory_timed_reference.py": "3f410b85ad47f74b0c25dee1b36b5f2445782fe413ba2446e84ecf409aca1d82",
+    "trajectory_timed_experiment.py": "978d85e284052dbe6bc5601d044f336a24cbfa24fff933c3aea7fe306b1717c5",
+    "trajectory_rgb_quality_reference.py": "630f0a6dc2efcfc7526140fb9ee27038781fb701c663b5a8b034ed313a64e0ef"
+  },
+  "generator": {
+    "path": "D:\\forAirsim\\python\\prepare_trajectory_rgb_quality_conditions.py",
+    "sha256": "903a743512519afbdab342083f34d0690ed0b47c72f1094650e7004b7ce784b2"
+  },
+  "physical_budget_changes": "NONE; same candidates, constraints, weights, task stopping criterion, motion and age limits",
+  "semantic_change": "Projection centering evaluates measured RGB centroid bearing on the same axial-depth plane; surface distance/footprint retain original anchors",
+  "motion_gate": "Post-capture actual state checked before planning; recorded inner-margin violations independently stop following sessions",
+  "gate": "Pure and shared-input regression, independent short gate, separate positive gate, frozen full development sweep",
+  "ai_assistance": "Preparation assisted by AI; no unexecuted outcome recorded"
+}

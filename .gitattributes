@@ -1,0 +1,2 @@
+# Preserve embedded CRLF context and binary sections in Git patches.
+patches/*.patch -text

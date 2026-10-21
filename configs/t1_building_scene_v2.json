@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "scene_id": "t1_building_courtyard_v2",
+  "description": "带白色横条的红色气球",
+  "fixed_height_ned_m": -3.0,
+  "start_hover_ned_m": [
+    0.0,
+    -3.0,
+    -3.0
+  ],
+  "observation_goal_ned_m": [
+    3.25,
+    -2.5,
+    -3.0
+  ],
+  "workspace": {
+    "low_ned_m": [
+      -1.0,
+      -6.0,
+      -3.15
+    ],
+    "high_ned_m": [
+      8.0,
+      2.0,
+      -2.85
+    ]
+  },
+  "clearance_m": 0.75,
+  "target": {
+    "position_ned_m": [
+      5.0,
+      -2.5,
+      -3.05
+    ],
+    "scale_xyz": [
+      1.2,
+      1.2,
+      1.5
+    ]
+  },
+  "distractor": {
+    "position_ned_m": [
+      5.0,
+      -3.8,
+      -3.05
+    ],
+    "scale_xyz": [
+      1.2,
+      1.2,
+      1.5
+    ]
+  },
+  "buildings": [
+    {
+      "name": "T1Building_A",
+      "center_ned_m": [
+        1.9,
+        -1.9,
+        -1.6
+      ],
+      "size_m": [
+        0.8,
+        0.8,
+        4.8
+      ]
+    },
+    {
+      "name": "T1Building_B",
+      "center_ned_m": [
+        4.5,
+        0.0,
+        -2.1
+      ],
+      "size_m": [
+        1.2,
+        1.4,
+        5.8
+      ]
+    },
+    {
+      "name": "T1Building_C",
+      "center_ned_m": [
+        6.0,
+        -5.0,
+        -1.4
+      ],
+      "size_m": [
+        1.2,
+        1.2,
+        4.4
+      ]
+    }
+  ]
+}

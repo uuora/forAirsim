@@ -1,0 +1,91 @@
+{
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "ApiServerPort": 41460,
+  "ClockSpeed": 1,
+  "ViewMode": "NoDisplay",
+  "CameraDirector": {
+    "X": -150,
+    "Y": -150,
+    "Z": -130,
+    "Pitch": -32,
+    "Yaw": 45,
+    "Roll": 0
+  },
+  "EngineSound": false,
+  "RecordUIVisible": false,
+  "LogMessagesVisible": false,
+  "Recording": {
+    "Enabled": false
+  },
+  "CameraDefaults": {
+    "CaptureSettings": [
+      {
+        "ImageType": -1,
+        "FOV_Degrees": 90,
+        "MotionBlurAmount": 0,
+        "AutoExposureMinBrightness": 1,
+        "AutoExposureMaxBrightness": 1
+      }
+    ]
+  },
+  "SubWindows": [],
+  "Vehicles": {
+    "DroneControl": {
+      "VehicleType": "SimpleFlight",
+      "DynamicsProfile": {
+        "Schema": 1,
+        "Name": "dual_target_v1",
+        "MassKg": 1.0,
+        "ThrustToWeightRatio": 2.5
+      },
+      "DefaultVehicleState": "Disarmed",
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "Yaw": 0,
+      "EnableCollisions": true,
+      "AllowAPIAlways": true,
+      "Cameras": {
+        "front_center": {
+          "X": 0.1,
+          "Y": 0,
+          "Z": -0.03,
+          "CaptureSettings": [
+            {
+              "ImageType": 0,
+              "Width": 256,
+              "Height": 144,
+              "FOV_Degrees": 90
+            }
+          ]
+        }
+      }
+    }
+  },
+  "ExternalCameras": {
+    "control_overview": {
+      "X": 0,
+      "Y": 0,
+      "Z": -90,
+      "Pitch": -90,
+      "Yaw": 90,
+      "Roll": 0,
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 1024,
+          "Height": 1024,
+          "FOV_Degrees": 90,
+          "ProjectionMode": "orthographic",
+          "OrthoWidth": 125,
+          "MotionBlurAmount": 0,
+          "AutoExposureMinBrightness": 1,
+          "AutoExposureMaxBrightness": 1,
+          "AutoExposureSpeed": 100,
+          "TargetGamma": 1.8
+        }
+      ]
+    }
+  }
+}

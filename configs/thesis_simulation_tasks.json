@@ -1,0 +1,2551 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-08",
+  "scope": "AirSim simulation only",
+  "source_proposal_sha256": "16493dd103ff46ef28b0d1dc6667c00a35730e6bc3db4088ec4debe9317ae76a",
+  "source_proposal": "C:/Users/hp/Desktop/修改9.29.docx",
+  "active_stage": "task_1_50_100mm_motion_scale_full_geometry_then_formal_methods",
+  "tasks": [
+    {
+      "id": "T1",
+      "name": "感知任务驱动的单机单目标轨迹优化方法研究",
+      "vehicles": [
+        "DroneA"
+      ],
+      "task_target_count": 1,
+      "status": "SCALED_DEVELOPMENT_MEASURED_FORMAL_T1_PENDING",
+      "core_comparison": [
+        "distance_efficiency_plan",
+        "perception_task_plan"
+      ],
+      "shared_comparison_requirements": [
+        "target_estimate",
+        "candidate_set",
+        "constraints",
+        "execution_budget"
+      ],
+      "primary_outcomes": [
+        "identity_correct_time_fraction",
+        "task_success_all_started",
+        "longest_loss_seconds"
+      ],
+      "trajectory_outcomes": [
+        "actual_path_m",
+        "jerk_squared_integral",
+        "planning_latency_seconds",
+        "constraint_violations"
+      ],
+      "offline_geometry_validation": {
+        "status": "PASS",
+        "case_checks": "13/13",
+        "matched_mode_checks": "3/3",
+        "report": "logs/trajectory_geometry_20260930_162648_714896/report.json",
+        "counts_as_flight_data": false
+      },
+      "next_gate": "integrate_V11P1_staged_capture_and_preserved_first_clear_then_spawn_gate_refreeze_zero50repeat100",
+      "controller_interface_pilots": {
+        "date": "2026-10-03",
+        "all_started_flights": 8,
+        "landed_and_released_flights": 8,
+        "scope": "fixed_world_height_positive_time_preview_not_time_indexed_3D_quintic_execution",
+        "formal_thesis_effect_results": false,
+        "batches": [
+          {
+            "kind": "V2_short",
+            "input": "geometry_oracle",
+            "started": 2,
+            "task_met": 0,
+            "protected_returns": 2,
+            "motion_evidence": "reported_acceleration_rejection_without_saved_rejected_input_vector",
+            "manifest": "logs/trajectory_interface_pilot_20261003_100056_6707762/manifest.json"
+          },
+          {
+            "kind": "V3_short_three_steps",
+            "input": "geometry_oracle",
+            "started": 2,
+            "task_met": 0,
+            "expected_step_limit": true,
+            "manifest": "logs/trajectory_interface_pilot_20261003_100923_0636899/manifest.json"
+          },
+          {
+            "kind": "V3_extended",
+            "input": "geometry_oracle",
+            "started": 2,
+            "task_met": 2,
+            "manifest": "logs/trajectory_interface_pilot_20261003_101228_9560743/manifest.json"
+          },
+          {
+            "kind": "V3_extended",
+            "input": "sensor_surface_estimate",
+            "started": 2,
+            "task_met": 2,
+            "manifest": "logs/trajectory_interface_pilot_20261003_101517_6298482/manifest.json"
+          }
+        ],
+        "V3_motion_status": "NO_EXCEEDANCE_IN_RECORDED_SAMPLES_NOT_A_CONTINUOUS_GUARANTEE",
+        "config": "configs/single_trajectory_fixed_height_v3_extended.json",
+        "progress_report": "docs/research-plan-20261003/单机单目标推进记录与下一步.md",
+        "remaining": [
+          "matched_actual_initial_states",
+          "offset_conditions_independent_sessions",
+          "time_indexed_3D_reference_execution",
+          "instance_identity_ground_truth",
+          "occlusion_and_latency_conditions",
+          "frozen_formal_protocol_and_independent_repetitions"
+        ]
+      },
+      "matched_start_offset_pilot": {
+        "date": "2026-10-03",
+        "kind": "V4_fixed_height_preview_sensor_surface_estimate",
+        "formal_thesis_effect_results": false,
+        "separate_short_gate_started": 2,
+        "all_started_with_interrupted_attempt": 13,
+        "terminal_reports": 12,
+        "missing_terminal_report_count": 1,
+        "verified_not_started_attempts": 3,
+        "task_met": 7,
+        "landed_and_released": 12,
+        "interrupted_terminal_safety": "UNKNOWN",
+        "terminal_initial_match_verified": 12,
+        "accepted_position_error_norm_m": [
+          0.007985978517354272,
+          0.008941323013820618
+        ],
+        "completed_independently_launched_paired_sessions": 6,
+        "terminal_flights_per_condition_policy": 2,
+        "same_terminal_source_modules": 8,
+        "motion_status": "NO_EXCEEDANCE_IN_RECORDED_POSITIONING_AND_APPROACH_V_A_SAMPLES_NOT_CONTINUOUS_GUARANTEE",
+        "original_sweep": "logs/trajectory_matched_sweep_20261003_113608_6428536/sweep_report.json",
+        "reconciliation": "logs/trajectory_matched_resume_20261003_154218_4001174/reconciliation_receipt.json",
+        "analysis": "logs/trajectory_matched_resume_20261003_154218_4001174/campaign_analysis_v3/summary.json",
+        "progress_report": "docs/research-plan-20261003/实测起点匹配与偏移先导结果.md",
+        "remaining": [
+          "inner_boundary_reference_execution",
+          "full_target_visibility_constraints",
+          "freshness_during_execution",
+          "time_indexed_3D_reference_execution",
+          "instance_identity_ground_truth",
+          "occlusion_and_latency_conditions",
+          "frozen_formal_protocol_and_independent_repetitions"
+        ]
+      },
+      "guarded_execution_pilot": {
+        "date": "2026-10-03",
+        "kind": "V5_fixed_height_preview_sensor_surface_estimate",
+        "formal_thesis_effect_results": false,
+        "separate_short_gate_started": 2,
+        "separate_short_gate_landed_and_released": 2,
+        "short_gate_step_limit_each": 3,
+        "short_gate_task_met": 0,
+        "planned_flights": 6,
+        "known_started_flights": 6,
+        "terminal_reports": 6,
+        "missing_terminal_report_count": 0,
+        "unknown_start_status_flights": 0,
+        "task_met": 5,
+        "landed_and_released": 6,
+        "terminal_initial_match_verified": 6,
+        "distinct_launches_with_safe_closure": 3,
+        "flights_per_condition_policy": 1,
+        "same_terminal_source_modules": 9,
+        "freshness_replan_events": 10,
+        "freshness_braked_ready": 10,
+        "completed_foreground_segment_post_query_age_samples": 690,
+        "maximum_recorded_segment_post_query_age_proxy_s": 0.4180019200004293,
+        "background_command_per_dispatch_age_coverage": "NOT_RECORDED",
+        "motion_status": "NO_EXCEEDANCE_IN_RECORDED_POSITIONING_AND_APPROACH_SAMPLES_NOT_CONTINUOUS_GUARANTEE",
+        "task_failure": "positive_offset_efficiency_NO_FEASIBLE_all_20_candidates_reject_TARGET_FOV",
+        "sweep": "logs/trajectory_matched_sweep_20261003_162504_2587397/sweep_report.json",
+        "analysis": "logs/trajectory_matched_sweep_20261003_162504_2587397/analysis/summary.json",
+        "diagnostics": "logs/trajectory_matched_sweep_20261003_162504_2587397/execution_diagnostics/execution_receipt.json",
+        "short_gate_manifest": "logs/trajectory_interface_pilot_20261003_162128_5512686/manifest.json",
+        "config": "configs/trajectory_guarded_pilot_v5/conditions.json",
+        "progress_report": "docs/research-plan-20261003/V5执行余量与观测重规划验收.md",
+        "next_implementation_plan": "docs/research-plan-20261003/V6时间索引执行接口计划.md",
+        "remaining": [
+          "time_indexed_reference_execution",
+          "background_command_freshness_trace",
+          "independent_braking_model_measurement",
+          "full_3D_and_pose_transform",
+          "instance_identity_ground_truth",
+          "occlusion_and_latency_conditions",
+          "frozen_formal_protocol_and_independent_repetitions"
+        ],
+        "footprint_constraint_audit": "INVALID_ANCHOR_DETECTION_CENTROID_OFFSETS_ADDED_TO_DIFFERENT_SURFACE_POINT",
+        "interpretation_limit": "Actual flight and safety counts retained; V5 footprint constraints are not correct measured-box validation or formal method effectiveness evidence",
+        "anchor_replay": "logs/trajectory_matched_sweep_20261003_162504_2587397/footprint_anchor_replay/replay_receipt.json"
+      },
+      "surface_anchor_correction": {
+        "version": "V5.1",
+        "status": "SHORT_GATE_AND_POSITIVE_PILOT_RECORDED_ANCHOR_RECONSTRUCTION_VERIFIED_FRESHNESS_ALLOWANCE_GAP",
+        "formal_thesis_effect_results": false,
+        "short_gate_started": 2,
+        "short_gate_landed_and_released": 2,
+        "short_gate_steps_each": 3,
+        "short_manifest": "logs/trajectory_interface_pilot_20261003_165011_4833788/manifest.json",
+        "short_analysis": "logs/trajectory_interface_pilot_20261003_165011_4833788/analysis/summary.json",
+        "separate_positive_pilot": "logs/trajectory_matched_sweep_20261003_165257_8024695/sweep_report.json",
+        "frozen_config": "configs/trajectory_guarded_pilot_v5p1/conditions.json",
+        "offline_terminal_input_replay": {
+          "counts_as_flight_data": false,
+          "legacy_status": "NO_FEASIBLE",
+          "corrected_status": "OK",
+          "corrected_feasible_candidates": 5,
+          "candidate_count": 20
+        },
+        "related_unit_tests": 146,
+        "remaining": [
+          "time_indexed_reference_execution",
+          "per_stage_freshness_budget_scheduling",
+          "background_command_per_dispatch_age_trace",
+          "independent_braking_measurement",
+          "full_3D_pose_identity_occlusion_formal_protocol"
+        ],
+        "planned_full_flights": 2,
+        "known_started_full_flights": 2,
+        "full_terminal_reports": 2,
+        "full_task_met": 1,
+        "full_landed_and_released": 2,
+        "full_initial_match_verified": 2,
+        "unknown_start_status_flights": 0,
+        "missing_terminal_report_count": 0,
+        "independently_launched_paired_sessions": 1,
+        "full_planning_input_box_reconstruction_frames": 104,
+        "maximum_recorded_box_corner_error_px": 5.684341886080802e-14,
+        "foreground_post_query_age_samples": 303,
+        "maximum_recorded_foreground_post_query_age_proxy_s": 0.4450024960004293,
+        "background_command_per_dispatch_age_coverage": "NOT_RECORDED",
+        "motion_status": "NO_EXCEEDANCE_IN_RECORDED_POSITIONING_AND_APPROACH_SAMPLES_NOT_CONTINUOUS_GUARANTEE",
+        "efficiency_failure": "SEVENTH_SELF_STATE_BRAKE_COMPLETED_THEN_MAX_SIX_REOBSERVATIONS_ALLOWANCE_PROTECTION_NO_NEW_IMAGE_AFTER_TRIGGER",
+        "freshness_brake_events": 11,
+        "full_braked_ready_count": 11,
+        "analysis": "logs/trajectory_matched_sweep_20261003_165257_8024695/analysis_v2/summary.json",
+        "projection_audit": "logs/trajectory_matched_sweep_20261003_165257_8024695/footprint_diagnostic/receipt.json",
+        "progress_report": "docs/research-plan-20261003/V5.1表面点锚点修正实测结果.md",
+        "next_implementation_plan": "docs/research-plan-20261003/V6时间索引执行接口计划.md"
+      },
+      "time_indexed_reference_pilot": {
+        "version": "V6",
+        "status": "SHORT_AND_POSITIVE_DIAGNOSTIC_COMPLETED_FULL_SWEEP_DEFERRED",
+        "formal_thesis_effect_results": false,
+        "short_started": 2,
+        "short_landed_and_released": 2,
+        "separate_positive_diagnostic": {
+          "planned_flights": 2,
+          "known_started_flights": 2,
+          "unknown_start_status_flights": 0,
+          "missing_terminal_report_count": 0,
+          "task_success_count": 1,
+          "safe_landing_and_release_count": 2,
+          "independent_launch_evidence_verified_session_count": 1
+        },
+        "diagnostic_sweep": "logs/trajectory_matched_sweep_20261003_173459_0863585/sweep_report.json",
+        "analysis": "logs/trajectory_matched_sweep_20261003_173459_0863585/analysis/summary.json",
+        "timed_diagnostic": "logs/trajectory_matched_sweep_20261003_173459_0863585/timed_diagnostic/receipt.json",
+        "full_planned_flights": 12,
+        "full_started_flights": 0,
+        "full_disposition": "logs/trajectory_matched_sweep_20261003_173459_0863585/full_sweep_disposition.json",
+        "failure": "positive_perception_NO_BOUNDARY_AND_RAMP_FEASIBLE_COMMAND_fixed_interval_ramp",
+        "ramp_replay": "logs/trajectory_matched_sweep_20261003_173459_0863585/ramp_transition_replay/receipt.json",
+        "counts_as_3D_or_formal_effect_results": false,
+        "source_module_count": 11,
+        "related_unit_tests": 162,
+        "progress_report": "docs/research-plan-20261003/V6时间索引与时效调度实测.md"
+      },
+      "elapsed_request_ramp_pilot": {
+        "version": "V6.1",
+        "status": "FULL_DEVELOPMENT_SWEEP_COMPLETED_SPATIAL_GATE_FAILED_IN_TWO_RUNS",
+        "formal_thesis_effect_results": false,
+        "short_started": 2,
+        "short_landed_and_released": 2,
+        "separate_positive_started": 2,
+        "separate_positive_task_met": 1,
+        "separate_positive_landed_and_released": 2,
+        "full": {
+          "planned_flights": 12,
+          "known_started_flights": 12,
+          "unknown_start_status_flights": 0,
+          "missing_terminal_report_count": 0,
+          "task_success_count": 10,
+          "safe_landing_and_release_count": 12,
+          "independent_launch_evidence_verified_session_count": 6
+        },
+        "sweep": "logs/trajectory_matched_sweep_20261003_175332_7484087/sweep_report.json",
+        "analysis": "logs/trajectory_matched_sweep_20261003_175332_7484087/analysis_v2/summary.json",
+        "timed_diagnostic": "logs/trajectory_matched_sweep_20261003_175332_7484087/timed_diagnostic/receipt.json",
+        "quality_reference_audit": "logs/trajectory_matched_sweep_20261003_175332_7484087/quality_reference_audit/receipt.json",
+        "analysis_code_snapshot": "logs/trajectory_matched_sweep_20261003_175332_7484087/analysis_code_snapshot/receipt.json",
+        "inner_protection_margin_violation_runs": 2,
+        "minimum_margins_in_violating_runs_m": [
+          0.1498642027378082,
+          0.1482458472251892
+        ],
+        "physical_budget_scope": "recorded_velocity_and_acceleration_only_spatial_reported_separately",
+        "source_module_count": 11,
+        "related_unit_tests": 167,
+        "progress_report": "docs/research-plan-20261003/V6.1实测起点反序与侧边界诊断.md"
+      },
+      "rgb_quality_and_spatial_pilot": {
+        "version": "V6.2",
+        "status": "FULL_DEVELOPMENT_SWEEP_COMPLETED_AND_AUDITED",
+        "formal_thesis_effect_results": false,
+        "short_started": 2,
+        "short_landed_and_released": 2,
+        "short_steps_each": 3,
+        "short_manifest": "logs/trajectory_interface_pilot_20261003_182941_0959523/manifest.json",
+        "separate_positive_started": 2,
+        "separate_positive_task_met": 2,
+        "separate_positive_landed_and_released": 2,
+        "separate_positive_sweep": "logs/trajectory_matched_sweep_20261003_183325_6861974/sweep_report.json",
+        "planned_full_flights": 12,
+        "planned_full_sessions": 6,
+        "full_sweep": "logs/trajectory_matched_sweep_20261003_184327_9519224/sweep_report.json",
+        "frozen_config": "configs/trajectory_timed_pilot_v6p2/conditions.json",
+        "source_module_count": 12,
+        "related_unit_tests": 177,
+        "test_log": "logs/trajectory_v6p2_related_tests.txt",
+        "reference_mode": "time_indexed",
+        "command_ramp_time_basis": "elapsed_since_previous_request",
+        "image_center_reference_mode": "rgb_detection_centroid_axial_plane_not_physical_target_center",
+        "post_capture_protection": true,
+        "independent_spatial_gate": true,
+        "pre_flight_source_freeze_check": true,
+        "progress_report": "docs/research-plan-20261003/V6.2居中参考与空间门槛实测结果.md",
+        "next_measurement_plan": "docs/research-plan-20261003/独立制动与响应测量方案.md",
+        "remaining": [
+          "independent_braking_response_measurement",
+          "full_3D_pose_transform",
+          "instance_identity_visibility_scoring",
+          "occlusion_latency_conditions",
+          "frozen_formal_protocol_and_independent_repetitions"
+        ],
+        "full": {
+          "planned_flights": 12,
+          "known_started_flights": 12,
+          "unknown_start_status_flights": 0,
+          "missing_terminal_report_count": 0,
+          "task_success_count": 12,
+          "safe_landing_and_release_count": 12,
+          "independent_launch_evidence_verified_session_count": 6
+        },
+        "verified_initial_state_pairs": 6,
+        "analysis": "logs/trajectory_matched_sweep_20261003_184327_9519224/analysis/summary.json",
+        "timed_diagnostic": "logs/trajectory_matched_sweep_20261003_184327_9519224/timed_diagnostic/receipt.json",
+        "quality_reference_audit": "logs/trajectory_matched_sweep_20261003_184327_9519224/quality_reference_audit/receipt.json",
+        "analysis_code_snapshot": "logs/trajectory_matched_sweep_20261003_184327_9519224/analysis_code_snapshot/receipt.json",
+        "request_figures": "logs/trajectory_matched_sweep_20261003_184327_9519224/timed_figures/plot_receipt.json",
+        "verified_target_requests": 3918,
+        "verified_planning_input_box_frames": 1351,
+        "maximum_recorded_corner_error_px": 5.684341886080802e-14,
+        "maximum_verified_dispatch_age_proxy_s": 0.2850014080013352,
+        "maximum_recorded_approach_speed_m_s": 0.07285449058403579,
+        "maximum_recorded_approach_acceleration_m_s2": 0.05097507132157182,
+        "minimum_recorded_workspace_margin_m": 0.18521944284439085,
+        "inner_protection_margin_violation_runs": 0,
+        "motion_status": "NO_EXCEEDANCE_IN_RECORDED_V_A_AND_SPATIAL_SAMPLES_NOT_CONTINUOUS_GUARANTEE"
+      },
+      "independent_braking_response_measurement": {
+        "status": "LOW_SPEED_XY_CANDIDATE_HELD_OUT_VALIDATION_COMPLETED",
+        "formal_thesis_effect_results": false,
+        "version": "V1.4 workflow; one h=1.0 s candidate chosen from V1.2 development data",
+        "measurement_methods": 1,
+        "model_horizon_s": 1.0,
+        "request_amplitudes_m_s": [
+          0.03,
+          0.06
+        ],
+        "source_module_count": 19,
+        "related_tests": 58,
+        "test_log": "logs/braking_response_final_related_tests.txt",
+        "independent_validation_flights": 2,
+        "nested_pulses": 16,
+        "stable_measured_pulses": 16,
+        "sampled_allowance_pass_pulses": 16,
+        "validation_analysis": "logs/braking_validation_v1p4_20261003/summary.json",
+        "validation_figures": "logs/braking_validation_v1p4_20261003/figure_receipt.json",
+        "validation_manifests": [
+          "logs/braking_campaign_20261003_231410_8621230/manifest.json",
+          "logs/braking_campaign_20261003_231925_2450598/manifest.json"
+        ],
+        "calibration_analysis": "logs/braking_campaign_20261003_223639_9536884/analysis/summary.json",
+        "old_full_plan_disposition": "logs/braking_campaign_20261003_223639_9536884/full_plan_disposition.json",
+        "report": "docs/research-plan-20261003/独立制动与响应实测结果.md",
+        "next_plan": "docs/research-plan-20261003/下一轮三维与姿态接口验收计划.md",
+        "minimum_actual_entry_forward_speed_m_s": 0.028478171676397324,
+        "maximum_actual_entry_forward_speed_m_s": 0.05859636887907982,
+        "all_development_accounting": {
+          "engine_attempts": 13,
+          "known_started_flights": 11,
+          "safe_landing_flights": 11,
+          "verified_not_started_attempts": 2,
+          "unknown_start_count": 0
+        },
+        "limits": [
+          "Two independent validation sessions, nested pulses; no formal method efficacy inference",
+          "Sampled low-speed XY only; higher amplitude, Z, attitude and continuous safety unverified",
+          "Equivalent allowance window is not measured actuation delay or certified constant physical deceleration"
+        ]
+      },
+      "perception_integration_20261004": {
+        "status": "CLEAN_GROUND_YOLO_VLX_POSE_SURFACE_AND_EVALUATION_GATES_COMPLETED",
+        "receipt": "logs/t1_perception_closeout_v1p1_20261004/receipt.json",
+        "new_flights": 0,
+        "intended_scene_pass_sessions": 1,
+        "base_frames": 18,
+        "additional_live_frames": 35,
+        "valid_semantic_cases": 7,
+        "uncertain_cases": 2,
+        "vlx_API_restored_and_verified": true,
+        "specialist_YOLO_training_completed": true,
+        "persistent_instance_tracking_completed": false,
+        "formal_method_effect_complete": false,
+        "ground_temporal_tracking_and_attribute_recovery_completed": true
+      },
+      "detector_adaptation_20261004": {
+        "status": "CONTROLLED_EPISODE_GROUPED_TRAINING_AND_TEST_COMPLETED",
+        "receipt": "logs/t1_balloon_adaptation_closeout_v1p2_20261004/receipt.json",
+        "new_flights": 0,
+        "cloud_requests": 0,
+        "frame_count": 192,
+        "train_validation_test_sessions": [
+          4,
+          2,
+          2
+        ],
+        "training_epochs": 20,
+        "test_frames": 48,
+        "test_episodes": 2,
+        "specialist_weights_sha256": "92b0dc0f4e17ff14e9c1e110b9cad9ef249274136ee9a28d99b7885dfb396844",
+        "formal_method_effect_complete": false
+      },
+      "continuous_identity_development_20261004": {
+        "status": "GROUND_ATTRIBUTE_RECOVERY_AND_UNOBSERVABLE_REFUSAL_RECORDED_TIMING_BUDGET_REVISED",
+        "receipt": "logs/t1_continuous_identity_closeout_20261004/receipt.json",
+        "latest_analysis": "logs/t1_continuous_identity_analysis_v1p3_final_20261004/report.json",
+        "independently_owned_UE_launches": 16,
+        "development_protocol_versions": [
+          "v1",
+          "v1p1a",
+          "v1p2",
+          "v1p3"
+        ],
+        "new_flights": 0,
+        "cloud_request_submissions": 48,
+        "saved_frames_all_versions": 577,
+        "latest_planned_slots": 124,
+        "latest_captured_slots": 123,
+        "latest_on_time_results": 115,
+        "latest_late_results": 8,
+        "latest_missed_slots": 1,
+        "latest_selected_correct": 54,
+        "latest_selected_wrong": 0,
+        "latest_attribute_recovery_sessions": 2,
+        "latest_identical_return_refusal_frames": 26,
+        "latest_sampling_period_nominal_s": 0.4,
+        "phase_boundary_interval_s": 0.2,
+        "online_role": "RGB-only observation; geometry continuity and periodic client-bound semantic review",
+        "instance_identity_guaranteed": false,
+        "trajectory_integration_completed": false,
+        "formal_method_effect_complete": false,
+        "development_report": "docs/research-plan-20261004/任务一持续身份与实时性开发结果.md",
+        "thesis_chapters": [
+          "docs/thesis/第二章_问题建模与仿真平台.md",
+          "docs/thesis/第三章_单机感知轨迹优化.md"
+        ]
+      },
+      "airborne_identity_depth_development_20261004": {
+        "status": "MICRO_XY_IDENTITY_DEPTH_INTEGRATION_RECORDED_FORMAL_TIMING_PENDING",
+        "data_date": "2026-10-04",
+        "review_update_date": "2026-10-05",
+        "analysis": "logs/t1_identity_flight_analysis_final_20261005/report.json",
+        "closeout_receipt": "logs/t1_identity_flight_closeout_20261005/receipt.json",
+        "observed_airborne_attempts_all": 5,
+        "development_gate_pass_attempts": 2,
+        "retained_failed_attempts": 3,
+        "planned_slots_all": 142,
+        "captured_groups_all": 141,
+        "media_original_hash_verified_all": 363,
+        "media_analysis_locked_without_original_seal_all": 60,
+        "known_cloud_submissions_all": 17,
+        "cloud_submission_unknown_sessions": [
+          "t1_identity_flight_zero_v1_20261004"
+        ],
+        "latest_planned_slots": 41,
+        "latest_captured_frames": 40,
+        "latest_identity_point_counts": {
+          "NO_OUTPUT": 16,
+          "CORRECT": 24
+        },
+        "latest_target_motion_commands": 24,
+        "latest_max_command_xy_m_s": 0.010659983346223952,
+        "latest_max_actual_xy_m_s": 0.00352592905996835,
+        "latest_sampled_xy_path_m": 0.026639299081469874,
+        "latest_max_fixed_height_error_m": 0.012738525867462158,
+        "latest_full_frame_late": 24,
+        "latest_observer_late": 11,
+        "latest_gate_decisions_late": 11,
+        "latest_gate_decisions_timely": 29,
+        "latest_missed_or_unknown_gate_slots": 1,
+        "latest_transition_recovery": {
+          "hidden_transition_completed_s": 31410.656,
+          "return_transition_completed_s": 31412.406,
+          "loss_receipt_delay_from_actual_hidden_s": 0.09400000000096043,
+          "recovery_completion_delay_from_actual_return_s": 2.0,
+          "recovery_identity_availability_delay_from_actual_return_s": 1.7810000000026776,
+          "status": "RECOVERY_OBSERVED",
+          "return_correct_output_frames": 14,
+          "return_other_frames": 4,
+          "longest_consecutive_correct_return_frames": 14,
+          "longest_correct_return_readback_span_s": 5.281999999999243,
+          "post_recovery_lost_output_transitions": 0,
+          "return_continuity_scope": "consecutive saved correct outputs, readback gaps <=.5s; brief recovery is not sustained tracking",
+          "time_scope": "same-host actual object transition receipt to captured readback/decision completion; not exposure time"
+        },
+        "latest_lease_clear": {
+          "nonzero_target_commands": 24,
+          "explicit_clear_recorded_count": 24,
+          "max_clear_after_declared_lease_s": 0.020000000000436557,
+          "max_clear_after_observation_deadline_s": -0.19799999999668216,
+          "max_stop_sample_gap_s": 0.0470000000022992
+        },
+        "specialist_weights_sha256": "92b0dc0f4e17ff14e9c1e110b9cad9ef249274136ee9a28d99b7885dfb396844",
+        "all_attempts_finally_grounded_released_paused_owned_closed": true,
+        "formal_method_effect_complete": false,
+        "whole_thesis_complete": false,
+        "development_report": "docs/research-plan-20261004/任务一机载身份深度与低速轨迹集成结果.md",
+        "next_gate": "decouple_own_state_controller_and_blocking_perception_then_latency_and_four_method_pilots"
+      },
+      "async_control_development_20261005": {
+        "status": "OWN_STATE_ZERO_HOLD_TIMING_RECORDED_NO_NEW_TARGET_IDENTITY_OUTPUT",
+        "date": "2026-10-05",
+        "timing_analysis": "logs/t1_async_timing_final_v2_20261005/report.json",
+        "identity_analysis": "logs/t1_async_identity_analysis_v2_20261005/report.json",
+        "component_latency_diagnostic": "logs/t1_vlx_latency_diagnostic_20261005/report.json",
+        "development_report": "docs/research-plan-20261004/任务一异步调度与语义时效开发结果.md",
+        "observed_airborne_attempts_all": 4,
+        "retained_failed_attempts_all": 4,
+        "planned_slots_all": 122,
+        "captured_rgb_frames_all": 103,
+        "complete_paired_media_groups": 102,
+        "no_output_frames": 102,
+        "unknown_output_frames": 1,
+        "nonzero_target_commands": 0,
+        "known_flight_semantic_submissions": 14,
+        "additional_latency_diagnostic_submissions": 3,
+        "corrected_runs_max_between_SELF_STATE_receipts_s": [
+          0.078,
+          0.094,
+          0.078
+        ],
+        "nominal_monitor_period_s": 0.05,
+        "measured_monitor_not_hard_real_time": true,
+        "blocked_interval_self_state_counts": [
+          15,
+          14
+        ],
+        "blocked_interval_max_gap_s": [
+          0.063,
+          0.063
+        ],
+        "blocking_under_active_nonzero_target_lease_verified": false,
+        "all_attempts_grounded_released_paused_owned_closed": true,
+        "tests_passed": 146,
+        "formal_method_effect_complete": false,
+        "whole_thesis_complete": false,
+        "next_gate": "vlx_completion_polling_and_initial_anchor_feasibility_then_nonzero_async_retest",
+        "source_scope": "Original plans and failed media gaps preserved; historical comparison is not matched efficacy",
+        "corrected_recovery_semantics": "No loss/recovery latency without a verified pre-hide correct track",
+        "final_closeout_receipt": "logs/t1_async_closeout_final_20261005/receipt.json"
+      },
+      "delayed_chain_attribute_development_20261005": {
+        "date": "2026-10-05",
+        "status": "SOURCE_ATTRIBUTE_CONTROLLED_XY_VERIFIED_REVIEW_CONTINUITY_AND_FORMAL_EFFECT_PENDING",
+        "analysis": "logs/t1_chain_analysis_final_v4p1_20261005/report.json",
+        "development_report": "docs/research-plan-20261004/任务一逐帧语义复核与属性拒识结果.md",
+        "closeout_receipt": "logs/t1_chain_closeout_20261005/receipt.json",
+        "actual_airborne_attempts_all": 3,
+        "actual_airborne_safe_closures_all": 3,
+        "independently_qualified_controlled_scope_runs": 2,
+        "independent_identity_failed_runs": 1,
+        "startup_failed_before_runner_attempts": 1,
+        "startup_failure_actual_flights": 0,
+        "startup_failure_ground_proof": "UNAVAILABLE_RPC_NO_FLIGHT_RUNNER_STARTED",
+        "startup_cleanup": "logs/t1_identity_chain_delay_v3_20261005/owned_startup_failure_cleanup.json",
+        "complete_rgb_depth_seg_groups": 119,
+        "media_files": 357,
+        "initial_acquisition_planned_slots": 150,
+        "initial_acquisition_captured_frames": 19,
+        "initial_acquisition_unused_after_success_slots": 131,
+        "measured_planned_slots": 102,
+        "measured_captured_frames": 100,
+        "measured_missing_deadline_slots": 2,
+        "known_live_semantic_requests": 16,
+        "maximum_live_backend_completed_s": 1.188,
+        "real_over_two_seconds_semantic_bridge_flown": false,
+        "retained_wrong_anchor_trial": {
+          "run": "logs/t1_identity_chain_short_v3_20261005/flight/report.json",
+          "original_runner_status": "PASS",
+          "independent_qualification": "FAIL_WRONG_IDENTITY",
+          "wrong_saved_frames": 6,
+          "wrong_target_nonzero_commands": 4,
+          "reason": "VLX selected distractor on occluded source; geometric continuity retained wrong anchor"
+        },
+        "latest_attribute_guarded_run": {
+          "run": "logs/t1_identity_attribute_delay_v4_20261005/flight/report.json",
+          "independent_qualification": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+          "acquisition_frames": 6,
+          "acquisition_elapsed_s": 2.25,
+          "measured_captured_frames": 39,
+          "measured_planned_slots": 41,
+          "correct_saved_frames": 18,
+          "no_output_saved_frames": 21,
+          "wrong_saved_frames": 0,
+          "nonzero_commands": 15,
+          "all_nonzero_commands_independently_correct": true,
+          "source_attribute_accepted": 5,
+          "source_attribute_rejected": 1,
+          "all_nonzero_explicitly_cleared": true,
+          "minimum_observation_clear_margin_s": 0.167,
+          "max_clear_after_declared_lease_s": 0.021,
+          "maximum_saved_own_state_query_gap_s": 0.078,
+          "measured_gate_timely_late_unknown": [
+            37,
+            2,
+            2
+          ],
+          "measured_full_frame_timely_late_unknown": [
+            20,
+            19,
+            2
+          ],
+          "sampled_xy_path_m": 0.0075311556,
+          "maximum_sampled_actual_xy_speed_m_s": 0.0012128643,
+          "stall_seconds": [
+            0.657,
+            0.657
+          ],
+          "stall_saved_own_state_queries": [
+            14,
+            13
+          ],
+          "stall_maximum_crossing_query_gap_s": [
+            0.063,
+            0.063
+          ],
+          "stall_active_nonzero_target_lease_overlap_verified": false,
+          "recovery_delay": null,
+          "recovery_qualification": "NOT_APPLICABLE_LOSS_ALREADY_PRESENT_BEFORE_HIDE",
+          "return_consecutive_correct_frames": 7,
+          "return_correct_readback_span_s": 2.422,
+          "return_later_loss_transitions": 1,
+          "motion_scope": "millimetre_scale_fixed_height_interface_only_not_trajectory_effect"
+        },
+        "source_attribute_replay": "logs/t1_source_attribute_replay_v1_20261005/report.json",
+        "source_attribute_limits": "descriptor-specific RGB rule; broad white circular glare can pass; no calibrated identity probability or instance guarantee",
+        "post_flight_source_change": "bounds and truncated candidate checks added after frozen V4 flight; flight snapshot and thresholds retained",
+        "tests_passed": 253,
+        "test_stdout": "logs/t1_chain_final_tests_20261005.stdout.log",
+        "test_stderr": "logs/t1_chain_final_tests_20261005.stderr.log",
+        "formal_method_effect_complete": false,
+        "whole_thesis_complete": false,
+        "next_gate": "continuous_review_without_artificial_loss_and_active_command_block_then_scaled_motion_and_formal_comparison",
+        "ai_assistance": "AI-assisted implementation and local sealed-evidence analysis; author reviews interpretation; tests are not scientific effect evidence"
+      },
+      "review_handoff_development_20261005": {
+        "date": "2026-10-05",
+        "kind": "REVIEW_HANDOFF_ACTIVE_DISPATCH_STALL_AND_LOSS_AWARE_REACQUISITION",
+        "runs": [
+          {
+            "label": "零目标速度V5",
+            "session_id": "t1_identity_handoff_zero_v5_20261005",
+            "run": "D:\\forAirsim\\logs\\t1_identity_handoff_zero_v5_20261005",
+            "original_runner_status": "PASS",
+            "independent_qualification": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "acquisition_frames": 6,
+            "acquisition_elapsed_s": 2.264999999999418,
+            "measured_captured_frames": 20,
+            "measured_planned_slots": 20,
+            "measured_identity_counts": {
+              "CORRECT": 20
+            },
+            "nonzero_target_commands": 0,
+            "continuous_source_changes": 2,
+            "valid_old_anchor_during_pending_frames": 4,
+            "active_stall_qualification": {
+              "status": "NOT_DECLARED",
+              "active_nonzero_overlap_verified": false
+            },
+            "recovery": {
+              "hidden_transition_completed_s": null,
+              "return_transition_completed_s": null,
+              "loss_receipt_delay_from_actual_hidden_s": null,
+              "recovery_completion_delay_from_actual_return_s": null,
+              "recovery_identity_availability_delay_from_actual_return_s": null,
+              "pre_hide_track_established": false,
+              "pre_hide_track_qualification": "TRANSITIONS_NOT_VERIFIED",
+              "status": "NOT_APPLICABLE_NO_HIDE_RETURN"
+            },
+            "sampled_xy_path_m": 0.0,
+            "maximum_actual_xy_speed_m_s": 0.0,
+            "maximum_saved_control_query_gap_s": 0.125,
+            "attribute_status_counts": {
+              "ACCEPTED": 4
+            },
+            "backend_max_s": 1.0940000000009604,
+            "safe_end": {
+              "grounded_and_released": true,
+              "paused": true
+            },
+            "fresh_ground_closure_verified": true,
+            "engine_closed_after_safe_completion": true
+          },
+          {
+            "label": "短XY V5",
+            "session_id": "t1_identity_handoff_short_v5_20261005",
+            "run": "D:\\forAirsim\\logs\\t1_identity_handoff_short_v5_20261005",
+            "original_runner_status": "PASS",
+            "independent_qualification": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "acquisition_frames": 6,
+            "acquisition_elapsed_s": 2.2189999999991414,
+            "measured_captured_frames": 41,
+            "measured_planned_slots": 41,
+            "measured_identity_counts": {
+              "CORRECT": 28,
+              "NO_OUTPUT": 13
+            },
+            "nonzero_target_commands": 19,
+            "continuous_source_changes": 3,
+            "valid_old_anchor_during_pending_frames": 6,
+            "active_stall_qualification": {
+              "status": "NOT_DECLARED",
+              "active_nonzero_overlap_verified": false
+            },
+            "recovery": {
+              "hidden_transition_completed_s": 13490.359,
+              "return_transition_completed_s": 13492.203,
+              "loss_receipt_delay_from_actual_hidden_s": 0.09399999999914144,
+              "recovery_completion_delay_from_actual_return_s": 3.5930000000007567,
+              "recovery_identity_availability_delay_from_actual_return_s": 3.436999999999898,
+              "pre_hide_track_established": true,
+              "pre_hide_track_qualification": "CORRECT_FRESH_TRACK_ESTABLISHED_BEFORE_HIDE",
+              "status": "RECOVERY_OBSERVED",
+              "pre_hide_available_output_frames": 18,
+              "pre_hide_max_link_gap_s": 0.5,
+              "pre_hide_reference_frame_id": "t1_identity_handoff_short_v5_20261005_f023",
+              "pre_hide_reference_readback_s": 13490.109,
+              "pre_hide_reference_observer_completed_s": 13490.234,
+              "pre_hide_source_age_at_hidden_s": 0.25,
+              "return_correct_output_frames": 10,
+              "return_other_frames": 8,
+              "longest_consecutive_correct_return_frames": 10,
+              "longest_correct_return_readback_span_s": 3.639999999999418,
+              "post_recovery_lost_output_transitions": 0,
+              "return_continuity_scope": "consecutive saved correct outputs, readback gaps <=.5s; brief recovery is not sustained tracking",
+              "time_scope": "same-host actual object transition receipt to captured readback/decision completion; not exposure time",
+              "recovery_qualification_scope": "fresh last available correct pre-hide output, then observed hidden loss; never-established or already-lost output is not a newly caused loss"
+            },
+            "sampled_xy_path_m": 0.011068450068367833,
+            "maximum_actual_xy_speed_m_s": 0.001791317482691957,
+            "maximum_saved_control_query_gap_s": 0.10900000000037835,
+            "attribute_status_counts": {
+              "ACCEPTED": 5,
+              "REJECTED": 1
+            },
+            "backend_max_s": 1.0469999999986612,
+            "safe_end": {
+              "grounded_and_released": true,
+              "paused": true
+            },
+            "fresh_ground_closure_verified": true,
+            "engine_closed_after_safe_completion": true
+          },
+          {
+            "label": "活动指令停顿V5",
+            "session_id": "t1_identity_handoff_active_v5_20261005",
+            "run": "D:\\forAirsim\\logs\\t1_identity_handoff_active_v5_20261005",
+            "original_runner_status": "PASS",
+            "independent_qualification": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "acquisition_frames": 6,
+            "acquisition_elapsed_s": 2.2180000000007567,
+            "measured_captured_frames": 40,
+            "measured_planned_slots": 41,
+            "measured_identity_counts": {
+              "CORRECT": 12,
+              "NO_OUTPUT": 28
+            },
+            "nonzero_target_commands": 7,
+            "continuous_source_changes": 1,
+            "valid_old_anchor_during_pending_frames": 2,
+            "active_stall_qualification": {
+              "status": "PASS_CONTROLLED_ACTIVE_DISPATCH_STALL",
+              "active_nonzero_overlap_verified": true,
+              "trigger_frame_id": "t1_identity_handoff_active_v5_20261005_f006",
+              "trigger_ticket_id": "control-7",
+              "dispatch_monotonic_s": 13629.421,
+              "explicit_clear_monotonic_s": 13629.546,
+              "explicit_clear_inside_block": true,
+              "block": {
+                "slot_index": 0,
+                "boundary": "AFTER_ACTUAL_NONZERO_DISPATCH_BEFORE_MEDIA_SAVE",
+                "started_monotonic_s": 13629.421,
+                "completed_monotonic_s": 13630.093,
+                "duration_s": 0.65,
+                "eligibility": {
+                  "eligible": true,
+                  "reason": "ACTUAL_NONZERO_DISPATCH_WITH_AT_LEAST_40MS_LEASE",
+                  "minimum_remaining_lease_s": 0.04,
+                  "input_scope": "control dispatch receipts only",
+                  "ticket_id": "control-7",
+                  "command_id": "PERCEPTION_XY_65",
+                  "frame_id": "t1_identity_handoff_active_v5_20261005_f006",
+                  "dispatch_monotonic_s": 13629.421,
+                  "declared_lease_end_monotonic_s": 13629.541000000001,
+                  "eligibility_checked_monotonic_s": 13629.421,
+                  "remaining_declared_lease_s": 0.12000000000080036
+                },
+                "ticket_id": "control-7",
+                "frame_id": "t1_identity_handoff_active_v5_20261005_f006",
+                "status": "ACTUAL_BLOCK_INTERVAL_ANALYZED",
+                "actual_duration_s": 0.6720000000004802,
+                "self_state_receipts_inside": 15,
+                "max_boundary_clipped_receipt_gap_s": 0.06300000000010186,
+                "max_whole_receipt_gap_touching_interval_s": 0.06300000000010186,
+                "bracketed_by_saved_self_receipts": true,
+                "prior_self_receipt_s": 13629.421,
+                "first_after_self_receipt_s": 13630.125,
+                "own_state_command_dispatches_inside": 13,
+                "nonzero_target_dispatches_inside": 1,
+                "total_command_dispatches_inside": 14,
+                "nonzero_target_active_overlap_rows": [
+                  {
+                    "target_frame_id": "t1_identity_handoff_active_v5_20261005_f006",
+                    "overlap_start_s": 13629.421,
+                    "overlap_end_s": 13629.546,
+                    "duration_s": 0.125
+                  }
+                ],
+                "scope": "actual saved block interval and host receipts; no samples does not imply controller coverage"
+              },
+              "limitations": "one low-speed sampled trial; no hard real-time or continuous physical safety guarantee"
+            },
+            "recovery": {
+              "hidden_transition_completed_s": 13636.234,
+              "return_transition_completed_s": 13638.218,
+              "loss_receipt_delay_from_actual_hidden_s": null,
+              "recovery_completion_delay_from_actual_return_s": null,
+              "recovery_identity_availability_delay_from_actual_return_s": null,
+              "pre_hide_track_established": false,
+              "pre_hide_track_qualification": "LOSS_ALREADY_PRESENT_BEFORE_HIDE",
+              "status": "CORRECT_RETURN_OUTPUT_WITHOUT_PRE_HIDE_TRACK",
+              "pre_hide_available_output_frames": 17,
+              "pre_hide_max_link_gap_s": 0.5,
+              "pre_hide_reference_frame_id": "t1_identity_handoff_active_v5_20261005_f023",
+              "pre_hide_reference_readback_s": 13636.093,
+              "pre_hide_reference_observer_completed_s": 13636.171,
+              "pre_hide_source_age_at_hidden_s": 0.14099999999962165,
+              "return_correct_output_frames": 11,
+              "return_other_frames": 7,
+              "longest_consecutive_correct_return_frames": 11,
+              "longest_correct_return_readback_span_s": 4.03099999999904,
+              "post_recovery_lost_output_transitions": 0,
+              "return_continuity_scope": "consecutive saved correct outputs, readback gaps <=.5s; brief recovery is not sustained tracking",
+              "time_scope": "same-host actual object transition receipt to captured readback/decision completion; not exposure time",
+              "recovery_qualification_scope": "fresh last available correct pre-hide output, then observed hidden loss; never-established or already-lost output is not a newly caused loss"
+            },
+            "sampled_xy_path_m": 0.004070026890792242,
+            "maximum_actual_xy_speed_m_s": 0.00137490686034582,
+            "maximum_saved_control_query_gap_s": 0.09400000000096043,
+            "attribute_status_counts": {
+              "ACCEPTED": 5,
+              "REJECTED": 1
+            },
+            "backend_max_s": 1.0,
+            "safe_end": {
+              "grounded_and_released": true,
+              "paused": true
+            },
+            "fresh_ground_closure_verified": true,
+            "engine_closed_after_safe_completion": true
+          },
+          {
+            "label": "恢复调度修复及停顿V5P1",
+            "session_id": "t1_identity_handoff_active_v5p1_20261005",
+            "run": "D:\\forAirsim\\logs\\t1_identity_handoff_active_v5p1_20261005",
+            "original_runner_status": "PASS",
+            "independent_qualification": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "acquisition_frames": 6,
+            "acquisition_elapsed_s": 2.29700000000048,
+            "measured_captured_frames": 40,
+            "measured_planned_slots": 41,
+            "measured_identity_counts": {
+              "CORRECT": 20,
+              "NO_OUTPUT": 20
+            },
+            "nonzero_target_commands": 13,
+            "continuous_source_changes": 1,
+            "valid_old_anchor_during_pending_frames": 4,
+            "active_stall_qualification": {
+              "status": "PASS_CONTROLLED_ACTIVE_DISPATCH_STALL",
+              "active_nonzero_overlap_verified": true,
+              "trigger_frame_id": "t1_identity_handoff_active_v5p1_20261005_f006",
+              "trigger_ticket_id": "control-7",
+              "dispatch_monotonic_s": 14490.234,
+              "explicit_clear_monotonic_s": 14490.359,
+              "explicit_clear_inside_block": true,
+              "block": {
+                "slot_index": 0,
+                "boundary": "AFTER_ACTUAL_NONZERO_DISPATCH_BEFORE_MEDIA_SAVE",
+                "started_monotonic_s": 14490.234,
+                "completed_monotonic_s": 14490.89,
+                "duration_s": 0.65,
+                "eligibility": {
+                  "eligible": true,
+                  "reason": "ACTUAL_NONZERO_DISPATCH_WITH_AT_LEAST_40MS_LEASE",
+                  "minimum_remaining_lease_s": 0.04,
+                  "input_scope": "control dispatch receipts only",
+                  "ticket_id": "control-7",
+                  "command_id": "PERCEPTION_XY_71",
+                  "frame_id": "t1_identity_handoff_active_v5p1_20261005_f006",
+                  "dispatch_monotonic_s": 14490.234,
+                  "declared_lease_end_monotonic_s": 14490.354000000001,
+                  "eligibility_checked_monotonic_s": 14490.234,
+                  "remaining_declared_lease_s": 0.12000000000080036
+                },
+                "ticket_id": "control-7",
+                "frame_id": "t1_identity_handoff_active_v5p1_20261005_f006",
+                "status": "ACTUAL_BLOCK_INTERVAL_ANALYZED",
+                "actual_duration_s": 0.6559999999990396,
+                "self_state_receipts_inside": 15,
+                "max_boundary_clipped_receipt_gap_s": 0.06300000000010186,
+                "max_whole_receipt_gap_touching_interval_s": 0.06300000000010186,
+                "bracketed_by_saved_self_receipts": true,
+                "prior_self_receipt_s": 14490.234,
+                "first_after_self_receipt_s": 14490.89,
+                "own_state_command_dispatches_inside": 12,
+                "nonzero_target_dispatches_inside": 1,
+                "total_command_dispatches_inside": 13,
+                "nonzero_target_active_overlap_rows": [
+                  {
+                    "target_frame_id": "t1_identity_handoff_active_v5p1_20261005_f006",
+                    "overlap_start_s": 14490.234,
+                    "overlap_end_s": 14490.359,
+                    "duration_s": 0.125
+                  }
+                ],
+                "scope": "actual saved block interval and host receipts; no samples does not imply controller coverage"
+              },
+              "limitations": "one low-speed sampled trial; no hard real-time or continuous physical safety guarantee"
+            },
+            "recovery": {
+              "hidden_transition_completed_s": 14497.062,
+              "return_transition_completed_s": 14498.968,
+              "loss_receipt_delay_from_actual_hidden_s": 0.07799999999951979,
+              "recovery_completion_delay_from_actual_return_s": 4.031999999999243,
+              "recovery_identity_availability_delay_from_actual_return_s": 3.7819999999992433,
+              "pre_hide_track_established": true,
+              "pre_hide_track_qualification": "CORRECT_FRESH_TRACK_ESTABLISHED_BEFORE_HIDE",
+              "status": "RECOVERY_OBSERVED",
+              "pre_hide_available_output_frames": 17,
+              "pre_hide_max_link_gap_s": 0.5,
+              "pre_hide_reference_frame_id": "t1_identity_handoff_active_v5p1_20261005_f023",
+              "pre_hide_reference_readback_s": 14496.859,
+              "pre_hide_reference_observer_completed_s": 14496.968,
+              "pre_hide_source_age_at_hidden_s": 0.2029999999995198,
+              "return_correct_output_frames": 9,
+              "return_other_frames": 9,
+              "longest_consecutive_correct_return_frames": 9,
+              "longest_correct_return_readback_span_s": 3.2189999999991414,
+              "post_recovery_lost_output_transitions": 0,
+              "return_continuity_scope": "consecutive saved correct outputs, readback gaps <=.5s; brief recovery is not sustained tracking",
+              "time_scope": "same-host actual object transition receipt to captured readback/decision completion; not exposure time",
+              "recovery_qualification_scope": "fresh last available correct pre-hide output, then observed hidden loss; never-established or already-lost output is not a newly caused loss"
+            },
+            "sampled_xy_path_m": 0.006068211296453339,
+            "maximum_actual_xy_speed_m_s": 0.001328121288695577,
+            "maximum_saved_control_query_gap_s": 0.11000000000058208,
+            "attribute_status_counts": {
+              "ACCEPTED": 5,
+              "REJECTED": 1
+            },
+            "backend_max_s": 0.9530000000013388,
+            "safe_end": {
+              "grounded_and_released": true,
+              "paused": true
+            },
+            "fresh_ground_closure_verified": true,
+            "engine_closed_after_safe_completion": true
+          }
+        ],
+        "actual_flights": 4,
+        "complete_media_groups": 165,
+        "complete_media_files": 495,
+        "measured_planned_slots": 143,
+        "measured_captured_slots": 141,
+        "acquisition_planned_slots": 200,
+        "acquisition_captured_slots": 24,
+        "acquisition_not_required_after_success": 176,
+        "analyses": [
+          "D:\\forAirsim\\logs\\t1_review_handoff_analysis_v5_20261005\\report.json",
+          "D:\\forAirsim\\logs\\t1_review_handoff_analysis_v5p1_20261005\\report.json"
+        ],
+        "result_document": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一后台复核交接与中文图表结果.md",
+        "tests_passed": 299,
+        "test_groups": [
+          {
+            "count": 293,
+            "stderr": "logs/t1_handoff_closeout_20261005/tests_v5p1.stderr.log"
+          },
+          {
+            "count": 6,
+            "stderr": "logs/t1_handoff_closeout_20261005/analysis_v5p1_tests.stderr.log"
+          }
+        ],
+        "figure_language": "zh-CN",
+        "figure_receipts": [
+          "D:\\forAirsim\\logs\\t1_review_handoff_figures_zh_v5_20261005\\artifact_receipt.json",
+          "D:\\forAirsim\\logs\\t1_review_handoff_figures_zh_v5p1_20261005\\artifact_receipt.json"
+        ],
+        "original_v5_failure_preserved": "one real stall loss plus twelve stale reply rejections logged as thirteen CHAIN_LOST events; 10.891s to reacquisition; original null engine path retained",
+        "live_backend_over_2s_covered": false,
+        "identity_probability_calibrated": false,
+        "formal_method_effect_complete": false,
+        "task_1_complete": false,
+        "whole_thesis_complete": false,
+        "motion_scope": "millimetre_scale_sampled_fixed_height_interface; no trajectory efficacy result",
+        "next_gate": "scaled_motion_diagnosis_and_frozen_validation_then_slow_reply_attribute_stress_and_formal_four_methods",
+        "ai_assistance": "AI-assisted implementation, local sealed-evidence analysis and Chinese plots; author reviews conclusions",
+        "recovery_clock_labels": {
+          "identity_availability": "observer process completed host receipt; not image readback",
+          "recovery_completion": "frame decision completed host receipt, including execution/settling; not pure identity confirmation",
+          "latest_first_recovery_image_readback_delay_s": 3.688
+        }
+      },
+      "motion_scale_development_20261006": {
+        "date": "2026-10-06",
+        "kind": "IDLE_ZERO_SCHEDULING_ENDPOINT_SCALE_DEVELOPMENT_REPEATS",
+        "formal_efficacy_results": false,
+        "v6p1_new_actual_flights": 5,
+        "total_actual_flights_in_scale_chain": 6,
+        "total_attempts": 7,
+        "verified_preflight_no_flight_attempts": 1,
+        "motion_independent_sessions": 4,
+        "motion_followup_repeats": 3,
+        "original_failed_attempt_preserved": true,
+        "original_failed_attempt_safe_closure": "UNVERIFIED",
+        "maximum_speed_cap_m_s": 0.03,
+        "acceleration_cap_m_s2": 0.15,
+        "command_lease_s": 0.12,
+        "actual_idle_zero_refresh_trigger_s": 0.3,
+        "sampled_stop_threshold_m_s": 0.005,
+        "formal_method_comparison_completed": false,
+        "minimum_frozen_motion_endpoint_m": 0.02,
+        "main_captured_frames": 240,
+        "main_planned_slots": 240,
+        "acquisition_captured_frames": 38,
+        "acquisition_planned_slots": 300,
+        "unused_after_acquisition_slots": 262,
+        "full_media_groups": 278,
+        "media_files": 834,
+        "runs": [
+          {
+            "session_id": "t1_motion_zero_v6_20261005",
+            "mode": "ZERO_GATE",
+            "runner_status": "PASS",
+            "independent_identity_execution": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "motion_qualification": "PASS_ZERO_GATE_DRIFT",
+            "endpoint_net_xy_m": 0.0,
+            "endpoint_receipt_span_s": 8.5,
+            "sampled_path_m": 0.0,
+            "captured_main_frames": 20,
+            "planned_main_slots": 20,
+            "identity_counts": {
+              "CORRECT": 20
+            },
+            "nonzero_target_commands": 0,
+            "minimum_target_mask_pixels": 9253,
+            "maximum_saved_query_gap_s": 0.09400000000096043,
+            "query_gaps_over_0p12_s": 0,
+            "nonzero_dispatches_without_fresh_state": 0,
+            "maximum_sampled_xy_speed_m_s": 0.0,
+            "no_active_displacement_xy_m": [
+              0.0,
+              0.0
+            ],
+            "idle_omission_count": 172,
+            "idle_omission_issues": [],
+            "same_clock_later_dispatch_ties": 0,
+            "maximum_explicit_clear_late_s": null,
+            "backend": {
+              "count": 4,
+              "min_s": 0.8130000000019209,
+              "median_s": 0.8829999999998108,
+              "p95_s": 1.1057499999995342,
+              "p99_s": 1.133949999999604,
+              "max_s": 1.1409999999996217
+            },
+            "center_windows": {
+              "scope": "first and last actual-readback 1s windows; descriptive offline target mask evidence, not causal centering benefit",
+              "windows": [
+                {
+                  "label": "first",
+                  "actual_window_start_s": 19189.734,
+                  "actual_window_end_s": 19190.734,
+                  "expected_planned_slot_indexes": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_zero_v6_20261005_f006",
+                    "t1_motion_zero_v6_20261005_f007",
+                    "t1_motion_zero_v6_20261005_f008"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_zero_v6_20261005_f006",
+                    "t1_motion_zero_v6_20261005_f007",
+                    "t1_motion_zero_v6_20261005_f008"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 3,
+                  "valid_mask_count": 3,
+                  "maximum_boundary_or_between_sample_gap_s": 0.4059999999990396,
+                  "mean_mask_center_error_norm": 0.06383780316546277,
+                  "mean_mask_image_fraction": 0.030123697916666668
+                },
+                {
+                  "label": "last",
+                  "actual_window_start_s": 19196.734,
+                  "actual_window_end_s": 19197.734,
+                  "expected_planned_slot_indexes": [
+                    18,
+                    19
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_zero_v6_20261005_f024",
+                    "t1_motion_zero_v6_20261005_f025"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_zero_v6_20261005_f024",
+                    "t1_motion_zero_v6_20261005_f025"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 2,
+                  "valid_mask_count": 2,
+                  "maximum_boundary_or_between_sample_gap_s": 0.3899999999994179,
+                  "mean_mask_center_error_norm": 0.06385770878623001,
+                  "mean_mask_image_fraction": 0.030126953125
+                }
+              ],
+              "status": "DESCRIPTIVE_WINDOWS_COVERED"
+            },
+            "gate_deadline_counts": {
+              "TIMELY": 20
+            },
+            "observer_deadline_counts": {
+              "TIMELY": 20
+            },
+            "full_completion_deadline_counts": {
+              "TIMELY": 20
+            }
+          },
+          {
+            "session_id": "t1_motion_zero_v6p1_20261006",
+            "mode": "ZERO_GATE",
+            "runner_status": "PASS",
+            "independent_identity_execution": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "motion_qualification": "PASS_ZERO_GATE_DRIFT",
+            "endpoint_net_xy_m": 0.0,
+            "endpoint_receipt_span_s": 8.48399999999674,
+            "sampled_path_m": 0.0,
+            "captured_main_frames": 20,
+            "planned_main_slots": 20,
+            "identity_counts": {
+              "CORRECT": 20
+            },
+            "nonzero_target_commands": 0,
+            "minimum_target_mask_pixels": 9253,
+            "maximum_saved_query_gap_s": 0.09399999999732245,
+            "query_gaps_over_0p12_s": 0,
+            "nonzero_dispatches_without_fresh_state": 0,
+            "maximum_sampled_xy_speed_m_s": 0.0,
+            "no_active_displacement_xy_m": [
+              0.0,
+              0.0
+            ],
+            "idle_omission_count": 182,
+            "idle_omission_issues": [],
+            "same_clock_later_dispatch_ties": 0,
+            "maximum_explicit_clear_late_s": null,
+            "backend": {
+              "count": 4,
+              "min_s": 0.8130000000019209,
+              "median_s": 0.9609999999993306,
+              "p95_s": 1.7507999999997987,
+              "p99_s": 1.8501599999999596,
+              "max_s": 1.875
+            },
+            "center_windows": {
+              "scope": "first and last actual-readback 1s windows; descriptive offline target mask evidence, not causal centering benefit",
+              "windows": [
+                {
+                  "label": "first",
+                  "actual_window_start_s": 40380.968,
+                  "actual_window_end_s": 40381.968,
+                  "expected_planned_slot_indexes": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_zero_v6p1_20261006_f008",
+                    "t1_motion_zero_v6p1_20261006_f009",
+                    "t1_motion_zero_v6p1_20261006_f010"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_zero_v6p1_20261006_f008",
+                    "t1_motion_zero_v6p1_20261006_f009",
+                    "t1_motion_zero_v6p1_20261006_f010"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 3,
+                  "valid_mask_count": 3,
+                  "maximum_boundary_or_between_sample_gap_s": 0.4059999999954016,
+                  "mean_mask_center_error_norm": 0.06385958411811504,
+                  "mean_mask_image_fraction": 0.030123697916666668
+                },
+                {
+                  "label": "last",
+                  "actual_window_start_s": 40387.968,
+                  "actual_window_end_s": 40388.968,
+                  "expected_planned_slot_indexes": [
+                    18,
+                    19
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_zero_v6p1_20261006_f026",
+                    "t1_motion_zero_v6p1_20261006_f027"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_zero_v6p1_20261006_f026",
+                    "t1_motion_zero_v6p1_20261006_f027"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 2,
+                  "valid_mask_count": 2,
+                  "maximum_boundary_or_between_sample_gap_s": 0.40600000000267755,
+                  "mean_mask_center_error_norm": 0.06386722444216088,
+                  "mean_mask_image_fraction": 0.030125325520833336
+                }
+              ],
+              "status": "DESCRIPTIVE_WINDOWS_COVERED"
+            },
+            "gate_deadline_counts": {
+              "TIMELY": 20
+            },
+            "observer_deadline_counts": {
+              "TIMELY": 20
+            },
+            "full_completion_deadline_counts": {
+              "TIMELY": 20
+            }
+          },
+          {
+            "session_id": "t1_motion_visible20_v6p1_20261006",
+            "mode": "SHORT_XY",
+            "runner_status": "PASS",
+            "independent_identity_execution": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "motion_qualification": "PASS_ENDPOINT_MOTION_SCALE",
+            "endpoint_net_xy_m": 0.06409806758447865,
+            "endpoint_receipt_span_s": 20.5,
+            "sampled_path_m": 0.06409806759157252,
+            "captured_main_frames": 50,
+            "planned_main_slots": 50,
+            "identity_counts": {
+              "CORRECT": 50
+            },
+            "nonzero_target_commands": 50,
+            "minimum_target_mask_pixels": 9232,
+            "maximum_saved_query_gap_s": 0.10900000000401633,
+            "query_gaps_over_0p12_s": 0,
+            "nonzero_dispatches_without_fresh_state": 0,
+            "maximum_sampled_xy_speed_m_s": 0.003651088570847992,
+            "no_active_displacement_xy_m": [
+              3.9611093468608014e-07,
+              0.0443277027034128
+            ],
+            "idle_omission_count": 244,
+            "idle_omission_issues": [],
+            "same_clock_later_dispatch_ties": 7,
+            "maximum_explicit_clear_late_s": 0.021000000000640284,
+            "backend": {
+              "count": 7,
+              "min_s": 0.7819999999992433,
+              "median_s": 0.8590000000040163,
+              "p95_s": 0.9718000000008032,
+              "p99_s": 0.9943600000001606,
+              "max_s": 1.0
+            },
+            "center_windows": {
+              "scope": "first and last actual-readback 1s windows; descriptive offline target mask evidence, not causal centering benefit",
+              "windows": [
+                {
+                  "label": "first",
+                  "actual_window_start_s": 40552.968,
+                  "actual_window_end_s": 40553.968,
+                  "expected_planned_slot_indexes": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_20261006_f006",
+                    "t1_motion_visible20_v6p1_20261006_f007",
+                    "t1_motion_visible20_v6p1_20261006_f008"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_20261006_f006",
+                    "t1_motion_visible20_v6p1_20261006_f007",
+                    "t1_motion_visible20_v6p1_20261006_f008"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 3,
+                  "valid_mask_count": 3,
+                  "maximum_boundary_or_between_sample_gap_s": 0.40600000000267755,
+                  "mean_mask_center_error_norm": 0.06381930434944232,
+                  "mean_mask_image_fraction": 0.03011935763888889
+                },
+                {
+                  "label": "last",
+                  "actual_window_start_s": 40571.968,
+                  "actual_window_end_s": 40572.968,
+                  "expected_planned_slot_indexes": [
+                    48,
+                    49
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_20261006_f054",
+                    "t1_motion_visible20_v6p1_20261006_f055"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_20261006_f054",
+                    "t1_motion_visible20_v6p1_20261006_f055"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 2,
+                  "valid_mask_count": 2,
+                  "maximum_boundary_or_between_sample_gap_s": 0.375,
+                  "mean_mask_center_error_norm": 0.05615281665797117,
+                  "mean_mask_image_fraction": 0.030071614583333336
+                }
+              ],
+              "status": "DESCRIPTIVE_WINDOWS_COVERED"
+            },
+            "gate_deadline_counts": {
+              "TIMELY": 50
+            },
+            "observer_deadline_counts": {
+              "TIMELY": 50
+            },
+            "full_completion_deadline_counts": {
+              "LATE": 50
+            }
+          },
+          {
+            "session_id": "t1_motion_visible20_v6p1_rep1_20261006",
+            "mode": "SHORT_XY",
+            "runner_status": "PASS",
+            "independent_identity_execution": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "motion_qualification": "PASS_ENDPOINT_MOTION_SCALE",
+            "endpoint_net_xy_m": 0.06331629307248778,
+            "endpoint_receipt_span_s": 20.5,
+            "sampled_path_m": 0.0633162930807642,
+            "captured_main_frames": 50,
+            "planned_main_slots": 50,
+            "identity_counts": {
+              "CORRECT": 50
+            },
+            "nonzero_target_commands": 50,
+            "minimum_target_mask_pixels": 9233,
+            "maximum_saved_query_gap_s": 0.0940000000045984,
+            "query_gaps_over_0p12_s": 0,
+            "nonzero_dispatches_without_fresh_state": 0,
+            "maximum_sampled_xy_speed_m_s": 0.003703184891538999,
+            "no_active_displacement_xy_m": [
+              8.315365734529075e-07,
+              0.04405262723503256
+            ],
+            "idle_omission_count": 256,
+            "idle_omission_issues": [],
+            "same_clock_later_dispatch_ties": 15,
+            "maximum_explicit_clear_late_s": 0.020999999993364327,
+            "backend": {
+              "count": 7,
+              "min_s": 0.7649999999994179,
+              "median_s": 0.8120000000053551,
+              "p95_s": 0.9749000000032537,
+              "p99_s": 1.0197800000027928,
+              "max_s": 1.0310000000026776
+            },
+            "center_windows": {
+              "scope": "first and last actual-readback 1s windows; descriptive offline target mask evidence, not causal centering benefit",
+              "windows": [
+                {
+                  "label": "first",
+                  "actual_window_start_s": 40985.718,
+                  "actual_window_end_s": 40986.718,
+                  "expected_planned_slot_indexes": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep1_20261006_f006",
+                    "t1_motion_visible20_v6p1_rep1_20261006_f007",
+                    "t1_motion_visible20_v6p1_rep1_20261006_f008"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep1_20261006_f006",
+                    "t1_motion_visible20_v6p1_rep1_20261006_f007",
+                    "t1_motion_visible20_v6p1_rep1_20261006_f008"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 3,
+                  "valid_mask_count": 3,
+                  "maximum_boundary_or_between_sample_gap_s": 0.4219999999986612,
+                  "mean_mask_center_error_norm": 0.06380905945154262,
+                  "mean_mask_image_fraction": 0.03011935763888889
+                },
+                {
+                  "label": "last",
+                  "actual_window_start_s": 41004.718,
+                  "actual_window_end_s": 41005.718,
+                  "expected_planned_slot_indexes": [
+                    48,
+                    49
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep1_20261006_f054",
+                    "t1_motion_visible20_v6p1_rep1_20261006_f055"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep1_20261006_f054",
+                    "t1_motion_visible20_v6p1_rep1_20261006_f055"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 2,
+                  "valid_mask_count": 2,
+                  "maximum_boundary_or_between_sample_gap_s": 0.40600000000267755,
+                  "mean_mask_center_error_norm": 0.056240954016556904,
+                  "mean_mask_image_fraction": 0.030066731770833334
+                }
+              ],
+              "status": "DESCRIPTIVE_WINDOWS_COVERED"
+            },
+            "gate_deadline_counts": {
+              "TIMELY": 50
+            },
+            "observer_deadline_counts": {
+              "TIMELY": 50
+            },
+            "full_completion_deadline_counts": {
+              "LATE": 49,
+              "TIMELY": 1
+            }
+          },
+          {
+            "session_id": "t1_motion_visible20_v6p1_rep2_20261006",
+            "mode": "SHORT_XY",
+            "runner_status": "PASS",
+            "independent_identity_execution": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "motion_qualification": "PASS_ENDPOINT_MOTION_SCALE",
+            "endpoint_net_xy_m": 0.06296940147977813,
+            "endpoint_receipt_span_s": 20.5,
+            "sampled_path_m": 0.06296940148946574,
+            "captured_main_frames": 50,
+            "planned_main_slots": 50,
+            "identity_counts": {
+              "CORRECT": 50
+            },
+            "nonzero_target_commands": 50,
+            "minimum_target_mask_pixels": 9233,
+            "maximum_saved_query_gap_s": 0.0940000000045984,
+            "query_gaps_over_0p12_s": 0,
+            "nonzero_dispatches_without_fresh_state": 0,
+            "maximum_sampled_xy_speed_m_s": 0.0035840834033956407,
+            "no_active_displacement_xy_m": [
+              2.5002050820594336e-07,
+              0.043993455728923436
+            ],
+            "idle_omission_count": 246,
+            "idle_omission_issues": [],
+            "same_clock_later_dispatch_ties": 12,
+            "maximum_explicit_clear_late_s": 0.021000000000640284,
+            "backend": {
+              "count": 7,
+              "min_s": 0.75,
+              "median_s": 0.7960000000020955,
+              "p95_s": 0.9953999999990627,
+              "p99_s": 1.0366799999987415,
+              "max_s": 1.0469999999986612
+            },
+            "center_windows": {
+              "scope": "first and last actual-readback 1s windows; descriptive offline target mask evidence, not causal centering benefit",
+              "windows": [
+                {
+                  "label": "first",
+                  "actual_window_start_s": 41108.703,
+                  "actual_window_end_s": 41109.703,
+                  "expected_planned_slot_indexes": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep2_20261006_f006",
+                    "t1_motion_visible20_v6p1_rep2_20261006_f007",
+                    "t1_motion_visible20_v6p1_rep2_20261006_f008"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep2_20261006_f006",
+                    "t1_motion_visible20_v6p1_rep2_20261006_f007",
+                    "t1_motion_visible20_v6p1_rep2_20261006_f008"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 3,
+                  "valid_mask_count": 3,
+                  "maximum_boundary_or_between_sample_gap_s": 0.4069999999992433,
+                  "mean_mask_center_error_norm": 0.06383041773577251,
+                  "mean_mask_image_fraction": 0.030120442708333334
+                },
+                {
+                  "label": "last",
+                  "actual_window_start_s": 41127.703,
+                  "actual_window_end_s": 41128.703,
+                  "expected_planned_slot_indexes": [
+                    48,
+                    49
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep2_20261006_f054",
+                    "t1_motion_visible20_v6p1_rep2_20261006_f055"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep2_20261006_f054",
+                    "t1_motion_visible20_v6p1_rep2_20261006_f055"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 2,
+                  "valid_mask_count": 2,
+                  "maximum_boundary_or_between_sample_gap_s": 0.3899999999994179,
+                  "mean_mask_center_error_norm": 0.05629058423912733,
+                  "mean_mask_image_fraction": 0.030068359375
+                }
+              ],
+              "status": "DESCRIPTIVE_WINDOWS_COVERED"
+            },
+            "gate_deadline_counts": {
+              "TIMELY": 50
+            },
+            "observer_deadline_counts": {
+              "TIMELY": 50
+            },
+            "full_completion_deadline_counts": {
+              "LATE": 50
+            }
+          },
+          {
+            "session_id": "t1_motion_visible20_v6p1_rep3_20261006",
+            "mode": "SHORT_XY",
+            "runner_status": "PASS",
+            "independent_identity_execution": "PASS_CONTROLLED_DEVELOPMENT_SCOPE",
+            "motion_qualification": "PASS_ENDPOINT_MOTION_SCALE",
+            "endpoint_net_xy_m": 0.06288716197522157,
+            "endpoint_receipt_span_s": 20.5,
+            "sampled_path_m": 0.06288716198123626,
+            "captured_main_frames": 50,
+            "planned_main_slots": 50,
+            "identity_counts": {
+              "CORRECT": 50
+            },
+            "nonzero_target_commands": 49,
+            "minimum_target_mask_pixels": 9233,
+            "maximum_saved_query_gap_s": 0.10899999999674037,
+            "query_gaps_over_0p12_s": 0,
+            "nonzero_dispatches_without_fresh_state": 0,
+            "maximum_sampled_xy_speed_m_s": 0.003659340786537969,
+            "no_active_displacement_xy_m": [
+              5.51941175313861e-07,
+              0.043991432034090394
+            ],
+            "idle_omission_count": 260,
+            "idle_omission_issues": [],
+            "same_clock_later_dispatch_ties": 20,
+            "maximum_explicit_clear_late_s": 0.021000000000640284,
+            "backend": {
+              "count": 7,
+              "min_s": 0.7339999999967404,
+              "median_s": 0.7969999999986612,
+              "p95_s": 0.9098000000005413,
+              "p99_s": 0.9323600000016449,
+              "max_s": 0.9380000000019209
+            },
+            "center_windows": {
+              "scope": "first and last actual-readback 1s windows; descriptive offline target mask evidence, not causal centering benefit",
+              "windows": [
+                {
+                  "label": "first",
+                  "actual_window_start_s": 41228.859,
+                  "actual_window_end_s": 41229.859,
+                  "expected_planned_slot_indexes": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep3_20261006_f006",
+                    "t1_motion_visible20_v6p1_rep3_20261006_f007",
+                    "t1_motion_visible20_v6p1_rep3_20261006_f008"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep3_20261006_f006",
+                    "t1_motion_visible20_v6p1_rep3_20261006_f007",
+                    "t1_motion_visible20_v6p1_rep3_20261006_f008"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 3,
+                  "valid_mask_count": 3,
+                  "maximum_boundary_or_between_sample_gap_s": 0.4220000000059372,
+                  "mean_mask_center_error_norm": 0.06382970244848825,
+                  "mean_mask_image_fraction": 0.030124782986111112
+                },
+                {
+                  "label": "last",
+                  "actual_window_start_s": 41247.859,
+                  "actual_window_end_s": 41248.859,
+                  "expected_planned_slot_indexes": [
+                    48,
+                    49
+                  ],
+                  "actual_readback_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep3_20261006_f054",
+                    "t1_motion_visible20_v6p1_rep3_20261006_f055"
+                  ],
+                  "valid_mask_frame_ids": [
+                    "t1_motion_visible20_v6p1_rep3_20261006_f054",
+                    "t1_motion_visible20_v6p1_rep3_20261006_f055"
+                  ],
+                  "status": "DESCRIPTIVE_WINDOW_COVERED",
+                  "saved_readback_count": 2,
+                  "valid_mask_count": 2,
+                  "maximum_boundary_or_between_sample_gap_s": 0.40600000000267755,
+                  "mean_mask_center_error_norm": 0.05628919387595892,
+                  "mean_mask_image_fraction": 0.030066731770833334
+                }
+              ],
+              "status": "DESCRIPTIVE_WINDOWS_COVERED"
+            },
+            "gate_deadline_counts": {
+              "TIMELY": 50
+            },
+            "observer_deadline_counts": {
+              "TIMELY": 50
+            },
+            "full_completion_deadline_counts": {
+              "TIMELY": 1,
+              "LATE": 49
+            }
+          }
+        ],
+        "motion_frames_correct": 200,
+        "motion_frames_wrong": 0,
+        "nonzero_motion_commands": 199,
+        "full_completion_late_motion_frames": 198,
+        "regression_tests": 353,
+        "endpoint_mean_m": 0.06331773102799153,
+        "endpoint_sd_m": 0.0005524642952167416,
+        "descriptive_only": true,
+        "analysis": "D:\\forAirsim\\logs\\t1_motion_scale_analysis_v6p1_20261006\\report.json",
+        "figures": "D:\\forAirsim\\logs\\t1_motion_scale_figures_zh_v6p1_20261006\\artifact_receipt.json",
+        "result_document": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一运动尺度重复验证与论文更新.md",
+        "next_work": "先定位整帧完成晚到并测量清零后的残余运动，再补超过2秒真实语义回复、属性高光误判和带遮挡运动；随后分别冻结50/100毫米尺度协议，统一四方法与YOLO/VLX消融，完成正式独立回合。"
+      },
+      "strict_settlement_development_20261006": {
+        "date": "2026-10-06",
+        "status": "STRICT_STOP_AND_CLEAR_BUDGET_DEVELOPMENT_VALIDATED_FORMAL_T1_PENDING",
+        "latest_runtime": "V7P3",
+        "latest_controller": "V1P4",
+        "analysis": "D:\\forAirsim\\logs\\t1_strict_settlement_analysis_final_20261006\\report.json",
+        "analysis_sha256": "ad7251ba494af423d7ef843905b3a13c45ecb9d0c92ad4e01aacdde04933bc23",
+        "figure_receipt": "D:\\forAirsim\\logs\\t1_strict_settlement_figures_zh_20261006\\artifact_receipt.json",
+        "report": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一严格停稳与清零预算验证结果.md",
+        "latest_motion_main_frames": 300,
+        "latest_motion_correct_frames": 300,
+        "latest_motion_no_output_frames": 0,
+        "latest_motion_nonzero_commands": 145,
+        "latest_motion_net_xy_m": [
+          0.022971719503508098,
+          0.02346778847813404
+        ],
+        "frame_processing_late_count": 30,
+        "historical_full_late_count": 172,
+        "same_source_independent_motion_runs": 2,
+        "new_flights_this_turn": 9,
+        "software_regression": {
+          "status": "PASS_SOFTWARE_REGRESSION",
+          "tests": 392,
+          "wall_s": 16.023,
+          "path": "D:\\forAirsim\\logs\\t1_strict_settlement_development_20261006\\final_tests.stderr.log",
+          "sha256": "bda6a735c046e7ccbce6e5a78107f7d1e2f41c1154ad25b00932f76ce450dfe4"
+        },
+        "final_idle_snapshot": {
+          "kind": "T1_STRICT_SETTLEMENT_FINAL_IDLE_SNAPSHOT",
+          "observed_utc": "2026-10-06T12:33:26.2127826Z",
+          "engine_process_count": 0,
+          "engine_processes": [],
+          "rpc_port": 41451,
+          "rpc_connection_count": 0,
+          "rpc_connections": [],
+          "status": "PASS_IDLE_AT_OBSERVATION"
+        },
+        "primary_source_sha256": {
+          "python/t1_identity_flight.py": "e354c7441b36d6139167b980b5c298100521a5d538e2c5e8504095bf59acc313",
+          "python/t1_flight_observer.py": "0a4cd562f45456ffeb8cc04d5182de2e3509a6129e9ec53bd191574cea50f77b",
+          "python/t1_pose_trajectory_planner.py": "38d5b8791c5e90dafc1f4a78737af4bb32b2ddcdd0bd5d6bd98d571b67e237d1",
+          "python/t1_identity_motion_policy.py": "21dd505a9eccff50beab7fa1f45a8d58de9e712d16cf2f9180fbed6470ee5608",
+          "python/t1_pose_projection_batch.py": "68df77a796538c2cb76758ee0b6765c1e7b3eeda5f01cd523147612be401c7d0",
+          "python/t1_candidate_surface_v2.py": "bba8012af2a6cf1315697f3cfd169edc52b8cbc9190a9e195a34805628537e57",
+          "python/t1_candidate_surface.py": "d9fb6bf0127e356f7dbb4c43908778a1f8f403a96ff94534e3123fea040e5d91",
+          "python/t1_continuous_semantic_observer.py": "7429751e342f620251b681fa80de96948e7f7682164322a059476ec72c3fa5d4",
+          "python/t1_temporal_identity.py": "ac42be0e86d8e825ec4a1aa62345f9537a1eb69a442ef965436c0cc149c758c4",
+          "python/t1_semantic_perception.py": "14994b166715bd8ae513b851dd8d9bf2e89925f8794ac2a8261ffd190647f3d0",
+          "python/t1_pose_geometry.py": "a1eaee24ecb1ae03b0b3515d21ad3e2f2071a0647f6e08a8b91b25165fa58f39",
+          "python/specialist_balloon_detector.py": "4212d42cae50e8c333f1f760e3246d0838e14be6dc149799bb0dfda6dd65e71a",
+          "python/train_t1_balloon_yolo.py": "905d866e8334638af54a9d367b115a5b88d14ae3d1c31fa275dba0799c7324b5",
+          "python/vlx_api_client.py": "c0fa95351ad80442466132550a92c79f702980a097c57487d01a48647b87f749",
+          "python/t1_ground_perception_probe.py": "a1749402c02f5a1bd20b1a1ac62d01fcb0cc785bc36c659e15a292ac23b01c67",
+          "python/t1_balloon_data_probe.py": "e5086bd10733a8f91f85c2c1998b93e8dabaea97e63448bf708bdd8b13aeae0e",
+          "python/t1_identity_sequence_probe_v1p3.py": "f9999073a3435b22e16686d7765afb9a497e58a970dbbf25958155ab22d0cbaf",
+          "python/t1_identity_schedule.py": "7596c83bc441253005f26cf8c8ab21b2319219a9bad7e1eb8038f3370dd03971",
+          "python/camera_geometry.py": "bcf86f5cbe6159ff0ad9890f6316ddd463fc297af6fea017a950cd462d29088d",
+          "python/setup_scene.py": "30668ece8e6e24d99dbb3303e8b79f468773ba20925afc57099f748731cf1af5",
+          "python/trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+          "python/braking_startup_readiness.py": "f42f304e6955f983e89826a1f0ce846554f9dbf1a7de0718148ad0fcc7d353db",
+          "python/prepare_t1_identity_flight.py": "73a104c20b523f59eaf086cfde0d64dbc8d8e86a959acdf4d4a287145339bcfc",
+          "scripts/run-t1-identity-flight-v1.ps1": "86fd7618ee2564f4cf32080478fede9bfae3585d30ce6f00927eea4109d46c63",
+          "scripts/assert-trajectory-source-freeze.ps1": "9188d2013b39ac92867f3436d23ad9e556989087fea9ba16d7a00351bc0c1f1c",
+          "python/t1_identity_flight_v2.py": "16306168a2a7afa1b3a599d57e0d2d66be5e70a97b0989d1cde859d32dd7e397",
+          "python/t1_async_control.py": "a09a718143f1bfcec585c9bed716030450cb02039bc0c816232dea969100a844",
+          "python/prepare_t1_identity_flight_v2.py": "eaa92887fa3c97d1acdb1b049a2b79549ccd5d9a79dcab58cf77bff5cc24a0c4",
+          "scripts/run-t1-identity-flight-v2.ps1": "8c425ed7c45251849b603f13b8ed84b315eec57934c77d6a338904b709a2ceb7",
+          "python/t1_identity_flight_v3.py": "fa40399e2ebd9f7f0af29ab45b6ff50a9dc40660469269147ed546a472bde132",
+          "python/prepare_t1_identity_flight_v3.py": "7c84bb9a1e13f17b7a674096b50c71a6597159d4d89615a4abcdcf5d7314fd75",
+          "scripts/run-t1-identity-flight-v3.ps1": "de70002fb351bdb7b3f3d76b01ab9ffe764ccd7deb818589ab5cb197c1be7e79",
+          "python/test_t1_identity_flight_v3.py": "7a1b2f62a067a590fec6ec1357888d23e2eb10a698bc5ffd2f2ac595ac96444d",
+          "python/t1_delayed_semantic_bridge.py": "e5ca0afff53dffaa3b6a2e5ff27ea47ae82a863360164c003a3e71a0142c5a62",
+          "python/t1_delayed_semantic_observer.py": "dfa8cee8629d560b38963ae7f30f4430fb3897ed00368703ba8e0f3b5c8a4663",
+          "python/t1_candidate_surface_v3.py": "327beb5e47dce9ad3e04d656da41d647205bd105b96b402b41e655b14ed566c3",
+          "python/t1_identity_flight_v4.py": "ef3c1551fc0e660e4799eece0e7e2f790289eec4a26f8529bb3a71920b66a521",
+          "python/prepare_t1_identity_flight_v4.py": "0015065a0ffda90436ae0611909de66a476a5dcbada179b9ba46e33556a5bfe2",
+          "python/t1_source_attribute_guard.py": "fbde21994bb4a62a6a61b3c764158025470143d907c1227387c95f0e2ff866a4",
+          "scripts/run-t1-identity-flight-v4.ps1": "b74562320d9940239622632e084d05ba3013f5fc627185746d9ba1be7dcd5b35",
+          "python/t1_identity_flight_v5.py": "dacc45e872fb5c7d925a2426ff5cef69c32c3dc9cd66d860e3a1a2ff6fe32136",
+          "python/prepare_t1_identity_flight_v5.py": "3e9f747d7676e107f15e043b182a2a38479cb6051ece1d9f2b64e6d3280194cb",
+          "python/t1_review_handoff.py": "1f0857e823eb6e6e64950ae6838e1456392fef764536b2daa4400d011d76442b",
+          "python/test_t1_review_handoff.py": "d62649adfdadc6db95190f300aee47e28cbcb8b416136a495ff413183cf2f036",
+          "python/t1_review_handoff_observer.py": "f3f8479bef9fc76f0b1dd3154416170cd48aa0a4b299d1ca4c490fd3b239995e",
+          "python/t1_active_stall.py": "81b4dd8acb85f1e46eeb7a977f04f1f7c831ab60d4cbf3562c61d368eb899439",
+          "python/test_t1_active_stall.py": "a1ca6a85cd6aff85ca56a9126baf19125bd5d9712b1e300af78971cf3d32827d",
+          "scripts/run-t1-identity-flight-v5.ps1": "99ab8e30595f415cf2e1e12c2daa9510189fadc9b8cac53b9a475d56fa758249",
+          "python/t1_review_handoff_v1p1.py": "7117201ce63ebaf49ef9d3f797930b78d7413b2720804b3890da21bfe6d1d588",
+          "python/test_t1_review_handoff_v1p1.py": "6f85d0db8112d8d3e9cf588d47b3b486d3ab138075240f21afa53957efa5141d",
+          "python/t1_review_handoff_observer_v1p1.py": "71c340860be9d9eafdcd7c38dda1b1970c8df58c644d32eac050cef6364227d2",
+          "python/t1_identity_flight_v5p1.py": "20d8e05a0709db366aea8c434783f33ea754d0dbddbbca6ed36c9a168bbf3894",
+          "python/prepare_t1_identity_flight_v5p1.py": "2501aef43276550c9536c274e51e9da7fbb79601d6e102cd6f8ec5ea51bbd671",
+          "scripts/run-t1-identity-flight-v5p1.ps1": "d10289a212cde745d1f8013c4bd19ff6375910bc88d2b648a293f0b76248a4e0",
+          "python/t1_async_control_v1p1.py": "fd9391acffa663cfd1a16515baa888fc361832cffdb8ca448b28cc04cbbf6350",
+          "python/test_t1_async_control_v1p1.py": "ee00a3b41efa926f805f4ea007f4bc4ca9f9a91ac7161a8852a785de1b2f1fcc",
+          "python/test_t1_async_control.py": "de0086811db58ffa70e6d133b4de512bee23b3c4b534b7fdf2ad1cf7572c62a4",
+          "python/test_t1_identity_motion_policy.py": "763d6e9fa1bafec855a7ea04eb62d537becaf319c6f7b51e5827d122c5bc50dc",
+          "python/t1_identity_flight_v6.py": "05c479823e51cf3f08cd68f10f55b8b65eff479a1ae61991b4269e3321b32d0a",
+          "python/prepare_t1_identity_flight_v6.py": "c873b78e492a4997c82b97451cb0211c34b3936234ffdc8b59248bff82a0d2ee",
+          "scripts/run-t1-identity-flight-v6.ps1": "c1709e79b20f4b5ac25e6de40f430cff9d94ec34449b2da894b4f740dc48f50f",
+          "python/t1_motion_plan_contract_v1.py": "971b0982f238492eb69df9a87ff232611a81845405e4a30ee91d8ec0b45b203b",
+          "python/test_t1_motion_plan_contract.py": "cb96ed74d61c7d1ec800b30e98cf72d491f085b03713693374a678726126533c",
+          "python/t1_identity_flight_v6p1.py": "0aefc2c1ca6ebe8dc48ff153362dae9b9626a7596b02eeb1401a1e7e6755c842",
+          "python/prepare_t1_identity_flight_v6p1.py": "bacb26e753713df4b3e73ba5d51b9a213055ab0efaabf49001eb8f96d3348ce2",
+          "scripts/run-t1-identity-flight-v6p1.ps1": "796bacc5c89b0bd681648a54217009c36b9b467a06029bb0d03f3f2605a74a48",
+          "python/t1_control_settlement.py": "c9a12e85e775df56350167f080e8d771d4c8eedf6d53f84da76d500aa6e5a0e6",
+          "python/test_t1_control_settlement.py": "9fa80adaf81c6888dae5eee138450df508864dcf62553c77760b11f587d92955",
+          "python/t1_feedback_flight.py": "2966b1ae37d3aa61949c1f5523cce88a70ab7447aff6a2ec03fd580371886af7",
+          "python/t1_async_control_v1p2.py": "a8d6e76f2fbb1beda135409264ffddb2d920cb7fff875a5cffc7d279c195a532",
+          "python/test_t1_async_control_v1p2.py": "e152b9d935dbd8d67300289cf576885faed0a1958c23c562e77d9d658759d19c",
+          "python/t1_settlement_plan_v1.py": "1c745b0a91b26d96655bd2de3a701dc246263af45e8d5b09b52e51bf463c861e",
+          "python/test_t1_settlement_plan.py": "9e2fef8b9e792144c4d15bf26a6c35e4fd1eb3a3bab411a05f013de1f3e82fd0",
+          "python/t1_identity_flight_v7.py": "e8b716abec5b50becbe9d6993991c24a7a07d9297ff5165d8d509c51cdc37fc3",
+          "python/prepare_t1_identity_flight_v7.py": "c2f1727a3b8325a160f46667589312c96bc31373d1c7c06729e1616331874b98",
+          "scripts/run-t1-identity-flight-v7.ps1": "52ff093a239fe891b67227dc69f4495ee52383ea1bb3d7ee36353b50151b54b6",
+          "python/analyze_t1_settlement.py": "b1ad58c1e40407aac70a954b77425e746b5a428381332c6bcc286bdeb6638ab4",
+          "python/test_analyze_t1_settlement.py": "8bb67e72eb431e4d0434367c8bf2fd974b41cf33c291f352c104fcd5d93b5ef1",
+          "python/t1_async_control_v1p3.py": "a30ad35d061805e0f614f364c2f98ceeae2154c4963377e069b4000199699118",
+          "python/test_t1_async_control_v1p3.py": "3dcc2f1c9a15fd3da114570270856dd32d14fca7b88eb8be903704bfc558a0e9",
+          "python/t1_identity_flight_v7p1.py": "b41e562ed93ccdb8be4fac010f9cffce5d7b66b7512e498d1942a2cd4750899d",
+          "python/prepare_t1_identity_flight_v7p1.py": "0852e18a025b9e24117f81ed96cdc0e2a2e2cc4deec27d5d4bb22976605e4f43",
+          "python/t1_settlement_plan_v1p1.py": "8e63c60338429935b1e5ea19101ba504d89a1e7dac701ca02811f850be301ebe",
+          "python/analyze_t1_settlement_v1p1.py": "3525b814bb7c45450bb5331a9b31c8ae3db206ba64ab633e21af72085d1d675f",
+          "scripts/run-t1-identity-flight-v7p1.ps1": "28225d27958cb6338837b5f14b9b8903b713ed0d1beb4aa78daeb36367b0185c",
+          "python/t1_async_control_v1p4.py": "344c4845edeffc4f1495702b573e779ad32253fddc1ef090779259812ef40496",
+          "python/test_t1_async_control_v1p4.py": "c93d90f63ec86400fc16181e8eec4ce75b6d379d606aea9492c3620e6b7ea5a5",
+          "python/t1_identity_flight_v7p2.py": "3d26afa22c6f3596d6ccb0b41926cfe55b3a06e3f13c9f2face52008743555f5",
+          "python/prepare_t1_identity_flight_v7p2.py": "dfaee902296d39abd087784008debe2b6a730a9ce9b2533bbb0b744c5b40abb7",
+          "python/t1_settlement_plan_v1p2.py": "78059697201de0b3cd1a6b5c2327eec928647841f08f3aabdd4ee93686536d81",
+          "python/analyze_t1_settlement_v1p2.py": "54d5b5fef2aa0dd868152f2070f7dc8c9c52f59d5b8a4b47ffe6b33be434fe34",
+          "scripts/run-t1-identity-flight-v7p2.ps1": "fdd8d831d5238bb363b71f1664d10ab58802edd4c9b2f85d23b129188f2635ae",
+          "python/t1_identity_motion_policy_v1p1.py": "fe79cdc906af3ff33b34b7cb027fb3e786eb3b23b1e393fe09ed3bb7fe49042b",
+          "python/test_t1_identity_motion_policy_v1p1.py": "4c828f67a4b697f46d230e5a4a568c2efa528474b89eb0cb6fc135f9d9bfc839",
+          "python/t1_identity_flight_v7p3.py": "940cfba899e83df63bff250e5c173a9fac84f5eb36ae4a6a6b26b311388faa01",
+          "python/prepare_t1_identity_flight_v7p3.py": "15d4aceec7c498f9a614ce6b596d827ec5e3c9ee231fb600a96bd7356a5c68d3",
+          "python/t1_settlement_plan_v1p3.py": "eaa994375469552ad36948cf30b778f8b315dc13b9d33ccf0b5a5b8f2e6ddee1",
+          "python/analyze_t1_settlement_v1p3.py": "c29b6cbea910aaa0a13c42d2dbae1a72cc4b17aebe555417e6f58e87875d6489",
+          "scripts/run-t1-identity-flight-v7p3.ps1": "9e17411b041a573001f4409e0be60416047fb58feb15d45c52ecf90fe15398c5"
+        },
+        "formal_efficacy_results": false,
+        "whole_thesis_complete": false,
+        "unused_prepared_repeat": "configs/t1_settlement_visible60_v7p2_rep1_20261006; not executed after actual-clear failure"
+      },
+      "source_fault_development_20261006": {
+        "date": "2026-10-06",
+        "status": "SOURCE_FAULT_DEVELOPMENT_MEASURED_FORMAL_T1_PENDING",
+        "analysis_path": "D:\\forAirsim\\logs\\t1_source_fault_analysis_final_v8_20261006\\report.json",
+        "analysis_sha256": "8a28e459d9de11c798e5b15fef726e4a6c0fdf2ac67a1bcdad344a5da724da70",
+        "report_path": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一源证据扰动验证结果.md",
+        "figure_receipt_path": "D:\\forAirsim\\logs\\t1_source_fault_figures_zh_v8_20261006\\artifact_receipt.json",
+        "actual_flights": 5,
+        "all_main_frames": 620,
+        "all_planned_main_slots": 620,
+        "all_acquisition_frames": 31,
+        "all_source_fault_conditions_passed": true,
+        "failed_conditions": [],
+        "scale_failed_sessions": [],
+        "all_main_identity_counts": {
+          "CORRECT": 561,
+          "NO_OUTPUT": 59
+        },
+        "late_full_completion_limiters": {
+          "CONTROL_SETTLEMENT": 289,
+          "UNKNOWN": 21
+        },
+        "original_failed_audit_preserved_and_bound_pending_review_recomputed": [
+          {
+            "session_id": "t1_source_delivery_v8_20261006",
+            "rows": [
+              {
+                "frame_id": "t1_source_delivery_v8_20261006_f019",
+                "issue": "PENDING_CARRY_NOT_BOUND_TO_ACTUAL_CURRENT_REVIEW"
+              }
+            ]
+          },
+          {
+            "session_id": "t1_source_delivery_v8_rep1_20261006",
+            "rows": [
+              {
+                "frame_id": "t1_source_delivery_v8_rep1_20261006_f019",
+                "issue": "PENDING_CARRY_NOT_BOUND_TO_ACTUAL_CURRENT_REVIEW"
+              }
+            ]
+          }
+        ],
+        "actual_occlusion_recovery_clocks": [
+          {
+            "session_id": "t1_source_occlusion_v8_20261006",
+            "first_correct_return_frame": "t1_source_occlusion_v8_20261006_f077",
+            "actual_occluder_clear_completed_monotonic_s": 21396.406,
+            "after_actual_clear_s": {
+              "capture": 4.453000000001339,
+              "gate": 4.562000000001717,
+              "frame_processing": 4.609000000000378,
+              "historical_full": 5.172000000002299
+            },
+            "nominal_return_capture_delay_s": 4.46900000000096,
+            "clock_scope": "saved host monotonic clocks"
+          }
+        ],
+        "natural_service_reply_count": 80,
+        "natural_service_over_two_s_count": 0,
+        "controlled_delivery_holds_count": 4,
+        "complete_late_frames": 310,
+        "frame_processing_late_frames": 44,
+        "regression_tests": 407,
+        "formal_efficacy_results": false,
+        "whole_thesis_complete": false
+      },
+      "latest_scaled_motion_development": {
+        "date": "2026-10-08",
+        "status": "PROCESS50_PILOT_PASS_REPEAT_CAPTURE_INCOMPLETE",
+        "analysis_path": "D:\\forAirsim\\logs\\t1_process_campaign_with_supplement_v11_20261008\\report.json",
+        "analysis_sha256": "be0f90e54f797629695820556b71e97b8b20444e08bcbbce782d5c9fe907dc71",
+        "report_path": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一控制进程与采集中断复验结果.md",
+        "all_new_attempts": 3,
+        "confirmed_new_flights": 3,
+        "all_attempts": 16,
+        "sessions": [
+          {
+            "session_id": "t1_process_zero_v11_20261007",
+            "independent_status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "runner_status": "PASS",
+            "new_flights": 1,
+            "main_completed": 20,
+            "main_started": 20,
+            "planned": 20,
+            "acquisition": 9,
+            "counts": {
+              "CORRECT": 20
+            },
+            "net_mm": 0.0,
+            "full_timing_counts": {
+              "TIMELY": 20
+            },
+            "processing_timing_counts": {
+              "TIMELY": 20
+            },
+            "process_control_audit_status": "PASS_PROCESS_CONTROL_EVIDENCE",
+            "process_trace_replay_audit_status": "PASS_PROCESS_TRACE_REPLAY",
+            "manifest_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_zero_v11_20261007\\manifest.json",
+              "sha256": "4558d4646fc4b43b69e90b5e274dda14aed083b7d996de2859ccafbcbe4537fd"
+            },
+            "fresh_ground_closure_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_zero_v11_20261007\\fresh_ground_closure.json",
+              "sha256": "0102f74beba4928006955c0eb71a71b796a40aa0d10a42f5a0cbd7182d535a46"
+            },
+            "safe_closed": true
+          },
+          {
+            "session_id": "t1_process_50_v11_20261007",
+            "independent_status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "runner_status": "PASS",
+            "new_flights": 1,
+            "main_completed": 400,
+            "main_started": 400,
+            "planned": 400,
+            "acquisition": 6,
+            "counts": {
+              "CORRECT": 380,
+              "NO_OUTPUT": 20
+            },
+            "net_mm": 58.67631733640207,
+            "full_timing_counts": {
+              "LATE": 211,
+              "TIMELY": 189
+            },
+            "processing_timing_counts": {
+              "TIMELY": 364,
+              "LATE": 36
+            },
+            "process_control_audit_status": "PASS_PROCESS_CONTROL_EVIDENCE",
+            "process_trace_replay_audit_status": "PASS_PROCESS_TRACE_REPLAY",
+            "manifest_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_20261007\\manifest.json",
+              "sha256": "02a6957c1bc6dec3daf81081cd1d2da6552568a3a070c7da55aeef828efde00b"
+            },
+            "fresh_ground_closure_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_20261007\\fresh_ground_closure.json",
+              "sha256": "3d97dad1ed0a35883ad0bce910162ac56d057eea2c734db62ba34ed379a7b18a"
+            },
+            "safe_closed": true
+          },
+          {
+            "session_id": "t1_process_50_v11_rep1_20261007",
+            "independent_status": "FAIL_SCALED_MOTION_EVIDENCE",
+            "runner_status": "FAIL",
+            "new_flights": 1,
+            "main_completed": 389,
+            "main_started": 390,
+            "planned": 400,
+            "acquisition": 8,
+            "counts": {
+              "CORRECT": 382,
+              "NO_OUTPUT": 7,
+              "UNKNOWN_OUTPUT_STATE": 1
+            },
+            "net_mm": null,
+            "full_timing_counts": {
+              "LATE": 228,
+              "TIMELY": 161,
+              "UNKNOWN": 1
+            },
+            "processing_timing_counts": {
+              "TIMELY": 333,
+              "LATE": 56,
+              "UNKNOWN": 1
+            },
+            "process_control_audit_status": "PASS_PROCESS_CONTROL_EVIDENCE",
+            "process_trace_replay_audit_status": "PASS_PROCESS_TRACE_REPLAY",
+            "manifest_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_rep1_20261007\\manifest.json",
+              "sha256": "bf83fe63857d56f3acc778fed7512543059486db4871bd4042ccb20f9c8e6437"
+            },
+            "fresh_ground_closure_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_rep1_20261007\\fresh_ground_closure.json",
+              "sha256": "7d952be85df63bfd460f0da9a47dfc8a7ab309473262072355222c8d108c5f11"
+            },
+            "safe_closed": true
+          }
+        ],
+        "source_count": 150,
+        "regression_tests": 481,
+        "capture_diagnostic_tests": 12,
+        "clear_preservation_and_supplement_tests": 12,
+        "qt_tests_after_changes": 20,
+        "process_offline_gate": {
+          "path": "D:\\forAirsim\\logs\\t1_process_offline_v11_v1p1_20261007\\report.json",
+          "sha256": "216a527bfea09205dcd48a151ac2c9f73367da4870f6da4d8e3b35ee4b8d129e"
+        },
+        "clear_supplement": {
+          "path": "D:\\forAirsim\\logs\\t1_process_clear_supplement_v11_20261008\\report.json",
+          "sha256": "000f36681ac69d17a2c245f9ff35b04d27ac128b96c05ee6404097e9ad3dec6e"
+        },
+        "scale100_passed": false,
+        "scale100_admitted": false,
+        "next_plan": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一V11P1采集与首次清零接续计划.md",
+        "next_gate": "integrate_V11P1_staged_capture_and_preserved_first_clear_then_spawn_gate_refreeze_zero50repeat100",
+        "new_capture_and_clear_revision_flight_validated": false,
+        "formal_efficacy_results": false,
+        "whole_thesis_complete": false
+      },
+      "qt_workbench": {
+        "status": "SAVED_REPLAY_AND_SINGLE_IMAGE_VERIFIED_OFFSCREEN",
+        "entrypoint": "Run-VLX-GUI.cmd",
+        "guide": "docs/任务一Qt5实验工作台.md",
+        "real_single_image_receipt": "logs/t1_qt_workbench_20261006/qt_verification.json",
+        "current_layout_receipt": "D:\\forAirsim\\logs\\t1_qt_process_workbench_v11_v1p3_20261008\\layout_verification.json",
+        "current_layout_sha256": "a6fe14bf83a49367c07299bc550cab155fefd012863c087e657507111c38aeb6",
+        "native_desktop_interaction_tested": false,
+        "live_flight_control_implemented": false,
+        "cloud_request_mode": "image_text",
+        "proposals_transmitted": false,
+        "named_sessions_verified": true,
+        "named_session_regression_tests": 20,
+        "all_attempts_in_current_replay": 16,
+        "first_clear_supplement_bound_to_original_inputs": true
+      },
+      "latest_sampling_cost_development": {
+        "date": "2026-10-07",
+        "status": "OFFLINE_SAMPLING_COST_ACCOUNTED_NEW_RUNTIME_PENDING",
+        "analysis_path": "D:\\forAirsim\\logs\\t1_sampling_cost_v1_20261007\\report.json",
+        "analysis_sha256": "0165ea838e0631a2269c578acff93c42d39e533bd90076107de5b40664188803",
+        "report_path": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一采样成本定位与下一轮修复计划.md",
+        "figure_receipt_path": "D:\\forAirsim\\logs\\t1_sampling_cost_figures_zh_v1p1_20261007\\artifact_receipt.json",
+        "completed_main_frames": 813,
+        "missing_main_slots": 7,
+        "new_flights": 0,
+        "new_model_calls": 0,
+        "formal_efficacy_results": false,
+        "physical_root_cause_established": false
+      },
+      "latest_pipeline_development": {
+        "date": "2026-10-07",
+        "status": "BOUNDED_PIPELINE_DEVELOPMENT_FORMAL_T1_PENDING",
+        "analysis_path": "D:\\forAirsim\\logs\\t1_pipeline_campaign_analysis_20261007\\report.json",
+        "analysis_sha256": "d0708aeeca487810425001facd3a443d667e503e07c92100ccc01d1a5910868d",
+        "report_path": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一有界后台记录与尺度复验结果.md",
+        "component_analysis_path": "D:\\forAirsim\\logs\\t1_bounded_sampling_analysis_20261007\\report.json",
+        "component_analysis_sha256": "a077296759cc0c0658137e4086efd9ec27dd703efa40f6d075b0ea78fcc8a396",
+        "figure_receipt_path": "D:\\forAirsim\\logs\\t1_bounded_sampling_figures_zh_v1p1_20261007\\artifact_receipt.json",
+        "all_new_attempts": 6,
+        "confirmed_new_flights": 5,
+        "sessions": [
+          {
+            "session_id": "t1_pipeline_zero_v10_20261007",
+            "status": "FAIL_SCALED_MOTION_EVIDENCE",
+            "new_flights": 1,
+            "measurement_entered": false,
+            "main": 0,
+            "completed_main": 0,
+            "planned": 20,
+            "acquisition": 7,
+            "correct": 0,
+            "no_output": 0,
+            "other": 0,
+            "net_mm": null,
+            "full_late": 0,
+            "processing_late": 0,
+            "safe_closed": true,
+            "errors": [
+              "RuntimeError",
+              "CONTROL_CLOSE_RuntimeError"
+            ],
+            "persistence_status": "FAIL_OR_MISSING_PERSISTENCE_EVIDENCE"
+          },
+          {
+            "session_id": "t1_pipeline_zero_v10p1_20261007",
+            "status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "new_flights": 1,
+            "measurement_entered": true,
+            "main": 20,
+            "completed_main": 20,
+            "planned": 20,
+            "acquisition": 8,
+            "correct": 20,
+            "no_output": 0,
+            "other": 0,
+            "net_mm": 0.0,
+            "full_late": 1,
+            "processing_late": 0,
+            "safe_closed": true,
+            "errors": [],
+            "persistence_status": "PASS_ACTUAL_BOUNDED_PERSISTENCE"
+          },
+          {
+            "session_id": "t1_pipeline_50_v10p1_20261007",
+            "status": "FAIL_SCALED_MOTION_EVIDENCE",
+            "new_flights": 0,
+            "measurement_entered": false,
+            "main": 0,
+            "completed_main": 0,
+            "planned": 400,
+            "acquisition": 0,
+            "correct": 0,
+            "no_output": 0,
+            "other": 0,
+            "net_mm": null,
+            "full_late": 0,
+            "processing_late": 0,
+            "safe_closed": true,
+            "errors": [
+              "RuntimeError",
+              "TEXTURE_ASSIGNMENT_FAILED"
+            ],
+            "persistence_status": "FAIL_OR_MISSING_PERSISTENCE_EVIDENCE"
+          },
+          {
+            "session_id": "t1_pipeline_50_v10p1_retry1_20261007",
+            "status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "new_flights": 1,
+            "measurement_entered": true,
+            "main": 400,
+            "completed_main": 400,
+            "planned": 400,
+            "acquisition": 8,
+            "correct": 378,
+            "no_output": 22,
+            "other": 0,
+            "net_mm": 58.58930945444362,
+            "full_late": 250,
+            "processing_late": 111,
+            "safe_closed": true,
+            "errors": [],
+            "persistence_status": "PASS_ACTUAL_BOUNDED_PERSISTENCE"
+          },
+          {
+            "session_id": "t1_pipeline_50_v10p1_rep1_20261007",
+            "status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "new_flights": 1,
+            "measurement_entered": true,
+            "main": 400,
+            "completed_main": 400,
+            "planned": 400,
+            "acquisition": 6,
+            "correct": 394,
+            "no_output": 6,
+            "other": 0,
+            "net_mm": 61.20908263117726,
+            "full_late": 245,
+            "processing_late": 86,
+            "safe_closed": true,
+            "errors": [],
+            "persistence_status": "PASS_ACTUAL_BOUNDED_PERSISTENCE"
+          },
+          {
+            "session_id": "t1_pipeline_100_v10p1_20261007",
+            "status": "FAIL_SCALED_MOTION_EVIDENCE",
+            "new_flights": 1,
+            "measurement_entered": true,
+            "main": 316,
+            "completed_main": 315,
+            "planned": 800,
+            "acquisition": 6,
+            "correct": 306,
+            "no_output": 9,
+            "other": 1,
+            "net_mm": null,
+            "full_late": 187,
+            "processing_late": 57,
+            "safe_closed": true,
+            "errors": [
+              "RuntimeError",
+              "CONTROL_CLOSE_RuntimeError"
+            ],
+            "persistence_status": "FAIL_OR_MISSING_PERSISTENCE_EVIDENCE"
+          }
+        ],
+        "regression_tests": 451,
+        "independent_50mm_qualified_sessions": 2,
+        "scale100_passed": false,
+        "formal_efficacy_results": false,
+        "whole_thesis_complete": false,
+        "original_failures_preserved": true
+      },
+      "latest_feedback_dispatch_development": {
+        "date": "2026-10-07",
+        "status": "NEW_SCALE50_CLEAR_DEADLINE_FAILED_PROCESS_ISOLATION_PLANNED",
+        "analysis_path": "D:\\forAirsim\\logs\\t1_dispatch_campaign_analysis_20261007\\report.json",
+        "analysis_sha256": "34822851c4c9eca8f62b17cbeb1aa76610b3078a9d872573e3056c373bf7e04b",
+        "report_path": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一反馈时效改进与末尾清零复验结果.md",
+        "component_analysis_path": "D:\\forAirsim\\logs\\t1_dispatch_timing_analysis_20261007\\report.json",
+        "component_analysis_sha256": "2d5dc71c18d0aa14872a3544e8b686994500ed7e90900e48960f2bbc4212e0e9",
+        "all_new_attempts": 2,
+        "confirmed_new_flights": 2,
+        "all_attempts": 13,
+        "sessions": [
+          {
+            "session_id": "t1_dispatch_zero_v10p2_20261007",
+            "independent_status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "runner_status": "PASS",
+            "new_flights": 1,
+            "main_completed": 20,
+            "main_started": 20,
+            "planned": 20,
+            "acquisition": 11,
+            "counts": {
+              "CORRECT": 20
+            },
+            "net_mm": 0.0,
+            "full_timing_counts": {
+              "LATE": 2,
+              "TIMELY": 18
+            },
+            "processing_timing_counts": {
+              "TIMELY": 20
+            },
+            "feedback_dispatch_audit": {
+              "status": "PASS_STRICT_FEEDBACK_DISPATCH_AUDIT",
+              "issues": [],
+              "read_timing_count": 281,
+              "feedback_proof_count": 58,
+              "refused_attempts": 0,
+              "recovered_ticks": 0,
+              "maximum_condition_wait_s": 0.014999999999417923,
+              "maximum_state_event_admission_s": 0.0,
+              "freshness_limit_s": 0.12,
+              "target_lease_renewed": false,
+              "hard_real_time_established": false
+            },
+            "safe_closed": true,
+            "natural_recovery_status": "NOT_TRIGGERED_IN_THIS_FLIGHT"
+          },
+          {
+            "session_id": "t1_dispatch_50_v10p2_20261007",
+            "independent_status": "FAIL_SCALED_MOTION_EVIDENCE",
+            "runner_status": "PASS",
+            "new_flights": 1,
+            "main_completed": 400,
+            "main_started": 400,
+            "planned": 400,
+            "acquisition": 7,
+            "counts": {
+              "CORRECT": 400
+            },
+            "net_mm": 62.61373311398198,
+            "full_timing_counts": {
+              "LATE": 244,
+              "TIMELY": 156
+            },
+            "processing_timing_counts": {
+              "TIMELY": 336,
+              "LATE": 64
+            },
+            "feedback_dispatch_audit": {
+              "status": "PASS_STRICT_FEEDBACK_DISPATCH_AUDIT",
+              "issues": [],
+              "read_timing_count": 3576,
+              "feedback_proof_count": 2295,
+              "refused_attempts": 0,
+              "recovered_ticks": 0,
+              "maximum_condition_wait_s": 0.01599999999962165,
+              "maximum_state_event_admission_s": 0.01600000000325963,
+              "freshness_limit_s": 0.12,
+              "target_lease_renewed": false,
+              "hard_real_time_established": false
+            },
+            "safe_closed": true,
+            "natural_recovery_status": "NOT_TRIGGERED_IN_THIS_FLIGHT"
+          }
+        ],
+        "regression_tests": 467,
+        "qt_tests_after_changes": 17,
+        "scale100_passed": false,
+        "original_v10p1_independent50_passed_sessions": 2,
+        "new_50_qualification_passed": false,
+        "next_plan": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一控制进程隔离与100毫米接续计划.md",
+        "next_gate": "implement_process_owned_control_and_bound_parent_loss_IPC_then_refreeze_zero50repeat100_without_relaxing_source_deadlines",
+        "formal_efficacy_results": false,
+        "whole_thesis_complete": false
+      },
+      "previous_scaled_motion_development_v10p2": {
+        "date": "2026-10-07",
+        "status": "SCALED_DEVELOPMENT_MEASURED_FORMAL_T1_PENDING",
+        "analysis_path": "D:\\forAirsim\\logs\\t1_scaled_campaign_analysis_v9_20261007\\report.json",
+        "analysis_sha256": "56c3ec94e62480068e748d13ea977a5750094d2e7048237171fbdb074c173325",
+        "report_path": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一尺度验证与Qt5工作台结果.md",
+        "figure_receipt_path": "D:\\forAirsim\\logs\\t1_scaled_motion_figures_zh_v9_20261007\\artifact_receipt.json",
+        "all_attempts": 5,
+        "complete_qualified_sessions": 2,
+        "incomplete_sessions": [
+          "t1_scale_50_v9_rep1_20261006",
+          "t1_scale_50_v9_rep2_20261006"
+        ],
+        "complete_main_frames": 813,
+        "complete_planned_slots": 820,
+        "complete_acquisition_frames": 18,
+        "complete_main_identity_counts": {
+          "CORRECT": 712,
+          "NO_OUTPUT": 101
+        },
+        "complete_late_frames": 443,
+        "frame_processing_late_frames": 102,
+        "completed_terminal_sessions": 3,
+        "scale_50_repeated_and_100_passed": false,
+        "regression_tests": 431,
+        "formal_efficacy_results": false,
+        "whole_thesis_complete": false,
+        "nonqualified_sessions": [
+          "t1_scale_50_v9_rep1_20261006",
+          "t1_scale_50_v9_rep2_20261006",
+          "t1_scale_50_v9_rep3_20261007"
+        ]
+      },
+      "latest_process_control_development": {
+        "date": "2026-10-08",
+        "status": "PROCESS50_PILOT_PASS_REPEAT_CAPTURE_INCOMPLETE",
+        "analysis_path": "D:\\forAirsim\\logs\\t1_process_campaign_with_supplement_v11_20261008\\report.json",
+        "analysis_sha256": "be0f90e54f797629695820556b71e97b8b20444e08bcbbce782d5c9fe907dc71",
+        "report_path": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一控制进程与采集中断复验结果.md",
+        "all_new_attempts": 3,
+        "confirmed_new_flights": 3,
+        "all_attempts": 16,
+        "sessions": [
+          {
+            "session_id": "t1_process_zero_v11_20261007",
+            "independent_status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "runner_status": "PASS",
+            "new_flights": 1,
+            "main_completed": 20,
+            "main_started": 20,
+            "planned": 20,
+            "acquisition": 9,
+            "counts": {
+              "CORRECT": 20
+            },
+            "net_mm": 0.0,
+            "full_timing_counts": {
+              "TIMELY": 20
+            },
+            "processing_timing_counts": {
+              "TIMELY": 20
+            },
+            "process_control_audit_status": "PASS_PROCESS_CONTROL_EVIDENCE",
+            "process_trace_replay_audit_status": "PASS_PROCESS_TRACE_REPLAY",
+            "manifest_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_zero_v11_20261007\\manifest.json",
+              "sha256": "4558d4646fc4b43b69e90b5e274dda14aed083b7d996de2859ccafbcbe4537fd"
+            },
+            "fresh_ground_closure_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_zero_v11_20261007\\fresh_ground_closure.json",
+              "sha256": "0102f74beba4928006955c0eb71a71b796a40aa0d10a42f5a0cbd7182d535a46"
+            },
+            "safe_closed": true
+          },
+          {
+            "session_id": "t1_process_50_v11_20261007",
+            "independent_status": "PASS_BOUNDED_SCALED_MOTION_DEVELOPMENT",
+            "runner_status": "PASS",
+            "new_flights": 1,
+            "main_completed": 400,
+            "main_started": 400,
+            "planned": 400,
+            "acquisition": 6,
+            "counts": {
+              "CORRECT": 380,
+              "NO_OUTPUT": 20
+            },
+            "net_mm": 58.67631733640207,
+            "full_timing_counts": {
+              "LATE": 211,
+              "TIMELY": 189
+            },
+            "processing_timing_counts": {
+              "TIMELY": 364,
+              "LATE": 36
+            },
+            "process_control_audit_status": "PASS_PROCESS_CONTROL_EVIDENCE",
+            "process_trace_replay_audit_status": "PASS_PROCESS_TRACE_REPLAY",
+            "manifest_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_20261007\\manifest.json",
+              "sha256": "02a6957c1bc6dec3daf81081cd1d2da6552568a3a070c7da55aeef828efde00b"
+            },
+            "fresh_ground_closure_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_20261007\\fresh_ground_closure.json",
+              "sha256": "3d97dad1ed0a35883ad0bce910162ac56d057eea2c734db62ba34ed379a7b18a"
+            },
+            "safe_closed": true
+          },
+          {
+            "session_id": "t1_process_50_v11_rep1_20261007",
+            "independent_status": "FAIL_SCALED_MOTION_EVIDENCE",
+            "runner_status": "FAIL",
+            "new_flights": 1,
+            "main_completed": 389,
+            "main_started": 390,
+            "planned": 400,
+            "acquisition": 8,
+            "counts": {
+              "CORRECT": 382,
+              "NO_OUTPUT": 7,
+              "UNKNOWN_OUTPUT_STATE": 1
+            },
+            "net_mm": null,
+            "full_timing_counts": {
+              "LATE": 228,
+              "TIMELY": 161,
+              "UNKNOWN": 1
+            },
+            "processing_timing_counts": {
+              "TIMELY": 333,
+              "LATE": 56,
+              "UNKNOWN": 1
+            },
+            "process_control_audit_status": "PASS_PROCESS_CONTROL_EVIDENCE",
+            "process_trace_replay_audit_status": "PASS_PROCESS_TRACE_REPLAY",
+            "manifest_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_rep1_20261007\\manifest.json",
+              "sha256": "bf83fe63857d56f3acc778fed7512543059486db4871bd4042ccb20f9c8e6437"
+            },
+            "fresh_ground_closure_receipt": {
+              "path": "D:\\forAirsim\\logs\\t1_process_50_v11_rep1_20261007\\fresh_ground_closure.json",
+              "sha256": "7d952be85df63bfd460f0da9a47dfc8a7ab309473262072355222c8d108c5f11"
+            },
+            "safe_closed": true
+          }
+        ],
+        "source_count": 150,
+        "regression_tests": 481,
+        "capture_diagnostic_tests": 12,
+        "clear_preservation_and_supplement_tests": 12,
+        "qt_tests_after_changes": 20,
+        "process_offline_gate": {
+          "path": "D:\\forAirsim\\logs\\t1_process_offline_v11_v1p1_20261007\\report.json",
+          "sha256": "216a527bfea09205dcd48a151ac2c9f73367da4870f6da4d8e3b35ee4b8d129e"
+        },
+        "clear_supplement": {
+          "path": "D:\\forAirsim\\logs\\t1_process_clear_supplement_v11_20261008\\report.json",
+          "sha256": "000f36681ac69d17a2c245f9ff35b04d27ac128b96c05ee6404097e9ad3dec6e"
+        },
+        "scale100_passed": false,
+        "scale100_admitted": false,
+        "next_plan": "D:\\forAirsim\\docs\\research-plan-20261004\\任务一V11P1采集与首次清零接续计划.md",
+        "next_gate": "integrate_V11P1_staged_capture_and_preserved_first_clear_then_spawn_gate_refreeze_zero50repeat100",
+        "new_capture_and_clear_revision_flight_validated": false,
+        "formal_efficacy_results": false,
+        "whole_thesis_complete": false
+      }
+    },
+    {
+      "id": "T2",
+      "name": "感知任务驱动的双机单目标轨迹优化方法研究",
+      "vehicles": [
+        "DroneA",
+        "DroneB"
+      ],
+      "task_target_count": 1,
+      "status": "SEQUENTIAL_FALLBACK_BASELINE_ONLY",
+      "roles": [
+        "tracker",
+        "observer"
+      ],
+      "role_handoff": [
+        "request",
+        "ready_ack",
+        "commit_version"
+      ],
+      "constraints_added": [
+        "time_aligned_inter_vehicle_distance",
+        "message_age",
+        "role_minimum_hold_time"
+      ],
+      "primary_outcomes": [
+        "identity_correct_time_fraction",
+        "reacquisition_success_and_seconds",
+        "handoff_success_all_requested"
+      ],
+      "next_gate": "T1_sensor_estimate_trajectory_closed_loop_pass"
+    },
+    {
+      "id": "T3",
+      "name": "面向快速碰撞任务的多智能体协同规划方法研究",
+      "vehicles": [
+        "DroneA",
+        "DroneB"
+      ],
+      "simultaneous_task_target_count": 1,
+      "target_refresh_trigger": "unique_valid_contact_only",
+      "refresh_position_source": "presaved_seeded_position_sequence",
+      "refresh_requires": [
+        "both_old_actions_cancelled",
+        "safe_hold_acknowledged",
+        "old_actor_removed",
+        "new_generation_observed"
+      ],
+      "episode_unit": "continuous_session_with_multiple_contact_rounds",
+      "development_rounds_per_session": 3,
+      "status": "PURE_ROUND_PROTOCOL_VALIDATED_NO_CONTINUOUS_FLIGHT_VALIDATION",
+      "protocol_fixture": {
+        "status": "PASS",
+        "synthetic_input": true,
+        "checks": "243/243",
+        "report": "logs/refreshed_target_protocol_20260930_162900_640240/report.json",
+        "counts_as_flight_data": false
+      },
+      "allocation_baselines": [
+        "fixed_A",
+        "alternating_AB",
+        "estimated_arrival_time_with_perception_readiness"
+      ],
+      "learning_after_rule_validation": [
+        "fixed_reward_MAPPO",
+        "imitation_pretraining",
+        "curriculum"
+      ],
+      "optional_last_extension": "offline_reward_search",
+      "primary_outcomes": [
+        "valid_contacts_all_started_rounds",
+        "session_completion",
+        "total_session_seconds",
+        "inter_contact_seconds"
+      ],
+      "safety_outcomes": [
+        "non_target_collision",
+        "inter_vehicle_collision",
+        "minimum_separation",
+        "stale_plan_rejection"
+      ],
+      "next_gate": "T2_joint_planning_and_generation_protocol_pass"
+    }
+  ],
+  "required_record_ids": [
+    "session_id",
+    "episode_id",
+    "target_generation",
+    "frame_id",
+    "plan_id"
+  ],
+  "truth_access": {
+    "scene_generation": "allowed",
+    "offline_evaluation": "allowed",
+    "training_supervision": "allowed_and_disclosed",
+    "geometry_interface_validation": "explicit_oracle_label_only",
+    "perception_method_execution_target_pose": "not_allowed"
+  },
+  "historical_data_use": "development_and_baseline_pilots_only",
+  "physical_balloon_rupture_claim": false,
+  "hardware_migration_in_current_scope": false
+}

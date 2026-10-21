@@ -1,0 +1,19 @@
+{
+  "kind": "TWELVE_V6P2_MODULES_UNCHANGED",
+  "reference": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p2\\center.json",
+  "reference_sha256": "4620a38912825ac4b6832f92249fc7aafa38f4d82ab6aaa7e10aa5cb9cf11531",
+  "source_sha256": {
+    "single_drone_experiment.py": "0f55e1d3d5afcb55cb372350df848fb8789279824fc3d905f3d477a37fa7ca1b",
+    "visual_servo.py": "35cd56bdf03aa8abd8338b865371e8c5e922ea1383fbe900b5fc6e0d2b1fb19e",
+    "target_provider.py": "7be594dfdd2e9de9485e5266aa7e42acc4fd90a78b3c66275ae20d46521899e6",
+    "balloon_detector.py": "8aea879e56ecddea5652ec817ea77ee9f1eea382a17843daafd4a42959fd46a0",
+    "trajectory_single_experiment.py": "d5e32903b597db556c0d5ffc6201f1edea38c6b24b7ca0d8e5a02487c2de44fb",
+    "perception_trajectory_planner.py": "4ed043f0f3e60451f9683950572f6f75738f3c564b261026829ff5291d1c26b4",
+    "timestamped_target_provider.py": "d00e3025c7a25cb9196f9bb9b2b91bd838010efb156f947aafc4458e8109ecd7",
+    "matched_trajectory_start.py": "3148f30a73f00dc53db2b5bed8c6ddbace7617a3fde4c830987cc80455cf7c53",
+    "trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+    "trajectory_timed_reference.py": "3f410b85ad47f74b0c25dee1b36b5f2445782fe413ba2446e84ecf409aca1d82",
+    "trajectory_timed_experiment.py": "978d85e284052dbe6bc5601d044f336a24cbfa24fff933c3aea7fe306b1717c5",
+    "trajectory_rgb_quality_reference.py": "630f0a6dc2efcfc7526140fb9ee27038781fb701c663b5a8b034ed313a64e0ef"
+  }
+}

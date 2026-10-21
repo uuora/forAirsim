@@ -1,0 +1,125 @@
+{
+  "status": "GENERATED_NUMERICALLY_VERIFIED_AND_VISUALLY_REVIEWED",
+  "authoring": "Matplotlib publication typesetting companion to native Origin project",
+  "origin_export_issue": "Native export has unexplained text overbars; native project remains editable. This companion is separately rendered from identical saved data.",
+  "files": [
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\01_recall_paired.png",
+      "sha256": "3c68455e6cdef9cea74183b12d7e15835ce539ece8d72dc21bbd134e9bd7e355"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\01_recall_paired.pdf",
+      "sha256": "1cf0294bae08ce8ad9eb3bb05ac8363d36a5166b49e5bf53b66b7f8601023f69"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\01_recall_paired.svg",
+      "sha256": "c31def42f7a74fbbb988b68217c5968c2730faf3b020e62c89a8e422b73fe2f7"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\02_precision_paired.png",
+      "sha256": "bf725ef3b770658128e83bf075c345b8415c938469fda9d9c3c2f00d7a61c556"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\02_precision_paired.pdf",
+      "sha256": "b0dcd40863c141153a23e71781af0261872135425a22f7b448fb205a32fc9616"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\02_precision_paired.svg",
+      "sha256": "621bd68ddff670933c3cfc87f7a8e5d4ece71152152f6b1eb153372f084d075e"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\03_latency_scatter.png",
+      "sha256": "afa19adbaa7440916530da82d32fef2da6b2e39cb17d09376195bd273fc41e40"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\03_latency_scatter.pdf",
+      "sha256": "bfe71149e9bc88d88c060371378cc0e00b28e8272699f2ca98bf12beebf08024"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\03_latency_scatter.svg",
+      "sha256": "bfc94996b6066ec0d0745bdfa55d6b94bdd37b36b0791edcd14c75c061e63d53"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\04_clear_margin_scatter.png",
+      "sha256": "b1216d220578df3d0dee3f5a7b5ceadebcab011772794ec7ac091791bd3bb61b"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\04_clear_margin_scatter.pdf",
+      "sha256": "ed83f9c8225a2cbabb624d5c5206b690ddd673cf1f29faa7daafb4211a12c5b1"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\04_clear_margin_scatter.svg",
+      "sha256": "f96ff8fccaefc86ad91530f3c2e846ce9ec3551d3318da9ef17976624cd109d8"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\05_processing_ecdf.png",
+      "sha256": "8b985ccbdf46c38776708ef99e502b633e924e167b5a9d7ffec67b7f7be018ac"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\05_processing_ecdf.pdf",
+      "sha256": "425f5bfe9fed9f1628e13b795395d1528e3dbdac2f95107742a3fe7b861e86e8"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\05_processing_ecdf.svg",
+      "sha256": "e4cb41bb1f220f1d069c24cafadb415b3c25f7ad5b470940c048fa79ae4b9384"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\06_completion_ecdf.png",
+      "sha256": "d78cceff1c0f0f22de442d5e430df79fdcbe4b4fd2b8e68dc4749c73b072e881"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\06_completion_ecdf.pdf",
+      "sha256": "785c027578a3017691a87fee3acfda3e0666d8554fc761c35fc12630306bbd86"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\06_completion_ecdf.svg",
+      "sha256": "a2653e1cc754ea42effa2890017f778b3a0e1355bc8f0028cdd760f5975d7864"
+    }
+  ],
+  "inputs": [
+    {
+      "role": "detector",
+      "path": "D:\\forAirsim\\logs\\t1_balloon_yolo_evaluation_v1p2_20261004\\report.json",
+      "sha256": "0de9ca21c995ebba18d721270d461400fa9cac4eb254e0130d69c0e833e5e33b"
+    },
+    {
+      "role": "age",
+      "path": "D:\\forAirsim\\logs\\t1_process_source_age_figures_zh_v11_v1p3_20261008\\data.json",
+      "sha256": "e09b14a563c08c9c5ef3850e546a4fcca20cc871dafe9875d5e1b5f65d6b0574"
+    },
+    {
+      "role": "campaign",
+      "path": "D:\\forAirsim\\logs\\t1_process_campaign_with_supplement_v11_20261008\\report.json",
+      "sha256": "be0f90e54f797629695820556b71e97b8b20444e08bcbbce782d5c9fe907dc71"
+    }
+  ],
+  "font": {
+    "path": "C:\\Windows\\Fonts\\simsun.ttc",
+    "sha256": "120a51d2b14eb588700a21e15fc301f0ea55d7c1a4e1f3ae61db83b7c8d42cd6"
+  },
+  "runtime": {
+    "python": "3.10.21 | packaged by Anaconda, Inc. | (main, Aug 27 2026, 14:35:39) [MSC v.1942 64 bit (AMD64)]",
+    "matplotlib": "3.10.9",
+    "numpy": "1.26.4"
+  },
+  "new_flights": 0,
+  "cloud_requests": 0,
+  "inferential_statistics": false,
+  "plot_source": {
+    "path": "D:\\forAirsim\\python\\build_publication_t1_figures.py",
+    "sha256": "2c9efdde3ba057f838f85c665eb04b70eff720d9ebaa07b52de03833d171c180"
+  },
+  "point_mapping": {
+    "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\figure_point_mapping.csv",
+    "sha256": "b61f45e0638cc3d1dd0c72973fef92ad7a4da3869b39fbe07bcef7c933a25d5c"
+  },
+  "visual_review": {
+    "status": "PASS",
+    "scope": "All six PNGs and all six PDF page renders; text, axes, legend, clipping and readable symbols checked. Author aesthetic acceptance is pending.",
+    "contact_sheet": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\pdf_visual_review\\all_six_pdf_contact_sheet.png"
+  },
+  "verification": {
+    "path": "D:\\forAirsim\\docs\\research-summary-20261008\\publication_v1\\delivery_verification.json",
+    "sha256": "c7e383915faf20bf17cba319a04c898ffbee1511628d2c953a806e4c946a5081"
+  }
+}

@@ -1,0 +1,562 @@
+{
+  "protocol_id": "t1_balloon_adaptation_ep02_train_20261004",
+  "research_stage": "episode_grouped_detector_adaptation_pilot",
+  "formal_efficacy_results": false,
+  "seed": 6100402,
+  "acquisition_seed": 6100402,
+  "split": "train",
+  "frames_per_case": 1,
+  "target_scale_xyz": [
+    1.296,
+    1.1268,
+    1.386
+  ],
+  "inactive_object_world_ned_m": [
+    30,
+    100,
+    -3
+  ],
+  "scene_acceptance": "Inactive masks zero; full occlusion target zero; active visible instances >=500 pixels",
+  "cases": [
+    {
+      "case_id": "01_occluded_negative",
+      "condition": "occluded_negative",
+      "target_world_ned_m": [
+        0,
+        0.0373,
+        -3.0478
+      ],
+      "camera_world_ned_m": [
+        -4.6458,
+        0.0878,
+        -2.8386
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        2.5065,
+        -3.9632,
+        -0.823
+      ],
+      "description": "红色气球",
+      "occluder_world_ned_m": [
+        -2.3229,
+        0.0625,
+        -2.9432
+      ]
+    },
+    {
+      "case_id": "02_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        -0.0852,
+        -2.9331
+      ],
+      "camera_world_ned_m": [
+        -4.761,
+        0.1721,
+        -3.1478
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        2.4345,
+        0.1373,
+        -3.2792
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "03_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        0.2689,
+        -2.9464
+      ],
+      "camera_world_ned_m": [
+        -4.1652,
+        -0.1424,
+        -2.8785
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -1.2815,
+        0.9938,
+        -1.2184
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "04_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        -0.3316,
+        -3.0333
+      ],
+      "camera_world_ned_m": [
+        -5.8,
+        -0.0143,
+        -2.9284
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        2.8729,
+        -0.5376,
+        -0.4902
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "05_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        0.0585,
+        -2.9381
+      ],
+      "camera_world_ned_m": [
+        -5.9735,
+        -0.1445,
+        -2.8926
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        1.1369,
+        0.2062,
+        -3.0605
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "06_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.805,
+        -3.0538
+      ],
+      "camera_world_ned_m": [
+        -3.93,
+        -0.0954,
+        -2.9736
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        1.2504,
+        1.1854,
+        3.2107
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.817,
+        -3.0538
+      ]
+    },
+    {
+      "case_id": "07_occluded_negative",
+      "condition": "occluded_negative",
+      "target_world_ned_m": [
+        0,
+        -0.1346,
+        -2.9961
+      ],
+      "camera_world_ned_m": [
+        -4.4944,
+        -0.0817,
+        -2.8896
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -2.739,
+        0.5203,
+        2.5762
+      ],
+      "description": "红色气球",
+      "occluder_world_ned_m": [
+        -2.2472,
+        -0.1081,
+        -2.9428
+      ]
+    },
+    {
+      "case_id": "08_occluded_negative",
+      "condition": "occluded_negative",
+      "target_world_ned_m": [
+        0,
+        0.3831,
+        -3.0861
+      ],
+      "camera_world_ned_m": [
+        -5.6186,
+        0.0607,
+        -2.9114
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -3.4233,
+        -1.948,
+        1.2086
+      ],
+      "description": "红色气球",
+      "occluder_world_ned_m": [
+        -2.8093,
+        0.2219,
+        -2.9988
+      ]
+    },
+    {
+      "case_id": "09_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        0.2499,
+        -2.9818
+      ],
+      "camera_world_ned_m": [
+        -5.2511,
+        -0.1645,
+        -2.8386
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -1.4982,
+        0.2348,
+        1.8276
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "10_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.9733,
+        -3.0662
+      ],
+      "camera_world_ned_m": [
+        -4.957,
+        -0.0895,
+        -2.892
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0.0711,
+        0.9287,
+        -3.7779
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.9128,
+        -3.0662
+      ]
+    },
+    {
+      "case_id": "11_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        0.3687,
+        -3.0897
+      ],
+      "camera_world_ned_m": [
+        -5.376,
+        -0.1003,
+        -3.0926
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        1.5103,
+        -1.1388,
+        -3.5208
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "12_occluded_negative",
+      "condition": "occluded_negative",
+      "target_world_ned_m": [
+        0,
+        0.2824,
+        -3.033
+      ],
+      "camera_world_ned_m": [
+        -3.8885,
+        -0.0098,
+        -3.1226
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -3.6245,
+        2.5751,
+        -0.0358
+      ],
+      "description": "红色气球",
+      "occluder_world_ned_m": [
+        -1.9443,
+        0.1363,
+        -3.0778
+      ]
+    },
+    {
+      "case_id": "13_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.9518,
+        -2.9206
+      ],
+      "camera_world_ned_m": [
+        -5.1019,
+        -0.1837,
+        -3.0949
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -0.2186,
+        3.1792,
+        -2.0573
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.9615,
+        -2.9206
+      ]
+    },
+    {
+      "case_id": "14_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.9327,
+        -3.0438
+      ],
+      "camera_world_ned_m": [
+        -5.9545,
+        -0.1437,
+        -3.0613
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0.3184,
+        -1.2347,
+        -3.83
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.7871,
+        -3.0438
+      ]
+    },
+    {
+      "case_id": "15_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        0.0627,
+        -3.0606
+      ],
+      "camera_world_ned_m": [
+        -4.2638,
+        -0.1181,
+        -2.8033
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -1.5616,
+        -3.9185,
+        1.2798
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "16_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        -0.133,
+        -2.9869
+      ],
+      "camera_world_ned_m": [
+        -5.766,
+        -0.0527,
+        -2.96
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -0.2793,
+        2.1026,
+        -1.2383
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "17_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        0.2522,
+        -3.0708
+      ],
+      "camera_world_ned_m": [
+        -4.8481,
+        -0.0358,
+        -2.9799
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -1.1012,
+        -3.7585,
+        -1.7839
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "18_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.9631,
+        -2.9894
+      ],
+      "camera_world_ned_m": [
+        -4.7825,
+        0.1483,
+        -3.1294
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        3.9666,
+        3.3435,
+        -0.6243
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.937,
+        -2.9894
+      ]
+    },
+    {
+      "case_id": "19_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.9564,
+        -3.0477
+      ],
+      "camera_world_ned_m": [
+        -4.3527,
+        -0.0674,
+        -2.8766
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        2.9696,
+        2.5023,
+        0.5486
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.8402,
+        -3.0477
+      ]
+    },
+    {
+      "case_id": "20_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.816,
+        -2.9777
+      ],
+      "camera_world_ned_m": [
+        -5.9433,
+        0.1479,
+        -3.096
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0.2079,
+        3.9362,
+        -2.0766
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.8571,
+        -2.9777
+      ]
+    },
+    {
+      "case_id": "21_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        -0.2759,
+        -2.9667
+      ],
+      "camera_world_ned_m": [
+        -4.8947,
+        -0.1478,
+        -3.1967
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        3.3973,
+        0.8996,
+        2.311
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "22_similar_pair",
+      "condition": "similar_pair",
+      "target_world_ned_m": [
+        0,
+        -0.8057,
+        -3.08
+      ],
+      "camera_world_ned_m": [
+        -4.2896,
+        -0.1788,
+        -2.9118
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -0.7263,
+        0.568,
+        -2.4103
+      ],
+      "description": "最左侧的红色气球",
+      "distractor_world_ned_m": [
+        0,
+        0.9654,
+        -3.08
+      ]
+    },
+    {
+      "case_id": "23_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        -0.0658,
+        -3.0391
+      ],
+      "camera_world_ned_m": [
+        -5.4153,
+        -0.1989,
+        -2.84
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        2.6238,
+        2.868,
+        1.7019
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "24_single",
+      "condition": "single",
+      "target_world_ned_m": [
+        0,
+        0.1341,
+        -3.0548
+      ],
+      "camera_world_ned_m": [
+        -4.1726,
+        0.1561,
+        -3.0835
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        -3.9071,
+        -0.5377,
+        3.5806
+      ],
+      "description": "红色气球"
+    }
+  ]
+}

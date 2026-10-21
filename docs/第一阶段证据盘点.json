@@ -1,0 +1,1285 @@
+{
+  "generated_utc": "2026-09-30T03:42:55.915572+00:00",
+  "blocks": {
+    "batches": [
+      {
+        "source": {
+          "path": "logs/single_batch_20260925_174839_546405/batch_report.json",
+          "sha256": "68a34851ede0fe75f6f2fd2459a91478e01c53dca10545f8304b8c6303bda33f"
+        },
+        "status": "FAIL",
+        "session": null,
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": false,
+            "batch": "single_batch_20260925_174839_546405",
+            "session": null,
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "FAIL"
+            }
+          }
+        ],
+        "run_count": 2,
+        "started_run_count": 2,
+        "unfinished_started_count": 0,
+        "failed_run_count": 1
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260925_175414_581919/batch_report.json",
+          "sha256": "09204aaaf4139467093edebee9e32f71695276dc8f7e51d18557645ee9b9bd7d"
+        },
+        "status": "PASS",
+        "session": null,
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260925_175414_581919",
+            "session": null,
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 11.467999999998938,
+              "approach_path_m": -0.43467401817280393
+            }
+          }
+        ],
+        "run_count": 2,
+        "started_run_count": 2,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_095742_1368008_session_1/batch_report.json",
+          "sha256": "db76fff50e7f3642fbc6c984dfdc459b718836274325b298aafb9f16b63cca1f"
+        },
+        "status": "PASS",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 40052,
+          "engine_started": "2026-09-30T01:57:42.7020656Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_095758_744827\\scene_report.json",
+          "scene_report_sha256": "ab6172dc8de0446bec6e879f41f90b4ea356aed4d9192ea0eda1cf69dd6f20c2"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_095742_1368008_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 40052,
+              "engine_started": "2026-09-30T01:57:42.7020656Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_095758_744827\\scene_report.json",
+              "scene_report_sha256": "ab6172dc8de0446bec6e879f41f90b4ea356aed4d9192ea0eda1cf69dd6f20c2"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 9.875,
+              "approach_path_m": -0.34178127801599967
+            }
+          },
+          {
+            "pair": 2,
+            "complete": true,
+            "batch": "single_batch_20260930_095742_1368008_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 40052,
+              "engine_started": "2026-09-30T01:57:42.7020656Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_095758_744827\\scene_report.json",
+              "scene_report_sha256": "ab6172dc8de0446bec6e879f41f90b4ea356aed4d9192ea0eda1cf69dd6f20c2"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 10.67199999999957,
+              "approach_path_m": -0.47392767355914356
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_095742_1368008_session_2/batch_report.json",
+          "sha256": "a0c7fce884035d74fdd57b2f6947f9583122793c54381e0f182af6b3bb8b78a0"
+        },
+        "status": "FAIL",
+        "session": {
+          "session_index": 2,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 22388,
+          "engine_started": "2026-09-30T02:02:24.2892972Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_2_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_2",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_100237_764996\\scene_report.json",
+          "scene_report_sha256": "57c591907595bd206d5e3a89b55014920b209b59efe52f0b7da4e6fc1a464936"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_095742_1368008_session_2",
+            "session": {
+              "session_index": 2,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 22388,
+              "engine_started": "2026-09-30T02:02:24.2892972Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_2_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_2",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_100237_764996\\scene_report.json",
+              "scene_report_sha256": "57c591907595bd206d5e3a89b55014920b209b59efe52f0b7da4e6fc1a464936"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 10.439000000000306,
+              "approach_path_m": -0.3510280330802822
+            }
+          },
+          {
+            "pair": 2,
+            "complete": false,
+            "batch": "single_batch_20260930_095742_1368008_session_2",
+            "session": {
+              "session_index": 2,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 22388,
+              "engine_started": "2026-09-30T02:02:24.2892972Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_2_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_2",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_100237_764996\\scene_report.json",
+              "scene_report_sha256": "57c591907595bd206d5e3a89b55014920b209b59efe52f0b7da4e6fc1a464936"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "FAIL"
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 1
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_101500_1699329_session_1/batch_report.json",
+          "sha256": "f9b3e49615ddad53365ea4a2472fd8b3c1c424b3cff2c460a092667da4b4110a"
+        },
+        "status": "RUNNING",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 27252,
+          "engine_started": "2026-09-30T02:15:00.7229316Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_101500_1699329\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_101500_1699329_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_101511_569886\\scene_report.json",
+          "scene_report_sha256": "2853f318d0887b420d4fba829ae55427f6463fe2291ccc1d9bff2751e9de363f"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_101500_1699329_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 27252,
+              "engine_started": "2026-09-30T02:15:00.7229316Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_101500_1699329\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_101500_1699329_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_101511_569886\\scene_report.json",
+              "scene_report_sha256": "2853f318d0887b420d4fba829ae55427f6463fe2291ccc1d9bff2751e9de363f"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 9.812999999999192,
+              "approach_path_m": 0.196583768180991
+            }
+          }
+        ],
+        "run_count": 2,
+        "started_run_count": 3,
+        "unfinished_started_count": 1,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_104530_5529764_session_1/batch_report.json",
+          "sha256": "23496a1c73b4d89522292502eb1d3fdfd2652eedfda9cd9c362a46aae4aca181"
+        },
+        "status": "PASS",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 6140,
+          "engine_started": "2026-09-30T02:45:31.2252276Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_104544_802023\\scene_report.json",
+          "scene_report_sha256": "9094866d44ce9faaaf8b1803535a44d872b4341e382c1a4c93d22035536343c2"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_104530_5529764_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 6140,
+              "engine_started": "2026-09-30T02:45:31.2252276Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_104544_802023\\scene_report.json",
+              "scene_report_sha256": "9094866d44ce9faaaf8b1803535a44d872b4341e382c1a4c93d22035536343c2"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 7.71900000000096,
+              "approach_path_m": 0.15540204757653187
+            }
+          },
+          {
+            "pair": 2,
+            "complete": true,
+            "batch": "single_batch_20260930_104530_5529764_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 6140,
+              "engine_started": "2026-09-30T02:45:31.2252276Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_104544_802023\\scene_report.json",
+              "scene_report_sha256": "9094866d44ce9faaaf8b1803535a44d872b4341e382c1a4c93d22035536343c2"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 7.687999999998283,
+              "approach_path_m": 0.04660511339409057
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_104530_5529764_session_2/batch_report.json",
+          "sha256": "e0bb6c03ea37ec3afb588fc204ae9a0047c7d94cd30ced1c7f7bbf613685678f"
+        },
+        "status": "PASS",
+        "session": {
+          "session_index": 2,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 35788,
+          "engine_started": "2026-09-30T02:50:20.9663242Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_2_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_2",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105031_469010\\scene_report.json",
+          "scene_report_sha256": "fdccfdbb88ad32e736d93e4bb8a26f56115ac0b10e2c512c470e95f9fc7b3dab"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_104530_5529764_session_2",
+            "session": {
+              "session_index": 2,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 35788,
+              "engine_started": "2026-09-30T02:50:20.9663242Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_2_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_2",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105031_469010\\scene_report.json",
+              "scene_report_sha256": "fdccfdbb88ad32e736d93e4bb8a26f56115ac0b10e2c512c470e95f9fc7b3dab"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 8.218000000000757,
+              "approach_path_m": 0.15175137834366415
+            }
+          },
+          {
+            "pair": 2,
+            "complete": true,
+            "batch": "single_batch_20260930_104530_5529764_session_2",
+            "session": {
+              "session_index": 2,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 35788,
+              "engine_started": "2026-09-30T02:50:20.9663242Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_2_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_2",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105031_469010\\scene_report.json",
+              "scene_report_sha256": "fdccfdbb88ad32e736d93e4bb8a26f56115ac0b10e2c512c470e95f9fc7b3dab"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 7.82799999999952,
+              "approach_path_m": 0.046233162169823094
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_104530_5529764_session_3/batch_report.json",
+          "sha256": "ab1dfe0455dd0988423d42a9d30f77ce56eabdf0bf7493df7d03ec03a3a84096"
+        },
+        "status": "PASS",
+        "session": {
+          "session_index": 3,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 20700,
+          "engine_started": "2026-09-30T02:55:08.9129046Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_3_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_3",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105519_472279\\scene_report.json",
+          "scene_report_sha256": "d5088d8ea710b16973c27684dd6b0139a579c11dd858acbfc75d54ca024af018"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_104530_5529764_session_3",
+            "session": {
+              "session_index": 3,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 20700,
+              "engine_started": "2026-09-30T02:55:08.9129046Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_3_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_3",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105519_472279\\scene_report.json",
+              "scene_report_sha256": "d5088d8ea710b16973c27684dd6b0139a579c11dd858acbfc75d54ca024af018"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 7.735000000000582,
+              "approach_path_m": 0.1568907425661752
+            }
+          },
+          {
+            "pair": 2,
+            "complete": true,
+            "batch": "single_batch_20260930_104530_5529764_session_3",
+            "session": {
+              "session_index": 3,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 20700,
+              "engine_started": "2026-09-30T02:55:08.9129046Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_3_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_3",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105519_472279\\scene_report.json",
+              "scene_report_sha256": "d5088d8ea710b16973c27684dd6b0139a579c11dd858acbfc75d54ca024af018"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 8.21900000000096,
+              "approach_path_m": 0.04193841067145554
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_112257_8235726_session_1/batch_report.json",
+          "sha256": "6ab9bb9ce49010f2832eab24e35f6ea4ac6c913750130c3b6f18557f2b4fd8ee"
+        },
+        "status": "PASS",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 33460,
+          "engine_started": "2026-09-30T03:22:58.3148877Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112257_8235726\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112257_8235726_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112308_838859\\scene_report.json",
+          "scene_report_sha256": "0155aab578a0b87db929903c306613bbf4a45985ff38132e7da06d84d1f5daa9"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_112257_8235726_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 33460,
+              "engine_started": "2026-09-30T03:22:58.3148877Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112257_8235726\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112257_8235726_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112308_838859\\scene_report.json",
+              "scene_report_sha256": "0155aab578a0b87db929903c306613bbf4a45985ff38132e7da06d84d1f5daa9"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 8.623999999999796,
+              "approach_path_m": 0.15157780120768916
+            }
+          },
+          {
+            "pair": 2,
+            "complete": true,
+            "batch": "single_batch_20260930_112257_8235726_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 33460,
+              "engine_started": "2026-09-30T03:22:58.3148877Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112257_8235726\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112257_8235726_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112308_838859\\scene_report.json",
+              "scene_report_sha256": "0155aab578a0b87db929903c306613bbf4a45985ff38132e7da06d84d1f5daa9"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "PASS"
+            },
+            "task_success": {
+              "coordinate": true,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 7.734000000000378,
+              "approach_path_m": 0.0370847863205388
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_112748_7625671_session_1/batch_report.json",
+          "sha256": "b8f94949f663e1d11a12c746ed06c26cc05ad6968c8f879563986af859b79eed"
+        },
+        "status": "PASS",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 30584,
+          "engine_started": "2026-09-30T03:27:49.1932166Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112748_7625671\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112748_7625671_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112759_873763\\scene_report.json",
+          "scene_report_sha256": "741722c0f532dbfbc477abeeb4fd8a33667c65b6577fb151c08b65e5f10f55e4"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_112748_7625671_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 30584,
+              "engine_started": "2026-09-30T03:27:49.1932166Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112748_7625671\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112748_7625671_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112759_873763\\scene_report.json",
+              "scene_report_sha256": "741722c0f532dbfbc477abeeb4fd8a33667c65b6577fb151c08b65e5f10f55e4"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": false,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": -1.1089999999985594,
+              "approach_path_m": -0.19246462638229667
+            }
+          },
+          {
+            "pair": 2,
+            "complete": true,
+            "batch": "single_batch_20260930_112748_7625671_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 30584,
+              "engine_started": "2026-09-30T03:27:49.1932166Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112748_7625671\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112748_7625671_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112759_873763\\scene_report.json",
+              "scene_report_sha256": "741722c0f532dbfbc477abeeb4fd8a33667c65b6577fb151c08b65e5f10f55e4"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "PASS"
+            },
+            "task_success": {
+              "coordinate": false,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": -2.70299999999952,
+              "approach_path_m": -0.29285802401963235
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      },
+      {
+        "source": {
+          "path": "logs/single_batch_20260930_113218_8494063_session_1/batch_report.json",
+          "sha256": "efb1afc620c7eab4c5685aac3c147823676d63fa5ababa3187636ee0dc1517fd"
+        },
+        "status": "PASS",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 39248,
+          "engine_started": "2026-09-30T03:32:19.2855732Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_113218_8494063\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_113218_8494063_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_113229_884125\\scene_report.json",
+          "scene_report_sha256": "38876145dd7fe02da867592088e25b92bd9d42fecf853b50c798e9afdc35e384"
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "complete": true,
+            "batch": "single_batch_20260930_113218_8494063_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 39248,
+              "engine_started": "2026-09-30T03:32:19.2855732Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_113218_8494063\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_113218_8494063_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_113229_884125\\scene_report.json",
+              "scene_report_sha256": "38876145dd7fe02da867592088e25b92bd9d42fecf853b50c798e9afdc35e384"
+            },
+            "statuses": {
+              "coordinate": "PASS",
+              "visual": "PASS"
+            },
+            "task_success": {
+              "coordinate": false,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 14.34400000000096,
+              "approach_path_m": 0.725069350742215
+            }
+          },
+          {
+            "pair": 2,
+            "complete": true,
+            "batch": "single_batch_20260930_113218_8494063_session_1",
+            "session": {
+              "session_index": 1,
+              "status": "RUNNING_BATCH",
+              "engine_process_id": 39248,
+              "engine_started": "2026-09-30T03:32:19.2855732Z",
+              "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_113218_8494063\\session_1_unreal.log",
+              "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_113218_8494063_session_1",
+              "scene_report": "D:\\forAirsim\\logs\\scene_20260930_113229_884125\\scene_report.json",
+              "scene_report_sha256": "38876145dd7fe02da867592088e25b92bd9d42fecf853b50c798e9afdc35e384"
+            },
+            "statuses": {
+              "visual": "PASS",
+              "coordinate": "PASS"
+            },
+            "task_success": {
+              "coordinate": false,
+              "visual": true
+            },
+            "visual_minus_coordinate": {
+              "approach_duration_s": 16.60899999999856,
+              "approach_path_m": 0.666290547456887
+            }
+          }
+        ],
+        "run_count": 4,
+        "started_run_count": 4,
+        "unfinished_started_count": 0,
+        "failed_run_count": 0
+      }
+    ],
+    "completed_pair_count": 17,
+    "failed_batch_count": 2,
+    "nonterminal_batch_count": 1,
+    "completed_pairs": [
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260925_175414_581919",
+        "session": null,
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 11.467999999998938,
+          "approach_path_m": -0.43467401817280393
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_095742_1368008_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 40052,
+          "engine_started": "2026-09-30T01:57:42.7020656Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_095758_744827\\scene_report.json",
+          "scene_report_sha256": "ab6172dc8de0446bec6e879f41f90b4ea356aed4d9192ea0eda1cf69dd6f20c2"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 9.875,
+          "approach_path_m": -0.34178127801599967
+        }
+      },
+      {
+        "pair": 2,
+        "complete": true,
+        "batch": "single_batch_20260930_095742_1368008_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 40052,
+          "engine_started": "2026-09-30T01:57:42.7020656Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_095758_744827\\scene_report.json",
+          "scene_report_sha256": "ab6172dc8de0446bec6e879f41f90b4ea356aed4d9192ea0eda1cf69dd6f20c2"
+        },
+        "statuses": {
+          "visual": "PASS",
+          "coordinate": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 10.67199999999957,
+          "approach_path_m": -0.47392767355914356
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_095742_1368008_session_2",
+        "session": {
+          "session_index": 2,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 22388,
+          "engine_started": "2026-09-30T02:02:24.2892972Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_095742_1368008\\session_2_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_095742_1368008_session_2",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_100237_764996\\scene_report.json",
+          "scene_report_sha256": "57c591907595bd206d5e3a89b55014920b209b59efe52f0b7da4e6fc1a464936"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 10.439000000000306,
+          "approach_path_m": -0.3510280330802822
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_101500_1699329_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 27252,
+          "engine_started": "2026-09-30T02:15:00.7229316Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_101500_1699329\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_101500_1699329_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_101511_569886\\scene_report.json",
+          "scene_report_sha256": "2853f318d0887b420d4fba829ae55427f6463fe2291ccc1d9bff2751e9de363f"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 9.812999999999192,
+          "approach_path_m": 0.196583768180991
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_104530_5529764_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 6140,
+          "engine_started": "2026-09-30T02:45:31.2252276Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_104544_802023\\scene_report.json",
+          "scene_report_sha256": "9094866d44ce9faaaf8b1803535a44d872b4341e382c1a4c93d22035536343c2"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 7.71900000000096,
+          "approach_path_m": 0.15540204757653187
+        }
+      },
+      {
+        "pair": 2,
+        "complete": true,
+        "batch": "single_batch_20260930_104530_5529764_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 6140,
+          "engine_started": "2026-09-30T02:45:31.2252276Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_104544_802023\\scene_report.json",
+          "scene_report_sha256": "9094866d44ce9faaaf8b1803535a44d872b4341e382c1a4c93d22035536343c2"
+        },
+        "statuses": {
+          "visual": "PASS",
+          "coordinate": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 7.687999999998283,
+          "approach_path_m": 0.04660511339409057
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_104530_5529764_session_2",
+        "session": {
+          "session_index": 2,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 35788,
+          "engine_started": "2026-09-30T02:50:20.9663242Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_2_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_2",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105031_469010\\scene_report.json",
+          "scene_report_sha256": "fdccfdbb88ad32e736d93e4bb8a26f56115ac0b10e2c512c470e95f9fc7b3dab"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 8.218000000000757,
+          "approach_path_m": 0.15175137834366415
+        }
+      },
+      {
+        "pair": 2,
+        "complete": true,
+        "batch": "single_batch_20260930_104530_5529764_session_2",
+        "session": {
+          "session_index": 2,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 35788,
+          "engine_started": "2026-09-30T02:50:20.9663242Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_2_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_2",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105031_469010\\scene_report.json",
+          "scene_report_sha256": "fdccfdbb88ad32e736d93e4bb8a26f56115ac0b10e2c512c470e95f9fc7b3dab"
+        },
+        "statuses": {
+          "visual": "PASS",
+          "coordinate": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 7.82799999999952,
+          "approach_path_m": 0.046233162169823094
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_104530_5529764_session_3",
+        "session": {
+          "session_index": 3,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 20700,
+          "engine_started": "2026-09-30T02:55:08.9129046Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_3_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_3",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105519_472279\\scene_report.json",
+          "scene_report_sha256": "d5088d8ea710b16973c27684dd6b0139a579c11dd858acbfc75d54ca024af018"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 7.735000000000582,
+          "approach_path_m": 0.1568907425661752
+        }
+      },
+      {
+        "pair": 2,
+        "complete": true,
+        "batch": "single_batch_20260930_104530_5529764_session_3",
+        "session": {
+          "session_index": 3,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 20700,
+          "engine_started": "2026-09-30T02:55:08.9129046Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_104530_5529764\\session_3_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_104530_5529764_session_3",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_105519_472279\\scene_report.json",
+          "scene_report_sha256": "d5088d8ea710b16973c27684dd6b0139a579c11dd858acbfc75d54ca024af018"
+        },
+        "statuses": {
+          "visual": "PASS",
+          "coordinate": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 8.21900000000096,
+          "approach_path_m": 0.04193841067145554
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_112257_8235726_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 33460,
+          "engine_started": "2026-09-30T03:22:58.3148877Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112257_8235726\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112257_8235726_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112308_838859\\scene_report.json",
+          "scene_report_sha256": "0155aab578a0b87db929903c306613bbf4a45985ff38132e7da06d84d1f5daa9"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 8.623999999999796,
+          "approach_path_m": 0.15157780120768916
+        }
+      },
+      {
+        "pair": 2,
+        "complete": true,
+        "batch": "single_batch_20260930_112257_8235726_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 33460,
+          "engine_started": "2026-09-30T03:22:58.3148877Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112257_8235726\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112257_8235726_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112308_838859\\scene_report.json",
+          "scene_report_sha256": "0155aab578a0b87db929903c306613bbf4a45985ff38132e7da06d84d1f5daa9"
+        },
+        "statuses": {
+          "visual": "PASS",
+          "coordinate": "PASS"
+        },
+        "task_success": {
+          "coordinate": true,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 7.734000000000378,
+          "approach_path_m": 0.0370847863205388
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_112748_7625671_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 30584,
+          "engine_started": "2026-09-30T03:27:49.1932166Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112748_7625671\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112748_7625671_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112759_873763\\scene_report.json",
+          "scene_report_sha256": "741722c0f532dbfbc477abeeb4fd8a33667c65b6577fb151c08b65e5f10f55e4"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": false,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": -1.1089999999985594,
+          "approach_path_m": -0.19246462638229667
+        }
+      },
+      {
+        "pair": 2,
+        "complete": true,
+        "batch": "single_batch_20260930_112748_7625671_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 30584,
+          "engine_started": "2026-09-30T03:27:49.1932166Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_112748_7625671\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_112748_7625671_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_112759_873763\\scene_report.json",
+          "scene_report_sha256": "741722c0f532dbfbc477abeeb4fd8a33667c65b6577fb151c08b65e5f10f55e4"
+        },
+        "statuses": {
+          "visual": "PASS",
+          "coordinate": "PASS"
+        },
+        "task_success": {
+          "coordinate": false,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": -2.70299999999952,
+          "approach_path_m": -0.29285802401963235
+        }
+      },
+      {
+        "pair": 1,
+        "complete": true,
+        "batch": "single_batch_20260930_113218_8494063_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 39248,
+          "engine_started": "2026-09-30T03:32:19.2855732Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_113218_8494063\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_113218_8494063_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_113229_884125\\scene_report.json",
+          "scene_report_sha256": "38876145dd7fe02da867592088e25b92bd9d42fecf853b50c798e9afdc35e384"
+        },
+        "statuses": {
+          "coordinate": "PASS",
+          "visual": "PASS"
+        },
+        "task_success": {
+          "coordinate": false,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 14.34400000000096,
+          "approach_path_m": 0.725069350742215
+        }
+      },
+      {
+        "pair": 2,
+        "complete": true,
+        "batch": "single_batch_20260930_113218_8494063_session_1",
+        "session": {
+          "session_index": 1,
+          "status": "RUNNING_BATCH",
+          "engine_process_id": 39248,
+          "engine_started": "2026-09-30T03:32:19.2855732Z",
+          "runtime_log": "D:\\forAirsim\\logs\\phase1_pilot_20260930_113218_8494063\\session_1_unreal.log",
+          "batch_path": "D:\\forAirsim\\logs\\single_batch_20260930_113218_8494063_session_1",
+          "scene_report": "D:\\forAirsim\\logs\\scene_20260930_113229_884125\\scene_report.json",
+          "scene_report_sha256": "38876145dd7fe02da867592088e25b92bd9d42fecf853b50c798e9afdc35e384"
+        },
+        "statuses": {
+          "visual": "PASS",
+          "coordinate": "PASS"
+        },
+        "task_success": {
+          "coordinate": false,
+          "visual": true
+        },
+        "visual_minus_coordinate": {
+          "approach_duration_s": 16.60899999999856,
+          "approach_path_m": 0.666290547456887
+        }
+      }
+    ],
+    "unit": "completed coordinate/visual flight pair; group by recorded Unreal session and controller version"
+  },
+  "maritime": {
+    "source": {
+      "path": "logs/maritime_single_20260925_205856_936729/report.json",
+      "sha256": "13c6c54d5a5646fb6243b0de9f7ac2029bb96aeae53db797e31c985fa6bc7379"
+    },
+    "status": "PASS",
+    "session_count": 1,
+    "frame_count": 30,
+    "conditions": [
+      {
+        "profile": "baseline",
+        "frame_count": 5,
+        "associations": {
+          "TARGET": 5
+        }
+      },
+      {
+        "profile": "target_shift",
+        "frame_count": 5,
+        "associations": {
+          "TARGET": 5
+        }
+      },
+      {
+        "profile": "similar_red",
+        "frame_count": 5,
+        "associations": {
+          "OTHER_INSTANCE": 5
+        }
+      },
+      {
+        "profile": "target_occluded",
+        "frame_count": 5,
+        "associations": {
+          "NO_CANDIDATE": 5
+        }
+      },
+      {
+        "profile": "low_sun",
+        "frame_count": 5,
+        "associations": {
+          "TARGET": 5
+        }
+      },
+      {
+        "profile": "raised_waves",
+        "frame_count": 5,
+        "associations": {
+          "TARGET": 5
+        }
+      }
+    ],
+    "unit": "one hover capture session; frames within it are correlated"
+  },
+  "layout": {
+    "manifest": {
+      "path": "logs/maritime_layout_collection_20260926/collection_manifest.json",
+      "sha256": "1bac03ec56d01984117a036d4395809456b240e0deb7972dc1a4eec89c61ec99"
+    },
+    "review_queue": {
+      "path": "logs/maritime_layout_collection_20260926/review_queue.csv",
+      "sha256": "713fde35b8f28152346bf05e333aa5ea1b6e54019cbf2631866685ccf5643986"
+    },
+    "session_count": 3,
+    "frame_count": 36,
+    "review_status": {
+      "AI_REVIEWED": 36
+    },
+    "human_verified_count": 0,
+    "unit": "Unreal process/capture session; no random frame split"
+  },
+  "vlx": {
+    "source": {
+      "path": "logs/vlx_api_full_test.json",
+      "sha256": "3df20a9e605120c4a60a06ad987eb58812d67aa3b27f1e299d50bcaf087a259b"
+    },
+    "status": "PASS",
+    "frame_count": 30,
+    "by_profile": {
+      "baseline": {
+        "frames": 5,
+        "target_associations": 5
+      },
+      "low_sun": {
+        "frames": 5,
+        "target_associations": 5
+      },
+      "raised_waves": {
+        "frames": 5,
+        "target_associations": 5
+      },
+      "similar_red": {
+        "frames": 5,
+        "target_associations": 5
+      },
+      "target_occluded": {
+        "frames": 5,
+        "target_associations": 5
+      },
+      "target_shift": {
+        "frames": 5,
+        "target_associations": 5
+      }
+    },
+    "request_mode": "NOT_RECORDED",
+    "independent_trial_count": 1,
+    "interpretation": "Saved cloud replay; candidate-box transport is not attested in this report"
+  }
+}

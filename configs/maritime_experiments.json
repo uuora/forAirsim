@@ -7,6 +7,18 @@
     "baseline": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false},
     "low_sun": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -8, "sun_yaw_deg": 35, "occlusion": false},
     "raised_waves": {"wave_material": "M_OceanRaised", "wave_amplitude_bound_m": 0.645, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false},
-    "occlusion": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": true}
+    "occlusion": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": true},
+    "target_shift": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false,
+      "balloon_positions_relative_hull_m": [[4, 7.0, -1.5], [11, -10, -1.7], [-11, 6.5, -1.45]]},
+    "similar_red": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false,
+      "balloon_positions_relative_hull_m": [[4, 9.5, -1.5], [11, -10, -1.7], [4, 6.8, -1.45]]},
+    "similar_red_left": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false,
+      "balloon_positions_relative_hull_m": [[4, 6.8, -1.5], [11, -10, -1.7], [4, 9.5, -1.45]]},
+    "similar_red_wide_right": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false,
+      "balloon_positions_relative_hull_m": [[4, 10.0, -1.5], [11, -10, -1.7], [4, 5.5, -1.45]]},
+    "similar_red_wide_left": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false,
+      "balloon_positions_relative_hull_m": [[4, 5.5, -1.5], [11, -10, -1.7], [4, 10.0, -1.45]]},
+    "target_occluded": {"wave_material": "M_AnimatedOcean", "wave_amplitude_bound_m": 0.43, "sun_pitch_deg": -28, "sun_yaw_deg": -35, "occlusion": false,
+      "balloon_positions_relative_hull_m": [[8, 0, -1.5], [11, -10, -1.7], [-11, 6.5, -1.45]]}
   }
 }

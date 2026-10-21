@@ -1,0 +1,1117 @@
+[body 1 paragraph]
+
+
+
+[body 2 paragraph]
+
+哈尔滨工程大学
+
+[body 3 paragraph]
+
+
+
+[body 4 paragraph]
+
+攻读硕士学位研究生论文
+
+[body 5 paragraph]
+
+
+
+[body 6 paragraph]
+
+开  题  报  告
+
+[body 7 paragraph]
+
+
+
+[body 8 paragraph]
+
+
+
+[body 9 paragraph]
+
+任务驱动的多无人机协同规划智能体方法研究
+
+[body 10 paragraph]
+
+
+
+[body 11 paragraph]
+
+专    业▁▁▁▁▁▁▁▁▁
+
+[body 12 paragraph]
+
+
+
+[body 13 paragraph]
+
+研究方向▁▁▁▁▁▁▁▁▁
+
+[body 14 paragraph]
+
+
+
+[body 15 paragraph]
+
+姓    名▁▁▁▁▁▁▁▁▁
+
+[body 16 paragraph]
+
+
+
+[body 17 paragraph]
+
+
+
+[body 18 paragraph]
+
+指导教师审查意见：
+
+[body 19 paragraph]
+
+
+
+[body 20 paragraph]
+
+
+
+[body 21 paragraph]
+
+
+
+[body 22 paragraph]
+
+                 审查合格，同意存档。
+
+[body 23 paragraph]
+
+
+
+[body 24 paragraph]
+
+                                             
+
+[body 25 paragraph]
+
+
+
+[body 26 paragraph]
+
+
+
+[body 27 paragraph]
+
+
+
+[body 28 paragraph]
+
+                                       指导教师签字：
+
+[body 29 paragraph]
+
+年   月   日
+
+[body 30 paragraph]
+
+一、选题依据
+
+[body 31 paragraph]
+
+1.1课题研究的目的、意义
+
+[body 32 paragraph]
+
+1.1.1研究背景与问题
+
+[body 33 paragraph]
+
+无人机(Unmanned Aerial Vehicle, UAV)是一种通过搭载飞行控制系统(Flight Control System, FCS)，实现机上无人驾驶飞行器。近年来，随着信息化、自动化、智能化技术水平的高速发展，UAV的使用成为军民领域的研究热点，在地理测绘、森林防火、电力巡检、灾情评估与搜索营救、区域监视、周边警戒、搜索引导、武力打击、通信中继与电子干扰等场景广泛应用，受到研究学者的广泛关注，发展出了许多新概念、新框架、新方法，取得了丰硕的成果。
+
+[body 34 paragraph]
+
+在巡检、搜救、安防与复杂环境等感知任务场景中，被观察的目标往往不是静止且无遮挡的。一方面，密集分布的同类目标会造成实例混淆，导致目标错跟、漏跟。另一方面，树木、建筑与地形会导致遮挡视线，导致到这目标观测条件恶化，感知不确定性激增。因此仅通过跟踪、预测等感知层手段改善感知效能已达瓶颈，需要在控制层快速调整无人机位置提升目标跟踪质量。此外，单机场景下，无人机需要同时承担目标确认、环境感知、轨迹规划与安全控制，当目标间的相互运动与周边环境的快速变化时，容易在有限视场、机载算力与反应时间之间产生冲突[1,2]，需要进一步开展任务驱动的多机协同方法研究。
+
+[body 35 paragraph]
+
+感知方面，无人机视觉目标跟踪已形成以卡尔曼滤波、多假设跟踪、深度学习为代表的感知方法体系，并在遮挡、快速运动、形变、背景干扰与尺度变化等属性下建立了评测口径[1,2]。规划方面，可见性感知轨迹优化把相对距离、观测角度与遮挡转成轨迹代价，使对目标连续检测和跟踪结果与平台控制约束共同影响下一个动作[3,4]。在上述工作基础上，本课题进一步提出三个问题。一是综合考虑目标之间、目标与环境之间在几何关系，如何通过控制无人机改善感知能力。感知任务中，多机对单目标容易受到邻近目标和周边环境遮挡，仅通过感知层手段已无法显著提升感知质量，需要理解目标局部空间几何关系，通过控制无人机的位置、姿态与运动轨迹，优化对重点关注目标观测角度、距离和遮挡关系，改善感知条件。二是如何评估单架或多架无人机与目标是否处于良好的感知条件[5,6]。现有状态估计方法主要关注目标状态的估计精度，较少考虑目标未来的感知性能和可观测条件；现有跟踪方法主要关注目标关联正确率，对控制和规划带来的感知增益考虑不足。因此，需要兼顾当前观测质量、未来可观测性和无人机感知能力约束，建立综合感知能力评价体系[7]。三是如何探索智能体的策略涌现机制，通过任务经验积累、闭环反馈、多机协同、大小模型快慢协同等方式，集智涌现新的协同规划策略，提高任务成功率和执行效率。
+
+[body 36 paragraph]
+
+为解决上述三个问题，本课题拟围绕指定重要目标的持续感知、定位与跟踪，开展感知任务驱动的单机单目标轨迹优化方法研究、感知任务驱动的双机单目标轨迹优化方法研究和面向快速碰撞任务的多智能体协同规划方法研究。基于结构化观测状态与自适应感知关系评价，将观测质量与安全裕度纳入轨迹优化，改善目标观测质量与无人机规划的闭环稳定性；在此基础上引入追踪机与评估机的动态任务规划，通过事件触发交接与滞回机制，提高角色交接的可靠性与时效，改善多机对重点单目标的感知质量；进一步探索面向快速碰撞任务的多机协同探索策略涌现机制，以任务经验积累与闭环反馈优化规划协同策略，提高任务成功率和执行效率，为低空复杂环境下的重点目标持续高质量感知提供有益技术参考。
+
+[body 37 paragraph]
+
+本选题受国家自然科学基金重大项目“交互式智能体博弈泛化与决策迁移技术”资助，总经费193.4万元，基金号：62293544。
+
+[body 38 paragraph]
+
+1.1.2理论意义
+
+[body 39 paragraph]
+
+本课题研究目标之间、目标与环境之间的时空关系在目标身份判别中的作用，建立兼顾当前观测质量与未来可观测性的感知关系评价方法。在此基础上，分析感知评价对单机轨迹规划、双机角色交接和协同策略更新的影响，为多无人机持续目标跟踪中的感知与规划联合研究提供参考。
+
+[body 40 paragraph]
+
+1.1.3现实意义
+
+[body 41 paragraph]
+
+课题拟形成可重复生成目标运动、遮挡、相似干扰与通信扰动的双机测试流程，为低空重点目标持续观察提供可比较的协同方法。研究结果可用于分析双机分工对身份保持、失锁恢复和闭环响应的影响，并为后续原型验证提供算法与数据基础。
+
+[body 42 paragraph]
+
+1.2国内外研究进展
+
+[body 43 paragraph]
+
+1.2.1单机目标持续感知与可见性规划
+
+[body 44 paragraph]
+
+在单机连续感知方向，时序上下文被用于增强连续帧之间的目标匹配[8]，外观集合或多模板在线更新被用于缓解目标外观变化与邻近干扰下的模板退化[9]；RGB与深度融合提供了多模态感知路径，并关注机载算力受限条件下的资源效率[10]。这些工作主要解决“图像序列中目标在哪里”，其评测口径是跟踪精度、成功率与速度，尚未直接回答“下一时刻应当从哪里观察”。
+
+[body 45 paragraph]
+
+在规划与控制方向，可见性感知轨迹优化把距离、观测角度与遮挡转成可见性代价[3]；SVPTO进一步把目标遮挡与障碍碰撞同时纳入感知型轨迹优化，通过主动调整相对距离与相对角度降低遮挡概率[4]；Fast-Tracker 2.0引入主动视觉与目标位置回归，给出遮挡感知的跟踪轨迹生成机制，同时指出目标观察与环境观察会竞争有限的机载视场[11]；QP Chaser与BPMP-Tracker分别以多项式轨迹、二次规划与Bernstein多项式运动基元给出候选轨迹“采样—约束检查—选择”的实现路径[12,13]。RAPTOR与语义感知主动规划从重规划与语义信息价值的角度说明，环境中哪些区域有利于稳定感知会影响导航与控制[14,15]。
+
+[body 46 paragraph]
+
+在高层任务理解与主动观察方向，AerialVLN把视觉语言导航从地面智能体扩展到空中场景，构建了面向空中环境的基准与仿真平台[16]；FlightGPT在无人机视觉语言导航中引入链式推理，结合监督微调与强化学习提升决策的可解释性与泛化能力[17]；TypeFly面向低时延任务规划，探索了语言模型驱动无人机任务分解与执行控制的可行路径[18]；GenNBV把静态重建中的下一最佳视角问题扩展为更一般的自由空间策略学习[19]。无人机与语言模型的结合已被综述为一条通向低空移动智能的路径[20]。
+
+[body 47 paragraph]
+
+现有单机研究已将目标可见性与飞行安全纳入轨迹优化[3,4]，但对相似目标干扰和遮挡条件下的身份保持关注不足。目标处于可见范围内，并不意味着跟踪结果仍对应指定目标。视觉语言导航主要研究无人机按指令完成导航任务[16,17]，其评价方式难以直接用于目标的持续观测。因此，本课题在单机规划中同时考虑目标身份、观测质量与飞行安全，并将视觉语言方法用于任务描述和观测评价。
+
+[body 48 paragraph]
+
+  1.2.2双机协同感知、定位与动态分工 
+
+[body 49 paragraph]
+
+在跨机视觉互补方向，MDOT数据集与ASNet表明，不同无人机从不同视角获得的模板可进行共享与融合，并提出结合时间因素的评价指标[5]；TransMDOT进一步利用状态较好的无人机帮助失锁无人机重校准，给出跨机目标信息交互与系统级评估的实现[6]。多机多目标遮挡基准说明，跨视角身份关联、遮挡标注与匹配质量是协同感知的基础[21]；基于稀疏点匹配的协同式未知目标跟踪则为“少训练样本、目标类别不明显”的协同识别提供了中文研究线索[22]。这些工作以视觉信息融合为主，其输出是跟踪框或掩膜，尚不能直接回答“双机的飞行角色应如何调整”。
+
+[body 50 paragraph]
+
+在协同规划与定位方向，多机协同可见性控制以可见概率为指标，通过集中式模型预测控制同时考虑跟踪、避碰、盲区规避与可见性最大化，并得到最大化相位差的飞行策略[7]；观测约束下的多机器人传感器融合把局部或完全遮挡与三维目标估计联系起来[23]；仅方位协同定位与机动目标估计分别从观测几何与估计器角度提升跟踪质量[24,25]；双机纯方位定位使用多级箱粒子滤波，与“两机—单机动目标”的规模最为接近[26]。风险感知跟踪、抗感知与通信失效的主动跟踪、搜索与监控并行以及基于最新时戳共识决策，提供了动态任务协调、失效处理与任务再分配的参考[27–29]。国内的遮挡目标检测与协同跟踪已把遮挡检测、多角度目标定位与多无人机轨迹规划连为闭环，并报告了仿真与飞行验证[30]。多无人机任务规划研究则把任务分配、路径规划与协同任务规划区分为相互耦合的三个子问题[31]。
+
+[body 51 paragraph]
+
+总体来看，上述研究多采用三机及以上或多目标设置，部分方法以传感器状态而非目标实例的身份置信作为决策输入。其动态切换主要涉及任务分配层面的成员调整，较少研究追踪机与评估机之间的飞行角色交接。因此，本研究需重点说明双机角色交接机制及其适用条件，并在计入观测几何、状态时效、通信与切换开销的实验中检验双机协同的实际收益。
+
+[body 52 paragraph]
+
+  1.2.3Agent协同优化、评价与安全约束 
+
+[body 53 paragraph]
+
+在协同学习方向，多机信息路径规划采用反事实基线缓解信用分配问题[32]；面向多无人机目标跟踪的两阶段深度强化学习以人工势场与比例—积分—微分控制器组合生成专家经验数据，用于改善探索与学习速度[33]；基于空间信息熵的协同跟踪奖励设计说明任务质量不应只看距离[34]；基于双层注意力的连续轨迹设计与计算卸载把部分可观测性、时延约束、避碰条件与能量收集联合考虑，并采用启发式嵌入的多智能体近端策略优化算法[35]。协作多智能体强化学习中，多智能体近端策略优化提供了简洁且广泛使用的对照基线[36]；数字孪生驱动的训练框架、分散式端到端四旋翼控制与障碍环境下的课程学习提示，训练环境、通信约束、团队规模与未见场景会显著影响策略迁移[37–39]。多智能体通信综述则把完整通信过程整理为可分析的设计维度[40]。
+
+[body 54 paragraph]
+
+奖励设计与安全性是本方向的关键边界。Eureka说明编码语言模型可以在进化搜索与训练反馈的循环中生成并迭代奖励程序[41]。该机制与本课题“Agent探索不同优化方向—按评价得分持续调优”的设想直接对应，但其边界同样明确：奖励代码生成不等于在线规划，更不等于直接更新视觉模型；被优化奖励自身的分数不能作为最终评价，必须预先固定独立于生成奖励的任务指标与测试场景。安全性方面，分散式神经屏障证书通过联合学习控制策略与控制屏障函数，使多智能体在避障与机间安全约束下达到目标[42]；Safe-Control-Gym把任务性能、数据效率、安全约束与扰动鲁棒性设计为可分项查询的评测接口[43]。二者共同说明：评价加权总分不能自动替代安全条件，把安全边界、最小距离与控制饱和作为独立约束或安全过滤器，比仅在奖励中加入惩罚更可检验。
+
+[body 55 paragraph]
+
+总体来看，上述研究从协作学习、通信设计与训练环境三个层面推进了多机协同决策：反事实基线缓解了信用分配问题，集中训练分散执行与多智能体近端策略优化提供了可用的对照基线，通信过程与训练环境也被整理为可分析、可设计的维度。但在奖励与安全两个方面仍存在明显边界。其一，多数方法以任务成败、距离或空间信息熵等回报驱动学习，训练回报的提高并不必然带来持续观测与身份保持能力的改善，且被优化的奖励自身不能作为最终评价，必须另设独立于奖励生成的任务指标与测试场景。其二，安全通常作为奖励中的惩罚项处理，难以对逐时的避障与机间间隔提供可检验的保证；以控制屏障函数或安全过滤器独立实现，并把性能与安全分项评测，更便于检验。因此，本课题将协作学习策略与独立的安全约束、任务指标分开设计，并以固定人工奖励、模仿预训练与奖励搜索分阶段对照，检验协同策略能否在安全前提下提高任务成功率与执行效率。
+
+[body 56 paragraph]
+
+1.2.4现有研究对本课题的启示
+
+[body 57 paragraph]
+
+
+
+[body 58 paragraph]
+
+综合前述国内外研究进展，现有单机感知规划、双机协同感知、多智能体协同优化领域的成果，为本课题提供了可复用的技术基础与方法参考，同时也暴露出当前研究的共性局限，明确了本课题的核心研究方向。
+
+[body 59 paragraph]
+
+已有研究形成了多类可直接借鉴的方法与设计范式。单机方向上，可见性感知轨迹优化研究[3,4]建立了感知代价计算-约束条件校验-最优轨迹选择的基本求解框架，后续的多项式轨迹、Bernstein多项式运动基元等方法[12,13]进一步完善了候选轨迹的生成路径；时序跟踪器结合低频视觉语言复核的思路[8,16,17]，也为解决相似目标干扰下的目标身份保持问题提供了可行的技术路线。双机方向上，跨视角目标模板共享与融合的相关研究[5,6,21]验证了多机位互补观测对提升遮挡场景下跟踪鲁棒性的实际效果；协同可见性控制、观测几何与目标估计精度的量化研究[7,24–26]，为量化无人机与目标的感知关系提供了理论支撑；动态任务协调、通信失效处理等机制设计[27–30]，也为双机角色交互的协议设计提供了参考依据。多智能体方向上，MAPPO等成熟的协作强化学习算法[36]、反事实基线与课程学习等训练方法[32,37]，为协同策略优化提供了完整的算法工具链；同时现有研究也形成了两点关键共识：一是被优化的奖励本身不能作为最终评价标准，必须预先设置独立于奖励生成的任务指标与测试场景[41]；二是安全约束应作为独立的安全过滤器而非奖励中的惩罚项，才能提供可检验的安全保证[42,43]，这些都是本课题方法设计中需要遵循的基本原则。
+
+[body 60 paragraph]
+
+与此同时，现有研究仍存在明显的交叉领域空白，也是本课题的核心切入点。首先，单机层面的可见性规划普遍仅将目标可见性与飞行安全纳入优化目标，并未把目标身份置信度纳入轨迹优化闭环，目标处于可视范围并不等同于跟踪的是指定目标，相似目标干扰下的身份保持问题尚未与轨迹控制形成联动。其次，双机协同研究多集中在感知层的信息融合，或是任务分配层面的成员调整，针对追踪机与评估机两种飞行角色之间的动态交接机制、触发条件与通信协议的针对性研究较少，双机飞行角色如何随观测质量动态调整还缺乏系统的方法支撑。最后，现有多智能体协同学习方法多面向通用任务场景设计，与持续目标感知的任务特性结合不够紧密，且安全约束多以惩罚项形式嵌入奖励函数，难以提供可靠的硬安全边界，学习策略的实际任务收益也缺乏独立的验证体系。基于上述研究基础与现存缺口，本课题依次开展单机单目标轨迹优化、双机单目标角色交接、基于Agent探索的协同规划优化研究，构建覆盖感知评价到策略优化全链路的多无人机协同规划方法。
+
+[body 61 paragraph]
+
+二、研究目标、研究内容和拟解决的关键问题
+
+[body 62 paragraph]
+
+2.1研究目标
+
+[body 63 paragraph]
+
+针对遮挡和相似目标干扰下目标身份难以持续确认、单机与双机的感知关系缺乏综合评价、协同策略难以随任务经验改进等问题，本课题拟开展单机单目标轨迹优化智能体、双机单目标轨迹优化和基于Agent探索的双机协同规划优化研究。通过目标与环境的时空关系分析及单机轨迹调整，提高目标身份保持能力；通过感知关系评价、互补观测和角色交接，改善持续观测与失锁恢复效果；通过任务经验积累和协同策略训练，提高任务成功率与执行效率，形成面向指定目标持续感知、定位和跟踪的多无人机协同规划方法。
+
+[body 64 paragraph]
+
+2.2研究内容
+
+[body 66 paragraph]
+
+针对遮挡与相似目标干扰下目标身份难以持续确认、单机与双机的感知关系缺乏综合评价、协同策略难以随任务经验改进等问题，本课题拟开展感知任务驱动的单机单目标轨迹优化方法研究、感知任务驱动的双机单目标轨迹优化方法研究和面向快速碰撞任务的多智能体协同规划方法研究。通过目标与环境时空关系的分析与观测位置调整，提高指定目标的身份保持能力；通过感知关系评价、互补观测与角色交接，改善持续观测与失锁恢复效果；通过任务经验积累与协同策略优化，在安全约束下提高任务成功率与执行效率，形成面向指定目标持续感知、定位与跟踪的多无人机协同规划方法。
+
+[body 67 paragraph]
+
+ 2.2.1感知任务驱动的单机单目标轨迹优化方法研究 
+
+[body 68 paragraph]
+
+针对遮挡与相似目标干扰下指定目标身份难以持续确认、单机观测质量难以直接指导飞行的问题，研究感知任务驱动的单机单目标轨迹优化方法。方法先把目标身份置信、时序一致性、相对位置、视场可见性、遮挡风险与障碍风险统一为结构化观测状态，使观测质量与安全裕度能够进入轨迹代价；与之配套的评价体系按感知、规划、安全分组，可逐项消融，其结果用于规划而非事后统计。控制接口拟通过模型上下文协议（MCP）等工具协议对接飞控与仿真，划清模型可调用的工具与飞控承担的安全职责。此外自行拍摄气球目标建立数据集，用于训练和微调候选视觉模块，提升细粒度定位、实例区分与"目标不存在"拒识能力，最终形成单机"感知—评估—控制"闭环，提高对指定目标的持续观测能力。
+
+[body 69 paragraph]
+
+ 2.2.2感知任务驱动的双机单目标轨迹优化方法研究 
+
+[body 70 paragraph]
+
+针对单机视角受限、目标被遮挡后难以持续确认的问题，研究感知任务驱动的双机单目标轨迹优化方法。两机分设追踪机与评估机两种可切换角色：追踪机保持安全观测距离，评估机从另一视角确认目标身份并提供恢复观测。角色选择依据两机的身份置信、观测位置、可见性与遮挡风险，据此规划互补的观测轨迹。当追踪质量持续下降、另一机具备接管条件且安全约束满足时执行交接，并以阈值滞回和最短角色保持时间减少误切换。共享消息带源观测时间戳，通信延迟与丢包在仿真中显式建模。实验最终检验双机协同对持续观测与失锁恢复的作用，看身份保持率能否提高、重获目标的时间能否缩短。
+
+[body 71 paragraph]
+
+2.2.3面向快速碰撞任务的多智能体协同规划方法研究
+
+[body 72 paragraph]
+
+
+
+[body 73 paragraph]
+
+
+
+[body 74 paragraph]
+
+针对固定分工与预设规则难以适应目标运动、遮挡及通信条件变化的问题，研究面向快速碰撞任务的多智能体协同规划方法。方法记录多机的观测状态、规划动作、角色交接与任务结果，把这些记录积累成协同任务经验；再由身份保持、持续观测、任务耗时等指标构造评价与奖励信号，用于调整协同规划策略。安全约束不并入奖励，而以约束或安全过滤的形式独立实现，以免奖励设计的偏差掩盖任务表现的真实变化。实验在 AirSim 中生成不同的目标运动与环境条件，开展离线训练与对照实验，保存训练过程中的状态、轨迹及评价结果，检验策略调整能否在满足安全约束的前提下提高任务成功率和执行效率。
+
+[body 75 paragraph]
+
+2.3实施方案
+
+[body 76 paragraph]
+
+2.3.1总体技术架构
+
+[body 77 paragraph]
+
+系统整体由四层组成。任务层输入指定目标的描述与任务约束，输出可验证的目标标识与优先级，并把任务约束转成状态机允许的状态集合。感知评估层从图像、定位与环境信息中估计身份置信、可见性、遮挡／碰撞风险与运动预测误差，输出结构化观测状态与质量分数。协同决策层在单机情形下输出保持、接近、换视点或恢复搜索，双机情形下在此基础上输出请求协助、角色交接与任务重新分配。执行安全层对规划动作执行动力学、边界、机间距离与障碍约束检查，并进行安全过滤与限幅。策略执行后产生新观测与新评价，进入下一闭环周期。
+
+[body 78 paragraph]
+
+对接口设计，拟通过MCP等工具协议方式把感知查询、状态读取、动作下发、日志记录抽象为工具调用，使模型侧与飞控侧的职责边界显式化：飞控负责姿态稳定、动力限幅、地理围栏与紧急处置；工具协议只负责信息交换与指令传递，不承担飞行安全保证。
+
+[body 79 paragraph]
+
+三个层次采用同一任务实例标识和时间基准。单机层输出目标状态、质量分项及候选轨迹；双机层增加角色、共享消息与交接事件；学习层使用相同执行接口替换高层决策模块。每个模块记录输入时间戳、完成时间和失败原因，使感知延迟、通信等待与规划耗时能够分开测量。
+
+[body 80 paragraph]
+
+2.3.2单机感知评估与轨迹优化方法
+
+[body 81 paragraph]
+
+单机闭环依次完成目标定位、身份校验、观测质量估计和候选轨迹选择。设质量分项经验证集标定后均映射至0至1区间，观测质量定义为式。该分数用于规划排序，不能替代独立的身份与安全判定。
+
+[body 82 paragraph]
+
+  
+
+[body 83 paragraph]
+
+式中，c为经验证集校准的身份置信，v为视场覆盖与居中质量，s为尺度适宜度，o为遮挡比例，e为归一化运动预测误差，权重非负且和为1。尺度适宜度按目标框面积与期望面积区间计算；预测误差用位置预测残差除以预设场景尺度并截断。缺失观测单独标记，不将缺失值当作高置信观测。
+
+[body 84 paragraph]
+
+为区分成像居中与实际可见，视场质量由目标框留在图像内的面积比例和归一化中心偏移共同构成，见式。
+
+[body 85 paragraph]
+
+  
+
+[body 86 paragraph]
+
+式中，B为预测目标框，I为图像区域，A表示面积，u为归一化图像坐标；σ为中心偏移尺度。该量度量视场覆盖与居中程度，遮挡另由式描述。
+
+[body 87 paragraph]
+
+遮挡比例按目标投影表面中不可见部分所占比例计算：
+
+[body 88 paragraph]
+
+  
+
+[body 89 paragraph]
+
+式中，为目标完整投影面积，为其中无遮挡的面积。仿真可用实例分割与深度真值计算离线标签；在线仅使用分割、深度或遮挡估计器的估计值，真值不进入执行策略。实测无法准确获得完整投影时，报告遮挡等级及估计误差，避免以视线穿过障碍的长度替代目标遮挡比例。
+
+[body 90 paragraph]
+
+感知前端拟采用“时序跟踪器＋低频视觉语言复核”的双速率结构。以TCTrack或同类公开跟踪器提供连续目标框[8]，以可部署的细粒度定位模型复核指定目标描述与当前实例的一致性。先比较冻结视觉前端与轻量微调两种设置，利用验证集校准置信度阈值，不直接将语言模型自报分数视为概率。
+
+[body 91 paragraph]
+
+训练数据由自采气球序列与仿真序列组成，公开跟踪数据用于检查基础跟踪能力，不替代本课题的角色交接数据。数据覆盖遮挡、相似实例、尺度变化与目标缺失，按场景和采集架次划分70%训练、15%验证、15%测试；具体比例可在采集前随场景数量调整，一经划分即固定。损失由目标框定位损失、身份分类损失和目标存在性损失构成，各分项权重通过验证集选择；困难负样本与正常样本分别记录召回率和误报率。
+
+[body 92 paragraph]
+
+在线三维状态由仿真传感器测量、深度或多视角估计获得。仿真真值仅用于监督和离线误差评价；RGB单目工况若无可靠尺度来源，须报告相对图像状态，并通过独立定位或双机测角提供尺度约束，不能由目标框直接假定得到精确三维距离。
+
+[body 93 paragraph]
+
+候选轨迹与约束求解，采用滚动时域规划：由目标运动预测和候选视点生成多项式轨迹，先检查动力学、视场与避碰条件，再在可行集合中选择代价最低轨迹，仅执行首段并随新观测更新，见式。 
+
+[body 94 paragraph]
+
+  
+
+[body 95 paragraph]
+
+其中总代价由四项组成：
+
+[body 96 paragraph]
+
+  
+
+[body 97 paragraph]
+
+式中，感知代价反映候选观测收益，平滑代价采用加加速度平方积分，控制代价用加速度和时间构成代理量，安全裕量代价鼓励远离约束边界。各项按验证集确定的固定尺度归一化；加速度代理量不等同于实际能耗。
+
+[body 98 paragraph]
+
+感知代价采用预测观测质量的离散积分：
+
+[body 99 paragraph]
+
+  
+
+[body 100 paragraph]
+
+轨迹平滑代价采用加加速度平方积分，以区别于控制努力：
+
+[body 101 paragraph]
+
+  
+
+[body 102 paragraph]
+
+控制代价采用加速度平方与时间的加权积分：
+
+[body 103 paragraph]
+
+  
+
+[body 104 paragraph]
+
+对已满足硬约束的轨迹，再以逆距离形式评价障碍安全裕量，该代价不能使违反约束的轨迹变为可行。
+
+[body 105 paragraph]
+
+  
+
+[body 106 paragraph]
+
+式中，为轨迹采样点到最近障碍的距离，为最小安全距离，为正则项。硬约束如式，并应在采样点之间采用插值加密或连续碰撞检测，避免漏检。
+
+[body 107 paragraph]
+
+  
+
+[body 108 paragraph]
+
+式中，速度与加速度以向量范数约束，为机间距离，为最小间隔。
+
+[body 109 paragraph]
+
+若可行集合为空，则进入已验证的制动、悬停或撤离动作，并记录规划失败。
+
+[body 110 paragraph]
+
+不能从不可行候选中强行选取最小代价动作。单机实施按接口贯通、前端校准、轨迹闭环和扰动测试四步推进。先以已知目标位置检查规划与控制接口，再替换为真实感知估计；每一步保留相同轨迹约束和场景，使感知误差对规划质量的影响可单独分析。规划周期由端到端时延测量确定，超时结果不得覆盖更新状态。
+
+[body 111 paragraph]
+
+
+
+[body 112 paragraph]
+
+
+
+[body 113 paragraph]
+
+
+
+[body 114 paragraph]
+
+
+
+[body 115 paragraph]
+
+
+
+[body 116 paragraph]
+
+
+
+[body 117 paragraph]
+
+
+
+[body 118 paragraph]
+
+
+
+[body 119 paragraph]
+
+
+
+[body 120 paragraph]
+
+
+
+[body 121 paragraph]
+
+
+
+[body 122 paragraph]
+
+
+
+[body 123 paragraph]
+
+
+
+[body 124 paragraph]
+
+
+
+[body 125 paragraph]
+
+
+
+[body 126 paragraph]
+
+ 2.3.3双机互补观测与事件触发交接方法 
+
+[body 127 paragraph]
+
+追设A为当前追踪机、B为评估机。A在目标远于式的期望区间时接近目标，进入区间后保持观测；距离达标本身不表示目标身份正确。B在满足避碰和通信条件的候选视点中选择与A遮挡情况互补的位置。固定角色、固定角度互补和可切换角色构成三级对照。多无人机单目标跟踪已有跨视角模板共享与在线融合结果[5]，但文献[5]不包含飞行角色交接，因此以下触发与通信协议均为本课题拟验证的设计。
+
+[body 128 paragraph]
+
+交接采用明确的事件逻辑：A的有效观测连续低于预先冻结的质量阈值，B对同一指定实例完成身份核验且当前视角有足够优势，双方已达到最短角色保持时间，B的接管轨迹可行且通信状态有效，才发出交接请求。恢复阈值高于触发阈值，以连续观测和最短保持时间抑制抖振。阈值、连续周期数及最短保持时间都在验证集上确定。B未识别到指定实例时，即使A失锁也不盲目接管。
+
+[body 129 paragraph]
+
+共享消息包含任务实例标识、源观测时间戳、状态及协方差、身份判断、角色版本和轨迹意图。追踪机在远于期望距离时执行接近，到达距离容差带后保持观测。以距离误差构造分段接近进度，见式；进入距离带只代表达到几何位置，仍须满足身份与观测质量要求。
+
+[body 130 paragraph]
+
+  
+
+[body 131 paragraph]
+
+式中，为期望观测距离，为容差，为归一化速度。远于距离带时，距离减小对应正进度；位于带内视为保持；过近时应增大距离。该定义避免将稳定跟随误判为“未接近”，也不把进度正值解释为身份正确。
+
+[body 132 paragraph]
+
+设A当前为追踪机、B为评估机，q为式的质量分数。交接事件采用式：A持续低质量、B具备质量优势、角色保持时间已满足且安全条件有效时，才发起请求。
+
+[body 133 paragraph]
+
+  
+
+[body 134 paragraph]
+
+其中，N为连续低质量周期数，为低质量阈值，为接管优势裕量，为式的通信与安全条件。恢复采用较高阈值并保留最短保持时间，见式。
+
+[body 135 paragraph]
+
+  
+
+[body 136 paragraph]
+
+式中高于，质量恢复需连续满足恢复条件。交接成功后重新计时，避免阈值附近频繁反转。B不具备可靠身份观测时，即使A失锁也不得盲目接管。
+
+[body 137 paragraph]
+
+交接还须满足安全前提：
+
+[body 138 paragraph]
+
+  
+
+[body 139 paragraph]
+
+式中，为B最近有效消息的信息年龄，为允许上限。消息携带任务实例标识、序列号、角色版本和确认状态；接收方拒绝过期版本。该条件区分消息新鲜度与往返时延，二者分别记录。
+
+[body 140 paragraph]
+
+双机共享摘要包含目标实例标识、观测时间戳、位置与协方差、身份置信、角色、轨迹意图和消息版本。接收方先检查身份及版本，再按消息年龄外推状态，并随时间增大不确定度；存在未建模相关性时采用保守融合，避免将共享来源重复计入而高估置信度。U2UData等数据可用于检查协同观测的数据组织形式[44]，本课题的交接标签仍由仿真与自采序列生成。
+
+[body 141 paragraph]
+
+交接协议包括请求、就绪确认和提交三个阶段。A发出带递增版本号的交接请求；B确认身份可靠、路径可行并返回就绪消息；A提交新角色版本，双方按约定生效时刻更新。超时或版本不一致则取消本次交接并保持原角色；任一方失去有效观测时进入保守搜索状态。通信中断时不把“立即切换”理解为无条件同时交换角色。
+
+[body 142 paragraph]
+
+评估机的轨迹并非固定悬停，而在可行视点中选择与追踪机遮挡相关性较低、身份辨别有利且通信可用的位置。先采用固定角度互补作为基线，再引入质量与信息年龄驱动的视点选择，比较其对接管准备时间、身份正确率和额外航程的影响。
+
+[body 143 paragraph]
+
+任务质量与闭环时效评价，身份保持率以应当跟踪目标的全部评价时刻为分母，未输出目标或关联错误均计为失败，避免只在成功输出帧上计算。见式，为指定目标身份，为系统输出身份。
+
+[body 144 paragraph]
+
+  
+
+[body 145 paragraph]
+
+可见帧占比按目标无遮挡投影面积与完整投影面积的比例判定，见式。连续性另报告最长失锁时长、可见片段长度及单位时间失锁次数，不能用帧占比代替连续性。
+
+[body 146 paragraph]
+
+  
+
+[body 147 paragraph]
+
+重获时间为失锁到连续稳定确认同一目标的时长。未能重获的回合计入失败率并作截尾记录，不从平均重获时间统计中静默删除。
+
+[body 148 paragraph]
+
+  
+
+[body 149 paragraph]
+
+角色切换频率为有效切换次数除以任务总时长。另统计最短保持时间内的重复请求次数作为抖振指标，正常切换不直接等同于抖振。
+
+[body 150 paragraph]
+
+  
+
+[body 151 paragraph]
+
+信息年龄定义为两机共享状态的时效：
+
+[body 152 paragraph]
+
+  
+
+[body 153 paragraph]
+
+端到端响应时延定义为从图像采集到有效控制指令下发的时长：
+
+[body 154 paragraph]
+
+  
+
+[body 155 paragraph]
+
+综合得分拟按分项加权组合：
+
+[body 156 paragraph]
+
+  
+
+[body 157 paragraph]
+
+式中，为同向化且按固定上下界归一化的分项指标，代价类指标先反向映射。权重只在训练与验证阶段确定。综合分数用于辅助排序，任务质量、安全性和时效性仍分别报告。
+
+[body 158 paragraph]
+
+
+
+[body 159 paragraph]
+
+
+
+[body 160 paragraph]
+
+
+
+[body 161 paragraph]
+
+
+
+[body 162 paragraph]
+
+
+
+[body 163 paragraph]
+
+
+
+[body 164 paragraph]
+
+
+
+[body 165 paragraph]
+
+
+
+[body 166 paragraph]
+
+2.3.4基于协作学习与奖励搜索的规划优化方法
+
+[body 167 paragraph]
+
+策略学习最大化任务累计收益，并由独立安全过滤器将策略建议动作投影至当前可行动作集合。该实现依赖状态估计与约束模型，仍须统计实际违例，不能把期望约束写成逐时安全保证。
+
+[body 168 paragraph]
+
+  
+
+[body 169 paragraph]
+
+式中，为策略，为策略建议，由动力学、障碍距离、机间距和飞行边界共同限定。可行集合为空时执行预设紧急动作。策略输出高层视点、速度参考或角色意图，底层飞控保持固定；不直接以语言模型输出电机指令[42,43]。
+
+[body 170 paragraph]
+
+奖励拟由分项评价指标加权构造：
+
+[body 171 paragraph]
+
+  
+
+[body 172 paragraph]
+
+式中，为训练可获得的质量分项，切换和时延项抑制无效交接与迟滞。安全过滤独立于奖励执行。训练可使用仿真身份真值计算奖励，但执行策略输入不含目标真值，评估机的身份置信来自传感器观测。
+
+[body 173 paragraph]
+
+策略网络拟由共享参数的观测编码器、时序状态单元及两个动作头组成。编码器处理本机质量分项、相对目标状态、角色和最近有效共享摘要；循环单元保存短时观测历史，离散动作头选择保持、请求交接或恢复搜索，连续动作头输出受限的候选视点偏移。中心化价值网络在训练时接收双机联合状态，执行时各机仅使用局部观测与实际收到的消息，符合集中训练、分散执行设置[36]。
+
+[body 174 paragraph]
+
+固定人工奖励的MAPPO作为主要学习基线，使用裁剪策略目标、价值回归与熵正则进行更新[36]。先以规则规划器生成安全示范，进行动作模仿预训练，再以相同交互步数比较纯强化学习和预训练策略。训练以无遮挡单目标起步，逐渐加入相似干扰、遮挡和通信扰动，课程切换条件由验证成功率与违例情况共同决定。
+
+[body 175 paragraph]
+
+奖励搜索智能体只离线读取训练日志和验证集的失败摘要，提出有限数量的奖励候选[41]。每个候选先做变量白名单、数值范围和非有限值检查，再在相同种子与步数下短程训练；保留候选后以等预算完整训练。禁止搜索智能体读取测试集反馈，也不允许其修改飞控、安全阈值或评价指标。除最终性能外，同时报告候选数量、总仿真交互量和训练时间，衡量搜索收益是否抵消额外计算成本。
+
+[body 176 paragraph]
+
+
+
+[body 177 paragraph]
+
+  
+
+[body 178 paragraph]
+
+
+
+[body 179 paragraph]
+
+
+
+[body 180 paragraph]
+
+  
+
+[body 181 paragraph]
+
+
+
+[body 182 paragraph]
+
+
+
+[body 183 paragraph]
+
+2.3.5实验设计与验证流程
+
+[body 184 paragraph]
+
+仿真场景。拟在AirSim中构建可控场景：设置单重要目标、相似干扰目标、静动态遮挡物、不同目标速度、观测噪声、通信延迟与丢包。观测配置以RGB为主，深度作为扩展工况可选加入。所有实验记录场景版本、参数文件与随机种子。
+
+[body 185 paragraph]
+
+仿真场景：拟在AirSim中构建包含指定目标、相似干扰目标和静态或动态遮挡物的场景，并调节目标速度、观测噪声、通信时延与丢包率。观测以RGB图像为主，深度信息作为扩展工况。仿真真值仅用于训练监督和离线评价，不输入执行策略。每次实验保存场景版本、参数文件和随机种子；训练、验证与测试场景按2.3.2节确定的划分固定。
+
+[body 186 paragraph]
+
+实验分三个阶段。第一阶段在单机条件下比较固定跟随、距离规划、可见性规划，以及身份核验与轨迹规划的联合闭环，检验感知误差对规划结果的影响。第二阶段在相同无人机数量和资源预算下，比较无信息共享、固定分工、固定角度互补观测与事件触发交接。第三阶段比较规则策略、固定人工奖励的MAPPO、模仿预训练策略，以及奖励搜索后的策略。学习方法使用相同的训练场景与交互步数；奖励搜索额外消耗的仿真交互量和训练时间单独报告。消融实验每次只改变一个因素，依次检查身份置信校准、共享消息时效、交接滞回、模仿预训练和课程训练的作用。移除安全过滤器的实验仅在仿真中开展。
+
+[body 187 paragraph]
+
+按遮挡强度、干扰实例数量、目标机动程度和通信质量对测试场景分层。每种关键工况计划运行至少30个独立回合，各方法使用相同的场景种子；涉及随机训练的策略至少使用5个独立训练种子。以回合为主要统计单位，报告均值、标准差和95%自助法置信区间。先分别汇总各训练种子的回合结果，再统计方法间差异，避免将同一回合的连续视频帧当作独立样本。参数和模型仅依据训练集、验证集确定，测试集不参与调整。
+
+[body 188 paragraph]
+
+除2.3.3节定义的身份、跟踪、交接和时效指标外，使用独立真值计算定位均方根误差；在缺少可靠尺度来源的RGB单目工况下，仅报告图像坐标或相对状态误差。轨迹指标包括航程、加加速度平方积分和规划失败率；安全指标包括碰撞次数、最小机间距、最小障碍距离及安全过滤器介入次数；时效指标包括端到端响应时延的中位数和95分位数。回合成功须同时满足指定实例身份正确、预先规定的连续观测要求和安全约束。所有判定阈值在预实验后、正式测试前登记，未重获目标或规划无可行解的回合计入相应失败统计。
+
+[body 189 paragraph]
+
+实测验证：在获批飞行场地开展小规模验证，检验仿真中已确定的感知、规划和交接机制。实测前固定速度与距离限制、地理围栏和紧急停机条件；记录传感器误差、通信状态及人工干预，并将实测结果与仿真结果分别报告。
+
+[body 190 paragraph]
+
+2.4可行性分析
+
+[body 191 paragraph]
+
+方法与实现基础。已有可见性规划[3,4,11–13]、跨机跟踪[5,6]、协同估计[7,23–26]和协作学习[36]提供了分层实现基础。拟复用成熟检测、跟踪与轨迹求解组件，将研究重点放在观测质量的决策表达、异步信息下的角色交接以及协同策略优化，减少同时重建感知与控制系统的工作量。
+
+[body 192 paragraph]
+
+计算与设备条件。根据课题组提供的条件材料，团队具备集群计算和大规模存储条件，并配置无人机、可见光与红外成像设备、定位及测距设备，可支撑仿真训练、目标影像采集和状态记录。课题拟优先使用与视觉跟踪直接相关的设备；具体可调用型号、GPU显存、标定精度及使用时段在实施前落实。
+
+[body 193 paragraph]
+
+据课题组提供的条件材料，团队依托信息感知与融合、信息与通信工程相关教学科研平台及重点实验室，具备集群计算和大规模存储条件，可支撑仿真训练、影像数据管理与多种子实验。现有可见光和红外成像设备、无人机、GPS、激光测距仪及气象仪等，可用于目标影像采集、状态记录和环境条件测量。本课题优先落实可见光成像、无人机及定位测距设备的使用；红外观测作为扩展工况。设备型号、可调用时段和标定精度在实验实施前确认。
+
+[body 194 paragraph]
+
+场景与实施条件。课题组具备沿海目标探测实验场条件，可为后续复杂背景观测提供场景支持。研究首先以可控气球目标和仿真场景验证机制，再视飞行许可与设备条件开展双机实验。既有对海探测条件作为场景资源，不直接等同于本课题已具备全部双机飞行和精确真值测量条件。
+
+[body 195 paragraph]
+
+工作量控制。先完成单机与规则双机闭环，再引入固定奖励的协作学习；奖励代码搜索作为最后阶段的扩展。候选视觉模块以公开可用模型为起点，优先轻量适配与阈值校准。若大模型推理延迟不能满足决策周期，则将其用于低频身份复核，连续跟踪与安全控制仍按独立周期运行。
+
+[body 196 paragraph]
+
+2.5预期达到的目标
+
+[body 197 paragraph]
+
+（1）发表或录用学术论文2篇；
+
+[body 198 paragraph]
+
+（2）申请国家发明专利2项；
+
+[body 199 paragraph]
+
+（3）授权软件著作权1项；
+
+[body 200 paragraph]
+
+（4）完成硕士学位论文1篇。
+
+[body 201 paragraph]
+
+2.6论文的进度安排
+
+[body 202 table]
+
+起止时间 | 主要工作 | 阶段成果
+2026.09-2026.10 | 梳理相关文献，明确研究目标、研究内容和技术路线；完成开题报告撰写，并根据导师意见修改 | 开题报告定稿及开题答辩材料
+2026.10-2026.12 | 补核全文、冻结任务边界与评价协议；确定仿真平台与数据记录格式；完成候选视觉模块选型；确定设备与飞行场地条件 | 文献对照表、评价协议、接口与数据格式说明
+2026.12-2027.03 | 采集并标注气球目标数据集；实现单机感知—评估—控制闭环 | 数据集与标注规范、单机闭环原型
+2027.03-2027.06 | 完成单机四类策略对照与模块消融；报告规划质量与安全指标 | 层次一实验数据与分析记录
+2027.06-2027.09 | 实现双机状态共享、互补视角与角色交接；开展通信与遮挡压力测试 | 层次二对照与压力测试结果
+2027.09-2028.01 | 完成协同学习训练、奖励版本对照、消融与泛化测试 | 层次三实验数据、评价体系说明
+2028.01-2028.06 | 条件允许时开展有限实测；整理数据，撰写论文与答辩材料 | 学位论文、数据与代码归档材料
+
+[body 203 paragraph]
+
+2.7拟解决的关键问题
+
+[body 204 paragraph]
+
+（1）面向单机单目标，如何在遮挡与相似目标干扰下保持指定目标的身份
+
+[body 205 paragraph]
+
+
+
+[body 206 paragraph]
+
+（2）面向双机单目标，如何评价无人机与目标的感知关系并用于轨迹规划与角色交接
+
+[body 207 paragraph]
+
+
+
+[body 208 paragraph]
+
+（3）面向快速碰撞任务的多智能体协同规划，如何利用任务经验改进协同策略并保证安全约束
+
+[body 209 paragraph]
+
+
+
+[body 210 paragraph]
+
+2.8学位论文预期创新点
+
+[body 211 paragraph]
+
+（1）面向指定重要目标持续感知的单机分层评价与规划框架
+
+[body 212 paragraph]
+
+针对单机跟踪中目标可见却可能发生身份误判、观测质量难以直接指导飞行的问题，提出单机分层评价与轨迹规划方法。通过分别评价目标身份置信、视场可见性和安全风险，并将评价结果用于候选轨迹选择，实现目标确认与观测位置调整的闭环，提升遮挡和相似目标干扰条件下的身份保持能力。
+
+[body 213 paragraph]
+
+（2）基于观测质量与状态时效的双机互补感知及角色交接机制
+
+[body 214 paragraph]
+
+针对固定分工难以应对观测质量下降和通信延迟的问题，提出基于观测质量与状态时效的双机角色交接机制。通过量化追踪机与评估机的观测条件和接管能力，结合安全约束确定交接时机；通过滞回阈值与最短保持时间减少频繁切换，实现双机互补观测，提升目标失锁后的恢复能力。
+
+[body 215 paragraph]
+
+（3）基于任务反馈的双机协作策略优化方法
+
+[body 216 paragraph]
+
+针对固定奖励和预设规则难以适应遮挡、目标运动及通信条件变化的问题，提出基于任务反馈的双机协作策略优化方法。通过将观测历史、角色状态和信息年龄用于协同决策，结合失败事件分析与离线奖励候选搜索，实现协作策略的迭代调整，提升任务成功率和执行效率。策略收益将以预先确定的任务指标和安全约束进行对照检验。
+
+[body 217 paragraph]
+
+三、所需的科研条件
+
+[body 218 paragraph]
+
+3.1所需的条件
+
+[body 219 paragraph]
+
+软件条件：无人机仿真平台，拟以AirSim为主，并与轻量多机仿真平台比较训练吞吐与物理建模能力[45]；多智能体强化学习训练框架与协作基线实现[36]；三维场景与目标轨迹生成工具；数据处理、标注与结果分析环境；版本管理与可复现实验记录工具。
+
+[body 220 paragraph]
+
+硬件条件：具备足够显存的训练算力，用于候选视觉模块微调与策略训练；数据采集用摄像机与目标（气球）器材；若开展实测，需要经批准的飞行场地、多旋翼飞行器、机载计算单元、传感器与安全防护设施。
+
+[body 221 paragraph]
+
+测量与数据条件：目标数据集采集与标注需要一定人力投入，仿真数据的记录格式需统一，包含状态、动作、轨迹、评估与任务结果，以及角色事件标注。文献库需要持续补核全文与收录信息。
+
+[body 222 paragraph]
+
+研究组织条件：建立几何版本、模型权重版本、奖励版本与实验配置的对照记录；对每项结论保留对应的计算脚本与原始数据；对尚不具备的设备，优先采用小功率或仿真可验证方案，确保每项结论均有相应依据。
+
+[body 223 paragraph]
+
+3.2可能遇到的困难、问题
+
+[body 224 paragraph]
+
+第一，遮挡和相似目标干扰下的身份判定困难。目标短时消失或与相似目标交汇后，跟踪置信度仍可能较高，但系统已关联到错误目标。此时目标与周围目标、环境之间的位置和运动线索也可能不完整，单靠几何可见性难以发现身份错误。
+
+[body 225 paragraph]
+
+第二，感知关系评价与双机角色交接困难。当前观测质量、未来可观测性和轨迹调整效果难以用单一指标衡量。双机共享信息还受到通信延迟与丢包影响；交接条件过宽容易引起频繁切换，过严则可能错过恢复观测的时机。
+
+[body 226 paragraph]
+
+第三，协同策略训练结果难以反映实际任务收益。学习型策略可能利用奖励设置中的偏差提高训练回报，却未改善持续观测和任务成功率。仿真与实际环境在图像、动力学和通信条件上也存在差异，策略的安全性及未见场景表现需要单独检验。
+
+[body 227 paragraph]
+
+3.3解决的途径、方法和措施
+
+[body 228 paragraph]
+
+第一，针对遮挡和相似目标干扰下的身份判定困难。在自采数据和仿真场景中加入相似目标交汇、短时遮挡及目标重新出现的情况，分别标注指定目标身份、失锁时刻和错误关联事件。结合目标与周围目标、环境之间的相对位置及运动连续性，对多帧观测结果进行身份校验。评价时将身份保持率、身份切换次数和错误目标接近次数与可见性分开统计，检查恢复观测后是否仍在跟踪指定目标。
+
+[body 229 paragraph]
+
+第二，针对感知关系评价与双机角色交接困难。综合身份置信、观测位置、遮挡趋势和信息时效，分别评价两机当前的观测条件及接管能力。共享消息附带观测时间和任务标识，过期信息仅供预测参考；通信中断时采用保守观察或退回单机策略。角色交接须经过接管条件检查与双方确认，并设置滞回和最短角色保持时间。实验中统一双机方法的传感器、算力及通信预算，记录交接等待、重规划和观测中断的开销。
+
+[body 230 paragraph]
+
+第三，针对协同策略训练结果难以反映实际任务收益。预先确定任务成功率、持续观测、执行时间和安全违例等测试指标，利用训练与验证场景调整奖励和策略，最终在独立测试场景中比较学习策略与固定规则策略。安全条件由独立执行环节检查，并记录每次约束违例和干预。在仿真中改变遮挡、观测噪声、通信及动力学条件，检验策略在未见场景中的表现；具备飞行条件后，再对已完成仿真验证的机制开展有限实测。
+
+[body 231 paragraph]
+
+
+
+[body 232 paragraph]
+
+ 
+
+[body 233 paragraph]
+
+主要参考文献
+
+[body 234 paragraph]
+
+[1] 陈琳, 刘允刚. 面向无人机的视觉目标跟踪算法：综述与展望[J]. . 信息与控制, 2022, 51(1): 23～40.
+
+[body 235 paragraph]
+
+[2] Fu C, Lu K, Zheng G, Ye J, Cao Z, Li B, Lu G. Siamese object tracking for unmanned aerial vehicle: a review and comprehensive analysis[J]. Artificial Intelligence Review, 2023, 56(S1): 1417～1477.
+
+[body 236 paragraph]
+
+[3] Wang Q, Gao Y, Ji J, Xu C, Gao F. Visibility-aware Trajectory Optimization with Application to Aerial Tracking[C]//, 2021: 5249～5256.
+
+[body 237 paragraph]
+
+[4] Wang H, Zhang X, Liu Y, Zhang X, Zhuang Y. SVPTO: Safe Visibility-Guided Perception-Aware Trajectory Optimization for Aerial Tracking[J]. IEEE Transactions on Industrial Electronics, 2024, 71(3): 2716～2725.
+
+[body 238 paragraph]
+
+[5] Zhu P, Zheng J, Du D, Wen L, Sun Y, Hu Q. Multi-Drone-Based Single Object Tracking With Agent Sharing Network[J]. IEEE Transactions on Circuits and Systems for Video Technology, 2021, 31(10): 4058～4070.
+
+[body 239 paragraph]
+
+[6] Chen G, Zhu P, Cao B, Wang X, Hu Q. Cross-Drone Transformer Network for Robust Single Object Tracking[J]. IEEE Transactions on Circuits and Systems for Video Technology, 2023, 33(9): 4552～4563.
+
+[body 240 paragraph]
+
+[7] Wang J, Wu Y X, Chen Y-Q, Ju S. Multi-UAVs collaborative tracking of moving target with maximized visibility in urban environment[J]. Journal of the Franklin Institute, 2022, 359(11): 5512～5532.
+
+[body 241 paragraph]
+
+[8] Cao Z, Huang Z, Pan L, Zhang S, Liu Z, Fu C. TCTrack: Temporal Contexts for Aerial Tracking[C]//, 2022: 14778～14788.
+
+[body 242 paragraph]
+
+[9] Liu X, Xu T, Wang Y, Yu Z, Yuan X, Qin H, Li J. BACTrack: Building Appearance Collection for Aerial Tracking[J]. IEEE Transactions on Circuits and Systems for Video Technology, 2024, 34(6): 5002～5017.
+
+[body 243 paragraph]
+
+[10] Yang J, Gao S, Li Z, Zheng F, Leonardis A. Resource-Efficient RGBD Aerial Tracking[C]//, 2023: 13374～13383.
+
+[body 244 paragraph]
+
+[11] Pan N, Zhang R, Yang T, Cui C, Xu C, Gao F. Fast-Tracker 2.0: improving autonomy of aerial tracking with active vision and human location regression[J]. IET Cyber-Systems and Robotics, 2021, 3(4): 292～301.
+
+[body 245 paragraph]
+
+[12] Lee Y, Park J, Jung S, Jeon B, Oh D, Kim H J. QP Chaser: Polynomial Trajectory Generation for Autonomous Aerial Tracking[J]. IEEE Transactions on Automation Science and Engineering, 2025, 22: 24177～24194.
+
+[body 246 paragraph]
+
+[13] Lee Y, Park J, Jeon B, Jung S, Kim H J. BPMP-Tracker: A Versatile Aerial Target Tracker Using Bernstein Polynomial Motion Primitives[J]. IEEE Robotics and Automation Letters, 2024, 9(12): 10938～10945.
+
+[body 247 paragraph]
+
+[14] Zhou B, Pan J, Gao F, Shen S. RAPTOR: Robust and Perception-Aware Trajectory Replanning for Quadrotor Fast Flight[J]. IEEE Transactions on Robotics, 2021, 37(6): 1992～2009.
+
+[body 248 paragraph]
+
+[15] Bartolomei L, Teixeira L, Chli M. Semantic-aware Active Perception for UAVs using Deep Reinforcement Learning[C]//, 2021: 3101～3108.
+
+[body 249 paragraph]
+
+[16] Liu S, Zhang H, Qi Y, Wang P, Zhang Y, Wu Q. AerialVLN: Vision-and-Language Navigation for UAVs[C]//, 2023: 15338～15348.
+
+[body 250 paragraph]
+
+[17] Cai H, Dong J, Tan J, Deng J, Li S, Gao Z, Wang H, Su Z, Sumalee A, Zhong R. FlightGPT: Towards Generalizable and Interpretable UAV Vision-and-Language Navigation with Vision-Language Models[C]//, 2025: 6670～6687.
+
+[body 251 paragraph]
+
+[18] Chen G, Yu X, Ling N, Zhong L. TypeFly: Low-Latency Drone Planning With Large Language Models[J]. IEEE Transactions on Mobile Computing, 2025, 24(9): 9068～9079.
+
+[body 252 paragraph]
+
+[19] Chen X, Li Q, Wang T, Xue T, Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction[C]//, 2024: 16436～16445.
+
+[body 253 paragraph]
+
+[20] Tian Y, Lin F, Li Y, Zhang T, Zhang Q, Fu X, Huang J, Dai X, Wang Y, Tian C, Li B, Lv Y, Kovács L, Wang F-Y. UAVs meet LLMs: Overviews and perspectives towards agentic low-altitude mobility[J]. Information Fusion, 2025, 122: 103158.
+
+[body 254 paragraph]
+
+[21] Liu Z, Shang Y, Li T, Chen G, Wang Y, Hu Q, Zhu P. Robust Multi-Drone Multi-Target Tracking to Resolve Target Occlusion: A Benchmark[J]. IEEE Transactions on Multimedia, 2023, 25: 1462～1476.
+
+[body 255 paragraph]
+
+[22] 郎荣玲, 魏才伦, 范亚. 基于稀疏点匹配的协同式未知目标跟踪方法[J]. . 航空学报, 2026, 47(3): 632425.
+
+[body 256 paragraph]
+
+[23] Amorim T G S, Souto L A, P. Do Nascimento T, Saska M. Multi-Robot Sensor Fusion Target Tracking With Observation Constraints[J]. IEEE Access, 2021, 9: 52557～52568.
+
+[body 257 paragraph]
+
+[24] Qian M, Chen W, Sun R. A Maneuvering Target Tracking Algorithm Based on Cooperative Localization of Multi-UAVs With Bearing-Only Measurements[J]. IEEE Transactions on Instrumentation and Measurement, 2024, 73: 1～11.
+
+[body 258 paragraph]
+
+[25] Mayya S, Ramachandran R K, Zhou L, Senthil V, Thakur D, Sukhatme G S, Kumar V. Adaptive and Risk-Aware Target Tracking for Robot Teams With Heterogeneous Sensors[J]. IEEE Robotics and Automation Letters, 2022, 7(2): 5615～5622.
+
+[body 259 paragraph]
+
+[26] Yin Q, Xu C, Zhou P, Huang D, Xu W. Dual-UAV cooperative bearing-only target localization based on multi-level box particle filter[J]. Digital Signal Processing, 2026, 168: 105572.
+
+[body 260 paragraph]
+
+[27] Zhou L, Kumar V. Robust Multi-Robot Active Target Tracking Against Sensing and Communication Attacks[J]. IEEE Transactions on Robotics, 2023, 39(3): 1768～1780.
+
+[body 261 paragraph]
+
+[28] Zhang H, Veres S, Kolling A. Simultaneous search and monitoring by multiple aerial robots[J]. Robotics and Autonomous Systems, 2023, 170: 104544.
+
+[body 262 paragraph]
+
+[29] 赵江, 皮明豪, 田栢苓. 面向多目标跟踪的集群无人机自组织共识决策方法[J]. . 航空学报, 2025, 46(16): 331635.
+
+[body 263 paragraph]
+
+[30] 崔阳洁, 屠展, 杨彬淇, 任文婧, 向锦武, 董鑫. 无人机遮挡目标检测与协同跟踪方法[J]. . 机器人, 2025, 47(3): 427～437.
+
+[body 264 paragraph]
+
+[31] Song J, Zhao K, Liu Y. Survey on Mission Planning of Multiple Unmanned Aerial Vehicles[J]. Aerospace, 2023, 10(3): 208.
+
+[body 265 paragraph]
+
+[32] Westheider J, Rückin J, Popović M. Multi-UAV Adaptive Path Planning Using Deep Reinforcement Learning[C]//, 2023: 649～656.
+
+[body 266 paragraph]
+
+[33] Wang J, Zhang P, Wang Y. Autonomous target tracking of multi-UAV: A two-stage deep reinforcement learning approach with expert experience[J]. Applied Soft Computing, 2023, 145: 110604.
+
+[body 267 paragraph]
+
+[34] Xia Z, Du J, Jiang C, Wang J, Ren Y, Li G. Multi-UAV Cooperative Target Tracking Based on Swarm Intelligence[C]//, 2021: 1～6.
+
+[body 268 paragraph]
+
+[35] Zhu H, Hui J, Guo Z. Two-Level-Attention-Based Continuous Trajectory Design and Computation Offloading for Multi-UAV Cooperative Target Search[J]. IEEE Transactions on Mobile Computing, 2026, 25(3): 3196～3214.
+
+[body 269 paragraph]
+
+[36] Yu C, Velu A, Vinitsky E, Gao J, Wang Y, Bayen A, Wu Y. The Surprising Effectiveness of PPO in Cooperative Multi-Agent Games[C]//, 2022: 24611～24624.
+
+[body 270 paragraph]
+
+[37] Shen G, Lei L, Zhang X, Li Z, Cai S, Zhang L. Multi-UAV Cooperative Search Based on Reinforcement Learning With a Digital Twin Driven Training Framework[J]. IEEE Transactions on Vehicular Technology, 2023, 72(7): 8354～8368.
+
+[body 271 paragraph]
+
+[38] Batra S, Huang Z, Petrenko A, Kumar T, Molchanov A, Sukhatme G S. Decentralized control of quadrotor swarms with end-to-end deep reinforcement learning[C]//, 2022, 164: 576～586.
+
+[body 272 paragraph]
+
+[39] HUANG Z H, YANG Z J, KRUPANI R. Collision avoidance and navigation for a quadrotor swarm using end-to-end deep reinforcement learning[C]//, 2024.
+
+[body 273 paragraph]
+
+[40] Zhu C, Dastani M, Wang S. A survey of multi-agent deep reinforcement learning with communication[J]. Autonomous Agents and Multi-Agent Systems, 2024, 38(1): 4.
+
+[body 274 paragraph]
+
+[41] Ma Y J, Liang W, Wang G, Huang D-A, Bastani O, Jayaraman D, Zhu Y, Fan L, Anandkumar A. Eureka: human-level reward design via coding large language models[C]//, 2024.
+
+[body 275 paragraph]
+
+[42] Qin Z, Zhang K, Chen Y, Chen J, Fan C. Learning safe multi-agent control with decentralized neural barrier certificates[C]//, 2021.
+
+[body 276 paragraph]
+
+[43] Yuan Z, Hall A W, Zhou S, Brunke L, Greeff M, Panerati J, Schoellig A P. Safe-Control-Gym: A Unified Benchmark Suite for Safe Learning-Based Control and Reinforcement Learning in Robotics[J]. IEEE Robotics and Automation Letters, 2022, 7(4): 11142～11149.
+
+[body 277 paragraph]
+
+[44] Feng T, Wang X, Han F, Zhang L, Zhu W. U2UData: A Large-scale Cooperative Perception Dataset for Swarm UAVs Autonomous Flight[C]//, 2024: 7600～7608.
+
+[body 278 paragraph]
+
+[45] Panerati J, Zheng H, Zhou S, Xu J, Prorok A, Schoellig A P. Learning to fly—a gym environment with PyBullet physics for reinforcement learning of multi-agent quadcopter control[C]//, 2021: 7512～7519.
+
+[body 279 paragraph]
+

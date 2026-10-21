@@ -1,0 +1,116 @@
+{
+  "status": "GENERATED_PENDING_VISUAL_REVIEW",
+  "inputs": [
+    {
+      "role": "detector",
+      "path": "D:\\forAirsim\\logs\\t1_balloon_yolo_evaluation_v1p2_20261004\\report.json",
+      "sha256": "0de9ca21c995ebba18d721270d461400fa9cac4eb254e0130d69c0e833e5e33b",
+      "snapshot": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\input_detector.json"
+    },
+    {
+      "role": "campaign",
+      "path": "D:\\forAirsim\\logs\\t1_process_campaign_with_supplement_v11_20261008\\report.json",
+      "sha256": "be0f90e54f797629695820556b71e97b8b20444e08bcbbce782d5c9fe907dc71",
+      "snapshot": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\input_campaign.json"
+    },
+    {
+      "role": "age",
+      "path": "D:\\forAirsim\\logs\\t1_process_source_age_figures_zh_v11_v1p3_20261008\\data.json",
+      "sha256": "e09b14a563c08c9c5ef3850e546a4fcca20cc871dafe9875d5e1b5f65d6b0574",
+      "snapshot": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\input_age.json"
+    }
+  ],
+  "files": [
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\01_detector_paired_points.png",
+      "sha256": "ec333374fbb80a058669c0f7255aa2530016209dcb42d9f7b2d56e4bd329482c"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\01_detector_paired_points.pdf",
+      "sha256": "317d3b7e3a1271e0e310ac54b783393960eb4ededaa2ccce81af7d95d3412c84"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\01_detector_paired_points.svg",
+      "sha256": "82bc25ce845132308209cc499f8800865ea1254f5d5b711ccb45f1450b3996a4"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\02_source_age_scatter.png",
+      "sha256": "f26b5488dd438853143d1ba1d0d697a49b6f94c3869051a3ffb227dc5eaec64b"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\02_source_age_scatter.pdf",
+      "sha256": "1be4843c2b782a4b62ca07be4dc4fdad61a014c5f87e1248cf466f1bfe93631e"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\02_source_age_scatter.svg",
+      "sha256": "8637119ffcc74012534512c7b6c2f3a72d2763f53e7727160b6c9e29effff462"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\03_completeness_and_timing.png",
+      "sha256": "928dc3f46eb826da8c111e4054ae082434d438d14ec6afeece100b5abd008c09"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\03_completeness_and_timing.pdf",
+      "sha256": "4c4d26bde737f6a88075558efee36ddc285f44d242521a04bc4062c01bcd9569"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\03_completeness_and_timing.svg",
+      "sha256": "ed17e8cbcd4f6098f078d36a476a6390e5df90a420e6a803dfd1f0328f4e534e"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\detector_frames.csv",
+      "sha256": "d884815dc14d5ce9db92e310f8057c3cca8093616c234b393c7119ede83d44a9"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\detector_sessions.csv",
+      "sha256": "4786ce01e74d5c152372dd3c5f0ed21ddcebc6adf622842372f2845af82a82fc"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\target_command_age_points.csv",
+      "sha256": "c294d51d051663779ec54e39623ee23f939d713197bdca6681eaad7dea046293"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\v11_frame_timing.csv",
+      "sha256": "0bfff7fcb6585a0daac356db3e75778a2d5f045c3b583ad6f279b0849dba9499"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\figures_v2\\v11_session_summary.csv",
+      "sha256": "6f188fd33f6457efea1209bc2225eb14f3f82c673650714eca1767bb1b5d83bb"
+    }
+  ],
+  "font_layout_audits": [
+    {
+      "font_path": "C:\\Windows\\Fonts\\msyh.ttc",
+      "font_sha256": "d79c55e68b1131eea0cc1c47be4f572d964f28c682e143db2ad09c1e4cb07a3f",
+      "outside_text": []
+    },
+    {
+      "font_path": "C:\\Windows\\Fonts\\msyh.ttc",
+      "font_sha256": "d79c55e68b1131eea0cc1c47be4f572d964f28c682e143db2ad09c1e4cb07a3f",
+      "outside_text": []
+    },
+    {
+      "font_path": "C:\\Windows\\Fonts\\msyh.ttc",
+      "font_sha256": "d79c55e68b1131eea0cc1c47be4f572d964f28c682e143db2ad09c1e4cb07a3f",
+      "outside_text": []
+    }
+  ],
+  "new_flights": 0,
+  "cloud_requests": 0,
+  "independent_detector_sessions": 2,
+  "independent_v11_sessions": 3,
+  "formal_trajectory_efficacy": false,
+  "png_visual_review": false,
+  "pdf_visual_review": false,
+  "statistics": "descriptive; no significance test or inferential CI",
+  "source_files": [
+    {
+      "path": "D:\\forAirsim\\python\\build_thesis_evidence_overview.py",
+      "sha256": "72aa84879dcd7d6ecee65ab2ef64e9108a7e0e23736ede57e84aa84d81e41ef4"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\plot_t1_identity_zh.py",
+      "sha256": "49f21b9bf10ed08dea264b24ccd6a3e173816b71c3b93cecb3eb84437df5a38d"
+    }
+  ]
+}

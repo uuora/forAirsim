@@ -1,0 +1,134 @@
+{
+  "status": "NATIVE_PROJECT_READBACK_PASS_EXPORT_TEXT_ISSUE",
+  "origin_version": 10.100178,
+  "project": {
+    "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\T1_论文科研图_Origin.opju",
+    "sha256": "d82cd2c91b351832d324c5d0ad6f8f8abe32236f4226575e818224b3aeef2f3f"
+  },
+  "files": [
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\01_recall_paired.png",
+      "sha256": "a3a91ec427be38d8d0d2be1ce20dc77f5ce0334270bd59bde47710e6f6c0c0d2",
+      "native_page": "Graph1"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\01_recall_paired.pdf",
+      "sha256": "c790727826a7159fffc4e7d159dc68a00d27c451f25c987d38621974cb3ba9b3",
+      "native_page": "Graph1"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\01_recall_paired.svg",
+      "sha256": "b65bf1f5c0a01e20fd1494e0304a26e5786697eadf5ca46f0e3f5c30608c9dcf",
+      "native_page": "Graph1"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\02_precision_paired.png",
+      "sha256": "b8e2717988ca71d59ee602eb91d5a4dfd62b44dc31c4f458f62d5f9f1d12b9e9",
+      "native_page": "Graph2"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\02_precision_paired.pdf",
+      "sha256": "2ba545f878e194343845bcd9223c04340db76eb66daf2815c953bed0d4e63b5e",
+      "native_page": "Graph2"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\02_precision_paired.svg",
+      "sha256": "f704f156c38e188ddfe5d94950249edcf449703a130225934ccf57121b1e1c10",
+      "native_page": "Graph2"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\03_latency_scatter.png",
+      "sha256": "511e0f5cbcc064751b9b41bde042cbb16a4b4a463d4c4942e18bd44a41d6b28d",
+      "native_page": "Latency"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\03_latency_scatter.pdf",
+      "sha256": "5d707eb6143463e1f7a95a9a9e1d23b6440cb1bb6332afe9fb9a4056ea712617",
+      "native_page": "Latency"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\03_latency_scatter.svg",
+      "sha256": "55bcaef77ca336be0e11d1ed9c2451bf62482f3cf7fc76aa392e7dbf179fb551",
+      "native_page": "Latency"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\04_clear_margin_scatter.png",
+      "sha256": "23ed586b644dd93eeb491d1b94e2398043a2c851dfc3d03ce4b27772f41cbd7c",
+      "native_page": "SourceMargin"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\04_clear_margin_scatter.pdf",
+      "sha256": "e77ea9873a2b1c8a3761e25257d9efd794235c63ac4bc0f41c635500d08cab91",
+      "native_page": "SourceMargin"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\04_clear_margin_scatter.svg",
+      "sha256": "c1ba3e3f083c4f74b501edc263792878d2710bdd56962c23d82ac344d70cb052",
+      "native_page": "SourceMargin"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\05_processing_ecdf.png",
+      "sha256": "61e3dcf6e97d8c30887731b0b74907eb8fab187ad44309274e198469af58105f",
+      "native_page": "Graph3"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\05_processing_ecdf.pdf",
+      "sha256": "fa2fb87dc95556a6b1c7d44360b654cf766c910f3d10d8c9864c3ff2fb7da31e",
+      "native_page": "Graph3"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\05_processing_ecdf.svg",
+      "sha256": "404152f4f5927a8e82ab0f6be719f4c37e2fa8da9fe42523e83a1307e36ab7b7",
+      "native_page": "Graph3"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\06_completion_ecdf.png",
+      "sha256": "a57948ced07bedce0f389d12eb5137927dfae97343402a20300030144b0320e1",
+      "native_page": "Graph4"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\06_completion_ecdf.pdf",
+      "sha256": "084c9d42fc6cfe1ed3bc2782fdf923c7f1effdb22cadbff010d263dd54c9091f",
+      "native_page": "Graph4"
+    },
+    {
+      "path": "D:\\forAirsim\\docs\\research-summary-20261008\\origin_thesis_v3\\06_completion_ecdf.svg",
+      "sha256": "eb6e147b3dd1e1a5d522401f9e277495f58e219f2f1412e9fb6b2be57d59d860",
+      "native_page": "Graph4"
+    }
+  ],
+  "inputs": [
+    {
+      "role": "detector",
+      "path": "D:\\forAirsim\\logs\\t1_balloon_yolo_evaluation_v1p2_20261004\\report.json",
+      "sha256": "0de9ca21c995ebba18d721270d461400fa9cac4eb254e0130d69c0e833e5e33b"
+    },
+    {
+      "role": "age",
+      "path": "D:\\forAirsim\\logs\\t1_process_source_age_figures_zh_v11_v1p3_20261008\\data.json",
+      "sha256": "e09b14a563c08c9c5ef3850e546a4fcca20cc871dafe9875d5e1b5f65d6b0574"
+    },
+    {
+      "role": "campaign",
+      "path": "D:\\forAirsim\\logs\\t1_process_campaign_with_supplement_v11_20261008\\report.json",
+      "sha256": "be0f90e54f797629695820556b71e97b8b20444e08bcbbce782d5c9fe907dc71"
+    }
+  ],
+  "new_flights": 0,
+  "cloud_requests": 0,
+  "formal_efficacy": false,
+  "source": {
+    "path": "D:\\forAirsim\\python\\build_origin_thesis_figures.py",
+    "sha256": "997a83a1fd4ce71affe8ccf00baf79ad68723d3a5bf38dce2a8279b17e975573"
+  },
+  "authoring": "Native Origin 2024 graphs and worksheets; independent COM instance",
+  "visual_review": true,
+  "caption_location": "external manuscript; no canvas title or footnote",
+  "readback": {
+    "graph_count": 6,
+    "worksheet_book_count": 6,
+    "all_six_tables_checked_against_inputs": true,
+    "project_file_unchanged": true
+  },
+  "export_limitation": "Unexplained overbars on axis titles and legend text. Native exports are retained as drafts; publication companion is separately typeset from identical source data."
+}

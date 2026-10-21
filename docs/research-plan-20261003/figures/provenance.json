@@ -1,0 +1,369 @@
+{
+  "kind": "ACTUAL_SAMPLED_INTERFACE_DIAGNOSTICS",
+  "formal_thesis_effect_results": false,
+  "script_sha256": "20aa394eb673e4cf271dfa4c8cb8bd787f9edf4b5d22ddba00aaf4852392ae0a",
+  "sources": [
+    {
+      "kind": "manifest",
+      "path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100056_6707762\\manifest.json",
+      "sha256": "a410a345890ccf078f263bda3a5ec59d1c96061232b838bf1c8a93a7af583bc0"
+    },
+    {
+      "kind": "batch_report",
+      "path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100056_6707762\\session_1_batch\\batch_report.json",
+      "sha256": "4500b1c52dc072b919dd0e566e93a15d2cfcee438be2958634d115ba6a0d8b04"
+    },
+    {
+      "kind": "flight_report",
+      "path": "D:\\forAirsim\\logs\\trajectory_efficiency_geometry_oracle_20261003_100122_036727\\report.json",
+      "sha256": "7aa680296aa066bd1d040378864252204223ec34230a947eec60db5c114f4638"
+    },
+    {
+      "kind": "flight_report",
+      "path": "D:\\forAirsim\\logs\\trajectory_perception_geometry_oracle_20261003_100218_266755\\report.json",
+      "sha256": "f6212bd54b0f7faed25544061cf435f782d8f504d1ca9d0c1377053941f68bb8"
+    },
+    {
+      "kind": "manifest",
+      "path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100923_0636899\\manifest.json",
+      "sha256": "9b23d90cb4e23c77c6957bae52a01a30ac28faaa06e9453bb6a27735df8e11fb"
+    },
+    {
+      "kind": "batch_report",
+      "path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100923_0636899\\session_1_batch\\batch_report.json",
+      "sha256": "2b7329955d7705b072f3c7ccfee3dbeddfcd4740b7990a71765bb0cd0d27ffed"
+    },
+    {
+      "kind": "flight_report",
+      "path": "D:\\forAirsim\\logs\\trajectory_efficiency_geometry_oracle_20261003_100943_358270\\report.json",
+      "sha256": "5e26802524c994dbfa653811e8f9c392d840ed209b970fe8e0628889f9e85b07"
+    },
+    {
+      "kind": "flight_report",
+      "path": "D:\\forAirsim\\logs\\trajectory_perception_geometry_oracle_20261003_101040_154299\\report.json",
+      "sha256": "4af63c414ae315ba30eee6a33e6ff8e7f9d2a5245e44e8c8bd1be8af6051cc74"
+    }
+  ],
+  "sample_count": 101,
+  "plotted_point_count": 437,
+  "clock_policy": "Separate host/query figures; no cross-clock conversion; untimed records indexed in extraction order",
+  "norm_policy": "Euclidean norm recomputed only from recorded actual vectors; missing vectors stay missing",
+  "scope": "Initial settle, sensing/input, command start, execution and execution end; excludes takeoff, return and landing",
+  "flights": [
+    {
+      "label": "V2 | efficiency",
+      "report_path": "D:\\forAirsim\\logs\\trajectory_efficiency_geometry_oracle_20261003_100122_036727\\report.json",
+      "report_sha256": "7aa680296aa066bd1d040378864252204223ec34230a947eec60db5c114f4638",
+      "manifest_path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100056_6707762\\manifest.json",
+      "episode_id": "trajectory_efficiency_geometry_oracle_20261003_100122_036727",
+      "session_index": 1,
+      "run": 1,
+      "time_origins": {
+        "host_monotonic_origin_s": 1276.046,
+        "query_timestamp_origin_ns": 1790992903211811584
+      },
+      "configuration": {
+        "durations_s": [
+          3.0
+        ],
+        "sample_dt_s": 0.02,
+        "candidate_steps_x_m": [
+          0.0,
+          0.1,
+          0.2,
+          0.22
+        ],
+        "candidate_steps_y_m": [
+          -0.2,
+          -0.12,
+          0.0,
+          0.12,
+          0.2
+        ],
+        "candidate_steps_z_m": [
+          0.0
+        ],
+        "max_acceleration_m_s2": 0.3,
+        "command_duration_s": 0.3,
+        "lookahead_s": 0.75,
+        "position_gain": 0.8,
+        "min_body_target_distance_m": 2.0,
+        "desired_geometry_body_center_m": 3.7,
+        "desired_surface_body_distance_m": 3.2,
+        "attitude_limit_deg": 7.5,
+        "settle_speed_m_s": 0.025,
+        "settle_acceleration_m_s2": 0.08,
+        "settle_stable_s": 0.25,
+        "settle_timeout_s": 8.0,
+        "origin_translation_tolerance_m": 0.05,
+        "execution_speed_cap_m_s": 0.15,
+        "max_rgb_depth_skew_s": 0.03,
+        "execution_mode": "fixed_world_height_preview",
+        "fixed_world_height_ned_m": -3.0,
+        "execution_guard_margin_m": 0.15,
+        "fixed_height_max_error_m": 0.12,
+        "execution_sample_dt_s": 0.1,
+        "execution_ramp_acceleration_m_s2": 0.15,
+        "plan_start_position_tolerance_m": 0.04,
+        "max_interface_planning_steps": 3
+      },
+      "protective_return_reason": "Measured initial acceleration exceeds planner budget",
+      "approach_stop_reason": "unsupported_input_or_no_valid_plan_controller_protection",
+      "task_success": false,
+      "status": "PASS",
+      "planning_step_count": 2,
+      "command_completion_count": 2,
+      "sample_count": 17,
+      "phase_counts": {
+        "settle": 3,
+        "planning_input": 4,
+        "command_start": 2,
+        "execute": 6,
+        "execute_end": 2
+      },
+      "actual_metric_counts": {
+        "world_z_ned_m": 17,
+        "acceleration_norm_m_s2": 14,
+        "speed_norm_m_s": 16
+      },
+      "sampled_acceleration_max_m_s2": 0.27015541858590414
+    },
+    {
+      "label": "V2 | perception",
+      "report_path": "D:\\forAirsim\\logs\\trajectory_perception_geometry_oracle_20261003_100218_266755\\report.json",
+      "report_sha256": "f6212bd54b0f7faed25544061cf435f782d8f504d1ca9d0c1377053941f68bb8",
+      "manifest_path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100056_6707762\\manifest.json",
+      "episode_id": "trajectory_perception_geometry_oracle_20261003_100218_266755",
+      "session_index": 1,
+      "run": 2,
+      "time_origins": {
+        "host_monotonic_origin_s": 1329.406,
+        "query_timestamp_origin_ns": null
+      },
+      "configuration": {
+        "durations_s": [
+          3.0
+        ],
+        "sample_dt_s": 0.02,
+        "candidate_steps_x_m": [
+          0.0,
+          0.1,
+          0.2,
+          0.22
+        ],
+        "candidate_steps_y_m": [
+          -0.2,
+          -0.12,
+          0.0,
+          0.12,
+          0.2
+        ],
+        "candidate_steps_z_m": [
+          0.0
+        ],
+        "max_acceleration_m_s2": 0.3,
+        "command_duration_s": 0.3,
+        "lookahead_s": 0.75,
+        "position_gain": 0.8,
+        "min_body_target_distance_m": 2.0,
+        "desired_geometry_body_center_m": 3.7,
+        "desired_surface_body_distance_m": 3.2,
+        "attitude_limit_deg": 7.5,
+        "settle_speed_m_s": 0.025,
+        "settle_acceleration_m_s2": 0.08,
+        "settle_stable_s": 0.25,
+        "settle_timeout_s": 8.0,
+        "origin_translation_tolerance_m": 0.05,
+        "execution_speed_cap_m_s": 0.15,
+        "max_rgb_depth_skew_s": 0.03,
+        "execution_mode": "fixed_world_height_preview",
+        "fixed_world_height_ned_m": -3.0,
+        "execution_guard_margin_m": 0.15,
+        "fixed_height_max_error_m": 0.12,
+        "execution_sample_dt_s": 0.1,
+        "execution_ramp_acceleration_m_s2": 0.15,
+        "plan_start_position_tolerance_m": 0.04,
+        "max_interface_planning_steps": 3
+      },
+      "protective_return_reason": "Measured initial acceleration exceeds planner budget",
+      "approach_stop_reason": "unsupported_input_or_no_valid_plan_controller_protection",
+      "task_success": false,
+      "status": "PASS",
+      "planning_step_count": 0,
+      "command_completion_count": 0,
+      "sample_count": 4,
+      "phase_counts": {
+        "settle": 3,
+        "planning_input": 1
+      },
+      "actual_metric_counts": {
+        "world_z_ned_m": 4,
+        "acceleration_norm_m_s2": 3,
+        "speed_norm_m_s": 3
+      },
+      "sampled_acceleration_max_m_s2": 0.17080855975995804
+    },
+    {
+      "label": "V3 | efficiency",
+      "report_path": "D:\\forAirsim\\logs\\trajectory_efficiency_geometry_oracle_20261003_100943_358270\\report.json",
+      "report_sha256": "5e26802524c994dbfa653811e8f9c392d840ed209b970fe8e0628889f9e85b07",
+      "manifest_path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100923_0636899\\manifest.json",
+      "episode_id": "trajectory_efficiency_geometry_oracle_20261003_100943_358270",
+      "session_index": 1,
+      "run": 1,
+      "time_origins": {
+        "host_monotonic_origin_s": 1777.062,
+        "query_timestamp_origin_ns": 1790993403943260928
+      },
+      "configuration": {
+        "durations_s": [
+          3.0
+        ],
+        "sample_dt_s": 0.02,
+        "candidate_steps_x_m": [
+          0.0,
+          0.1,
+          0.2,
+          0.22
+        ],
+        "candidate_steps_y_m": [
+          -0.2,
+          -0.12,
+          0.0,
+          0.12,
+          0.2
+        ],
+        "candidate_steps_z_m": [
+          0.0
+        ],
+        "max_acceleration_m_s2": 0.3,
+        "command_duration_s": 0.3,
+        "lookahead_s": 0.75,
+        "position_gain": 0.8,
+        "min_body_target_distance_m": 2.0,
+        "desired_geometry_body_center_m": 3.7,
+        "desired_surface_body_distance_m": 3.2,
+        "attitude_limit_deg": 7.5,
+        "settle_speed_m_s": 0.025,
+        "settle_acceleration_m_s2": 0.08,
+        "settle_stable_s": 0.25,
+        "settle_timeout_s": 8.0,
+        "origin_translation_tolerance_m": 0.05,
+        "execution_speed_cap_m_s": 0.15,
+        "max_rgb_depth_skew_s": 0.03,
+        "execution_mode": "fixed_world_height_preview",
+        "fixed_world_height_ned_m": -3.0,
+        "execution_guard_margin_m": 0.15,
+        "fixed_height_max_error_m": 0.12,
+        "execution_sample_dt_s": 0.1,
+        "execution_ramp_acceleration_m_s2": 0.15,
+        "plan_start_position_tolerance_m": 0.04,
+        "max_interface_planning_steps": 3,
+        "continuous_goal_keepalive_s": 0.5
+      },
+      "protective_return_reason": null,
+      "approach_stop_reason": "configured_interface_step_limit_reached",
+      "task_success": false,
+      "status": "PASS",
+      "planning_step_count": 3,
+      "command_completion_count": 3,
+      "sample_count": 40,
+      "phase_counts": {
+        "settle": 10,
+        "pre_capture": 5,
+        "provider_query": 5,
+        "planning_input": 5,
+        "command_start": 3,
+        "execute": 9,
+        "execute_end": 3
+      },
+      "actual_metric_counts": {
+        "world_z_ned_m": 35,
+        "acceleration_norm_m_s2": 40,
+        "speed_norm_m_s": 40
+      },
+      "sampled_acceleration_max_m_s2": 0.171353605541592
+    },
+    {
+      "label": "V3 | perception",
+      "report_path": "D:\\forAirsim\\logs\\trajectory_perception_geometry_oracle_20261003_101040_154299\\report.json",
+      "report_sha256": "4af63c414ae315ba30eee6a33e6ff8e7f9d2a5245e44e8c8bd1be8af6051cc74",
+      "manifest_path": "D:\\forAirsim\\logs\\trajectory_interface_pilot_20261003_100923_0636899\\manifest.json",
+      "episode_id": "trajectory_perception_geometry_oracle_20261003_101040_154299",
+      "session_index": 1,
+      "run": 2,
+      "time_origins": {
+        "host_monotonic_origin_s": 1831.0,
+        "query_timestamp_origin_ns": 1790993457791409664
+      },
+      "configuration": {
+        "durations_s": [
+          3.0
+        ],
+        "sample_dt_s": 0.02,
+        "candidate_steps_x_m": [
+          0.0,
+          0.1,
+          0.2,
+          0.22
+        ],
+        "candidate_steps_y_m": [
+          -0.2,
+          -0.12,
+          0.0,
+          0.12,
+          0.2
+        ],
+        "candidate_steps_z_m": [
+          0.0
+        ],
+        "max_acceleration_m_s2": 0.3,
+        "command_duration_s": 0.3,
+        "lookahead_s": 0.75,
+        "position_gain": 0.8,
+        "min_body_target_distance_m": 2.0,
+        "desired_geometry_body_center_m": 3.7,
+        "desired_surface_body_distance_m": 3.2,
+        "attitude_limit_deg": 7.5,
+        "settle_speed_m_s": 0.025,
+        "settle_acceleration_m_s2": 0.08,
+        "settle_stable_s": 0.25,
+        "settle_timeout_s": 8.0,
+        "origin_translation_tolerance_m": 0.05,
+        "execution_speed_cap_m_s": 0.15,
+        "max_rgb_depth_skew_s": 0.03,
+        "execution_mode": "fixed_world_height_preview",
+        "fixed_world_height_ned_m": -3.0,
+        "execution_guard_margin_m": 0.15,
+        "fixed_height_max_error_m": 0.12,
+        "execution_sample_dt_s": 0.1,
+        "execution_ramp_acceleration_m_s2": 0.15,
+        "plan_start_position_tolerance_m": 0.04,
+        "max_interface_planning_steps": 3,
+        "continuous_goal_keepalive_s": 0.5
+      },
+      "protective_return_reason": null,
+      "approach_stop_reason": "configured_interface_step_limit_reached",
+      "task_success": false,
+      "status": "PASS",
+      "planning_step_count": 3,
+      "command_completion_count": 3,
+      "sample_count": 40,
+      "phase_counts": {
+        "settle": 10,
+        "pre_capture": 5,
+        "provider_query": 5,
+        "planning_input": 5,
+        "command_start": 3,
+        "execute": 9,
+        "execute_end": 3
+      },
+      "actual_metric_counts": {
+        "world_z_ned_m": 35,
+        "acceleration_norm_m_s2": 40,
+        "speed_norm_m_s": 40
+      },
+      "sampled_acceleration_max_m_s2": 0.17114653157534238
+    }
+  ]
+}

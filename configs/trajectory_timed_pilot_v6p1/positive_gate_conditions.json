@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "V6P1_SEPARATE_POSITIVE_DIAGNOSTIC_CONFIG_FREEZE",
+  "preparation_status": "PREPARED_NOT_EXECUTED",
+  "formal_thesis_effect_results": false,
+  "prepared_local": "2026-10-03T17:45:30.228373+08:00",
+  "planned_sessions": 1,
+  "planned_flights": 2,
+  "conditions": [
+    {
+      "condition_id": "target_y_plus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p1\\target_y_plus_0p4.json",
+      "configuration_sha256": "bb68bdadc597c328ec9ddbfc503795097db5c04255d6fbfab5da3c9f49b0bc50",
+      "planned_repetitions": 1
+    }
+  ],
+  "session_plan": [
+    {
+      "planned_session_index": 1,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p1\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ]
+    }
+  ],
+  "separate_short_gate": {
+    "path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6p1\\center_short.json",
+    "sha256": "86a27cec0bb7c3c4c2b93ba10238e1b4f7d3d9353c0fcba07581504ef3e980f0",
+    "planned_flights": 2
+  },
+  "parent_freeze": {
+    "path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\conditions.json",
+    "sha256": "a0ec8db1b6d7867233f2b5f4e984417202c5eedca2bd965d09acb400ccd0193d"
+  },
+  "current_flight_source_sha256": {
+    "single_drone_experiment.py": "0f55e1d3d5afcb55cb372350df848fb8789279824fc3d905f3d477a37fa7ca1b",
+    "visual_servo.py": "35cd56bdf03aa8abd8338b865371e8c5e922ea1383fbe900b5fc6e0d2b1fb19e",
+    "target_provider.py": "7be594dfdd2e9de9485e5266aa7e42acc4fd90a78b3c66275ae20d46521899e6",
+    "balloon_detector.py": "8aea879e56ecddea5652ec817ea77ee9f1eea382a17843daafd4a42959fd46a0",
+    "trajectory_single_experiment.py": "0f28dd77456b38a208f3b0cdc3050e845239f0603511eb7231bd72aebf4dd57c",
+    "perception_trajectory_planner.py": "62e32a2d9e41be30d1e6cf6b34266cbfcc1965d06a3b6bad47bab4ea0b80d0b0",
+    "timestamped_target_provider.py": "d00e3025c7a25cb9196f9bb9b2b91bd838010efb156f947aafc4458e8109ecd7",
+    "matched_trajectory_start.py": "3148f30a73f00dc53db2b5bed8c6ddbace7617a3fde4c830987cc80455cf7c53",
+    "trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+    "trajectory_timed_reference.py": "3f410b85ad47f74b0c25dee1b36b5f2445782fe413ba2446e84ecf409aca1d82",
+    "trajectory_timed_experiment.py": "d64257107e62c1bd393127ff3b0e0a80364d597ff0e46b76040f3831110fc732"
+  },
+  "generator": {
+    "path": "D:\\forAirsim\\python\\prepare_trajectory_elapsed_ramp_conditions.py",
+    "sha256": "5c6509fabfda9ceddf893c5f05dc9aabd2403cdb67502e8f3a7566cfc122b845"
+  },
+  "physical_budget_changes": "NONE; .15m/s speed, .30m/s2 actual acceleration, .15m/s2 command change rate, workspace and .50s age retained",
+  "gate": "Independent short gate, separate positive gate, then full frozen development sweep",
+  "ai_assistance": "Preparation assisted by AI; no unexecuted outcome recorded"
+}

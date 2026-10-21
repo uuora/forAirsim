@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_BEFORE_COLLECTION_AND_TRAINING",
+  "kind": "T1_CONTROLLED_BALLOON_ADAPTATION_PILOT",
+  "created_utc": "2026-10-04T03:04:55.559336+00:00",
+  "campaign_root": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004",
+  "settings_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\settings.json",
+  "settings_sha256": "697153c0ef9dd13df69f9b3f966794c672adaaf5e94d879c00fb15ab301cd70b",
+  "ground_only": true,
+  "new_flight_requests": 0,
+  "cloud_requests": 0,
+  "cases_per_episode": 24,
+  "frames_per_case": 1,
+  "seed_rule": "6100400 + one-based episode index; RNG used only for scene generation",
+  "source_sha256": "0679c7b5eba98ce9f2f27611ce88a470680cdcbe295bcdae228b84cf66ca18a0",
+  "expected_source_sha256": {
+    "t1_ground_perception_probe.py": "a1749402c02f5a1bd20b1a1ac62d01fcb0cc785bc36c659e15a292ac23b01c67",
+    "setup_scene.py": "30668ece8e6e24d99dbb3303e8b79f468773ba20925afc57099f748731cf1af5",
+    "camera_geometry.py": "bcf86f5cbe6159ff0ad9890f6316ddd463fc297af6fea017a950cd462d29088d"
+  },
+  "split_unit": "whole independently launched UE process/session",
+  "target_and_distractor_class": "balloon",
+  "label_kind": "visible-mask half-open bounding boxes",
+  "model_initial_weights": "D:\\forAirsim\\models\\yolo11n.pt",
+  "training_protocol": {
+    "epochs": 20,
+    "imgsz": 640,
+    "batch": 8,
+    "workers": 0,
+    "device": 0,
+    "seed": 6100420,
+    "deterministic": true,
+    "optimizer": "AdamW",
+    "lr0": 0.001,
+    "patience": 20,
+    "amp": false,
+    "pretrained": true,
+    "hsv_h": 0.0,
+    "hsv_s": 0.2,
+    "hsv_v": 0.2,
+    "mosaic": 0.5,
+    "degrees": 5.0,
+    "translate": 0.1,
+    "scale": 0.2,
+    "fliplr": 0.5,
+    "close_mosaic": 5,
+    "plots": false
+  },
+  "evaluation_protocol": {
+    "fixed_operating_confidence": 0.25,
+    "nms_iou": 0.5,
+    "matching_iou": 0.5,
+    "test_use": "one evaluation after validation-selected best checkpoint",
+    "baselines": [
+      "original_COCO_sports_ball",
+      "specialist_balloon"
+    ],
+    "timing_clock": "perf_counter_ns",
+    "scope": "same-map same-red-material held-out scene seeds only"
+  },
+  "episodes": [
+    {
+      "episode_id": "ep01_train",
+      "split": "train",
+      "seed": 6100401,
+      "acquisition_seed": 6100401,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep01_train.json",
+      "protocol_sha256": "ad8defd376c3ff0530e9c7be44a436bc2a4d7966137540a1f51510c7ef36fe79",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep01_train\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep01_train\\probe\\report.json"
+    },
+    {
+      "episode_id": "ep02_train",
+      "split": "train",
+      "seed": 6100402,
+      "acquisition_seed": 6100402,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep02_train.json",
+      "protocol_sha256": "237cd498254dc4b3a2258b1c1f9aeca269b580833b277b7d6bd8a6405a2ff910",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep02_train\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep02_train\\probe\\report.json"
+    },
+    {
+      "episode_id": "ep03_train",
+      "split": "train",
+      "seed": 6100403,
+      "acquisition_seed": 6100403,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep03_train.json",
+      "protocol_sha256": "cff3f15a95c7ebd97447a1acc4deb9fa3e902768d8f3dd2eafb808d642493ce6",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep03_train\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep03_train\\probe\\report.json"
+    },
+    {
+      "episode_id": "ep04_train",
+      "split": "train",
+      "seed": 6100404,
+      "acquisition_seed": 6100404,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep04_train.json",
+      "protocol_sha256": "9f549f87bc4dddac40ef924a44b215814ee9915b30d24bc84bbccecaff9e45e1",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep04_train\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep04_train\\probe\\report.json"
+    },
+    {
+      "episode_id": "ep05_validation",
+      "split": "validation",
+      "seed": 6100405,
+      "acquisition_seed": 6100405,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep05_validation.json",
+      "protocol_sha256": "57e3aec263b1fb7cec3e4764e368ca4675fab9a80cc630b2a7b890ac6e5d9b89",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep05_validation\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep05_validation\\probe\\report.json"
+    },
+    {
+      "episode_id": "ep06_validation",
+      "split": "validation",
+      "seed": 6100406,
+      "acquisition_seed": 6100406,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep06_validation.json",
+      "protocol_sha256": "11ed576e08bdbfe3c7e3f2c35c8d77cfe0b28135a622a1a927c8ef3d4f31f626",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep06_validation\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep06_validation\\probe\\report.json"
+    },
+    {
+      "episode_id": "ep07_test",
+      "split": "test",
+      "seed": 6100407,
+      "acquisition_seed": 6100407,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep07_test.json",
+      "protocol_sha256": "bf424ef0ea0f2b71e28dd8dded5983062b2cd07c7673095009271d997d3e7e61",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep07_test\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep07_test\\probe\\report.json"
+    },
+    {
+      "episode_id": "ep08_test",
+      "split": "test",
+      "seed": 6100408,
+      "acquisition_seed": 6100408,
+      "protocol_path": "D:\\forAirsim\\configs\\t1_balloon_adaptation_v1_20261004\\ep08_test.json",
+      "protocol_sha256": "a3a43b61826d34577a7d727e105ae30d7794d5f5dd2c6d52a3999788d1af34ba",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep08_test\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_balloon_adaptation_campaign_v1_20261004\\ep08_test\\probe\\report.json"
+    }
+  ],
+  "limits": [
+    "Small controlled adaptation pilot; two validation and two test UE sessions",
+    "All episodes share Blocks map, sphere mesh and red material; no map or appearance generalization claim",
+    "Scene labels supervise detector training only; instance identity is a separate downstream task",
+    "Virtual camera changes do not validate vehicle flight/trajectory or formal thesis efficacy"
+  ],
+  "ai_assistance": "AI assisted configuration, implementation and bounded reporting",
+  "model_initial_weights_sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1"
+}

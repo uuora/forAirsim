@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "V6_TIME_INDEXED_FRESHNESS_CONFIG_FREEZE",
+  "preparation_status": "PREPARED_NOT_EXECUTED",
+  "formal_thesis_effect_results": false,
+  "prepared_local": "2026-10-03T17:28:19.556842+08:00",
+  "planned_sessions": 6,
+  "planned_flights": 12,
+  "conditions": [
+    {
+      "condition_id": "center",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\center.json",
+      "configuration_sha256": "4bf0e8be9d0fb0cd79fc1df0adc241d9d4bd2c6369a167e0642499f9469790d0",
+      "planned_repetitions": 2
+    },
+    {
+      "condition_id": "target_y_plus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\target_y_plus_0p4.json",
+      "configuration_sha256": "d98b3ca4454913ac8404056a056fa1ba3123a345e78d4883cd5806131611ccc3",
+      "planned_repetitions": 2
+    },
+    {
+      "condition_id": "target_y_minus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\target_y_minus_0p4.json",
+      "configuration_sha256": "5777453e247b01799a4b4ba99d0d83fdce8cefe62eda91eb1627f62c73137720",
+      "planned_repetitions": 2
+    }
+  ],
+  "session_plan": [
+    {
+      "planned_session_index": 1,
+      "condition_id": "center",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\center.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ]
+    },
+    {
+      "planned_session_index": 2,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ]
+    },
+    {
+      "planned_session_index": 3,
+      "condition_id": "target_y_minus_0p4",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\target_y_minus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ]
+    },
+    {
+      "planned_session_index": 4,
+      "condition_id": "center",
+      "repetition": 2,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\center.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ]
+    },
+    {
+      "planned_session_index": 5,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 2,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ]
+    },
+    {
+      "planned_session_index": 6,
+      "condition_id": "target_y_minus_0p4",
+      "repetition": 2,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\target_y_minus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ]
+    }
+  ],
+  "separate_short_gate": {
+    "path": "D:\\forAirsim\\configs\\trajectory_timed_pilot_v6\\center_short.json",
+    "sha256": "00920e3af8a8101f1fdf985303ff2aefc47cb81b7e2dfeaffbf0c221f1e5b991",
+    "planned_flights": 2
+  },
+  "parent_freeze": {
+    "path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\conditions.json",
+    "sha256": "e093e7066fe52fe99919f23df341e4ba313df4db8938d782d0543c18059ba06e"
+  },
+  "current_flight_source_sha256": {
+    "single_drone_experiment.py": "0f55e1d3d5afcb55cb372350df848fb8789279824fc3d905f3d477a37fa7ca1b",
+    "visual_servo.py": "35cd56bdf03aa8abd8338b865371e8c5e922ea1383fbe900b5fc6e0d2b1fb19e",
+    "target_provider.py": "7be594dfdd2e9de9485e5266aa7e42acc4fd90a78b3c66275ae20d46521899e6",
+    "balloon_detector.py": "8aea879e56ecddea5652ec817ea77ee9f1eea382a17843daafd4a42959fd46a0",
+    "trajectory_single_experiment.py": "0f28dd77456b38a208f3b0cdc3050e845239f0603511eb7231bd72aebf4dd57c",
+    "perception_trajectory_planner.py": "62e32a2d9e41be30d1e6cf6b34266cbfcc1965d06a3b6bad47bab4ea0b80d0b0",
+    "timestamped_target_provider.py": "d00e3025c7a25cb9196f9bb9b2b91bd838010efb156f947aafc4458e8109ecd7",
+    "matched_trajectory_start.py": "3148f30a73f00dc53db2b5bed8c6ddbace7617a3fde4c830987cc80455cf7c53",
+    "trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+    "trajectory_timed_reference.py": "4919e68ed2f42ade46c02d390b1353a0f9ca32699afc84916ad3d3dd77c07a3b",
+    "trajectory_timed_experiment.py": "7dc45c665e8eef46b03744359e4b142674db57681c4102f1b641e722d1dc26b1"
+  },
+  "generator": {
+    "path": "D:\\forAirsim\\python\\prepare_trajectory_timed_conditions.py",
+    "sha256": "4e5bdf03944efe11755ba756647088a5827e65bb9f02ac257e132987fdf6f8eb"
+  },
+  "gate": "Short trace/motion gate, separate positive diagnostic gate, then frozen full development sweep",
+  "ai_assistance": "Configuration preparation assisted by AI; no unrun outcome recorded"
+}

@@ -1,0 +1,10 @@
+{
+  "source_map": "/Game/EnclosedUAVLabManual/Maps/EnclosedUAVLab_Manual",
+  "source_file": "D:\\forAirsim\\external\\AirSim\\Unreal\\Environments\\Blocks\\Content\\EnclosedUAVLabManual\\Maps\\EnclosedUAVLab_Manual.umap",
+  "source_sha256": "d686934f7215219429f9fa9b053351a397383f6f42a0240b5e457e2aa4d485e5",
+  "runtime_map": "/Game/EnclosedUAVLabManual/Maps/EnclosedUAVLab_RuntimeRandom_v1",
+  "runtime_file": "D:\\forAirsim\\external\\AirSim\\Unreal\\Environments\\Blocks\\Content\\EnclosedUAVLabManual\\Maps\\EnclosedUAVLab_RuntimeRandom_v1.umap",
+  "runtime_sha256": "03cd1655a479114dd928fd035cb814cb5e171234a217e7262f7bc5d2faa68e2f",
+  "static_geometry_verified_equal": true,
+  "receipt": "D:\\forAirsim\\reports\\step3_continue_20261010_152319\\runtime_copy_build.json"
+}

@@ -1,0 +1,5 @@
+﻿model,episode_id,frames,tp,fp,fn,recall,precision,median_latency_ms
+original_COCO_sports_ball,ep07_test,24,10,5,18,0.35714285714285715,0.6666666666666666,49.9614
+original_COCO_sports_ball,ep08_test,24,15,4,13,0.5357142857142857,0.7894736842105263,48.54115
+specialist_balloon,ep07_test,24,28,0,0,1.0,1.0,47.88905
+specialist_balloon,ep08_test,24,28,0,0,1.0,1.0,49.00565

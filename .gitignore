@@ -33,3 +33,21 @@ docs/references-20260915/sources/*.pdf
 
 # Editor-local settings (absolute local paths)
 .vscode/
+
+# Credentials, machine-local state and generated experiment output
+.env
+.env.*
+!.env.example
+/.runtime/
+/reports/
+/runs/
+/tmp/
+*.lnk
+
+# Frozen per-run copies stay with the local experiment archive
+/configs/**/source_bundle/
+*.pt
+*.pth
+
+# Large generated figure inputs (raw experiments remain local)
+/docs/research-summary-20261008/**/input_campaign.json

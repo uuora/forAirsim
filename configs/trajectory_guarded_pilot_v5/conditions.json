@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "V5_EXECUTION_ENVELOPE_CONFIG_FREEZE",
+  "preparation_status": "PREPARED_NOT_EXECUTED",
+  "formal_thesis_effect_results": false,
+  "prepared_local": "2026-10-03T16:21:27.863548+08:00",
+  "planned_sessions": 3,
+  "planned_flights": 6,
+  "conditions": [
+    {
+      "condition_id": "center",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\center.json",
+      "configuration_sha256": "cc616a0d82a06f298cc66397f67a941798c14ba0ce09591d059e7933d20149a1",
+      "planned_repetitions": 1
+    },
+    {
+      "condition_id": "target_y_plus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\target_y_plus_0p4.json",
+      "configuration_sha256": "ce326eb27f1845ea6b8c6738cf00a8f8105b5762363e912259d4bb2c113c117b",
+      "planned_repetitions": 1
+    },
+    {
+      "condition_id": "target_y_minus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\target_y_minus_0p4.json",
+      "configuration_sha256": "d4c78e6c35a3f64a3db4300bfb110b880384832ddc766e28d41a9170c21e0a39",
+      "planned_repetitions": 1
+    }
+  ],
+  "session_plan": [
+    {
+      "planned_session_index": 1,
+      "condition_id": "center",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\center.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ]
+    },
+    {
+      "planned_session_index": 2,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ]
+    },
+    {
+      "planned_session_index": 3,
+      "condition_id": "target_y_minus_0p4",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\target_y_minus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ]
+    }
+  ],
+  "separate_short_gate": {
+    "path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\center_short.json",
+    "sha256": "943fb0a9b112cbd042fb273ab3ffe6497fe20d20c9aa31542dc9e33c03bb1148",
+    "planned_flights": 2
+  },
+  "parent_v4_freeze": {
+    "path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\conditions.json",
+    "sha256": "67cc897a7128c5cfadc5e7ec08f2c6f304af2458f511e4019db7af485e920e61"
+  },
+  "generator": {
+    "path": "D:\\forAirsim\\python\\prepare_trajectory_guarded_conditions.py",
+    "sha256": "1ff3eb75beb7b9611373dfdf4654225a56a92088a21a28b9188fdaade16e9ac6"
+  },
+  "gate": "Short matched-start and sampled physical motion gate, then staged center/positive/negative pilots",
+  "ai_assistance": "Engineering configuration preparation assisted by AI; no unrun result recorded"
+}

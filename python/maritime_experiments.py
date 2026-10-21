@@ -6,8 +6,25 @@ import re
 import time
 from pathlib import Path
 import airsim
+import numpy as np
 
 ROOT=Path(__file__).resolve().parents[1]
+
+
+def balloon_locations(profile):
+    locations = [[4, 9.5, -1.5], [11, -10, -1.7], [-11, 6.5, -1.45]]
+    if profile['occlusion']:
+        locations[1] = [5, 0, -1.7]
+    if 'balloon_positions_relative_hull_m' in profile:
+        locations = profile['balloon_positions_relative_hull_m']
+    if len(locations) != 3 or any(len(x) != 3 or not np.isfinite(x).all() for x in locations):
+        raise ValueError('Expected three finite balloon positions')
+    if min(np.linalg.norm(np.subtract(locations[i][:2], locations[j][:2]))
+           for i in range(3) for j in range(i + 1, 3)) < 2.0:
+        raise ValueError('Balloon positions must remain at least 2 m apart')
+    return locations
+
+
 def unique(client, pattern):
     names=[n for n in client.simListSceneObjects('MH2_.*') if re.fullmatch(pattern,n)]
     if len(names)!=1: raise RuntimeError('Expected unique actor: '+pattern)
@@ -16,6 +33,7 @@ def unique(client, pattern):
 def apply(client, name):
     raw=(ROOT/'configs/maritime_experiments.json').read_bytes()
     config=json.loads(raw); p=config['profiles'][name]
+    locations=balloon_locations(p)
     applied=[]
     for pattern in ('MH2_OceanGrid(_[0-9]+)?','MH2_DistantOcean(_[0-9]+)?'):
         actor=unique(client,pattern)
@@ -28,8 +46,6 @@ def apply(client, name):
     client.simSetObjectPose(sun,sunpose,True)
     hull=client.simGetObjectPose(unique(client,'MH2_Vessel_Hull(_[0-9]+)?')).position
     # Coordinates relative to the original hull origin. Move balloon AND string.
-    locations=[(4,9.5,-1.5),(11,-10,-1.7),(-11,6.5,-1.45)]
-    if p['occlusion']: locations[1]=(5,0,-1.7)
     positions={}
     for i,(x,y,z) in enumerate(locations):
         for prefix,z_offset in [('Balloon',z),('String',z/2)]:

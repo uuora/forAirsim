@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "kind": "MATCHED_START_LATERAL_PILOT_CONFIG_FREEZE",
+  "protocol_id": "single_trajectory_matched_start_lateral_v4_20261003",
+  "research_scope": "development_matched_start_paired_lateral_pilot_fixed_height_preview",
+  "preparation_status": "PREPARED_NOT_EXECUTED",
+  "formal_thesis_effect_results": false,
+  "prepared_local": "2026-10-03T11:24:44.143426+08:00",
+  "order_seed": 20261003,
+  "order_seed_scope": "lateral_condition_order_only_not_scene_seed",
+  "source_inputs": {
+    "base_config": {
+      "path": "D:\\forAirsim\\configs\\single_trajectory_fixed_height_v3_extended.json",
+      "sha256": "cfea84868c73a1ae3a2cede51105974c7894226380f3b88c3fb56c7d12a8c2f9"
+    },
+    "settings": {
+      "path": "D:\\forAirsim\\configs\\settings_trajectory_interface.json",
+      "sha256": "8ee7797f969868fcc4892232a8ef367e73ab6432c8f934d32ca59aae2c9e5b42"
+    },
+    "generator": {
+      "path": "D:\\forAirsim\\python\\prepare_trajectory_matched_conditions.py",
+      "sha256": "879a5a2acde84a2ca3774907a566824b1870794ecf0c1aff7a43d98e1448193f"
+    }
+  },
+  "initial_state_match": {
+    "enabled": true,
+    "position_tolerance_m": 0.015,
+    "speed_tolerance_m_s": 0.01,
+    "acceleration_tolerance_m_s2": 0.05,
+    "attitude_tolerance_deg": 1.0,
+    "stable_s": 0.5,
+    "timeout_s": 30.0,
+    "reposition_speed_cap_m_s": 0.05,
+    "reposition_acceleration_cap_m_s2": 0.05,
+    "proportional_gain": 0.8,
+    "command_dt_s": 0.1,
+    "max_sample_gap_s": 0.25
+  },
+  "planned_condition_count": 3,
+  "planned_independent_unreal_sessions": 6,
+  "planned_flights_per_session": 2,
+  "planned_flights": 12,
+  "method_configuration_scope": "Same condition configuration shared by both methods",
+  "planned_primary_target_source": "sensor_surface_estimate",
+  "gate_scope": "Root operator checks the short matched-start gate before progressive execution",
+  "conditions": [
+    {
+      "condition_id": "center",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\center.json",
+      "configuration_sha256": "50853d24a653f865ceaa0aa68b340d055be3578911888d845916759141b19635",
+      "target_world_ned_m": [
+        0.0,
+        0.0,
+        -3.0
+      ],
+      "target_offset_ned_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "planned_repetitions": 2
+    },
+    {
+      "condition_id": "target_y_minus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\target_y_minus_0p4.json",
+      "configuration_sha256": "991344b4a40cd02c9bd647f3e1670e3fd8d2253c9d733a33413d25807ed7468e",
+      "target_world_ned_m": [
+        0.0,
+        -0.4,
+        -3.0
+      ],
+      "target_offset_ned_m": [
+        0.0,
+        -0.4,
+        0.0
+      ],
+      "planned_repetitions": 2
+    },
+    {
+      "condition_id": "target_y_plus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\target_y_plus_0p4.json",
+      "configuration_sha256": "4ce4a6ab822b466e9f7803a612efa0dec12fcce0e9270e3a8db8c12004e48abd",
+      "target_world_ned_m": [
+        0.0,
+        0.4,
+        -3.0
+      ],
+      "target_offset_ned_m": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "planned_repetitions": 2
+    }
+  ],
+  "session_plan": [
+    {
+      "planned_session_index": 1,
+      "condition_id": "center",
+      "repetition": 1,
+      "independent_unreal_session": true,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\center.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ],
+      "reverse_order": false,
+      "order_seed": 20261003,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "planned_session_index": 2,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 1,
+      "independent_unreal_session": true,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ],
+      "reverse_order": false,
+      "order_seed": 20261003,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "planned_session_index": 3,
+      "condition_id": "target_y_minus_0p4",
+      "repetition": 1,
+      "independent_unreal_session": true,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\target_y_minus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ],
+      "reverse_order": false,
+      "order_seed": 20261003,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "planned_session_index": 4,
+      "condition_id": "target_y_minus_0p4",
+      "repetition": 2,
+      "independent_unreal_session": true,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\target_y_minus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ],
+      "reverse_order": true,
+      "order_seed": 20261003,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "planned_session_index": 5,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 2,
+      "independent_unreal_session": true,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ],
+      "reverse_order": true,
+      "order_seed": 20261003,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "planned_session_index": 6,
+      "condition_id": "center",
+      "repetition": 2,
+      "independent_unreal_session": true,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_matched_pilot_v4\\center.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "perception",
+        "efficiency"
+      ],
+      "reverse_order": true,
+      "order_seed": 20261003,
+      "execution_status": "NOT_RUN"
+    }
+  ],
+  "execution_results": [],
+  "limitations": [
+    "Prepared configuration and order only; all session entries are NOT_RUN",
+    "Fixed-height positive-time preview, not complete three-dimensional trajectory execution",
+    "No method superiority claim or formal experiment result is produced",
+    "A seeded condition order does not randomize Unreal dynamics or establish independent errors"
+  ],
+  "ai_assistance": "Configuration generator and offline tests authored with AI assistance"
+}

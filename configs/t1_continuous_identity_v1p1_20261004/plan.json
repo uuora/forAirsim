@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_BEFORE_SEQUENCE_COLLECTION",
+  "kind": "T1_GROUND_CONTINUOUS_IDENTITY_CAMPAIGN",
+  "created_utc": "2026-10-04T07:52:18.835985+00:00",
+  "campaign_root": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004",
+  "ground_only": true,
+  "formal_efficacy_results": false,
+  "new_flights": 0,
+  "planned_UE_sessions": 4,
+  "planned_slots_per_session": 60,
+  "target_generation": 1,
+  "settings_path": "D:\\forAirsim\\configs\\t1_continuous_identity_v1p1_20261004\\settings.json",
+  "settings_sha256": "697153c0ef9dd13df69f9b3f966794c672adaaf5e94d879c00fb15ab301cd70b",
+  "observer_module": "t1_continuous_semantic_observer",
+  "weights_config_path": "D:\\forAirsim\\configs\\t1_continuous_identity_v1p1_20261004\\detector_config.json",
+  "weights_config_sha256": "2b4e4abc6f272128c6282690b5e1b354b679ae2cd1b386cbdbbfd7c8af3cffea",
+  "weights_path": "D:\\forAirsim\\logs\\t1_balloon_yolo_training_v1p2_20261004\\training\\fixed_protocol\\weights\\best.pt",
+  "weights_sha256": "92b0dc0f4e17ff14e9c1e110b9cad9ef249274136ee9a28d99b7885dfb396844",
+  "source_inventory": [
+    {
+      "path": "D:\\forAirsim\\python\\t1_identity_sequence_probe.py",
+      "relative_path": "python/t1_identity_sequence_probe.py",
+      "sha256": "3cb5b16adf4c0b5036868f3a98d79aeb7fcda99cbbc643963cae1877d364611e"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\prepare_t1_identity_sequence.py",
+      "relative_path": "python/prepare_t1_identity_sequence.py",
+      "sha256": "7a5d65975fea0563b40b0ed94210a18467b3d6c9c3cabfddf519064008816be3"
+    },
+    {
+      "path": "D:\\forAirsim\\scripts\\run-t1-identity-sequence.ps1",
+      "relative_path": "scripts/run-t1-identity-sequence.ps1",
+      "sha256": "79184482d2790809f1a1eda7d483a9ee553bcba6cb252348c40f5d5600134b3c"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\test_t1_identity_sequence.py",
+      "relative_path": "python/test_t1_identity_sequence.py",
+      "sha256": "c6129dcb69f7adb2c26e1501333708d00784dfaa93630ee2603fd7969b86975b"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\t1_balloon_data_probe.py",
+      "relative_path": "python/t1_balloon_data_probe.py",
+      "sha256": "e5086bd10733a8f91f85c2c1998b93e8dabaea97e63448bf708bdd8b13aeae0e"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\t1_ground_perception_probe.py",
+      "relative_path": "python/t1_ground_perception_probe.py",
+      "sha256": "a1749402c02f5a1bd20b1a1ac62d01fcb0cc785bc36c659e15a292ac23b01c67"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\camera_geometry.py",
+      "relative_path": "python/camera_geometry.py",
+      "sha256": "bcf86f5cbe6159ff0ad9890f6316ddd463fc297af6fea017a950cd462d29088d"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\setup_scene.py",
+      "relative_path": "python/setup_scene.py",
+      "sha256": "30668ece8e6e24d99dbb3303e8b79f468773ba20925afc57099f748731cf1af5"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\braking_startup_readiness.py",
+      "relative_path": "python/braking_startup_readiness.py",
+      "sha256": "f42f304e6955f983e89826a1f0ce846554f9dbf1a7de0718148ad0fcc7d353db"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\t1_continuous_semantic_observer.py",
+      "relative_path": "python/t1_continuous_semantic_observer.py",
+      "sha256": "7429751e342f620251b681fa80de96948e7f7682164322a059476ec72c3fa5d4"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\t1_temporal_identity.py",
+      "relative_path": "python/t1_temporal_identity.py",
+      "sha256": "ac42be0e86d8e825ec4a1aa62345f9537a1eb69a442ef965436c0cc149c758c4"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\t1_semantic_perception.py",
+      "relative_path": "python/t1_semantic_perception.py",
+      "sha256": "14994b166715bd8ae513b851dd8d9bf2e89925f8794ac2a8261ffd190647f3d0"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\specialist_balloon_detector.py",
+      "relative_path": "python/specialist_balloon_detector.py",
+      "sha256": "4212d42cae50e8c333f1f760e3246d0838e14be6dc149799bb0dfda6dd65e71a"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\train_t1_balloon_yolo.py",
+      "relative_path": "python/train_t1_balloon_yolo.py",
+      "sha256": "905d866e8334638af54a9d367b115a5b88d14ae3d1c31fa275dba0799c7324b5"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\vlx_api_client.py",
+      "relative_path": "python/vlx_api_client.py",
+      "sha256": "c0fa95351ad80442466132550a92c79f702980a097c57487d01a48647b87f749"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\t1_identity_sequence_probe_v1p1.py",
+      "relative_path": "python/t1_identity_sequence_probe_v1p1.py",
+      "sha256": "88b07dcb1d7fd9e4768ffe423d1ca0310145ac6946e21aa6f4e6f614f7c71464"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\prepare_t1_identity_sequence_v1p1.py",
+      "relative_path": "python/prepare_t1_identity_sequence_v1p1.py",
+      "sha256": "e97fbb9bd5d8b45cd7f089fa4cb6ff2af102f7500e2b83662c14aa68ea909684"
+    },
+    {
+      "path": "D:\\forAirsim\\scripts\\run-t1-identity-sequence-v1p1.ps1",
+      "relative_path": "scripts/run-t1-identity-sequence-v1p1.ps1",
+      "sha256": "aec8fe5723bd254748e0e4ca4f86928cf27b8b8e262b09d20dd3784e496023d1"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\test_t1_identity_sequence_v1p1.py",
+      "relative_path": "python/test_t1_identity_sequence_v1p1.py",
+      "sha256": "c99fc4a2f3c9bc2c6cee3215eb3cf1cf8f7b6d8cf2b0ce3d6fff079c9c0d4bf3"
+    }
+  ],
+  "runtime": {
+    "python": "3.10.21",
+    "python_implementation": "CPython",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "airsim": "1.8.1",
+      "numpy": "1.26.4",
+      "opencv-python": "4.10.0.84",
+      "Pillow": "12.3.0",
+      "torch": "2.11.0+cu128",
+      "ultralytics": "8.4.153",
+      "requests": "2.34.2"
+    }
+  },
+  "episodes": [
+    {
+      "episode_id": "visible_identity_cue_seed6100410",
+      "condition": "visible_identity_cue",
+      "acquisition_seed": 6100410,
+      "recovery_observability": "VISUAL_ATTRIBUTE",
+      "protocol_path": "D:\\forAirsim\\configs\\t1_continuous_identity_v1p1_20261004\\visible_identity_cue_seed6100410.json",
+      "protocol_sha256": "eefca2a26ee5809ede5f10184fb1d22bc7c0729ea0752d3184bf182c016e809c",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\visible_identity_cue_seed6100410\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\visible_identity_cue_seed6100410\\probe\\report.json"
+    },
+    {
+      "episode_id": "visible_identity_cue_seed6100411",
+      "condition": "visible_identity_cue",
+      "acquisition_seed": 6100411,
+      "recovery_observability": "VISUAL_ATTRIBUTE",
+      "protocol_path": "D:\\forAirsim\\configs\\t1_continuous_identity_v1p1_20261004\\visible_identity_cue_seed6100411.json",
+      "protocol_sha256": "b7a65a7e01594e86b38eb0b58bc3f4d922a392ef8f1ad9b13a1cfc96d26f41b6",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\visible_identity_cue_seed6100411\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\visible_identity_cue_seed6100411\\probe\\report.json"
+    },
+    {
+      "episode_id": "identical_no_recovery_cue_seed6100410",
+      "condition": "identical_no_recovery_cue",
+      "acquisition_seed": 6100410,
+      "recovery_observability": "UNRESOLVABLE_IDENTICAL",
+      "protocol_path": "D:\\forAirsim\\configs\\t1_continuous_identity_v1p1_20261004\\identical_no_recovery_cue_seed6100410.json",
+      "protocol_sha256": "5c2d7df80a9e373978085ca8897db0d9bc9c0e825d209a8e21abc23f48a915c0",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\identical_no_recovery_cue_seed6100410\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\identical_no_recovery_cue_seed6100410\\probe\\report.json"
+    },
+    {
+      "episode_id": "identical_no_recovery_cue_seed6100411",
+      "condition": "identical_no_recovery_cue",
+      "acquisition_seed": 6100411,
+      "recovery_observability": "UNRESOLVABLE_IDENTICAL",
+      "protocol_path": "D:\\forAirsim\\configs\\t1_continuous_identity_v1p1_20261004\\identical_no_recovery_cue_seed6100411.json",
+      "protocol_sha256": "8f246b163277f4378e8d27e587c91ebb9517c311845f4fae8a4bd10340f3f404",
+      "manifest_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\identical_no_recovery_cue_seed6100411\\manifest.json",
+      "report_path": "D:\\forAirsim\\logs\\t1_continuous_identity_campaign_v1p1_20261004\\identical_no_recovery_cue_seed6100411\\probe\\report.json"
+    }
+  ],
+  "evaluation_unit": "whole independently launched UE session; frames and phases nested",
+  "scope": "development mechanism and observability test, not formal thesis method efficacy",
+  "source_lock_scope": "declared project modules and checkpoint only; not full transitive package/source/build lock",
+  "api_secret_snapshot": "NONE; no .env/credential/endpoint inventory",
+  "seed_use": "Two preregistered camera ranges per condition; no stochastic policy RNG claim",
+  "limits": [
+    "Four sessions, two per visual observability condition, same map and meshes",
+    "No persistent train/validation/test split or detector training in this campaign",
+    "All started/failed sessions and every scheduled slot retained",
+    "No flight or formal algorithm effectiveness"
+  ],
+  "ai_assistance": "AI assisted protocol implementation and evidence preparation"
+}

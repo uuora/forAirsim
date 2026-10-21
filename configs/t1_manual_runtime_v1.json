@@ -1,0 +1,7 @@
+{
+  "offline_gate": "D:/forAirsim/logs/t1_process_offline_v11p1_20261008/report.json",
+  "scene": "D:/forAirsim/configs/t1_building_scene_v2.json",
+  "detector_device": "cuda",
+  "llm_provider_connected": false,
+  "simulation_only": true
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "V5P1_SURFACE_ANCHOR_CORRECTION_CONFIG_FREEZE",
+  "preparation_status": "PREPARED_NOT_EXECUTED",
+  "formal_thesis_effect_results": false,
+  "prepared_local": "2026-10-03T16:50:08.173996+08:00",
+  "planned_sessions": 1,
+  "planned_flights": 2,
+  "conditions": [
+    {
+      "condition_id": "target_y_plus_0p4",
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5p1\\target_y_plus_0p4.json",
+      "configuration_sha256": "084ab7e81ed3889336631324ee624dcb3d31b7124fe2e7da029ca12506b2e6a6",
+      "planned_repetitions": 1
+    }
+  ],
+  "session_plan": [
+    {
+      "planned_session_index": 1,
+      "condition_id": "target_y_plus_0p4",
+      "repetition": 1,
+      "configuration_path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5p1\\target_y_plus_0p4.json",
+      "target_source": "sensor_surface_estimate",
+      "method_order": [
+        "efficiency",
+        "perception"
+      ]
+    }
+  ],
+  "separate_short_gate": {
+    "path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5p1\\center_short.json",
+    "sha256": "391129e77da2d0743510636dd908001911ce0a413488bb33bdfd2b2b18e4e905",
+    "planned_flights": 2
+  },
+  "parent_v5_freeze": {
+    "path": "D:\\forAirsim\\configs\\trajectory_guarded_pilot_v5\\conditions.json",
+    "sha256": "e093e7066fe52fe99919f23df341e4ba313df4db8938d782d0543c18059ba06e"
+  },
+  "current_flight_source_sha256": {
+    "single_drone_experiment.py": "0f55e1d3d5afcb55cb372350df848fb8789279824fc3d905f3d477a37fa7ca1b",
+    "visual_servo.py": "35cd56bdf03aa8abd8338b865371e8c5e922ea1383fbe900b5fc6e0d2b1fb19e",
+    "target_provider.py": "7be594dfdd2e9de9485e5266aa7e42acc4fd90a78b3c66275ae20d46521899e6",
+    "balloon_detector.py": "8aea879e56ecddea5652ec817ea77ee9f1eea382a17843daafd4a42959fd46a0",
+    "trajectory_single_experiment.py": "0d99c2ba2c4fdade108b9ee6ae1449101ca88087ccee4a3df915baf05bde370a",
+    "perception_trajectory_planner.py": "62e32a2d9e41be30d1e6cf6b34266cbfcc1965d06a3b6bad47bab4ea0b80d0b0",
+    "timestamped_target_provider.py": "d00e3025c7a25cb9196f9bb9b2b91bd838010efb156f947aafc4458e8109ecd7",
+    "matched_trajectory_start.py": "3148f30a73f00dc53db2b5bed8c6ddbace7617a3fde4c830987cc80455cf7c53",
+    "trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a"
+  },
+  "generator": {
+    "path": "D:\\forAirsim\\logs\\trajectory_matched_sweep_20261003_162504_2587397\\footprint_anchor_replay\\prepare_correction_configs.py",
+    "sha256": "b7af55ddfd750141037be15abe7d1436123e7276177fcfb0e61cd63d104db2b0"
+  },
+  "gate": "Separate short gate, then one positive-offset E/P pair; not pooled with V5",
+  "ai_assistance": "Preparation assisted by AI; no unrun result recorded"
+}

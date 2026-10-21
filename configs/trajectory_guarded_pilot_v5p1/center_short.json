@@ -1,0 +1,159 @@
+{
+  "protocol_id": "single_trajectory_surface_anchor_v5p1_20261003",
+  "research_stage": "fixed_height_surface_anchor_correction_development",
+  "vehicle": "DroneA",
+  "target": "BalloonTarget",
+  "target_world_ned_m": [
+    0.0,
+    0.0,
+    -3.0
+  ],
+  "observation_world_ned_m": [
+    -5.0,
+    -0.5,
+    -3.0
+  ],
+  "coordinate_endpoint_world_ned_m": [
+    -3.9,
+    0.0,
+    -3.0
+  ],
+  "return_world_ned_m": [
+    -5.0,
+    -4.0,
+    -3.0
+  ],
+  "workspace_min_ned_m": [
+    -5.6,
+    -1.3,
+    -3.6
+  ],
+  "workspace_max_ned_m": [
+    -2.4,
+    0.6,
+    -2.4
+  ],
+  "visual": {
+    "confirm_frames": 2,
+    "lost_frames": 6,
+    "frame_max_age_s": 0.5,
+    "stop_surface_range_m": 2.5,
+    "alignment_error_max": 0.08,
+    "stable_frames": 3,
+    "max_duration_s": 45.0,
+    "max_altitude_setpoint_change_m": 0.5
+  },
+  "safety": {
+    "coordinate_speed_m_s": 0.15,
+    "approach_speed_cap_m_s": 0.15,
+    "visual_command_duration_s": 0.35,
+    "bystander_max_drift_m": 0.25,
+    "bystander_max_speed_m_s": 0.12
+  },
+  "planning": {
+    "durations_s": [
+      3.0
+    ],
+    "sample_dt_s": 0.02,
+    "candidate_steps_x_m": [
+      0.0,
+      0.1,
+      0.2,
+      0.22
+    ],
+    "candidate_steps_y_m": [
+      -0.2,
+      -0.12,
+      0.0,
+      0.12,
+      0.2
+    ],
+    "candidate_steps_z_m": [
+      0.0
+    ],
+    "max_acceleration_m_s2": 0.3,
+    "command_duration_s": 0.15,
+    "lookahead_s": 0.75,
+    "position_gain": 0.8,
+    "min_body_target_distance_m": 2.0,
+    "desired_geometry_body_center_m": 3.7,
+    "desired_surface_body_distance_m": 3.2,
+    "attitude_limit_deg": 7.5,
+    "settle_speed_m_s": 0.025,
+    "settle_acceleration_m_s2": 0.08,
+    "settle_stable_s": 0.25,
+    "settle_timeout_s": 8.0,
+    "origin_translation_tolerance_m": 0.05,
+    "execution_speed_cap_m_s": 0.15,
+    "max_rgb_depth_skew_s": 0.03,
+    "execution_mode": "fixed_world_height_preview",
+    "fixed_world_height_ned_m": -3.0,
+    "execution_guard_margin_m": 0.15,
+    "fixed_height_max_error_m": 0.12,
+    "execution_sample_dt_s": 0.05,
+    "execution_ramp_acceleration_m_s2": 0.15,
+    "plan_start_position_tolerance_m": 0.04,
+    "max_interface_planning_steps": 3,
+    "continuous_goal_keepalive_s": 0.5,
+    "execution_envelope": {
+      "horizon_s": 0.5,
+      "position_reserve_m": 0.02,
+      "freshness_reserve_s": 0.06,
+      "minimum_command_s": 0.03,
+      "brake_timeout_s": 4.0,
+      "max_freshness_replans": 6,
+      "image_border_margin_fraction": 0.08
+    }
+  },
+  "evidence_limits": [
+    "Known static-height plane; not a complete 3D trajectory optimizer",
+    "Positive-time preview control; planned jerk is not measured flight smoothness",
+    "World/local altitude translation measured in this session",
+    "Original workspace, speed and physical acceleration budgets preserved",
+    "Same-mode background goal maintained during RGB/depth acquisition and planning; all keepalive commands recorded",
+    "Extended development pilot: common task stopping criterion or 45-second approach limit; not formal effectiveness data",
+    "Matched-start development pilot with measured position/velocity/acceleration/attitude acceptance",
+    "One pair per condition; separate short gate; not formal method effectiveness data",
+    "Observed bbox rectangle at representative axial depth, not true 3D target extent",
+    "Execution envelope assumes declared delay and braking acceleration; no physical safety guarantee",
+    "Shortened requests and adaptive leases; original .15 m/s, .30 m/s2 and .50s age budgets retained",
+    "Surface-point projection anchors the footprint; same V5 physical budgets; separate source version"
+  ],
+  "formal_thesis_effect_results": false,
+  "initial_state_match": {
+    "enabled": true,
+    "position_tolerance_m": 0.015,
+    "speed_tolerance_m_s": 0.01,
+    "acceleration_tolerance_m_s2": 0.05,
+    "attitude_tolerance_deg": 1.0,
+    "stable_s": 0.5,
+    "timeout_s": 30.0,
+    "reposition_speed_cap_m_s": 0.05,
+    "reposition_acceleration_cap_m_s2": 0.05,
+    "proportional_gain": 0.8,
+    "command_dt_s": 0.1,
+    "max_sample_gap_s": 0.25
+  },
+  "condition_id": "center_short_guarded_gate",
+  "target_offset_ned_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "condition_metadata": {
+    "condition_id": "center",
+    "world_ned_y_offset_m": 0.0,
+    "planned_repetitions": [
+      1
+    ],
+    "order_seed": 20261003,
+    "method_orders_by_repetition": {
+      "1": [
+        "perception",
+        "efficiency"
+      ]
+    },
+    "order_seed_scope": "explicit_staged_gate_order_not_scene_seed"
+  },
+  "footprint_anchor_contract": "fixed_forward_projection_of_estimated_surface_point_not_detection_centroid"
+}

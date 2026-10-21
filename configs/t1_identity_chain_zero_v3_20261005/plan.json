@@ -1,0 +1,918 @@
+{
+  "schema_version": 1,
+  "kind": "T1_IDENTITY_LOW_SPEED_FLIGHT_PILOT",
+  "status": "FROZEN_BEFORE_FLIGHT",
+  "created_utc": "2026-10-05T02:47:57.652170+00:00",
+  "session_id": "t1_identity_chain_zero_v3_20261005",
+  "description": "带白色横条的红色气球",
+  "target_generation": 1,
+  "mode": "ZERO_GATE",
+  "vehicle": "DroneA",
+  "bystander": "DroneB",
+  "recovery_observability": "VISUAL_ATTRIBUTE",
+  "formal_efficacy_results": false,
+  "planned_UE_sessions": 1,
+  "planned_flights": 1,
+  "period_s": 0.4,
+  "world_z_ned_m": -3.0,
+  "command_speed_cap_m_s": 0.03,
+  "command_lease_s": 0.12,
+  "self_monitor_period_s": 0.05,
+  "phases": [
+    {
+      "phase_id": "visible",
+      "duration_s": 8.0
+    }
+  ],
+  "planned_duration_s": 8.0,
+  "scene": {
+    "target_world_ned_m": [
+      5.0,
+      -2.5,
+      -3.05
+    ],
+    "distractor_world_ned_m": [
+      5.0,
+      -3.8,
+      -3.05
+    ],
+    "occluder_world_ned_m": [
+      4.0,
+      -2.625,
+      -3.05
+    ],
+    "inactive_world_ned_m": [
+      30.0,
+      100.0,
+      -3.0
+    ],
+    "target_scale_xyz": [
+      1.2,
+      1.2,
+      1.5
+    ],
+    "occluder_scale_xyz": [
+      0.2,
+      1.0,
+      2.0
+    ],
+    "target_texture": "red_64x64_white_horizontal_rows_24_to_39",
+    "distractor_texture": "plain_red_64x64"
+  },
+  "takeoff": {
+    "world_z_ned_m": -3.0,
+    "move_to_z_speed_m_s": 0.3,
+    "xy_anchor": "ACTUAL_INITIAL_SELF_WORLD_POSITION",
+    "scope": "Excluded from low-speed phase statistics"
+  },
+  "planned_slots": [
+    {
+      "slot_index": 0,
+      "phase_id": "visible",
+      "scheduled_start_s": 0.0,
+      "scheduled_end_s": 0.4
+    },
+    {
+      "slot_index": 1,
+      "phase_id": "visible",
+      "scheduled_start_s": 0.4,
+      "scheduled_end_s": 0.8
+    },
+    {
+      "slot_index": 2,
+      "phase_id": "visible",
+      "scheduled_start_s": 0.8,
+      "scheduled_end_s": 1.2
+    },
+    {
+      "slot_index": 3,
+      "phase_id": "visible",
+      "scheduled_start_s": 1.2,
+      "scheduled_end_s": 1.6
+    },
+    {
+      "slot_index": 4,
+      "phase_id": "visible",
+      "scheduled_start_s": 1.6,
+      "scheduled_end_s": 2.0
+    },
+    {
+      "slot_index": 5,
+      "phase_id": "visible",
+      "scheduled_start_s": 2.0,
+      "scheduled_end_s": 2.4
+    },
+    {
+      "slot_index": 6,
+      "phase_id": "visible",
+      "scheduled_start_s": 2.4,
+      "scheduled_end_s": 2.8
+    },
+    {
+      "slot_index": 7,
+      "phase_id": "visible",
+      "scheduled_start_s": 2.8,
+      "scheduled_end_s": 3.2
+    },
+    {
+      "slot_index": 8,
+      "phase_id": "visible",
+      "scheduled_start_s": 3.2,
+      "scheduled_end_s": 3.6
+    },
+    {
+      "slot_index": 9,
+      "phase_id": "visible",
+      "scheduled_start_s": 3.6,
+      "scheduled_end_s": 4.0
+    },
+    {
+      "slot_index": 10,
+      "phase_id": "visible",
+      "scheduled_start_s": 4.0,
+      "scheduled_end_s": 4.4
+    },
+    {
+      "slot_index": 11,
+      "phase_id": "visible",
+      "scheduled_start_s": 4.4,
+      "scheduled_end_s": 4.8
+    },
+    {
+      "slot_index": 12,
+      "phase_id": "visible",
+      "scheduled_start_s": 4.8,
+      "scheduled_end_s": 5.2
+    },
+    {
+      "slot_index": 13,
+      "phase_id": "visible",
+      "scheduled_start_s": 5.2,
+      "scheduled_end_s": 5.6
+    },
+    {
+      "slot_index": 14,
+      "phase_id": "visible",
+      "scheduled_start_s": 5.6,
+      "scheduled_end_s": 6.0
+    },
+    {
+      "slot_index": 15,
+      "phase_id": "visible",
+      "scheduled_start_s": 6.0,
+      "scheduled_end_s": 6.4
+    },
+    {
+      "slot_index": 16,
+      "phase_id": "visible",
+      "scheduled_start_s": 6.4,
+      "scheduled_end_s": 6.8
+    },
+    {
+      "slot_index": 17,
+      "phase_id": "visible",
+      "scheduled_start_s": 6.8,
+      "scheduled_end_s": 7.2
+    },
+    {
+      "slot_index": 18,
+      "phase_id": "visible",
+      "scheduled_start_s": 7.2,
+      "scheduled_end_s": 7.6
+    },
+    {
+      "slot_index": 19,
+      "phase_id": "visible",
+      "scheduled_start_s": 7.6,
+      "scheduled_end_s": 8.0
+    }
+  ],
+  "timing_grid": "PHASE_BOUNDARY_CLIPPED_0P4",
+  "detector_config_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\detector_config.json",
+  "detector_config_sha256": "eaf0aa9488a8d9286ee1e86be7e8136beff9aa6b997aff92a685d0ceaef67c65",
+  "weights_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\model\\specialist_best.pt",
+  "weights_sha256": "92b0dc0f4e17ff14e9c1e110b9cad9ef249274136ee9a28d99b7885dfb396844",
+  "training_receipt_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\training_receipt.json",
+  "training_receipt_sha256": "f98db6fb0f916bd00ea74ee36596fb222d662f3a913d36610d9e96aa7c4b22a5",
+  "detector_bindings": {
+    "weights_sha256": "92b0dc0f4e17ff14e9c1e110b9cad9ef249274136ee9a28d99b7885dfb396844",
+    "training_receipt_sha256": "f98db6fb0f916bd00ea74ee36596fb222d662f3a913d36610d9e96aa7c4b22a5",
+    "class_names": {
+      "0": "balloon"
+    },
+    "confidence": 0.25,
+    "nms_iou": 0.5,
+    "imgsz": 640,
+    "device": "0"
+  },
+  "settings_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\settings.json",
+  "settings_sha256": "697153c0ef9dd13df69f9b3f966794c672adaaf5e94d879c00fb15ab301cd70b",
+  "source_sha256": {
+    "python/t1_identity_flight.py": "e354c7441b36d6139167b980b5c298100521a5d538e2c5e8504095bf59acc313",
+    "python/t1_flight_observer.py": "0a4cd562f45456ffeb8cc04d5182de2e3509a6129e9ec53bd191574cea50f77b",
+    "python/t1_pose_trajectory_planner.py": "38d5b8791c5e90dafc1f4a78737af4bb32b2ddcdd0bd5d6bd98d571b67e237d1",
+    "python/t1_identity_motion_policy.py": "21dd505a9eccff50beab7fa1f45a8d58de9e712d16cf2f9180fbed6470ee5608",
+    "python/t1_pose_projection_batch.py": "68df77a796538c2cb76758ee0b6765c1e7b3eeda5f01cd523147612be401c7d0",
+    "python/t1_candidate_surface_v2.py": "bba8012af2a6cf1315697f3cfd169edc52b8cbc9190a9e195a34805628537e57",
+    "python/t1_candidate_surface.py": "d9fb6bf0127e356f7dbb4c43908778a1f8f403a96ff94534e3123fea040e5d91",
+    "python/t1_continuous_semantic_observer.py": "7429751e342f620251b681fa80de96948e7f7682164322a059476ec72c3fa5d4",
+    "python/t1_temporal_identity.py": "ac42be0e86d8e825ec4a1aa62345f9537a1eb69a442ef965436c0cc149c758c4",
+    "python/t1_semantic_perception.py": "14994b166715bd8ae513b851dd8d9bf2e89925f8794ac2a8261ffd190647f3d0",
+    "python/t1_pose_geometry.py": "a1eaee24ecb1ae03b0b3515d21ad3e2f2071a0647f6e08a8b91b25165fa58f39",
+    "python/specialist_balloon_detector.py": "4212d42cae50e8c333f1f760e3246d0838e14be6dc149799bb0dfda6dd65e71a",
+    "python/train_t1_balloon_yolo.py": "905d866e8334638af54a9d367b115a5b88d14ae3d1c31fa275dba0799c7324b5",
+    "python/vlx_api_client.py": "c0fa95351ad80442466132550a92c79f702980a097c57487d01a48647b87f749",
+    "python/t1_ground_perception_probe.py": "a1749402c02f5a1bd20b1a1ac62d01fcb0cc785bc36c659e15a292ac23b01c67",
+    "python/t1_balloon_data_probe.py": "e5086bd10733a8f91f85c2c1998b93e8dabaea97e63448bf708bdd8b13aeae0e",
+    "python/t1_identity_sequence_probe_v1p3.py": "f9999073a3435b22e16686d7765afb9a497e58a970dbbf25958155ab22d0cbaf",
+    "python/t1_identity_schedule.py": "7596c83bc441253005f26cf8c8ab21b2319219a9bad7e1eb8038f3370dd03971",
+    "python/camera_geometry.py": "bcf86f5cbe6159ff0ad9890f6316ddd463fc297af6fea017a950cd462d29088d",
+    "python/setup_scene.py": "30668ece8e6e24d99dbb3303e8b79f468773ba20925afc57099f748731cf1af5",
+    "python/trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+    "python/braking_startup_readiness.py": "f42f304e6955f983e89826a1f0ce846554f9dbf1a7de0718148ad0fcc7d353db",
+    "python/prepare_t1_identity_flight.py": "73a104c20b523f59eaf086cfde0d64dbc8d8e86a959acdf4d4a287145339bcfc",
+    "scripts/run-t1-identity-flight-v1.ps1": "86fd7618ee2564f4cf32080478fede9bfae3585d30ce6f00927eea4109d46c63",
+    "scripts/assert-trajectory-source-freeze.ps1": "9188d2013b39ac92867f3436d23ad9e556989087fea9ba16d7a00351bc0c1f1c",
+    "python/t1_identity_flight_v2.py": "16306168a2a7afa1b3a599d57e0d2d66be5e70a97b0989d1cde859d32dd7e397",
+    "python/t1_async_control.py": "a09a718143f1bfcec585c9bed716030450cb02039bc0c816232dea969100a844",
+    "python/prepare_t1_identity_flight_v2.py": "eaa92887fa3c97d1acdb1b049a2b79549ccd5d9a79dcab58cf77bff5cc24a0c4",
+    "scripts/run-t1-identity-flight-v2.ps1": "8c425ed7c45251849b603f13b8ed84b315eec57934c77d6a338904b709a2ceb7",
+    "python/t1_identity_flight_v3.py": "fa40399e2ebd9f7f0af29ab45b6ff50a9dc40660469269147ed546a472bde132",
+    "python/prepare_t1_identity_flight_v3.py": "7c84bb9a1e13f17b7a674096b50c71a6597159d4d89615a4abcdcf5d7314fd75",
+    "scripts/run-t1-identity-flight-v3.ps1": "de70002fb351bdb7b3f3d76b01ab9ffe764ccd7deb818589ab5cb197c1be7e79",
+    "python/test_t1_identity_flight_v3.py": "7a1b2f62a067a590fec6ec1357888d23e2eb10a698bc5ffd2f2ac595ac96444d",
+    "python/t1_delayed_semantic_bridge.py": "e5ca0afff53dffaa3b6a2e5ff27ea47ae82a863360164c003a3e71a0142c5a62",
+    "python/t1_delayed_semantic_observer.py": "dfa8cee8629d560b38963ae7f30f4430fb3897ed00368703ba8e0f3b5c8a4663",
+    "python/t1_candidate_surface_v3.py": "327beb5e47dce9ad3e04d656da41d647205bd105b96b402b41e655b14ed566c3"
+  },
+  "source_inventory": [
+    {
+      "relative_path": "python/t1_identity_flight.py",
+      "path": "D:\\forAirsim\\python\\t1_identity_flight.py",
+      "sha256": "e354c7441b36d6139167b980b5c298100521a5d538e2c5e8504095bf59acc313",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_identity_flight.py"
+    },
+    {
+      "relative_path": "python/t1_flight_observer.py",
+      "path": "D:\\forAirsim\\python\\t1_flight_observer.py",
+      "sha256": "0a4cd562f45456ffeb8cc04d5182de2e3509a6129e9ec53bd191574cea50f77b",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_flight_observer.py"
+    },
+    {
+      "relative_path": "python/t1_pose_trajectory_planner.py",
+      "path": "D:\\forAirsim\\python\\t1_pose_trajectory_planner.py",
+      "sha256": "38d5b8791c5e90dafc1f4a78737af4bb32b2ddcdd0bd5d6bd98d571b67e237d1",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_pose_trajectory_planner.py"
+    },
+    {
+      "relative_path": "python/t1_identity_motion_policy.py",
+      "path": "D:\\forAirsim\\python\\t1_identity_motion_policy.py",
+      "sha256": "21dd505a9eccff50beab7fa1f45a8d58de9e712d16cf2f9180fbed6470ee5608",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_identity_motion_policy.py"
+    },
+    {
+      "relative_path": "python/t1_pose_projection_batch.py",
+      "path": "D:\\forAirsim\\python\\t1_pose_projection_batch.py",
+      "sha256": "68df77a796538c2cb76758ee0b6765c1e7b3eeda5f01cd523147612be401c7d0",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_pose_projection_batch.py"
+    },
+    {
+      "relative_path": "python/t1_candidate_surface_v2.py",
+      "path": "D:\\forAirsim\\python\\t1_candidate_surface_v2.py",
+      "sha256": "bba8012af2a6cf1315697f3cfd169edc52b8cbc9190a9e195a34805628537e57",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_candidate_surface_v2.py"
+    },
+    {
+      "relative_path": "python/t1_candidate_surface.py",
+      "path": "D:\\forAirsim\\python\\t1_candidate_surface.py",
+      "sha256": "d9fb6bf0127e356f7dbb4c43908778a1f8f403a96ff94534e3123fea040e5d91",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_candidate_surface.py"
+    },
+    {
+      "relative_path": "python/t1_continuous_semantic_observer.py",
+      "path": "D:\\forAirsim\\python\\t1_continuous_semantic_observer.py",
+      "sha256": "7429751e342f620251b681fa80de96948e7f7682164322a059476ec72c3fa5d4",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_continuous_semantic_observer.py"
+    },
+    {
+      "relative_path": "python/t1_temporal_identity.py",
+      "path": "D:\\forAirsim\\python\\t1_temporal_identity.py",
+      "sha256": "ac42be0e86d8e825ec4a1aa62345f9537a1eb69a442ef965436c0cc149c758c4",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_temporal_identity.py"
+    },
+    {
+      "relative_path": "python/t1_semantic_perception.py",
+      "path": "D:\\forAirsim\\python\\t1_semantic_perception.py",
+      "sha256": "14994b166715bd8ae513b851dd8d9bf2e89925f8794ac2a8261ffd190647f3d0",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_semantic_perception.py"
+    },
+    {
+      "relative_path": "python/t1_pose_geometry.py",
+      "path": "D:\\forAirsim\\python\\t1_pose_geometry.py",
+      "sha256": "a1eaee24ecb1ae03b0b3515d21ad3e2f2071a0647f6e08a8b91b25165fa58f39",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_pose_geometry.py"
+    },
+    {
+      "relative_path": "python/specialist_balloon_detector.py",
+      "path": "D:\\forAirsim\\python\\specialist_balloon_detector.py",
+      "sha256": "4212d42cae50e8c333f1f760e3246d0838e14be6dc149799bb0dfda6dd65e71a",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\specialist_balloon_detector.py"
+    },
+    {
+      "relative_path": "python/train_t1_balloon_yolo.py",
+      "path": "D:\\forAirsim\\python\\train_t1_balloon_yolo.py",
+      "sha256": "905d866e8334638af54a9d367b115a5b88d14ae3d1c31fa275dba0799c7324b5",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\train_t1_balloon_yolo.py"
+    },
+    {
+      "relative_path": "python/vlx_api_client.py",
+      "path": "D:\\forAirsim\\python\\vlx_api_client.py",
+      "sha256": "c0fa95351ad80442466132550a92c79f702980a097c57487d01a48647b87f749",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\vlx_api_client.py"
+    },
+    {
+      "relative_path": "python/t1_ground_perception_probe.py",
+      "path": "D:\\forAirsim\\python\\t1_ground_perception_probe.py",
+      "sha256": "a1749402c02f5a1bd20b1a1ac62d01fcb0cc785bc36c659e15a292ac23b01c67",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_ground_perception_probe.py"
+    },
+    {
+      "relative_path": "python/t1_balloon_data_probe.py",
+      "path": "D:\\forAirsim\\python\\t1_balloon_data_probe.py",
+      "sha256": "e5086bd10733a8f91f85c2c1998b93e8dabaea97e63448bf708bdd8b13aeae0e",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_balloon_data_probe.py"
+    },
+    {
+      "relative_path": "python/t1_identity_sequence_probe_v1p3.py",
+      "path": "D:\\forAirsim\\python\\t1_identity_sequence_probe_v1p3.py",
+      "sha256": "f9999073a3435b22e16686d7765afb9a497e58a970dbbf25958155ab22d0cbaf",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_identity_sequence_probe_v1p3.py"
+    },
+    {
+      "relative_path": "python/t1_identity_schedule.py",
+      "path": "D:\\forAirsim\\python\\t1_identity_schedule.py",
+      "sha256": "7596c83bc441253005f26cf8c8ab21b2319219a9bad7e1eb8038f3370dd03971",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_identity_schedule.py"
+    },
+    {
+      "relative_path": "python/camera_geometry.py",
+      "path": "D:\\forAirsim\\python\\camera_geometry.py",
+      "sha256": "bcf86f5cbe6159ff0ad9890f6316ddd463fc297af6fea017a950cd462d29088d",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\camera_geometry.py"
+    },
+    {
+      "relative_path": "python/setup_scene.py",
+      "path": "D:\\forAirsim\\python\\setup_scene.py",
+      "sha256": "30668ece8e6e24d99dbb3303e8b79f468773ba20925afc57099f748731cf1af5",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\setup_scene.py"
+    },
+    {
+      "relative_path": "python/trajectory_execution_guard.py",
+      "path": "D:\\forAirsim\\python\\trajectory_execution_guard.py",
+      "sha256": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\trajectory_execution_guard.py"
+    },
+    {
+      "relative_path": "python/braking_startup_readiness.py",
+      "path": "D:\\forAirsim\\python\\braking_startup_readiness.py",
+      "sha256": "f42f304e6955f983e89826a1f0ce846554f9dbf1a7de0718148ad0fcc7d353db",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\braking_startup_readiness.py"
+    },
+    {
+      "relative_path": "python/prepare_t1_identity_flight.py",
+      "path": "D:\\forAirsim\\python\\prepare_t1_identity_flight.py",
+      "sha256": "73a104c20b523f59eaf086cfde0d64dbc8d8e86a959acdf4d4a287145339bcfc",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\prepare_t1_identity_flight.py"
+    },
+    {
+      "relative_path": "scripts/run-t1-identity-flight-v1.ps1",
+      "path": "D:\\forAirsim\\scripts\\run-t1-identity-flight-v1.ps1",
+      "sha256": "86fd7618ee2564f4cf32080478fede9bfae3585d30ce6f00927eea4109d46c63",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\scripts\\run-t1-identity-flight-v1.ps1"
+    },
+    {
+      "relative_path": "scripts/assert-trajectory-source-freeze.ps1",
+      "path": "D:\\forAirsim\\scripts\\assert-trajectory-source-freeze.ps1",
+      "sha256": "9188d2013b39ac92867f3436d23ad9e556989087fea9ba16d7a00351bc0c1f1c",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\scripts\\assert-trajectory-source-freeze.ps1"
+    },
+    {
+      "relative_path": "python/t1_identity_flight_v2.py",
+      "path": "D:\\forAirsim\\python\\t1_identity_flight_v2.py",
+      "sha256": "16306168a2a7afa1b3a599d57e0d2d66be5e70a97b0989d1cde859d32dd7e397",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_identity_flight_v2.py"
+    },
+    {
+      "relative_path": "python/t1_async_control.py",
+      "path": "D:\\forAirsim\\python\\t1_async_control.py",
+      "sha256": "a09a718143f1bfcec585c9bed716030450cb02039bc0c816232dea969100a844",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_async_control.py"
+    },
+    {
+      "relative_path": "python/prepare_t1_identity_flight_v2.py",
+      "path": "D:\\forAirsim\\python\\prepare_t1_identity_flight_v2.py",
+      "sha256": "eaa92887fa3c97d1acdb1b049a2b79549ccd5d9a79dcab58cf77bff5cc24a0c4",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\prepare_t1_identity_flight_v2.py"
+    },
+    {
+      "relative_path": "scripts/run-t1-identity-flight-v2.ps1",
+      "path": "D:\\forAirsim\\scripts\\run-t1-identity-flight-v2.ps1",
+      "sha256": "8c425ed7c45251849b603f13b8ed84b315eec57934c77d6a338904b709a2ceb7",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\scripts\\run-t1-identity-flight-v2.ps1"
+    },
+    {
+      "relative_path": "python/t1_identity_flight_v3.py",
+      "path": "D:\\forAirsim\\python\\t1_identity_flight_v3.py",
+      "sha256": "fa40399e2ebd9f7f0af29ab45b6ff50a9dc40660469269147ed546a472bde132",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_identity_flight_v3.py"
+    },
+    {
+      "relative_path": "python/prepare_t1_identity_flight_v3.py",
+      "path": "D:\\forAirsim\\python\\prepare_t1_identity_flight_v3.py",
+      "sha256": "7c84bb9a1e13f17b7a674096b50c71a6597159d4d89615a4abcdcf5d7314fd75",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\prepare_t1_identity_flight_v3.py"
+    },
+    {
+      "relative_path": "scripts/run-t1-identity-flight-v3.ps1",
+      "path": "D:\\forAirsim\\scripts\\run-t1-identity-flight-v3.ps1",
+      "sha256": "de70002fb351bdb7b3f3d76b01ab9ffe764ccd7deb818589ab5cb197c1be7e79",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\scripts\\run-t1-identity-flight-v3.ps1"
+    },
+    {
+      "relative_path": "python/test_t1_identity_flight_v3.py",
+      "path": "D:\\forAirsim\\python\\test_t1_identity_flight_v3.py",
+      "sha256": "7a1b2f62a067a590fec6ec1357888d23e2eb10a698bc5ffd2f2ac595ac96444d",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\test_t1_identity_flight_v3.py"
+    },
+    {
+      "relative_path": "python/t1_delayed_semantic_bridge.py",
+      "path": "D:\\forAirsim\\python\\t1_delayed_semantic_bridge.py",
+      "sha256": "e5ca0afff53dffaa3b6a2e5ff27ea47ae82a863360164c003a3e71a0142c5a62",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_delayed_semantic_bridge.py"
+    },
+    {
+      "relative_path": "python/t1_delayed_semantic_observer.py",
+      "path": "D:\\forAirsim\\python\\t1_delayed_semantic_observer.py",
+      "sha256": "dfa8cee8629d560b38963ae7f30f4430fb3897ed00368703ba8e0f3b5c8a4663",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_delayed_semantic_observer.py"
+    },
+    {
+      "relative_path": "python/t1_candidate_surface_v3.py",
+      "path": "D:\\forAirsim\\python\\t1_candidate_surface_v3.py",
+      "sha256": "327beb5e47dce9ad3e04d656da41d647205bd105b96b402b41e655b14ed566c3",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\python\\t1_candidate_surface_v3.py"
+    }
+  ],
+  "legacy_source_inventory": [
+    {
+      "path": "D:\\forAirsim\\python\\single_drone_experiment.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\single_drone_experiment.py",
+      "sha256": "0f55e1d3d5afcb55cb372350df848fb8789279824fc3d905f3d477a37fa7ca1b"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\visual_servo.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\visual_servo.py",
+      "sha256": "35cd56bdf03aa8abd8338b865371e8c5e922ea1383fbe900b5fc6e0d2b1fb19e"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\target_provider.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\target_provider.py",
+      "sha256": "7be594dfdd2e9de9485e5266aa7e42acc4fd90a78b3c66275ae20d46521899e6"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\balloon_detector.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\balloon_detector.py",
+      "sha256": "8aea879e56ecddea5652ec817ea77ee9f1eea382a17843daafd4a42959fd46a0"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\trajectory_single_experiment.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\trajectory_single_experiment.py",
+      "sha256": "d5e32903b597db556c0d5ffc6201f1edea38c6b24b7ca0d8e5a02487c2de44fb"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\perception_trajectory_planner.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\perception_trajectory_planner.py",
+      "sha256": "4ed043f0f3e60451f9683950572f6f75738f3c564b261026829ff5291d1c26b4"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\timestamped_target_provider.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\timestamped_target_provider.py",
+      "sha256": "d00e3025c7a25cb9196f9bb9b2b91bd838010efb156f947aafc4458e8109ecd7"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\matched_trajectory_start.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\matched_trajectory_start.py",
+      "sha256": "3148f30a73f00dc53db2b5bed8c6ddbace7617a3fde4c830987cc80455cf7c53"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\trajectory_execution_guard.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\trajectory_execution_guard.py",
+      "sha256": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\trajectory_timed_reference.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\trajectory_timed_reference.py",
+      "sha256": "3f410b85ad47f74b0c25dee1b36b5f2445782fe413ba2446e84ecf409aca1d82"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\trajectory_timed_experiment.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\trajectory_timed_experiment.py",
+      "sha256": "978d85e284052dbe6bc5601d044f336a24cbfa24fff933c3aea7fe306b1717c5"
+    },
+    {
+      "path": "D:\\forAirsim\\python\\trajectory_rgb_quality_reference.py",
+      "snapshot_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\source_bundle\\legacy_v6p2\\trajectory_rgb_quality_reference.py",
+      "sha256": "630f0a6dc2efcfc7526140fb9ee27038781fb701c663b5a8b034ed313a64e0ef"
+    }
+  ],
+  "legacy_freeze_path": "D:\\forAirsim\\configs\\t1_identity_chain_zero_v3_20261005\\legacy_v6p2_source_freeze.json",
+  "legacy_freeze_sha256": "0e342acee8d2517009855ae62394b0008984dbe702792d6c6fdaa2809e67fdd5",
+  "legacy_v6p2_source_sha256": {
+    "single_drone_experiment.py": "0f55e1d3d5afcb55cb372350df848fb8789279824fc3d905f3d477a37fa7ca1b",
+    "visual_servo.py": "35cd56bdf03aa8abd8338b865371e8c5e922ea1383fbe900b5fc6e0d2b1fb19e",
+    "target_provider.py": "7be594dfdd2e9de9485e5266aa7e42acc4fd90a78b3c66275ae20d46521899e6",
+    "balloon_detector.py": "8aea879e56ecddea5652ec817ea77ee9f1eea382a17843daafd4a42959fd46a0",
+    "trajectory_single_experiment.py": "d5e32903b597db556c0d5ffc6201f1edea38c6b24b7ca0d8e5a02487c2de44fb",
+    "perception_trajectory_planner.py": "4ed043f0f3e60451f9683950572f6f75738f3c564b261026829ff5291d1c26b4",
+    "timestamped_target_provider.py": "d00e3025c7a25cb9196f9bb9b2b91bd838010efb156f947aafc4458e8109ecd7",
+    "matched_trajectory_start.py": "3148f30a73f00dc53db2b5bed8c6ddbace7617a3fde4c830987cc80455cf7c53",
+    "trajectory_execution_guard.py": "c2251ad6c3f7582fe7ea36a7c48545b4968af9128c010a32fc1a119940a3ed7a",
+    "trajectory_timed_reference.py": "3f410b85ad47f74b0c25dee1b36b5f2445782fe413ba2446e84ecf409aca1d82",
+    "trajectory_timed_experiment.py": "978d85e284052dbe6bc5601d044f336a24cbfa24fff933c3aea7fe306b1717c5",
+    "trajectory_rgb_quality_reference.py": "630f0a6dc2efcfc7526140fb9ee27038781fb701c663b5a8b034ed313a64e0ef"
+  },
+  "braking_model": {
+    "horizon_s": 1.0,
+    "ramp_acceleration_m_s2": 0.15,
+    "position_reserve_m": 0.02,
+    "scope": "Previously sampled low-speed candidate; no continuous physical safety certificate"
+  },
+  "observer_configuration": {
+    "review_period_s": 3.0,
+    "current_frame_max_age_s": 0.5,
+    "semantic_max_age_s": 8.0,
+    "response_timeout_s": 10.0,
+    "min_request_interval_s": 2.0,
+    "track_max_unreviewed_s": 8.0,
+    "track_max_gap_s": 0.5,
+    "confirmation_frames": 2,
+    "semantic_source_chain_max_age_s": 8.0,
+    "transport_timeout_s": 10.0,
+    "post_adoption_confirmation_frames": 2
+  },
+  "artifact_origins": {
+    "settings_path": "D:\\forAirsim\\configs\\t1_continuous_identity_v1p3_20261004\\settings.json",
+    "settings_sha256": "697153c0ef9dd13df69f9b3f966794c672adaaf5e94d879c00fb15ab301cd70b",
+    "detector_runtime_config_path": "D:\\forAirsim\\configs\\t1_balloon_detector_runtime_cuda_v1.json",
+    "detector_runtime_config_sha256": "4c9270ba1a57709aeed9fc0348514dfb38a232c5cb72386f0443f35dfcb0db9c",
+    "weights_path": "D:\\forAirsim\\logs\\t1_balloon_yolo_training_v1p2_20261004\\training\\fixed_protocol\\weights\\best.pt",
+    "training_receipt_path": "D:\\forAirsim\\logs\\t1_balloon_yolo_training_v1p2_20261004\\receipt.json"
+  },
+  "runtime": {
+    "python": "3.10.21",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "airsim": "1.8.1",
+      "numpy": "1.26.4",
+      "opencv-python": "4.10.0.84",
+      "Pillow": "12.3.0",
+      "torch": "2.11.0+cu128",
+      "ultralytics": "8.4.153",
+      "requests": "2.34.2"
+    }
+  },
+  "truth_access": "Scene construction and separate evaluation only; RGB identity and depth surface provide all planner target inputs",
+  "flight_scope": "One development launch; zero or .03m/s XY phase requests; staging/return are separately recorded",
+  "source_lock_scope": "Explicit project source inventory and historical twelve-module check; not a full dependency/build lock",
+  "api_secret_snapshot": "NONE; .env, credentials and endpoints excluded",
+  "missed_slot_policy": "Retain every predeclared slot, including NOT_CAPTURED, stale and interrupted slots",
+  "ai_assistance": "AI assisted protocol, implementation and evidence preparation",
+  "control_architecture": "INDEPENDENT_CONTROL_CHAIN_REVIEW_V3",
+  "control_rpc_timeout_setting_s": 2.0,
+  "control_rpc_timeout_scope": "msgpack timeout polling is coarse; setting does not establish a subsecond return bound",
+  "injected_perception_delays": [],
+  "lease_expiry_scope": "explicit own-state zero dispatch, measured clearing and sampled stopping",
+  "timing_results_scope": "Acquisition and measured phases separately retained; current RGB 0.5s, own state 0.12s, lease 0.12s and XY cap 0.03m/s unchanged",
+  "semantic_strategy": "ORIGINAL_SOURCE_BOUNDED_DELAYED_LOCAL_CHAIN_WITH_POST_ADOPTION_CONFIRMATION",
+  "semantic_source_chain_max_age_s": 8.0,
+  "semantic_transport_timeout_s": 10.0,
+  "local_chain_max_gap_s": 0.5,
+  "semantic_post_adoption_confirmation_frames": 2,
+  "initial_identity_acquisition": {
+    "maximum_duration_s": 20.0,
+    "period_s": 0.4,
+    "maximum_planned_slots": 50,
+    "desired_xy_m_s": [
+      0.0,
+      0.0
+    ],
+    "success": "CURRENT_TRACKING_SELECTION_AND_PAIRED_SURFACE_BEFORE_20S",
+    "measured_epoch": "START_ONLY_AFTER_SUCCESS",
+    "failure": "FAIL_WITH_ALL_MEASURED_SLOTS_NOT_ENTERED_RETAINED",
+    "unused_slots": "NOT_REQUIRED_AFTER_ACQUISITION",
+    "scope": "Real onboard current frames; separate from measured phase denominator"
+  },
+  "planned_acquisition_slots": [
+    {
+      "slot_index": 0,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 0.0,
+      "scheduled_end_s": 0.4
+    },
+    {
+      "slot_index": 1,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 0.4,
+      "scheduled_end_s": 0.8
+    },
+    {
+      "slot_index": 2,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 0.8,
+      "scheduled_end_s": 1.2
+    },
+    {
+      "slot_index": 3,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 1.2,
+      "scheduled_end_s": 1.6
+    },
+    {
+      "slot_index": 4,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 1.6,
+      "scheduled_end_s": 2.0
+    },
+    {
+      "slot_index": 5,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 2.0,
+      "scheduled_end_s": 2.4
+    },
+    {
+      "slot_index": 6,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 2.4,
+      "scheduled_end_s": 2.8
+    },
+    {
+      "slot_index": 7,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 2.8,
+      "scheduled_end_s": 3.2
+    },
+    {
+      "slot_index": 8,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 3.2,
+      "scheduled_end_s": 3.6
+    },
+    {
+      "slot_index": 9,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 3.6,
+      "scheduled_end_s": 4.0
+    },
+    {
+      "slot_index": 10,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 4.0,
+      "scheduled_end_s": 4.4
+    },
+    {
+      "slot_index": 11,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 4.4,
+      "scheduled_end_s": 4.8
+    },
+    {
+      "slot_index": 12,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 4.8,
+      "scheduled_end_s": 5.2
+    },
+    {
+      "slot_index": 13,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 5.2,
+      "scheduled_end_s": 5.6
+    },
+    {
+      "slot_index": 14,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 5.6,
+      "scheduled_end_s": 6.0
+    },
+    {
+      "slot_index": 15,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 6.0,
+      "scheduled_end_s": 6.4
+    },
+    {
+      "slot_index": 16,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 6.4,
+      "scheduled_end_s": 6.8
+    },
+    {
+      "slot_index": 17,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 6.8,
+      "scheduled_end_s": 7.2
+    },
+    {
+      "slot_index": 18,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 7.2,
+      "scheduled_end_s": 7.6
+    },
+    {
+      "slot_index": 19,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 7.6,
+      "scheduled_end_s": 8.0
+    },
+    {
+      "slot_index": 20,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 8.0,
+      "scheduled_end_s": 8.4
+    },
+    {
+      "slot_index": 21,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 8.4,
+      "scheduled_end_s": 8.8
+    },
+    {
+      "slot_index": 22,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 8.8,
+      "scheduled_end_s": 9.2
+    },
+    {
+      "slot_index": 23,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 9.2,
+      "scheduled_end_s": 9.6
+    },
+    {
+      "slot_index": 24,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 9.6,
+      "scheduled_end_s": 10.0
+    },
+    {
+      "slot_index": 25,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 10.0,
+      "scheduled_end_s": 10.4
+    },
+    {
+      "slot_index": 26,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 10.4,
+      "scheduled_end_s": 10.8
+    },
+    {
+      "slot_index": 27,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 10.8,
+      "scheduled_end_s": 11.2
+    },
+    {
+      "slot_index": 28,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 11.2,
+      "scheduled_end_s": 11.6
+    },
+    {
+      "slot_index": 29,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 11.6,
+      "scheduled_end_s": 12.0
+    },
+    {
+      "slot_index": 30,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 12.0,
+      "scheduled_end_s": 12.4
+    },
+    {
+      "slot_index": 31,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 12.4,
+      "scheduled_end_s": 12.8
+    },
+    {
+      "slot_index": 32,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 12.8,
+      "scheduled_end_s": 13.2
+    },
+    {
+      "slot_index": 33,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 13.2,
+      "scheduled_end_s": 13.6
+    },
+    {
+      "slot_index": 34,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 13.6,
+      "scheduled_end_s": 14.0
+    },
+    {
+      "slot_index": 35,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 14.0,
+      "scheduled_end_s": 14.4
+    },
+    {
+      "slot_index": 36,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 14.4,
+      "scheduled_end_s": 14.8
+    },
+    {
+      "slot_index": 37,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 14.8,
+      "scheduled_end_s": 15.2
+    },
+    {
+      "slot_index": 38,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 15.2,
+      "scheduled_end_s": 15.6
+    },
+    {
+      "slot_index": 39,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 15.6,
+      "scheduled_end_s": 16.0
+    },
+    {
+      "slot_index": 40,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 16.0,
+      "scheduled_end_s": 16.4
+    },
+    {
+      "slot_index": 41,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 16.4,
+      "scheduled_end_s": 16.8
+    },
+    {
+      "slot_index": 42,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 16.8,
+      "scheduled_end_s": 17.2
+    },
+    {
+      "slot_index": 43,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 17.2,
+      "scheduled_end_s": 17.6
+    },
+    {
+      "slot_index": 44,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 17.6,
+      "scheduled_end_s": 18.0
+    },
+    {
+      "slot_index": 45,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 18.0,
+      "scheduled_end_s": 18.4
+    },
+    {
+      "slot_index": 46,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 18.4,
+      "scheduled_end_s": 18.8
+    },
+    {
+      "slot_index": 47,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 18.8,
+      "scheduled_end_s": 19.2
+    },
+    {
+      "slot_index": 48,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 19.2,
+      "scheduled_end_s": 19.6
+    },
+    {
+      "slot_index": 49,
+      "phase_id": "initial_acquisition",
+      "scheduled_start_s": 19.6,
+      "scheduled_end_s": 20.0
+    }
+  ],
+  "global_frame_sequence_scope": "Consumed acquisition slots then measured slots; missed slots consume indices, unused acquisition tail does not"
+}

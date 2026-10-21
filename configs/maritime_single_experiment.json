@@ -1,0 +1,17 @@
+{
+  "scene": "MaritimeHarborV2",
+  "rpc_port": 41452,
+  "vehicle": "DroneA",
+  "bystander": "DroneB",
+  "target_id": "balloon_001",
+  "observation_local_ned_m": [0.0, 0.0, -6.0],
+  "profiles": ["baseline", "target_shift", "similar_red", "target_occluded", "low_sun", "raised_waves"],
+  "frames_per_profile": 5,
+  "frame_interval_s": 0.25,
+  "safety": {
+    "hover_position_tolerance_m": 0.50,
+    "hover_speed_max_m_s": 0.30,
+    "bystander_drift_max_m": 0.15,
+    "bystander_speed_max_m_s": 0.10
+  }
+}

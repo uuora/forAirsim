@@ -1,0 +1,60 @@
+{
+  "kind": "BRAKING_MODEL_CANDIDATE_FREEZE",
+  "status": "PREPARED_NOT_EXECUTED",
+  "prepared_local": "2026-10-03T22:53:40.117539+08:00",
+  "formal_thesis_effect_results": false,
+  "configurations": [
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p4\\zero_short.json",
+      "sha256": "8f0869495cfa82bed7a9e91c9b4f6b067ba6fbffb163e8e661695e3884bf84ee",
+      "mode": "zero_hold_gate",
+      "planned_pulses": 0
+    },
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p4\\low_gate.json",
+      "sha256": "4b4c179ce9cc4f25b947d8628a58a65b67172ef9edb41bfaab4b07808f0e4254",
+      "mode": "pulse_measurement",
+      "planned_pulses": 4
+    },
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p4\\session_forward.json",
+      "sha256": "8a257fb5e52c10ef52d9fbf21ab12183ff20b3724534aada0450bd0ff0e3a60a",
+      "mode": "pulse_measurement",
+      "planned_pulses": 8
+    },
+    {
+      "configuration": "D:\\forAirsim\\configs\\braking_response_v1p4\\session_reverse.json",
+      "sha256": "f9383595e8530e113493a38a4edfbb536db4967f45ad7f477445e9c3e4721c26",
+      "mode": "pulse_measurement",
+      "planned_pulses": 8
+    }
+  ],
+  "candidate_horizon_s": 1.0,
+  "minimum_h_for_each_calibration_pulse_s": [
+    0.3577692210131102,
+    0.34704925371564027,
+    0.34076801957155045,
+    0.34395181415582415,
+    0.7297665672198843,
+    0.7400247364669796,
+    0.7291438620375988,
+    0.7350867376041577
+  ],
+  "calibration_audit": "D:\\forAirsim\\logs\\braking_campaign_20261003_223639_9536884\\analysis\\summary.json",
+  "calibration_audit_sha256": "e6ba7299d0e0e82cb09a17c2c8bcb157f9cad7d1c896f8bc49074f54dcd00fba",
+  "calibration_report": "D:\\forAirsim\\logs\\braking_response_20261003_223651_879172\\report.json",
+  "calibration_report_sha256": "6049d15fb628811a0cb56da46860cd0dde74b693a33f189334930cb5c74715a1",
+  "offline_command_replay_count": 795,
+  "offline_command_mismatches": 0,
+  "offline_counts_as_new_flight": false,
+  "decision": "One equivalent-window candidate 1.0 s exceeds all observed minimum windows plus the frozen 0.25 s query-gap cap. Keep a=.15 and reserve=.02; independent validation required.",
+  "gates": "new zero short, then held-out forward full whose .03 pulses precede .06, audit before reverse full; separate low-only configuration remains not dispatched",
+  "full_planned_flights": 2,
+  "full_planned_pulses": 16,
+  "ai_assistance": "Calibration candidate preparation assisted by AI; no validation result yet",
+  "parent_freeze": "D:\\forAirsim\\configs\\braking_response_v1p3\\conditions.json",
+  "parent_freeze_sha256": "4e12893caa27a7fe94a3af25ddfca46f5cbc25644bdc8d9fea9fe49ebb02225a",
+  "previous_zero_gate": "logs/braking_campaign_20261003_224701_4550403/analysis/summary.json",
+  "changes": "Only zero gate saved-query-span confirmation added; pulse procedure and h=1.0 model unchanged",
+  "runner": "braking_response_experiment_v1p3.py"
+}

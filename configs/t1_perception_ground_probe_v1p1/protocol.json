@@ -1,0 +1,200 @@
+{
+  "protocol_id": "t1_ground_virtual_camera_perception_v1p1_20261004",
+  "research_stage": "development_camera_and_perception_interface",
+  "formal_efficacy_results": false,
+  "frames_per_case": 2,
+  "target_scale_xyz": [
+    1.2,
+    1.2,
+    1.5
+  ],
+  "cases": [
+    {
+      "case_id": "center",
+      "target_world_ned_m": [
+        0,
+        0,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0,
+        0,
+        0
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "y_minus",
+      "target_world_ned_m": [
+        0,
+        -0.4,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0,
+        0,
+        0
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "y_plus",
+      "target_world_ned_m": [
+        0,
+        0.4,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0,
+        0,
+        0
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "yaw_10",
+      "target_world_ned_m": [
+        0,
+        0,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0,
+        0,
+        10
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "pitch_8",
+      "target_world_ned_m": [
+        0,
+        0,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        8,
+        0,
+        0
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "pose_3d",
+      "target_world_ned_m": [
+        0,
+        0,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3.3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        6,
+        8,
+        -7
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "occluded",
+      "target_world_ned_m": [
+        0,
+        0,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0,
+        0,
+        0
+      ],
+      "occluder_world_ned_m": [
+        -2,
+        0,
+        -3
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "reappeared",
+      "target_world_ned_m": [
+        0,
+        0,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0,
+        0,
+        0
+      ],
+      "description": "红色气球"
+    },
+    {
+      "case_id": "similar_red_pair",
+      "target_world_ned_m": [
+        0,
+        -0.8,
+        -3
+      ],
+      "camera_world_ned_m": [
+        -4,
+        0,
+        -3
+      ],
+      "camera_pitch_roll_yaw_deg": [
+        0,
+        0,
+        0
+      ],
+      "distractor_world_ned_m": [
+        0,
+        0.8,
+        -3
+      ],
+      "description": "最左侧的红色气球"
+    }
+  ],
+  "inactive_object_world_ned_m": [
+    30,
+    100,
+    -3
+  ],
+  "scene_acceptance": "Inactive distractor/occluder mask zero; visible specified target >=500 px except full-occlusion target zero; similar distractor >=500 px"
+}

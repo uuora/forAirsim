@@ -1,0 +1,8 @@
+C:\Users\hp\AppData\Local\Temp\tmpv7ae9oud\reconcile
+{"planned_flights": 12, "known_started_flights": 12, "unknown_start_status_flights": 0, "task_success_count": 12, "safe_landing_and_release_count": 12}
+{"planned_flights": 4, "started_flights": 2, "task_success_count": 1, "safe_landing_and_release_count": 1}
+..................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 162 tests in 1.665s
+
+OK

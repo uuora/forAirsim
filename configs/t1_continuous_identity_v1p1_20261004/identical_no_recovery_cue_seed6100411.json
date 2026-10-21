@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "protocol_id": "t1_continuous_identity_identical_no_recovery_cue_seed6100411_20261004",
+  "episode_id": "identical_no_recovery_cue_seed6100411",
+  "acquisition_seed": 6100411,
+  "split": "DEVELOPMENT_UNPARTITIONED",
+  "recovery_observability": "UNRESOLVABLE_IDENTICAL",
+  "ground_only": true,
+  "formal_efficacy_results": false,
+  "description": "持续跟踪开始时位于左侧的红色气球",
+  "target_generation": 1,
+  "minimum_period_s": 0.2,
+  "target_scale_xyz": [
+    1.2,
+    1.2,
+    1.5
+  ],
+  "occluder_scale_xyz": [
+    0.2,
+    1.6,
+    2.0
+  ],
+  "camera_world_ned_m": [
+    -4.08,
+    0,
+    -3
+  ],
+  "camera_pitch_roll_yaw_deg": [
+    0,
+    0,
+    0
+  ],
+  "controlled_target_motion_amplitude_m": 0.0,
+  "target_texture": "plain_red_64x64",
+  "distractor_texture": "plain_red_64x64",
+  "texture_Bgr_red": [
+    55,
+    35,
+    235
+  ],
+  "texture_Bgr_white": [
+    245,
+    245,
+    245
+  ],
+  "observer_configuration": {
+    "review_period_s": 3.0,
+    "current_frame_max_age_s": 0.5,
+    "semantic_max_age_s": 2.0,
+    "response_timeout_s": 2.0,
+    "min_request_interval_s": 2.0,
+    "track_max_unreviewed_s": 8.0,
+    "track_max_gap_s": 0.5,
+    "confirmation_frames": 2
+  },
+  "scene_acceptance": "target>=500 and distractor>=500 in initial/return; target=0 and distractor>=500 while hidden; inactive occluder=0",
+  "timing_contract": "60 predeclared .2-second intervals over 12 host seconds; missed slots remain NOT_CAPTURED; actual readback receipts stored separately",
+  "truth_access": "scenario constructor and independent evaluation only; RGB/self-camera observer does not receive phase/seg/depth/actor poses",
+  "phases": [
+    {
+      "phase_id": "initial_pair",
+      "host_duration_s": 5.0,
+      "target_world_ned_m": [
+        0,
+        -0.8,
+        -3
+      ],
+      "distractor_world_ned_m": [
+        0,
+        0.8,
+        -3
+      ],
+      "occluder_world_ned_m": [
+        30,
+        100,
+        -3
+      ]
+    },
+    {
+      "phase_id": "target_hidden_with_distractor_at_old_target",
+      "host_duration_s": 2.0,
+      "target_world_ned_m": [
+        0,
+        -0.8,
+        -3
+      ],
+      "distractor_world_ned_m": [
+        -2.5,
+        -0.30980392156862746,
+        -3
+      ],
+      "occluder_world_ned_m": [
+        -1.0,
+        -0.603921568627451,
+        -3
+      ]
+    },
+    {
+      "phase_id": "return_target_right",
+      "host_duration_s": 5.0,
+      "target_world_ned_m": [
+        0,
+        0.8,
+        -3
+      ],
+      "distractor_world_ned_m": [
+        0,
+        -0.8,
+        -3
+      ],
+      "occluder_world_ned_m": [
+        30,
+        100,
+        -3
+      ]
+    }
+  ],
+  "limits": [
+    "Development scene semantics are preregistered; no post-occlusion location hint is given to observer",
+    "Identical red instances after complete target occlusion lack a visible identity cue; successful reacquisition cannot be inferred from initial-left instruction",
+    "Controlled stripe condition is an attribute-cued recovery test, not unconstrained reidentification",
+    "Actors and virtual camera move; neither drone flies"
+  ],
+  "collector_version": "v1p1_phase_scoped_metadata",
+  "timing_repair": {
+    "unchanged": "same 5/2/5 seconds, .2s slots, boxes, masks, descriptions, weights and observer",
+    "change": "camera intrinsics once before timing; ground/actor pose RPC at phase boundaries; one report save after each observer",
+    "ground_scope": "phase boundary and end readback; not per-frame fresh ground state",
+    "evaluation": "every planned slot and actual receipt retained; no retrospective grid change"
+  }
+}

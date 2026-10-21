@@ -1,0 +1,23 @@
+{
+  "scene": "MaritimeHarborV2",
+  "rpc_port": 41452,
+  "vehicle": "DroneA",
+  "bystander": "DroneB",
+  "target_id": "balloon_001",
+  "observation_local_ned_m": [0.0, 0.0, -6.0],
+  "profiles": ["similar_red", "similar_red_left", "similar_red_wide_right", "similar_red_wide_left"],
+  "tasks": {
+    "similar_red": {"description": "the rightmost red balloon in the image", "expected_target_side": "right"},
+    "similar_red_left": {"description": "the leftmost red balloon in the image", "expected_target_side": "left"},
+    "similar_red_wide_right": {"description": "the rightmost red balloon in the image", "expected_target_side": "right"},
+    "similar_red_wide_left": {"description": "the leftmost red balloon in the image", "expected_target_side": "left"}
+  },
+  "frames_per_profile": 3,
+  "frame_interval_s": 0.5,
+  "safety": {
+    "hover_position_tolerance_m": 0.50,
+    "hover_speed_max_m_s": 0.30,
+    "bystander_drift_max_m": 0.15,
+    "bystander_speed_max_m_s": 0.10
+  }
+}

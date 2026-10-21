@@ -1,0 +1,43 @@
+{
+  "control": {
+    "x_min": -50.0,
+    "x_max": 50.0,
+    "y_min": -50.0,
+    "y_max": 50.0,
+    "height_min": 2.0,
+    "height_max": 25.0,
+    "margin": 1.0,
+    "arrival_radius": 0.5,
+    "max_speed": 4.0,
+    "max_acceleration": 4.0,
+    "max_yaw_rate_deg": 120.0,
+    "control_hz": 50,
+    "display_hz": 20,
+    "heading_tolerance_deg": 20.0,
+    "response_time_s": 0.35,
+    "target_distance_min": 6.0,
+    "target_distance_max": 12.0,
+    "seed": 13
+  },
+  "airsim": {
+    "host": "127.0.0.1",
+    "port": 41460,
+    "vehicle": "DroneControl",
+    "camera": "front_center",
+    "aim_camera": true,
+    "initial_height": 8.0,
+    "command_duration": 0.15,
+    "rpc_timeout": 3.0,
+    "editor": "D:/UE_4.27/Engine/Binaries/Win64/UE4Editor.exe",
+    "project": "external/AirSim/Unreal/Environments/Blocks/Blocks.uproject",
+    "map": "/Game/DroneControlOverview/Maps/DroneControlOverview",
+    "settings": "configs/dual_target_airsim_settings.json"
+  },
+  "overview": {
+    "camera": "control_overview",
+    "fps": 4,
+    "map_width_m": 125,
+    "marker_lifetime_s": 0.6,
+    "ue_debug_markers": false
+  }
+}
