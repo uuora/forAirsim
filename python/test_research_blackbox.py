@@ -40,7 +40,11 @@ class BlackboxTests(unittest.TestCase):
             result = run_blackbox_search(sphere, [-1.] * 4, [1.] * 4, method=method,
                                         seed=13, population=8, budget=256)
             parents = np.array(result["initial_population_normalized"])
-            costs = np.sum(parents ** 2, axis=1)
+            # Replay recorded objective values exactly; independent reductions
+            # may differ by one ULP across BLAS/NumPy platforms.
+            costs = np.array([row["score"] for row in result["evaluations"][:8]])
+            np.testing.assert_allclose(costs, np.sum(parents ** 2, axis=1),
+                                       rtol=0., atol=1e-14)
             factors, rates = np.full(8, .5), np.full(8, .9)
             accepted_count = rejected_count = adapted_count = 0
             for start in range(8, 256, 8):
