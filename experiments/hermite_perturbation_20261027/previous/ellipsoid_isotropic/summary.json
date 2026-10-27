@@ -1,0 +1,178 @@
+{
+  "scope": "frozen-reference geometric stress; no controller, vehicle, wind, sensing or probability model",
+  "profile": "ellipsoid_isotropic",
+  "methods": {
+    "random": {
+      "seeds": 20,
+      "feasible_all_conditions_seeds": 20,
+      "failed_conditions": 0,
+      "mean_training_score": 0.4387113370963073,
+      "mean_validation_score": 0.4387113370963073,
+      "mean_reference_duration_s": 3.678815255285482,
+      "mean_search_s": 0.3397339899999906
+    },
+    "gaussian": {
+      "seeds": 20,
+      "feasible_all_conditions_seeds": 20,
+      "failed_conditions": 0,
+      "mean_training_score": 0.43553760500220334,
+      "mean_validation_score": 0.43553760500220334,
+      "mean_reference_duration_s": 3.6602913172476677,
+      "mean_search_s": 0.3708032800000183
+    },
+    "abom": {
+      "seeds": 20,
+      "feasible_all_conditions_seeds": 20,
+      "failed_conditions": 0,
+      "mean_training_score": 0.44631326343576444,
+      "mean_validation_score": 0.44631326343576444,
+      "mean_reference_duration_s": 3.9139483576558396,
+      "mean_search_s": 0.3998644900000272
+    },
+    "abom_perturb": {
+      "seeds": 20,
+      "feasible_all_conditions_seeds": 20,
+      "failed_conditions": 0,
+      "mean_training_score": 0.4402318382562661,
+      "mean_validation_score": 0.4402318382562661,
+      "mean_reference_duration_s": 3.7571356448742526,
+      "mean_search_s": 0.400675850000016
+    },
+    "abom_triggered": {
+      "seeds": 20,
+      "feasible_all_conditions_seeds": 20,
+      "failed_conditions": 0,
+      "mean_training_score": 0.44459668753060144,
+      "mean_validation_score": 0.44459668753060144,
+      "mean_reference_duration_s": 3.87146264586089,
+      "mean_search_s": 0.3791432749999785
+    }
+  },
+  "paired_comparisons": [
+    {
+      "method": "gaussian",
+      "comparator": "abom",
+      "seeds": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "mean_delta_validation_score": -0.010775658433561208,
+      "exploratory_bootstrap_95_ci": [
+        -0.01642120727772485,
+        -0.0042391734585822466
+      ],
+      "wins": 17,
+      "ties": 0,
+      "losses": 3,
+      "negative_favors": "gaussian",
+      "independent_unit": "optimizer seed; no multiplicity correction"
+    },
+    {
+      "method": "abom_perturb",
+      "comparator": "abom",
+      "seeds": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "mean_delta_validation_score": -0.006081425179498454,
+      "exploratory_bootstrap_95_ci": [
+        -0.01031414977594099,
+        -0.001628367764663258
+      ],
+      "wins": 15,
+      "ties": 0,
+      "losses": 5,
+      "negative_favors": "abom_perturb",
+      "independent_unit": "optimizer seed; no multiplicity correction"
+    },
+    {
+      "method": "abom_triggered",
+      "comparator": "abom",
+      "seeds": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "mean_delta_validation_score": -0.0017165759051630091,
+      "exploratory_bootstrap_95_ci": [
+        -0.0034064123520856403,
+        -0.00030289935972763177
+      ],
+      "wins": 12,
+      "ties": 5,
+      "losses": 3,
+      "negative_favors": "abom_triggered",
+      "independent_unit": "optimizer seed; no multiplicity correction"
+    }
+  ],
+  "baseline": {
+    "method": "default",
+    "seed": null,
+    "score": 0.48099954809689416,
+    "feasible": true,
+    "cases": 128,
+    "failed_cases": 0,
+    "reference_duration_s": 5.0,
+    "jerk_energy_m2_s5": 6.387741257143914,
+    "result_file": "validation_default_sNone.json",
+    "result_sha256": "eb155ddbfeb56c9bbbe59dbac44a51f229c90acaabfd78091ffb97edf78103c9"
+  },
+  "training_candidates": 12800,
+  "training_sphere_conditions": 12800,
+  "validation_candidates": 101,
+  "validation_sphere_conditions": 12928,
+  "interpretation": "Exploratory optimization and stress transfer of fixed references; no controller, flight or wind conclusions"
+}

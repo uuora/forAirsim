@@ -1,0 +1,9 @@
+{
+  "status": "TRAINING_ONLY_SUPERSEDED",
+  "reason": "The directional certificate received its final numerical unit-vector contraction after this training source freeze. Validation correctly requires matching source bytes; this group was retained and rerun using the final shared source version.",
+  "replacement": "ellipsoid_nominal_final",
+  "training_runs": 100,
+  "candidate_evaluations": 12800,
+  "validation_performed": false,
+  "included_in_main_comparisons": false
+}
