@@ -4,9 +4,10 @@
 
 - `previous/`：前轮600个主运行、76,800次候选评价的摘要；早期退役组另列，不混入主统计。
 - `current/main/`：两种曲线空间、三个布局、七种方法、20种子的256次预算主实验摘要。
-- `current/budget_extension/`：新种子下七次空间512次预算扩展，执行完成后加入。
+- `current/budget_extension/`：新种子下七次空间512次预算扩展，300次运行、153,600次候选评价。
+- `current/staged_unlock/`：先低维再解锁与维数重启对照，90次运行、23,040次候选评价。
 - `previous_round_evidence_manifest.json`：前轮压缩包SHA-256及逐文件清单。
-- `new_round_evidence_manifest.json`：本轮压缩包SHA-256及逐文件清单，全部实验和核查完成后生成。
+- `new_round_evidence_manifest.json`：本轮压缩包SHA-256及逐文件清单，涵盖主实验、预算扩展和分阶段探索。
 
 压缩包超过目标大小时分为若干独立ZIP，每个包都包含自己的 `ARCHIVE_MANIFEST.json`，请按清单核对全部ZIP的SHA-256。解压后保留 `reports/...` 的相对目录，可在独立仓库副本中读取原始路径；不要覆盖自己已有的实验目录。ZIP中的源码快照、manifest、逐候选记录、选择和逐条件验证用于检查已保存证据。重跑需使用相应源码及依赖，不应把旧记录塞入新协议重新绑定。
 

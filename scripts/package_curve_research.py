@@ -17,7 +17,7 @@ import zlib
 ROOT = Path(__file__).resolve().parents[1]
 PREVIOUS = ("search_pilot", "curve_search", "uncertainty_nominal", "uncertainty_margin",
             "ellipsoid_nominal", "ellipsoid_nominal_final", "ellipsoid_isotropic", "ellipsoid_directional", "geometry")
-CURRENT = ("main", "budget_extension")
+CURRENT = ("main", "budget_extension", "staged_unlock")
 
 
 def sha(data):
