@@ -1,0 +1,8 @@
+{
+  "status": "COMPLETE",
+  "runs": 180,
+  "full_evaluations": 46080,
+  "feasible_selected": 180,
+  "shared_initialization_verified": true,
+  "best_result_rechecks_passed": true
+}

@@ -39,7 +39,11 @@ jobs:
           test_research_parameterizations test_research_blackbox test_research_perturbation_task
           test_research_parameter_campaign test_research_parameter_budget test_research_staged
           test_research_initial_curve_adapter
+          test_research_screened_search test_research_control_bounded test_research_quality_bound
+          test_research_timed_tracking
           dual_target_control.test_core dual_target_control.test_bezier_parameters
           dual_target_control.test_trajectory_objective dual_target_control.test_trajectory_profile
           dual_target_control.test_turning dual_target_control.test_terminal_corridor
           dual_target_control.test_waypoint_spacing
+      - name: Replay compressed ABOM budget evidence
+        run: python python/verify_abom_budget_bundles.py

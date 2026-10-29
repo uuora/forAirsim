@@ -1,0 +1,31 @@
+{
+  "geometry_main_raw.zip": {
+    "bytes": 13180447,
+    "sha256": "546735243e3d30420f8350aba0eb2a357090bfb43ece6de14161c2135af78c8f",
+    "entries": 193,
+    "status": "CRC_AND_ALL_SOURCE_BYTES_VERIFIED"
+  },
+  "geometry_closed_form_raw.zip": {
+    "bytes": 13182225,
+    "sha256": "1520479aa64929a121d8cdc24505539f945ec70e1374c97c379397f056a6f98c",
+    "entries": 194,
+    "status": "CRC_AND_ALL_SOURCE_BYTES_VERIFIED"
+  },
+  "control_cached_pilot_raw.zip": {
+    "bytes": 399545,
+    "sha256": "90d44d30f500b7ccba99bf9b355dfd09958e4543e59e5a3ff08d02b7971c9f54",
+    "entries": 20,
+    "status": "CRC_AND_ALL_SOURCE_BYTES_VERIFIED"
+  },
+  "dropout_calibration_raw.zip": {
+    "bytes": 7061275,
+    "sha256": "8500a1032570a1f661236aee5f53854069ebf5f11cc8762b19196447aa3e6de8",
+    "entries": 195,
+    "status": "CRC_AND_ALL_SOURCE_BYTES_VERIFIED"
+  },
+  "excluded_diagnostics.zip": {
+    "bytes": 251914,
+    "sha256": "1f6c72316f72eee529811ca1acb5f1bc80b3f8d062c23837768647ba75f2170b",
+    "reason": "Smoke has lazy-start timing effect; first control pilot aborted due scenario-caching mismatch. Excluded from timing conclusions."
+  }
+}

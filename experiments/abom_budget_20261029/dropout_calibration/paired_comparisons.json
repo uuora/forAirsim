@@ -1,0 +1,206 @@
+[
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "dropout": 0.5,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.00540111813979533,
+    "median_paired_score_difference": 0.000544883858794698,
+    "exploratory_paired_bootstrap95": [
+      -0.01609998268178644,
+      0.0037678483993853268
+    ],
+    "better_runs": 5,
+    "equal_runs": 0,
+    "worse_runs": 5,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "dropout": 0.1,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.008357233932850039,
+    "median_paired_score_difference": -0.004962613777192759,
+    "exploratory_paired_bootstrap95": [
+      -0.01657137960680752,
+      -0.001541861450723364
+    ],
+    "better_runs": 6,
+    "equal_runs": 0,
+    "worse_runs": 4,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "dropout": 0.5,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.00999758068307971,
+    "median_paired_score_difference": -0.01042460485373975,
+    "exploratory_paired_bootstrap95": [
+      -0.013956816200183613,
+      -0.0060784529066313
+    ],
+    "better_runs": 9,
+    "equal_runs": 0,
+    "worse_runs": 1,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "dropout": 0.1,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.002080217285884456,
+    "median_paired_score_difference": 0.002636016382554729,
+    "exploratory_paired_bootstrap95": [
+      -0.009773007592973542,
+      0.00534489282694419
+    ],
+    "better_runs": 4,
+    "equal_runs": 0,
+    "worse_runs": 6,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "dropout": 0.5,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.011817807780384193,
+    "median_paired_score_difference": -0.01409650077499422,
+    "exploratory_paired_bootstrap95": [
+      -0.01904163514598495,
+      -0.004638361635579445
+    ],
+    "better_runs": 8,
+    "equal_runs": 0,
+    "worse_runs": 2,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "dropout": 0.1,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.013607158725319419,
+    "median_paired_score_difference": -0.013672260739407638,
+    "exploratory_paired_bootstrap95": [
+      -0.017065962836034038,
+      -0.010515233344112253
+    ],
+    "better_runs": 10,
+    "equal_runs": 0,
+    "worse_runs": 0,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "dropout": 0.5,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.005677554320207184,
+    "median_paired_score_difference": -0.006480736119746228,
+    "exploratory_paired_bootstrap95": [
+      -0.014286172227896235,
+      0.0024293182283503137
+    ],
+    "better_runs": 7,
+    "equal_runs": 0,
+    "worse_runs": 3,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "dropout": 0.1,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.008698768283839258,
+    "median_paired_score_difference": -0.005569385729668391,
+    "exploratory_paired_bootstrap95": [
+      -0.020195534493552755,
+      0.0011486171879893426
+    ],
+    "better_runs": 7,
+    "equal_runs": 0,
+    "worse_runs": 3,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "dropout": 0.5,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": 0.004526246691985575,
+    "median_paired_score_difference": 0.007052539066596808,
+    "exploratory_paired_bootstrap95": [
+      -0.00663650528016606,
+      0.014804850752808137
+    ],
+    "better_runs": 2,
+    "equal_runs": 0,
+    "worse_runs": 8,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "dropout": 0.1,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": -0.00251931307997742,
+    "median_paired_score_difference": 0.002429392119950524,
+    "exploratory_paired_bootstrap95": [
+      -0.011551506501249503,
+      0.005950745490868178
+    ],
+    "better_runs": 4,
+    "equal_runs": 0,
+    "worse_runs": 6,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "dropout": 0.5,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": 0.002226555649123457,
+    "median_paired_score_difference": 0.002552108879138648,
+    "exploratory_paired_bootstrap95": [
+      -0.0022581855900262746,
+      0.0060941461273749265
+    ],
+    "better_runs": 2,
+    "equal_runs": 0,
+    "worse_runs": 8,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "dropout": 0.1,
+    "baseline_dropout": 0.95,
+    "n": 10,
+    "mean_paired_score_difference": 0.0003920348207194002,
+    "median_paired_score_difference": 0.0015590356125401161,
+    "exploratory_paired_bootstrap95": [
+      -0.007245001584080794,
+      0.008381341476612156
+    ],
+    "better_runs": 5,
+    "equal_runs": 0,
+    "worse_runs": 5,
+    "interpretation": "negative difference means lower selected score; exploratory across fixed development tasks"
+  }
+]
