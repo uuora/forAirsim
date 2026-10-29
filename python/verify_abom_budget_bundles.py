@@ -26,7 +26,11 @@ def main():
                 result=audit(root)
                 for filename in ['manifest.json','summary.json','rows.json','paired_comparisons.json','completion.json']:
                     compact=public/name.removesuffix('_raw.zip')/filename
-                    if compact.exists(): assert compact.read_bytes()==(root/filename).read_bytes()
+                    if compact.exists():
+                        # Git normalizes text newlines on checkout. Compressed
+                        # originals stay byte/hash-bound; the readable replicas
+                        # must contain the same JSON data on every host.
+                        assert json.loads(compact.read_text(encoding='utf-8-sig'))==json.loads((root/filename).read_text(encoding='utf-8-sig'))
                 print(name,result['status'])
 
 

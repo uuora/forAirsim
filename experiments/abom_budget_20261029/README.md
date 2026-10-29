@@ -13,6 +13,8 @@ The main method uses a valid objective lower bound to omit candidates that canno
 
 Every raw archive includes complete per-candidate records and source snapshots. Compact manifests, run rows, summaries and audits are also unpacked. [Archive hashes](bundle_index.json) bind the packages. [Regression output](regression_tests.txt) records 195 relevant passing tests.
 
+Archive hashes and source snapshots are checked byte-for-byte. Readable JSON replicas are compared as parsed data, so Git's Windows/Linux newline conversion does not invalidate identical evidence.
+
 The two geometry timing campaigns use the same task/seed combinations; they are not 360 independent task repetitions. Each campaign audited 46,080 screened proposals and 8,208 pruned records. The reference and selected-score sequences were identical to their paired originals. Closed-form ABOM screening reduced complete evaluations by 24.92% and the six group median wall times by 18.74–22.96%. Other optimizers also benefit; this does not establish ABOM as the strongest optimizer.
 
 The cached control pilot saved only two scenario rollouts across its screened arms. Adaptive ordering saved none. Its small timing differences do not establish a speedup. The existing model reports arrival/command checks, not synchronized reference tracking RMSE or motor saturation.
