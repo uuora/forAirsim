@@ -1,0 +1,666 @@
+{
+  "protocol": "pinned-abom-dropout-calibration-v1",
+  "args": {
+    "output": "reports/abom_budget_20261029/dropout_calibration",
+    "budget": 256,
+    "seeds": [
+      401,
+      402,
+      403,
+      404,
+      405,
+      406,
+      407,
+      408,
+      409,
+      410
+    ],
+    "dropouts": [
+      0.95,
+      0.5,
+      0.1
+    ],
+    "families": [
+      "single_bump",
+      "paired_bump"
+    ],
+    "layouts": [
+      "central",
+      "early_offset",
+      "two_obstacles"
+    ],
+    "upstream": "D:\\forAirsim\\tmp\\abom_deploy_probe\\upstream"
+  },
+  "sources": {
+    "python\\run_abom_dropout_research.py": "7efc33b3580647a06416e92c6b146a5d2f33cf74ee4af8c780583d2fad37d911",
+    "python\\trajectory_research\\search.py": "8e288aa09349219d19245d2e06461cd9938992f81924f46463e7304b041188b2",
+    "python\\trajectory_research\\screened_search.py": "e715fd8aec9262824acaa1e7fa2b96a853158b272509e22f18d176a819249ff0",
+    "python\\trajectory_research\\parameterizations.py": "e28c99432257e81d56d25f9d599f984d02fb9b4df0e3f5b692ad3df431e584a9",
+    "python\\trajectory_research\\perturbation_task.py": "3898794667c34105d32d920e3651d8fff757212e0d49014f0a5b1e6eb53c12b3",
+    "python\\trajectory_research\\curves.py": "2236256f86ca4dbc838f2ebfbb899d39fce87de0b6bffb678bba2fc07e543a02",
+    "python\\trajectory_research\\curve_task.py": "8122ebefcd9cdccb1eebe9b25650ca63e759b8a66c0f55af2e343da3f81dae4f",
+    "python\\trajectory_research\\constraints.py": "ea82fca425b1687de5fd4f704c9173d53b2f8db618e4bbb8bfb7a0b79968dd5a",
+    "python\\trajectory_research\\directional.py": "b166fea6a8c06969a3946a780c58f33491da9da410bc0b3da06d7239a833bf96"
+  },
+  "python": "3.10.21",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "upstream_commit": "79a2baec700ce0abc6cf7d4cba1e897989d80516",
+  "upstream_network_git_blob": "5959aa7e4aef13c6b128e7c16e51d8a23205d030",
+  "upstream_network_sha256": "2dbbd1409036d4250b96631575d6a87fdd56ad3b8a73f417a3037d21c7e58a7f",
+  "population": 16,
+  "method": "abom",
+  "initialization": "uniform with shared physical anchor",
+  "screening_enabled": false,
+  "bounded_objective_enabled": false,
+  "model_update_schedule": "every generation; source-style reset AdamW and repeated best SmoothL1 target",
+  "scope": "offline polynomial point-reference geometry; no controller, aircraft, wind, sensing, or flight validation",
+  "timer": "warm Python process; includes network construction and search; excludes one-time import/optimizer warmup, anchor checks, selected-result re-evaluation, serialization and summary",
+  "order": "cycle all dropout permutations across condition/seed blocks; plan frozen before timed runs",
+  "execution_plan": [
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 401,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 402,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 403,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 404,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 405,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 406,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 407,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 408,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 409,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "central",
+      "seed": 410,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 401,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 402,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 403,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 404,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 405,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 406,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 407,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 408,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 409,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "early_offset",
+      "seed": 410,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 401,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 402,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 403,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 404,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 405,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 406,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 407,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 408,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 409,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "single_bump",
+      "layout": "two_obstacles",
+      "seed": 410,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 401,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 402,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 403,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 404,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 405,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 406,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 407,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 408,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 409,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "central",
+      "seed": 410,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 401,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 402,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 403,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 404,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 405,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 406,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 407,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 408,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 409,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "early_offset",
+      "seed": 410,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 401,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 402,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 403,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 404,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 405,
+      "dropout_order": [
+        0.95,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 406,
+      "dropout_order": [
+        0.95,
+        0.1,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 407,
+      "dropout_order": [
+        0.5,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 408,
+      "dropout_order": [
+        0.5,
+        0.1,
+        0.95
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 409,
+      "dropout_order": [
+        0.1,
+        0.95,
+        0.5
+      ]
+    },
+    {
+      "family": "paired_bump",
+      "layout": "two_obstacles",
+      "seed": 410,
+      "dropout_order": [
+        0.1,
+        0.5,
+        0.95
+      ]
+    }
+  ],
+  "expected_runs": 180,
+  "baseline_dropout": 0.95,
+  "inference": "exploratory calibration on fixed development layouts; no global superiority or novel mechanism claim",
+  "excluded_one_time_optimizer_warmup_s": 1.666338499999938,
+  "torch_version": "2.11.0+cu128"
+}

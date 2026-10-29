@@ -1,0 +1,736 @@
+{
+  "schema": "staged-schedule-exploratory-comparisons/1",
+  "comparisons": [
+    {
+      "layout": "central",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.00018449458725416923,
+      "median_delta": -0.0002742943444291879,
+      "exploratory_bootstrap_95_ci": [
+        -0.0012758060270314146,
+        0.0011616087566897987
+      ],
+      "wins": 7,
+      "ties": 0,
+      "losses": 3
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.004572357534046789,
+      "median_delta": -0.004836161481295065,
+      "exploratory_bootstrap_95_ci": [
+        -0.026870854491664535,
+        0.02046548208370374
+      ],
+      "wins": 7,
+      "ties": 0,
+      "losses": 3
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 0.8283501281620886,
+      "median_delta": -0.019414103515302372,
+      "exploratory_bootstrap_95_ci": [
+        -2.201183262824357,
+        3.979876898562697
+      ],
+      "wins": 5,
+      "ties": 0,
+      "losses": 5
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.009356662984735952,
+      "median_delta": -0.007506365597118675,
+      "exploratory_bootstrap_95_ci": [
+        -0.014004213432255398,
+        -0.0053187540037557554
+      ],
+      "wins": 10,
+      "ties": 0,
+      "losses": 0
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.18074072692769527,
+      "median_delta": -0.11849237629592246,
+      "exploratory_bootstrap_95_ci": [
+        -0.29593660922951803,
+        -0.08432290064530185
+      ],
+      "wins": 10,
+      "ties": 0,
+      "losses": 0
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 13.689969504919816,
+      "median_delta": 10.587144409239684,
+      "exploratory_bootstrap_95_ci": [
+        4.959700960701649,
+        23.056335430495444
+      ],
+      "wins": 2,
+      "ties": 0,
+      "losses": 8
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.009172168397481783,
+      "median_delta": -0.006599179513196607,
+      "exploratory_bootstrap_95_ci": [
+        -0.014800325895334731,
+        -0.004338165679378069
+      ],
+      "wins": 10,
+      "ties": 0,
+      "losses": 0
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.1761683693936485,
+      "median_delta": -0.10527895370051787,
+      "exploratory_bootstrap_95_ci": [
+        -0.3105488044393223,
+        -0.06572807665594124
+      ],
+      "wins": 8,
+      "ties": 0,
+      "losses": 2
+    },
+    {
+      "layout": "central",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 12.861619376757726,
+      "median_delta": 8.20127278832318,
+      "exploratory_bootstrap_95_ci": [
+        2.6320685324565343,
+        24.357151864065035
+      ],
+      "wins": 3,
+      "ties": 0,
+      "losses": 7
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 0.00031299252755326854,
+      "median_delta": 0.0001574756254216214,
+      "exploratory_bootstrap_95_ci": [
+        -0.0009821625001599262,
+        0.0016849003144120281
+      ],
+      "wins": 5,
+      "ties": 0,
+      "losses": 5
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.0018292322050287523,
+      "median_delta": -0.01043908974110197,
+      "exploratory_bootstrap_95_ci": [
+        -0.025168778902593395,
+        0.02432342129725289
+      ],
+      "wins": 6,
+      "ties": 0,
+      "losses": 4
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 1.750255106261939,
+      "median_delta": 1.866565001010727,
+      "exploratory_bootstrap_95_ci": [
+        -1.347295929463366,
+        4.739780234991858
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 6
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.009129876269951254,
+      "median_delta": -0.007809444663608611,
+      "exploratory_bootstrap_95_ci": [
+        -0.015087815798931046,
+        -0.004116415633617943
+      ],
+      "wins": 9,
+      "ties": 0,
+      "losses": 1
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.1361388989545807,
+      "median_delta": -0.16191850344935044,
+      "exploratory_bootstrap_95_ci": [
+        -0.23367912021242204,
+        -0.04656002960882489
+      ],
+      "wins": 9,
+      "ties": 0,
+      "losses": 1
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 5.455623980267823,
+      "median_delta": 9.868966518130708,
+      "exploratory_bootstrap_95_ci": [
+        -4.6502174093527895,
+        14.511778133810049
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 6
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.009442868797504523,
+      "median_delta": -0.0077688371162485115,
+      "exploratory_bootstrap_95_ci": [
+        -0.014735747043469563,
+        -0.005099643395314538
+      ],
+      "wins": 9,
+      "ties": 0,
+      "losses": 1
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.13430966674955194,
+      "median_delta": -0.1210399518567038,
+      "exploratory_bootstrap_95_ci": [
+        -0.22064023715851563,
+        -0.05520297412410284
+      ],
+      "wins": 9,
+      "ties": 0,
+      "losses": 1
+    },
+    {
+      "layout": "early_offset",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 3.7053688740058837,
+      "median_delta": 6.698829824135146,
+      "exploratory_bootstrap_95_ci": [
+        -5.010907078207062,
+        11.098512479034206
+      ],
+      "wins": 2,
+      "ties": 0,
+      "losses": 8
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 0.0006906360638546938,
+      "median_delta": 0.0007645740211691676,
+      "exploratory_bootstrap_95_ci": [
+        -0.001451557895251626,
+        0.002853271565196102
+      ],
+      "wins": 3,
+      "ties": 0,
+      "losses": 7
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 0.0007498363470419989,
+      "median_delta": 0.015672379098380596,
+      "exploratory_bootstrap_95_ci": [
+        -0.040320789867611506,
+        0.042007403324132754
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 6
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to7",
+      "second": "staged_4to4",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 2.056315443596288,
+      "median_delta": -1.247937272905034,
+      "exploratory_bootstrap_95_ci": [
+        -3.1343770641372295,
+        7.423080823238615
+      ],
+      "wins": 6,
+      "ties": 0,
+      "losses": 4
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.0034215012828460846,
+      "median_delta": -0.004416197992206633,
+      "exploratory_bootstrap_95_ci": [
+        -0.006644605984293031,
+        -5.4118466595614074e-05
+      ],
+      "wins": 8,
+      "ties": 0,
+      "losses": 2
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.08239558410492984,
+      "median_delta": -0.06565868318822998,
+      "exploratory_bootstrap_95_ci": [
+        -0.14803499905912615,
+        -0.019410157012523657
+      ],
+      "wins": 8,
+      "ties": 0,
+      "losses": 2
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to7",
+      "second": "staged_7to7",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 7.865671770606309,
+      "median_delta": 6.188057194250312,
+      "exploratory_bootstrap_95_ci": [
+        2.245586907102704,
+        13.72633656492317
+      ],
+      "wins": 2,
+      "ties": 0,
+      "losses": 8
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "quality",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.004112137346700778,
+      "median_delta": -0.005982033766662009,
+      "exploratory_bootstrap_95_ci": [
+        -0.007279420030125488,
+        -0.0006512122131107666
+      ],
+      "wins": 8,
+      "ties": 0,
+      "losses": 2
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "duration_s",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": -0.08314542045197185,
+      "median_delta": -0.11445247106411016,
+      "exploratory_bootstrap_95_ci": [
+        -0.1525938502144765,
+        -0.012405636904804626
+      ],
+      "wins": 8,
+      "ties": 0,
+      "losses": 2
+    },
+    {
+      "layout": "two_obstacles",
+      "first": "staged_4to4",
+      "second": "staged_7to7",
+      "field": "jerk_energy_m2_s5",
+      "seeds": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "mean_delta": 5.809356327010022,
+      "median_delta": 9.168267599924981,
+      "exploratory_bootstrap_95_ci": [
+        -2.8854918093220596,
+        13.474622014719813
+      ],
+      "wins": 2,
+      "ties": 0,
+      "losses": 8
+    }
+  ],
+  "independent_unit": "optimizer seed within fixed layout",
+  "note": "post-development 10-seed study; paired bootstrap not multiplicity adjusted; restart and dimension both vary"
+}

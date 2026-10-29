@@ -1,0 +1,10 @@
+{
+  "schema": "staged-curve-evidence-audit/1",
+  "status": "PASS",
+  "runs": 90,
+  "training_candidates": 23040,
+  "manifest_sha256": "697dabffc4c8e20c4c3590ed7e3859253e30fefbfbf0d4eb7c6799ec4b5fc7b4",
+  "selection_sha256": "95a438a2bd019ced2c97d84a27aa4268c80bbcac69adeef1c24e91d9a0ec6a51",
+  "scope": "schedule/budget/seed/embedding/anchor/history/hash consistency; no physical validation claim",
+  "main_study_audit": "not applied; cross-schedule first populations intentionally differ"
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.9434393507972632,
+    "exploratory_paired_bootstrap95": [
+      0.8712317338884145,
+      0.9885982150954427
+    ],
+    "calls_saved_fraction": 0.251953125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.9379121842682798,
+    "exploratory_paired_bootstrap95": [
+      0.8779704433775487,
+      0.981597530454589
+    ],
+    "calls_saved_fraction": 0.1890625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9651649789920502,
+    "exploratory_paired_bootstrap95": [
+      0.926852690453588,
+      1.0018274472567654
+    ],
+    "calls_saved_fraction": 0.13203125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.8785145879164573,
+    "exploratory_paired_bootstrap95": [
+      0.8484074872769063,
+      0.9195715049957085
+    ],
+    "calls_saved_fraction": 0.246875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 1.002737790276485,
+    "exploratory_paired_bootstrap95": [
+      0.9492058861408585,
+      1.0137115355698993
+    ],
+    "calls_saved_fraction": 0.17578125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 1.046252377589772,
+    "exploratory_paired_bootstrap95": [
+      0.9652771080345943,
+      1.0931623364477274
+    ],
+    "calls_saved_fraction": 0.115625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.900444242899662,
+    "exploratory_paired_bootstrap95": [
+      0.8361897703832392,
+      0.9538183377256421
+    ],
+    "calls_saved_fraction": 0.22265625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.9333301789463688,
+    "exploratory_paired_bootstrap95": [
+      0.8970369583207694,
+      0.9900198211145987
+    ],
+    "calls_saved_fraction": 0.166796875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9961128656246692,
+    "exploratory_paired_bootstrap95": [
+      0.9694115648645604,
+      1.0485472803915346
+    ],
+    "calls_saved_fraction": 0.09453125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.8555290846841881,
+    "exploratory_paired_bootstrap95": [
+      0.820895860909867,
+      0.8902792849783101
+    ],
+    "calls_saved_fraction": 0.270703125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.8767340276642988,
+    "exploratory_paired_bootstrap95": [
+      0.8481635165666652,
+      0.9424257555726915
+    ],
+    "calls_saved_fraction": 0.191015625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.981932519857383,
+    "exploratory_paired_bootstrap95": [
+      0.9307679146381815,
+      0.9903198466841425
+    ],
+    "calls_saved_fraction": 0.119140625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.8537093553549968,
+    "exploratory_paired_bootstrap95": [
+      0.8282012951785918,
+      0.9358838525165876
+    ],
+    "calls_saved_fraction": 0.24609375,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.9394028871976965,
+    "exploratory_paired_bootstrap95": [
+      0.9063910406117957,
+      0.9950046246344121
+    ],
+    "calls_saved_fraction": 0.1671875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9875584313512169,
+    "exploratory_paired_bootstrap95": [
+      0.9207780776795513,
+      1.042598995013352
+    ],
+    "calls_saved_fraction": 0.096484375,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.8399705740341078,
+    "exploratory_paired_bootstrap95": [
+      0.7381547034715643,
+      0.8971759879125087
+    ],
+    "calls_saved_fraction": 0.25703125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.9355524600032563,
+    "exploratory_paired_bootstrap95": [
+      0.916518870251392,
+      0.969220085201244
+    ],
+    "calls_saved_fraction": 0.169921875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9631212717645834,
+    "exploratory_paired_bootstrap95": [
+      0.8882449877400436,
+      1.024058249276328
+    ],
+    "calls_saved_fraction": 0.093359375,
+    "feasible": 10,
+    "all_equivalent": true
+  }
+]

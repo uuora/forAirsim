@@ -1,2 +1,13 @@
 # Preserve embedded CRLF context and binary sections in Git patches.
 patches/*.patch -text
+
+# Preserve byte-bound research sources and evidence across Windows/Linux clones.
+python/trajectory_research/*.py -text whitespace=cr-at-eol
+python/run_*research.py -text whitespace=cr-at-eol
+python/run_curve_structure_study.py -text whitespace=cr-at-eol
+python/*hermite*.py -text whitespace=cr-at-eol
+python/*parameter*.py -text whitespace=cr-at-eol
+python/*staged*.py -text whitespace=cr-at-eol
+python/check_perturbation_energy_identity.py -text whitespace=cr-at-eol
+experiments/hermite_perturbation_20261027/** -text whitespace=cr-at-eol
+docs/research-hermite-20261027/figures/** -text whitespace=cr-at-eol

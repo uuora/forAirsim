@@ -1,0 +1,38 @@
+{
+  "schema": "initial-curve-parameter-perturbation-audit/1",
+  "status": "PASS",
+  "output": "D:\\forAirsim\\reports\\hermite_parameter_perturbation_20261027\\main",
+  "auditor_sha256": "a403332b504295cd44de6d2ea64df2df57019ee4fdd294f3c492fe2a63a4392f",
+  "python": "3.10.21",
+  "numpy": "1.26.4",
+  "counts": {
+    "assertions": 4912372,
+    "source_snapshots": 9,
+    "training_runs": 840,
+    "training_candidates": 215040,
+    "training_infeasible_candidates": 90468,
+    "stress_obstacles": 256,
+    "stress_scenes": 192,
+    "validation_references": 846,
+    "validation_conditions": 54144,
+    "failed_validation_conditions": 0,
+    "summary_groups": 42,
+    "paired_bootstrap_comparisons": 57
+  },
+  "findings": [],
+  "coverage": [
+    "frozen source hashes; current source bytes not imported or required",
+    "exact FE, generation indices, shared seeded initialization and anchor, parameter box",
+    "evaluated incumbent, monotone prefix histories, all training check/score arithmetic",
+    "independent full-curve jerk-energy and deformation-RMS arithmetic",
+    "selection/training bindings, reconstructed within-ellipsoid stress scenes",
+    "all validation result/check/certificate-status arithmetic and hash bindings",
+    "summary full structure, group means/counts, seed-paired 10000-resample intervals"
+  ],
+  "limitations": [
+    "Record consistency does not prove record creation time, execution order, or that validation never influenced human decisions.",
+    "Reported derivative hull and spatial certificate projection values are checked for internal arithmetic/status consistency, not independently rederived from every control hull.",
+    "A stress result is hash-bound to the declared complete scene file; complete geometric oracles are not replayed by this auditor.",
+    "A PASS is not a signed execution attestation, scientific novelty judgment, formal interval-arithmetic certificate, or aircraft/flight safety guarantee."
+  ]
+}

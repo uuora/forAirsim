@@ -1,0 +1,115 @@
+{
+  "methods": {
+    "random": {
+      "seeds": 5,
+      "all_cases_feasible_seeds": 5,
+      "failed_cases": 0,
+      "mean_validation_time_s": 12.573066666666673,
+      "mean_training_score": 0.42099373834901666,
+      "mean_search_wall_s": 29.587164899999994,
+      "total_training_candidate_evaluations": 640
+    },
+    "gaussian": {
+      "seeds": 5,
+      "all_cases_feasible_seeds": 5,
+      "failed_cases": 0,
+      "mean_validation_time_s": 12.608400000000007,
+      "mean_training_score": 0.4210897603903244,
+      "mean_search_wall_s": 26.646739579999984,
+      "total_training_candidate_evaluations": 640
+    },
+    "abom": {
+      "seeds": 5,
+      "all_cases_feasible_seeds": 5,
+      "failed_cases": 0,
+      "mean_validation_time_s": 12.504266666666675,
+      "mean_training_score": 0.41922594988415823,
+      "mean_search_wall_s": 28.716267080000012,
+      "total_training_candidate_evaluations": 640
+    },
+    "abom_perturb": {
+      "seeds": 5,
+      "all_cases_feasible_seeds": 5,
+      "failed_cases": 0,
+      "mean_validation_time_s": 12.534400000000009,
+      "mean_training_score": 0.41968256592551095,
+      "mean_search_wall_s": 26.574419279999983,
+      "total_training_candidate_evaluations": 640
+    }
+  },
+  "paired_time_comparisons": [
+    {
+      "comparator": "random",
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "mean_delta_time_s": -0.03866666666666525,
+      "bootstrap_95_percentile_ci_s": [
+        -0.08746666666666521,
+        0.04080000000000226
+      ],
+      "negative_favors": "abom_perturb",
+      "interpretation": "exploratory seed-paired interval; failures retained"
+    },
+    {
+      "comparator": "gaussian",
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "mean_delta_time_s": -0.07399999999999984,
+      "bootstrap_95_percentile_ci_s": [
+        -0.09666666666666365,
+        -0.04333333333333726
+      ],
+      "negative_favors": "abom_perturb",
+      "interpretation": "exploratory seed-paired interval; failures retained"
+    },
+    {
+      "comparator": "abom",
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "mean_delta_time_s": 0.030133333333333567,
+      "bootstrap_95_percentile_ci_s": [
+        -0.00973333333333386,
+        0.07093333333333333
+      ],
+      "negative_favors": "abom_perturb",
+      "interpretation": "exploratory seed-paired interval; failures retained"
+    }
+  ],
+  "baseline": {
+    "feasible": true,
+    "score": 0.5592349247139298,
+    "mean_elapsed_s": 12.958666666666675,
+    "mean_normalized_peak_command_jerk": 0.8006173452462306,
+    "time_weight": 0.99,
+    "smoothness_weight": 0.001,
+    "time_scale_s": 10.0,
+    "failed_cases": 0,
+    "failed_checks": 0,
+    "total_checks": 270,
+    "quality_term": 0.5592349247139298,
+    "feasibility_rule": "all independent regression checks must pass"
+  },
+  "budget_accounting": {
+    "training_candidates": 2560,
+    "training_rollout_conditions": 7680,
+    "validation_candidates": 21,
+    "validation_rollout_conditions": 630
+  },
+  "scope": "development pilot, not AirSim or real flight",
+  "limitations": "No force/wind, sensing, rotor, thrust, or attitude model; feasibility is model-specific"
+}

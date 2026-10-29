@@ -1,0 +1,113 @@
+{
+  "scope": "100 randomized algebraic cases and one continuous-reference geometry example; no flight",
+  "random_seed": 20261027,
+  "cases": 100,
+  "samples_per_curve": 301,
+  "maximum_absolute_time_derivative_error": {
+    "cubic": [
+      7.993605777301127e-15,
+      1.4876988529977098e-14,
+      5.684341886080802e-14,
+      8.526512829121202e-14
+    ],
+    "quintic": [
+      5.861977570020827e-14,
+      1.0724754417879012e-13,
+      6.746825320647076e-13,
+      1.8189894035458565e-12
+    ],
+    "bump_bezier": [
+      8.970602038971265e-14,
+      2.6401103525586223e-13,
+      1.549316230864406e-12,
+      7.16227077646181e-12
+    ]
+  },
+  "derivative_order_units": [
+    "m",
+    "m/s",
+    "m/s^2",
+    "m/s^3"
+  ],
+  "maximum_endpoint_preservation_errors": [
+    2.842170943040401e-14,
+    1.1368683772161603e-13,
+    3.410605131648481e-13
+  ],
+  "example": {
+    "baseline": {
+      "status": "VIOLATED",
+      "certified_leaves": 0,
+      "unresolved_intervals": [],
+      "violation_witness": {
+        "u": 0.5,
+        "position": [
+          4.0,
+          0.0,
+          5.0
+        ],
+        "distance_to_centre": 0.0
+      },
+      "max_depth": 12,
+      "numerical_margin": 1e-10,
+      "minimum_certified_box_distance": null,
+      "inflated_radius": 0.4,
+      "scope": "continuous polynomial reference versus one sphere; finite-precision AABB sufficient condition"
+    },
+    "bumped_coarse": {
+      "status": "UNRESOLVED",
+      "certified_leaves": 0,
+      "unresolved_intervals": [
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "violation_witness": null,
+      "max_depth": 0,
+      "numerical_margin": 1e-10,
+      "minimum_certified_box_distance": null,
+      "inflated_radius": 0.4,
+      "scope": "continuous polynomial reference versus one sphere; finite-precision AABB sufficient condition"
+    },
+    "bumped_refined": {
+      "status": "CERTIFIED",
+      "certified_leaves": 6,
+      "unresolved_intervals": [],
+      "violation_witness": null,
+      "max_depth": 12,
+      "numerical_margin": 1e-10,
+      "minimum_certified_box_distance": 0.6591796875000002,
+      "inflated_radius": 0.4,
+      "scope": "continuous polynomial reference versus one sphere; finite-precision AABB sufficient condition"
+    },
+    "junction_baseline": {
+      "position_m": 0.0,
+      "velocity_m_s": 0.0,
+      "acceleration_m_s2": 0.0,
+      "jerk_m_s3": 2.5141574442188355,
+      "c0": true,
+      "c1": true,
+      "c2": true,
+      "c3": false
+    },
+    "junction_bumped": {
+      "position_m": 0.0,
+      "velocity_m_s": 0.0,
+      "acceleration_m_s2": 0.0,
+      "jerk_m_s3": 6.8137841410619675,
+      "c0": true,
+      "c1": true,
+      "c2": true,
+      "c3": false
+    },
+    "derivative_hull_bounds": {
+      "1": 4.32961892087514,
+      "2": 9.600000000000001,
+      "3": 14.400000000000002
+    },
+    "jerk_energy_increase": 13.165714285714285
+  },
+  "maximum_example_displacement_m": 0.8,
+  "limitations": "Finite-precision sufficient geometry checks; no vehicle tracking or wind model"
+}
