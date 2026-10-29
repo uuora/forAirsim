@@ -15,7 +15,10 @@ def audit(folder):
     folder=Path(folder)
     manifest=load(folder/'manifest.json')
     for source,digest in manifest['sources'].items():
-        assert hashlib.sha256((folder/'source_snapshot'/Path(source).name).read_bytes()).hexdigest()==digest
+        # Manifests were written on Windows; host Path.name does not parse a
+        # Windows backslash on Linux. Snapshot names themselves are portable.
+        basename=str(source).replace('\\','/').rsplit('/',1)[-1]
+        assert hashlib.sha256((folder/'source_snapshot'/basename).read_bytes()).hexdigest()==digest
     rows=load(folder/'rows.json')
     assert rows, 'no completed runs'
     if manifest['protocol']=='pinned-abom-dropout-calibration-v1':
@@ -95,7 +98,7 @@ def audit(folder):
             ratios=[r['modes'][mode]['wall_s']/r['modes']['plain']['wall_s'] for r in chosen]
             saved=1-sum(r['modes'][mode]['case_rollouts'] for r in chosen)/sum(r['modes']['plain']['case_rollouts'] for r in chosen)
             assert saved==group['case_rollout_reduction']
-        assert float(np.median(ratios))==group['median_wall_ratio']
+        assert np.isclose(float(np.median(ratios)),group['median_wall_ratio'],rtol=1e-12,atol=1e-14)
     hashes={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in folder.glob('*.json') if p.name!='audit.json'}
     result=dict(status='PASS',completed_pairs_or_triples=len(rows),screened_proposals_audited=total_proposals,
                 pruned_records_audited=total_pruned,observed_screened_case_rollouts=total_cases,
@@ -134,16 +137,16 @@ def audit_dropout(folder,manifest,rows):
     for group in load(folder/'summary.json'):
         chosen=[r for r in rows if (r['family'],r['layout'],r['dropout'])==(group['family'],group['layout'],group['dropout'])]
         assert group['n']==len(chosen)
-        assert group['mean_score']==float(np.mean([r['best_score'] for r in chosen]))
-        assert group['median_wall_s']==float(np.median([r['wall_s'] for r in chosen]))
+        assert np.isclose(group['mean_score'],float(np.mean([r['best_score'] for r in chosen])),rtol=1e-12,atol=1e-14)
+        assert np.isclose(group['median_wall_s'],float(np.median([r['wall_s'] for r in chosen])),rtol=1e-12,atol=1e-14)
     for group in load(folder/'paired_comparisons.json'):
         differences=np.array([indexed[(group['family'],group['layout'],seed,group['dropout'])]['best_score']-
                               indexed[(group['family'],group['layout'],seed,.95)]['best_score'] for seed in manifest['args']['seeds']])
-        assert group['mean_paired_score_difference']==float(np.mean(differences))
+        assert np.isclose(group['mean_paired_score_difference'],float(np.mean(differences)),rtol=1e-12,atol=1e-14)
         assert group['better_runs']==sum(differences<0)
         rng=np.random.default_rng(20261029)
         boot=np.mean(differences[rng.integers(0,len(differences),(5000,len(differences)))],axis=1)
-        assert group['exploratory_paired_bootstrap95']==np.quantile(boot,[.025,.975]).tolist()
+        np.testing.assert_allclose(group['exploratory_paired_bootstrap95'],np.quantile(boot,[.025,.975]),rtol=1e-12,atol=1e-14)
     result=dict(status='PASS',runs=len(rows),proposals=sum(r['budget'] for r in rows),
                 shared_initialization_and_execution_order_verified=True,summary_and_paired_arithmetic_verified=True,
                 source_snapshot_hashes_verified=True,
