@@ -124,8 +124,13 @@ class ControlConfig:
 class BezierParameters:
     """Bounded search variables; defaults reproduce the original planner.
 
-    These parameters shape the curve and its passage speed. They do not change
-    the arrival gate, field bounds, or command speed/acceleration/yaw limits.
+    The first five fields shape the curve geometry and its passage speed. The
+    remaining five expose the speed-profile coefficients that used to be
+    hard-coded in the guidance law: the lateral-acceleration share taken by
+    curvature, the braking-distance share, the backward braking propagation,
+    the lowest passage-speed ratio, and the speed floor used while the body is
+    not yet aligned. None of them changes the arrival gate, field bounds, or
+    command speed/acceleration/yaw limits.
     """
 
     outgoing_weight: float = 0.4
@@ -133,9 +138,14 @@ class BezierParameters:
     approach_handle_ratio: float = 0.2
     corridor_fraction: float = 0.45
     pass_speed_scale: float = 1.0
+    curvature_lateral_share: float = 0.7
+    brake_share: float = 0.55
+    braking_propagation: float = 1.4
+    terminal_speed_floor: float = 0.2
+    alignment_speed_floor: float = 0.15
 
-    _LOWER: ClassVar[tuple[float, ...]] = (0.0, 0.15, 0.1, 0.2, 0.6)
-    _UPPER: ClassVar[tuple[float, ...]] = (0.8, 0.5, 0.35, 0.65, 1.3)
+    _LOWER: ClassVar[tuple[float, ...]] = (0.0, 0.15, 0.1, 0.2, 0.6, 0.3, 0.25, 0.8, 0.05, 0.0)
+    _UPPER: ClassVar[tuple[float, ...]] = (0.8, 0.5, 0.35, 0.65, 1.3, 1.0, 1.0, 2.5, 0.6, 0.5)
 
     def __post_init__(self) -> None:
         self.validate()
@@ -158,12 +168,13 @@ class BezierParameters:
 
     @classmethod
     def from_vector(cls, values) -> "BezierParameters":
+        count = len(fields(cls))
         try:
             vector = np.asarray(values, dtype=object)
         except (TypeError, ValueError) as error:
-            raise ValueError("Bezier parameters must be a vector of five numbers") from error
-        if vector.shape != (5,):
-            raise ValueError("Bezier parameters must be a vector of five numbers")
+            raise ValueError(f"Bezier parameters must be a vector of {count} numbers") from error
+        if vector.shape != (count,):
+            raise ValueError(f"Bezier parameters must be a vector of {count} numbers")
         return cls(*vector.tolist())
 
     @classmethod
@@ -471,15 +482,15 @@ class RollingController:
         self._progress = 0.0
         cosine = float(np.clip(np.dot(incoming, outgoing), -1.0, 1.0))
         self._target_speed = min(self.config.max_speed, self.config.max_speed
-            * max(0.2, math.sqrt((1.0 + cosine) / 2.0)) * self._parameters.pass_speed_scale)
+            * max(self._parameters.terminal_speed_floor, math.sqrt((1.0 + cosine) / 2.0)) * self._parameters.pass_speed_scale)
         self._speed_profile = np.minimum(self.config.max_speed, np.sqrt(
-            0.7 * self.config.max_acceleration / np.maximum(self._curvature, 1e-9)))
+            self._parameters.curvature_lateral_share * self.config.max_acceleration / np.maximum(self._curvature, 1e-9)))
         self._speed_profile[self._SAMPLES - 1] = min(self._speed_profile[self._SAMPLES - 1], self._target_speed)
         # Propagate braking distance backward rather than imposing the slowest
         # distant curve on the whole leg. This is a bounded O(samples) pass.
         for index in range(len(self._path) - 2, -1, -1):
             reachable = math.sqrt(self._speed_profile[index + 1] ** 2
-                                  + 1.4 * self.config.max_acceleration * increments[index])
+                                  + self._parameters.braking_propagation * self.config.max_acceleration * increments[index])
             self._speed_profile[index] = min(self._speed_profile[index], reachable)
         self._planning_ms = (perf_counter() - began) * 1000.0
         self._planning_revision += 1
@@ -550,7 +561,7 @@ class RollingController:
         # Reserve response distance before the arrival region, using measured
         # speed and tracking error. This is a command envelope, not a claim that
         # the physical aircraft can instantaneously satisfy it.
-        brake = 0.55 * self.config.max_acceleration
+        brake = self._parameters.brake_share * self.config.max_acceleration
         lag = self.config.response_time_s
         measured_speed = float(np.linalg.norm(self._velocity))
         # Position alone reacts too late when residual lateral inertia carries
@@ -568,7 +579,8 @@ class RollingController:
         # Measured yaw controls this slowdown; an unrealistically fast yaw command
         # cannot grant a hit or permit acceleration while the body faces away.
         alignment = max(0.0, math.cos(yaw_error))
-        speed *= 0.15 + 0.85 * alignment
+        floor = self._parameters.alignment_speed_floor
+        speed *= floor + (1.0 - floor) * alignment
         # A passed, unqualified target must be recovered without counting a hit.
         # The normal entry corridor and speed envelope are intended to prevent
         # this branch during a feasible approach.

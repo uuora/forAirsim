@@ -85,10 +85,13 @@ class TrackingCondition:
                                allow_zero=name == "position_gain"))
 
 
-def run_timed_tracking(segment, condition=None, *, initial_position_offset_m=(0., 0., 0.)):
+def run_timed_tracking(segment, condition=None, *, initial_position_offset_m=(0., 0., 0.),
+                       velocity_error_gain=0., acceleration_feedforward_s=0.):
     """Return a complete, JSON-serializable deterministic tracking rollout.
 
-    p_dot=v, v_dot=(c-v)/tau; c_raw=q_dot+kp*(q-p). Project c_raw into the
+    p_dot=v, v_dot=(c-v)/tau; c_raw=q_dot+kp*(q-p), optionally plus
+    kv*(q_dot-v)+tau_ff*q_ddot. Extensions default to zero for legacy callers.
+    Project c_raw into the
     command-speed ball, then limit its change from the preceding command.
     Initial actual velocity and preceding command equal q_dot(0). Actual
     position is q(0) plus the explicitly recorded position offset.
@@ -107,6 +110,8 @@ def run_timed_tracking(segment, condition=None, *, initial_position_offset_m=(0.
     if not isinstance(condition, TrackingCondition):
         raise ValueError("condition must be a TrackingCondition")
     offset = _vector(initial_position_offset_m, "initial_position_offset_m")
+    velocity_error_gain=_scalar(velocity_error_gain,'velocity_error_gain',allow_zero=True)
+    acceleration_feedforward_s=_scalar(acceleration_feedforward_s,'acceleration_feedforward_s',allow_zero=True)
     duration = segment.duration_s
     ratio = duration / condition.timestep_s
     if not math.isfinite(ratio) or ratio > MAX_STEPS:
@@ -118,6 +123,7 @@ def run_timed_tracking(segment, condition=None, *, initial_position_offset_m=(0.
         raise ValueError("rollout time grid must have finite positive intervals")
     reference_position = segment.sample(times, derivative=0)
     reference_velocity = segment.sample(times, derivative=1)
+    reference_acceleration=segment.sample(times,derivative=2) if acceleration_feedforward_s else None
     if not np.isfinite(reference_position).all() or not np.isfinite(reference_velocity).all():
         raise ValueError("reference states must be finite")
     previous_command = reference_velocity[0].copy()
@@ -141,6 +147,8 @@ def run_timed_tracking(segment, condition=None, *, initial_position_offset_m=(0.
             velocity[0] = reference_velocity[0]
             for i, step in enumerate(intervals):
                 raw = reference_velocity[i] + condition.position_gain * (reference_position[i]-position[i])
+                if velocity_error_gain:raw=raw+velocity_error_gain*(reference_velocity[i]-velocity[i])
+                if acceleration_feedforward_s:raw=raw+acceleration_feedforward_s*reference_acceleration[i]
                 raw_norm = _norm(raw, "raw velocity command")
                 speed_limited = raw * min(1., condition.max_command_speed_mps/max(raw_norm, 1e-300))
                 speed_clipped[i] = raw_norm > condition.max_command_speed_mps
@@ -185,6 +193,7 @@ def run_timed_tracking(segment, condition=None, *, initial_position_offset_m=(0.
         max_velocity_command_mps=max(_norm(x, "velocity command") for x in commands),
         max_command_slew_mps2=float(np.max(command_slew)))
     return dict(model=MODEL, scope=SCOPE, condition=asdict(condition), duration_s=duration,
+        controller_extensions=dict(velocity_error_gain=velocity_error_gain,acceleration_feedforward_s=acceleration_feedforward_s),
         intervals=count, actual_max_timestep_s=float(np.max(intervals)),
         initial_position_offset_m=offset.tolist(), initial_velocity_command_mps=reference_velocity[0].tolist(),
         metrics=metrics, times_s=times.tolist(),

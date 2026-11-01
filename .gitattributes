@@ -1,5 +1,8 @@
 # Preserve embedded CRLF context and binary sections in Git patches.
 patches/*.patch -text
+python/** -text
+scripts/** -text
+experiments/control_full_flow_20261101/** -text
 
 # Preserve byte-bound research sources and evidence across Windows/Linux clones.
 python/trajectory_research/*.py -text whitespace=cr-at-eol

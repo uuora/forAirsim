@@ -19,3 +19,5 @@ git -C external/AirSim apply --reverse --check ../../patches/airsim-local.patch
 应用后，按项目原有流程构建 AirSim 和 Blocks。原生观察器与动力模块的增量构建入口是 `scripts/build_dual_target_observer.ps1` 和 `scripts/build_dual_target_dynamics.ps1`；其中 Unreal 安装路径、编译器版本需要与本机环境一致。GitHub 中不含 Unreal 安装、编译后的 DLL、模型权重或 Python 虚拟环境。
 
 本次代码归档不含 `.env`、日志、`reports/`、`runs/`、运行缓存、每次实验的 `configs/**/source_bundle/` 冻结副本及图表的大型 `input_campaign.json` 原始输入；这些文件保留在本地。历史文档中引用本地实验输出的链接需要原始实验归档才能打开。
+
+2026-11-01补充：当前完整控制批次及必要启动方案以显式白名单保存在`experiments/control_full_flow_20261101/evidence.zip`，使用`scripts/restore_control_evidence.py`校验恢复；其他历史日志仍不全部上传。证据包不含UE／Python安装和编译DLL。另一台已有可用03环境时，先复用该环境，不要盲目重复应用补丁。

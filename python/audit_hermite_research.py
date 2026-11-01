@@ -67,8 +67,12 @@ def frozen_bounds(directory, pilot):
         node = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == "BezierParameters")
         values = literal_assignments(node.body)
         lower, upper = values["_LOWER"], values["_UPPER"]
-        default = [values[name] for name in ("outgoing_weight", "initial_handle_ratio",
-                                           "approach_handle_ratio", "corridor_fraction", "pass_speed_scale")]
+        # Derive the default order from the frozen class body so snapshots taken
+        # before the speed-profile coefficients existed still read correctly.
+        names = [field.target.id for field in node.body
+                 if isinstance(field, ast.AnnAssign) and isinstance(field.target, ast.Name)
+                 and not field.target.id.startswith("_")]
+        default = [values[name] for name in names if name in values]
     else:
         path = directory / "source_snapshot/python/trajectory_research/curve_task.py"
         values = literal_assignments(ast.parse(path.read_text(encoding="utf-8-sig")).body)

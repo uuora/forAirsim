@@ -24,7 +24,7 @@ def main():
                     assert target.is_relative_to(root), 'archive path escapes extraction folder'
                 archive.extractall(root)
                 result=audit(root)
-                for filename in ['manifest.json','summary.json','rows.json','paired_comparisons.json','completion.json']:
+                for filename in ['manifest.json','summary.json','rows.json','audit.json','paired_comparisons.json','completion.json']:
                     compact=public/name.removesuffix('_raw.zip')/filename
                     if compact.exists():
                         # Git normalizes text newlines on checkout. Compressed

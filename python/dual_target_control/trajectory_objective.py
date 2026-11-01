@@ -130,7 +130,7 @@ def _score_rows(rows: list[dict]) -> tuple[float, bool, dict]:
 
 
 def evaluate_parameters(parameters, cases=None, *, dt: float = 0.05) -> dict:
-    """Evaluate a BézierParameters object or ordered five-value vector.
+    """Evaluate a BézierParameters object or an ordered parameter vector.
 
     Parameters remain fixed across the two original target legs in each case.
     Each new candidate starts from the exact same measured state, target queue,
