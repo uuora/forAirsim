@@ -1,0 +1,254 @@
+[
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.8021922402534394,
+    "exploratory_paired_bootstrap95": [
+      0.7456335621925403,
+      0.8437046252965764
+    ],
+    "calls_saved_fraction": 0.251953125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.8518211191342631,
+    "exploratory_paired_bootstrap95": [
+      0.8301447284977472,
+      0.8660144221001763
+    ],
+    "calls_saved_fraction": 0.1890625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "central",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.8794873830029917,
+    "exploratory_paired_bootstrap95": [
+      0.865997152181511,
+      0.9183474579461464
+    ],
+    "calls_saved_fraction": 0.13203125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.8017325373815521,
+    "exploratory_paired_bootstrap95": [
+      0.747536008249859,
+      0.860333273442756
+    ],
+    "calls_saved_fraction": 0.246875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.8940556656117542,
+    "exploratory_paired_bootstrap95": [
+      0.8683447966872135,
+      0.9389186096720235
+    ],
+    "calls_saved_fraction": 0.17578125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "early_offset",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9209507925565688,
+    "exploratory_paired_bootstrap95": [
+      0.8781578869557928,
+      0.9693827431248753
+    ],
+    "calls_saved_fraction": 0.115625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.812587968412362,
+    "exploratory_paired_bootstrap95": [
+      0.7772764881445882,
+      0.8473061222728397
+    ],
+    "calls_saved_fraction": 0.22265625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.8597240288578156,
+    "exploratory_paired_bootstrap95": [
+      0.8113950792497961,
+      0.8907645847479456
+    ],
+    "calls_saved_fraction": 0.166796875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "single_bump",
+    "layout": "two_obstacles",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9277921339372703,
+    "exploratory_paired_bootstrap95": [
+      0.8976014116257867,
+      0.94533479389074
+    ],
+    "calls_saved_fraction": 0.09453125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.7704168168467365,
+    "exploratory_paired_bootstrap95": [
+      0.7421419617912459,
+      0.7982761196673719
+    ],
+    "calls_saved_fraction": 0.270703125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.8349679308254903,
+    "exploratory_paired_bootstrap95": [
+      0.7930340275191974,
+      0.8675838548262775
+    ],
+    "calls_saved_fraction": 0.191015625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "central",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9050078566452749,
+    "exploratory_paired_bootstrap95": [
+      0.8385816432994484,
+      0.9136898592454152
+    ],
+    "calls_saved_fraction": 0.119140625,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.7902865344650253,
+    "exploratory_paired_bootstrap95": [
+      0.7693366447391841,
+      0.8503937277457372
+    ],
+    "calls_saved_fraction": 0.24609375,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.8720254918677024,
+    "exploratory_paired_bootstrap95": [
+      0.8412973399535214,
+      0.8935225004569834
+    ],
+    "calls_saved_fraction": 0.1671875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "early_offset",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.9444297539133399,
+    "exploratory_paired_bootstrap95": [
+      0.9098119026530777,
+      0.9607339570072411
+    ],
+    "calls_saved_fraction": 0.096484375,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "method": "abom",
+    "n": 10,
+    "median_wall_ratio": 0.7739091665831946,
+    "exploratory_paired_bootstrap95": [
+      0.7283491748166705,
+      0.8008304652826049
+    ],
+    "calls_saved_fraction": 0.25703125,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "method": "abom_perturb",
+    "n": 10,
+    "median_wall_ratio": 0.8718247651388364,
+    "exploratory_paired_bootstrap95": [
+      0.8494270910515097,
+      0.9099208514270467
+    ],
+    "calls_saved_fraction": 0.169921875,
+    "feasible": 10,
+    "all_equivalent": true
+  },
+  {
+    "family": "paired_bump",
+    "layout": "two_obstacles",
+    "method": "gaussian",
+    "n": 10,
+    "median_wall_ratio": 0.942234290254395,
+    "exploratory_paired_bootstrap95": [
+      0.908640693504178,
+      0.9632199878599412
+    ],
+    "calls_saved_fraction": 0.093359375,
+    "feasible": 10,
+    "all_equivalent": true
+  }
+]

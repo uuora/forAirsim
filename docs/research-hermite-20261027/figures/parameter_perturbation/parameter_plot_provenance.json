@@ -1,0 +1,142 @@
+{
+  "generated_at_utc": "2026-10-27T07:59:59.826684+00:00",
+  "campaign": "D:\\forAirsim\\reports\\hermite_parameter_perturbation_20261027\\main",
+  "input_sha256": {
+    "manifest.json": "a111bd511320e197ef5e187e615a92d4c6eef8e971532e928fb3ace1301e4bd8",
+    "selection.json": "473893fe6e229cded99fbb06ed38e8b00e9bbc59fb5a61ad7cd5ea92620a05eb",
+    "summary.json": "0e8bb0fc3d21e784b25be43053ae00f2a192064ed1bda94c329015c61b02d357",
+    "validation_summary.json": "72532b425169c45e429cf44524833db94eaab20a90eb4d02953410ecaf1e165b"
+  },
+  "plot_script_sha256": "ef82ca96b466b88f79423860b3862929b75936a3719b3bf53a81121398e49d25",
+  "path_selection": {
+    "method": "coordinate",
+    "rule": "Sort each family/layout's training scores, then seeds; take index (n-1)//2",
+    "validation_used": false,
+    "selected": [
+      {
+        "family": "single_bump",
+        "layout": "central",
+        "method": "coordinate",
+        "seed": 117,
+        "parameters": [
+          0.0009241399446722198,
+          -0.6425134895722157,
+          0.014683233057884215,
+          3.2006044456555913
+        ],
+        "final_training_score": 0.4006570004910422,
+        "duration_s": 3.2006044456555913,
+        "training_file": "train/single_bump__central__coordinate__s117.json",
+        "training_sha256": "4685562d7f5ad10e144029c5f223954d1254183b614da0b0185a008c02020c00"
+      },
+      {
+        "family": "paired_bump",
+        "layout": "central",
+        "method": "coordinate",
+        "seed": 118,
+        "parameters": [
+          -0.02761929997758128,
+          0.6940255924523555,
+          0.023830043760956654,
+          0.25054015428778165,
+          -0.07248367756352181,
+          0.00782681981565414,
+          3.2455520553907
+        ],
+        "final_training_score": 0.40430490099354166,
+        "duration_s": 3.2455520553907,
+        "training_file": "train/paired_bump__central__coordinate__s118.json",
+        "training_sha256": "92ccc077069f92145dc6c32d401c482da3e755e4b660d4ba46121682c6af2860"
+      },
+      {
+        "family": "single_bump",
+        "layout": "early_offset",
+        "method": "coordinate",
+        "seed": 115,
+        "parameters": [
+          0.025731987606289808,
+          -0.4045704280167568,
+          0.4989097710285859,
+          3.19853591682105
+        ],
+        "final_training_score": 0.4005615153342001,
+        "duration_s": 3.19853591682105,
+        "training_file": "train/single_bump__early_offset__coordinate__s115.json",
+        "training_sha256": "ae48adb0dc3cf8395ef06b17e5ef30b0050f9904f7a33e0539971309f913d7e2"
+      },
+      {
+        "family": "paired_bump",
+        "layout": "early_offset",
+        "method": "coordinate",
+        "seed": 113,
+        "parameters": [
+          0.03162411182504421,
+          -0.17577302662265604,
+          0.7859938313119301,
+          0.27867479693618025,
+          -0.06973559707494559,
+          -0.0073589352270979624,
+          3.376381672112985
+        ],
+        "final_training_score": 0.4133309982423823,
+        "duration_s": 3.376381672112985,
+        "training_file": "train/paired_bump__early_offset__coordinate__s113.json",
+        "training_sha256": "e740d890e04fd101c8d5f949f917604e50496a4adc045ecbe8708e8d2c068a7c"
+      },
+      {
+        "family": "single_bump",
+        "layout": "two_obstacles",
+        "method": "coordinate",
+        "seed": 119,
+        "parameters": [
+          0.0026241944566315345,
+          -0.9413512632355299,
+          0.002878114249206143,
+          3.3682310034169936
+        ],
+        "final_training_score": 0.4161868739445575,
+        "duration_s": 3.3682310034169936,
+        "training_file": "train/single_bump__two_obstacles__coordinate__s119.json",
+        "training_sha256": "1f971627f1d066406b32d4f6b9d742111ababfd4fb24089dec5a07dfddc790d5"
+      },
+      {
+        "family": "paired_bump",
+        "layout": "two_obstacles",
+        "method": "coordinate",
+        "seed": 118,
+        "parameters": [
+          -0.10307639401059687,
+          0.9329708322010877,
+          -0.011465502265129102,
+          0.19332920959714084,
+          -0.16875174026402062,
+          0.05242611600163105,
+          3.4372044525394507
+        ],
+        "final_training_score": 0.4194366723694216,
+        "duration_s": 3.4372044525394507,
+        "training_file": "train/paired_bump__two_obstacles__coordinate__s118.json",
+        "training_sha256": "db39e2cf2d547f004166fda8f2087f1b83e39542d387a135764baa7753384cfb"
+      }
+    ]
+  },
+  "figures_and_tables_sha256": {
+    "parameter_quality_boxplots.png": "51f877e5b41bc14fb5d7de2ecbe3874ba9d4e33db2cff402879921b22053f837",
+    "parameter_quality_boxplots.pdf": "8a94784f0d7694dfc81744f206fd3b99803850e54191bc7572811f655c12124f",
+    "parameter_mean_metrics.png": "ca75c44fc59738d0d2475e4c13fcff0d3f8028791b4d5bfe2765158cb5864d60",
+    "parameter_mean_metrics.pdf": "d6c13b82c692e537084a7c94fd6366022d40e5d964f70af30a5a43d775447134",
+    "parameter_convergence.png": "ae3838bb8d1f5071aed75f775bb86da5a49f186a76803ddddd0632e229ff20f4",
+    "parameter_convergence.pdf": "cf3ea61ada5cf931b8163c5dc50b623a44eaf4c6cf9dab6db8a3b420f39e1d9a",
+    "parameter_paths_central.png": "166b458177b2aad23ae3f7661b4f3ec6f0e402e6fda952c2a65175685813a2b8",
+    "parameter_paths_central.pdf": "436a682745fce9c33f6a7a4a349b8d937be9ebc42c8c0b08a6de2a451bb33eef",
+    "parameter_paths_early_offset.png": "c93ad85c9838ea3d00f3ae14afb129b9937f580cc9760e4a83fbeed848b81b67",
+    "parameter_paths_early_offset.pdf": "741be604ca7fffed1629fdbe96e8ea11748cf8db41be67ef49fab9fe7ec53549",
+    "parameter_paths_two_obstacles.png": "b37a19653c511226778f1a3bca707b03d5762da81ba9de8a1329c0b12e2c70a7",
+    "parameter_paths_two_obstacles.pdf": "66386a1faef1c4c47b834a4d0b357404a24c891cb44c33260651d565105e3f07",
+    "parameter_group_metrics.csv": "f930f09f3b315f1904209fd286b964592c782a7763dfd503546ee3545e524676",
+    "parameter_runs.csv": "ef50a8c0238ead1dedb5da7429f2ce884f98bbb30b1e95c56810e39c3acc41ed",
+    "parameter_selected_paths.csv": "6721220061a0dc1a8e06e76578a2ed012dca88c289d53be0e88a8a035cce3a9d"
+  },
+  "scope": "offline polynomial point-reference optimization; no aircraft, controller, wind or perception simulation",
+  "interpretation": "Optimizer seeds are the statistical units. Envelopes are assumed, not calibrated. No flight performance is measured."
+}

@@ -1,0 +1,7 @@
+{
+  "packages": {
+    "stop": "reports/route_default_stop_20261030_v2/airsim_replay_plan.json",
+    "pass": "reports/route_default_pass_20261030_v2/airsim_replay_plan.json"
+  },
+  "scope": "Two separately fixed waypoint policies; all six methods use the same points and command limits within each policy."
+}

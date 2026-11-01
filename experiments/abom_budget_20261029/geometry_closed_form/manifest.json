@@ -1,0 +1,55 @@
+{
+  "protocol": "paired-exact-screening-v1",
+  "args": {
+    "output": "reports/abom_budget_20261029/geometry_closed_form",
+    "budget": 256,
+    "bound_mode": "closed_form",
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110
+    ],
+    "methods": [
+      "abom",
+      "abom_perturb",
+      "gaussian"
+    ],
+    "families": [
+      "single_bump",
+      "paired_bump"
+    ],
+    "layouts": [
+      "central",
+      "early_offset",
+      "two_obstacles"
+    ],
+    "upstream": "D:\\forAirsim\\tmp\\abom_deploy_probe\\upstream"
+  },
+  "sources": {
+    "python\\run_screened_abom_research.py": "c2d758c6d8fe4371506443c64c3f8d29a8b9536f04bee8960f98c1d37659eefa",
+    "python\\trajectory_research\\screened_search.py": "e715fd8aec9262824acaa1e7fa2b96a853158b272509e22f18d176a819249ff0",
+    "python\\trajectory_research\\search.py": "8e288aa09349219d19245d2e06461cd9938992f81924f46463e7304b041188b2",
+    "python\\trajectory_research\\perturbation_task.py": "3898794667c34105d32d920e3651d8fff757212e0d49014f0a5b1e6eb53c12b3",
+    "python\\trajectory_research\\parameterizations.py": "e28c99432257e81d56d25f9d599f984d02fb9b4df0e3f5b692ad3df431e584a9",
+    "python\\trajectory_research\\curves.py": "2236256f86ca4dbc838f2ebfbb899d39fce87de0b6bffb678bba2fc07e543a02",
+    "python\\trajectory_research\\curve_task.py": "8122ebefcd9cdccb1eebe9b25650ca63e759b8a66c0f55af2e343da3f81dae4f",
+    "python\\trajectory_research\\constraints.py": "ea82fca425b1687de5fd4f704c9173d53b2f8db618e4bbb8bfb7a0b79968dd5a",
+    "python\\trajectory_research\\directional.py": "b166fea6a8c06969a3946a780c58f33491da9da410bc0b3da06d7239a833bf96",
+    "python\\trajectory_research\\quality_bound.py": "ad6ddd35cb6a200e32e86fc753a3082d3ea0c745d2e02a6c86fae51a3820f4ad"
+  },
+  "python": "3.10.21",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "scope": "offline point-reference geometry; no controller, aircraft, wind, or flight validation",
+  "timer": "warm Python process; includes optimizer initialization, lower bounds, objective and network work; excludes initial torch import and post-run audit",
+  "budgets": "equal proposals, not equal full objective calls",
+  "pruning": "LB >= worst retained elite; stable ties keep old parents; no feasibility imputed",
+  "novelty": "engineering baseline; exact lower-bound elimination is not claimed as a new optimization principle",
+  "excluded_one_time_optimizer_warmup_s": 1.6701616999999942
+}

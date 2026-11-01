@@ -1,0 +1,245 @@
+{
+  "scope": "reference geometry and duration; no flight-time or physical robustness claim",
+  "comparisons": [
+    {
+      "before": "uncertainty_nominal",
+      "after": "uncertainty_margin",
+      "same_stress_geometries": true,
+      "same_initial_populations": true,
+      "candidates_budget_identical": true,
+      "methods": [
+        {
+          "method": "abom",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 2,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.724953420948848,
+          "mean_reference_duration_after_s": 3.9133991960003334,
+          "mean_delta_reference_duration_s": 0.18844577505148563,
+          "relative_change_percent": 5.059010241354467,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.029851504107445786,
+            0.372518770329973
+          ]
+        },
+        {
+          "method": "abom_perturb",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 1,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.3652283107519616,
+          "mean_reference_duration_after_s": 3.618644545882541,
+          "mean_delta_reference_duration_s": 0.2534162351305794,
+          "relative_change_percent": 7.530432164763101,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.1580839690338226,
+            0.3608804515925101
+          ]
+        },
+        {
+          "method": "abom_triggered",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 0,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.6473377684116137,
+          "mean_reference_duration_after_s": 3.881632272592859,
+          "mean_delta_reference_duration_s": 0.23429450418124548,
+          "relative_change_percent": 6.423712829954842,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.0749008107986632,
+            0.4239735600373538
+          ]
+        },
+        {
+          "method": "gaussian",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 1,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.2991203018238364,
+          "mean_reference_duration_after_s": 3.509725636932752,
+          "mean_delta_reference_duration_s": 0.21060533510891558,
+          "relative_change_percent": 6.3836815830113025,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.1655120382936552,
+            0.26118074835844335
+          ]
+        },
+        {
+          "method": "random",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 2,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.507654911977974,
+          "mean_reference_duration_after_s": 3.6377327640773887,
+          "mean_delta_reference_duration_s": 0.1300778520994141,
+          "relative_change_percent": 3.7083993540876437,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.044577446325641416,
+            0.21383820049682337
+          ]
+        }
+      ]
+    },
+    {
+      "before": "ellipsoid_nominal_final",
+      "after": "ellipsoid_isotropic",
+      "same_stress_geometries": true,
+      "same_initial_populations": true,
+      "candidates_budget_identical": true,
+      "methods": [
+        {
+          "method": "abom",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 9,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.7787365363200416,
+          "mean_reference_duration_after_s": 3.9139483576558396,
+          "mean_delta_reference_duration_s": 0.1352118213357984,
+          "relative_change_percent": 3.5782283320412445,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            -0.0019373585803391321,
+            0.295811809818242
+          ]
+        },
+        {
+          "method": "abom_perturb",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 4,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.4882333240256003,
+          "mean_reference_duration_after_s": 3.7571356448742526,
+          "mean_delta_reference_duration_s": 0.2689023208486521,
+          "relative_change_percent": 7.708839858749039,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.14147462866757476,
+            0.39998613240950226
+          ]
+        },
+        {
+          "method": "abom_triggered",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 8,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.7975898603943143,
+          "mean_reference_duration_after_s": 3.87146264586089,
+          "mean_delta_reference_duration_s": 0.07387278546657552,
+          "relative_change_percent": 1.945254442482236,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            -0.06876174049574908,
+            0.24259691646738576
+          ]
+        },
+        {
+          "method": "gaussian",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 7,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.3368940917973324,
+          "mean_reference_duration_after_s": 3.6602913172476677,
+          "mean_delta_reference_duration_s": 0.32339722545033467,
+          "relative_change_percent": 9.691563967981542,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.17384033793102513,
+            0.5117921347848597
+          ]
+        },
+        {
+          "method": "random",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 11,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.527762385341912,
+          "mean_reference_duration_after_s": 3.678815255285482,
+          "mean_delta_reference_duration_s": 0.15105286994356887,
+          "relative_change_percent": 4.281832318729983,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            0.06440030873531565,
+            0.2436847301401845
+          ]
+        }
+      ]
+    },
+    {
+      "before": "ellipsoid_isotropic",
+      "after": "ellipsoid_directional",
+      "same_stress_geometries": true,
+      "same_initial_populations": true,
+      "candidates_budget_identical": true,
+      "methods": [
+        {
+          "method": "abom",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 20,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.9139483576558396,
+          "mean_reference_duration_after_s": 3.8023807789585113,
+          "mean_delta_reference_duration_s": -0.11156757869732874,
+          "relative_change_percent": -2.850512283308426,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            -0.2847654055053984,
+            0.04522625665212392
+          ]
+        },
+        {
+          "method": "abom_perturb",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 20,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.7571356448742526,
+          "mean_reference_duration_after_s": 3.5436650454911494,
+          "mean_delta_reference_duration_s": -0.21347059938310214,
+          "relative_change_percent": -5.681737886528926,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            -0.359727279739611,
+            -0.07424347053430207
+          ]
+        },
+        {
+          "method": "abom_triggered",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 20,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.87146264586089,
+          "mean_reference_duration_after_s": 3.766706233949995,
+          "mean_delta_reference_duration_s": -0.1047564119108948,
+          "relative_change_percent": -2.70586136283385,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            -0.2671965562328486,
+            0.04186689352658835
+          ]
+        },
+        {
+          "method": "gaussian",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 20,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.6602913172476677,
+          "mean_reference_duration_after_s": 3.4104607866792866,
+          "mean_delta_reference_duration_s": -0.24983053056838028,
+          "relative_change_percent": -6.825427511497617,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            -0.4370721160043268,
+            -0.11738964422428835
+          ]
+        },
+        {
+          "method": "random",
+          "paired_optimizer_seeds": 20,
+          "fully_feasible_references_before": 20,
+          "fully_feasible_references_after": 20,
+          "mean_reference_duration_before_s": 3.678815255285482,
+          "mean_reference_duration_after_s": 3.571951858518684,
+          "mean_delta_reference_duration_s": -0.10686339676679643,
+          "relative_change_percent": -2.9048318371862614,
+          "exploratory_seed_bootstrap_95_percentile_ci_s": [
+            -0.1859023016914683,
+            -0.03944402936634107
+          ]
+        }
+      ]
+    }
+  ],
+  "independent_unit": "optimizer seed; all declared failures retained",
+  "intervals": "exploratory bootstrap; post-development comparisons, no multiplicity correction",
+  "script_sha256": "8347f3d5b94d2727e05c813dba793f259e736a39f5e5f1e9bef4a7fee0af87d4"
+}

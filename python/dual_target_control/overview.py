@@ -58,8 +58,8 @@ def _points(values, limit, cfg=None):
 def marker_geometry(snapshot, cfg):
     """Use the same height-up runtime snapshot as the Qt 3D view."""
     targets = _points(snapshot.get('targets', []), 3, cfg)
-    if len(targets) not in (0, 2):
-        raise ValueError('地图标记需要当前目标和下一目标。')
+    if len(targets) not in (0, 1, 2):
+        raise ValueError('地图标记最多接受当前目标和下一目标。')
     return dict(targets=targets,
                 planned=_points(snapshot.get('planned_path', []), 300, cfg),
                 trail=_points(snapshot.get('trail', []), 300))
@@ -207,13 +207,14 @@ class OverviewStream:
     def _draw(self, client, airsim, state):
         cfg = ControlConfig.from_dict(state.get('config', self.config).get('control', {}))
         geometry = marker_geometry(state, cfg)
-        ned = lambda rows: [airsim.Vector3r(float(x), float(y), -float(h)) for x, y, h in rows]
+        origin=np.asarray(state.get('marker_world_origin_ned',[0.,0.,0.]))
+        ned = lambda rows: [airsim.Vector3r(float(x+origin[0]), float(y+origin[1]), float(-h+origin[2])) for x, y, h in rows]
         warnings = []
         targets = geometry['targets']
         # Real movable UE meshes are captured even when a SceneCapture component
         # omits the engine's debug lines. Empty queues hide the two unused meshes.
         for index, name in enumerate(('DC_TargetRed', 'DC_TargetBlue')):
-            point = ned([targets[index]])[0] if targets else airsim.Vector3r(0., 0., 1000.)
+            point = ned([targets[index]])[0] if index<len(targets) else airsim.Vector3r(0., 0., 1000.)
             if not self._call(client.simSetObjectPose, name,
                               airsim.Pose(point, airsim.Quaternionr()), teleport=True):
                 warnings.append(name + ' 实体未同步')
@@ -224,17 +225,33 @@ class OverviewStream:
             return '；'.join(warnings)
         shared = dict(duration=self._duration, is_persistent=False)
         for index, color in enumerate(([1., .05, .05, 1.], [.1, .3, 1., 1.])):
-            if targets:
+            if index<len(targets):
                 self._call(client.simPlotPoints, ned([targets[index]]),
                            color_rgba=color, size=10., **shared)
         self._call(client.simPlotLineList, ned(field_edges(cfg)),
                    color_rgba=[1., .65, .15, 1.], thickness=2., **shared)
         for key, color in (('planned', [.12, .9, .3, 1.]),
-                           ('trail', [.65, .65, .65, 1.])):
+                           ('trail', [1., .05, .85, 1.])):
             if len(geometry[key]) >= 2:
                 self._call(client.simPlotLineStrip, ned(geometry[key]),
-                           color_rgba=color, thickness=3., **shared)
+                           color_rgba=color, thickness=6. if key=='trail' else 2.5, **shared)
+        self._draw_route_landmarks(client,airsim,state,ned,shared)
         return '；'.join(warnings)
+
+    def _draw_route_landmarks(self,client,airsim,state,ned,shared):
+        from .route_milestones import glyph_lines
+        markers=state.get('route_markers') or []
+        visited=[];strings=[];positions=[]
+        for marker in markers:
+            if marker['kind']=='via' and marker['state']!='visited':continue
+            point=marker['position']
+            if marker['kind']=='via':visited.append(point)
+            else:
+                color=[.02,.65,.65,1.] if marker['kind']=='start' else [1.,.55,.05,1.]
+                self._call(client.simPlotLineList,ned(glyph_lines(marker)),color_rgba=color,thickness=4.,**shared)
+            strings.append(marker['id']);positions.append([point[0],point[1],point[2]+.85])
+        if visited:self._call(client.simPlotPoints,ned(visited),color_rgba=[.1,.45,1.,1.],size=9.,**shared)
+        if strings:self._call(client.simPlotStrings,strings,ned(positions),scale=1.2,color_rgba=[.05,.12,.18,1.],duration=self._duration)
 
     def _work(self):
         client = None

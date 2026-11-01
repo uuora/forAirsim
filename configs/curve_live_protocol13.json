@@ -1,0 +1,9 @@
+{
+  "base_config": "configs/dual_target_control.json",
+  "plans": "reports/live_control_turn_case_1201/airsim_replay_plan.json",
+  "max_speed_mps": 6.0,
+  "max_acceleration_mps2": 6.0,
+  "reference_time_scale": 1.25,
+  "auto_show_scene": true,
+  "scope": "Protocol13 realtime curve execution in original03 framework. Limits are command limits, not guaranteed actual speed. No visual input."
+}

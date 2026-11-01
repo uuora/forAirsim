@@ -64,7 +64,8 @@ class ControlRuntime:
     def __init__(self, config, mode='airsim'):
         if mode not in ('airsim', 'demo'):
             raise ValueError('mode must be airsim or demo')
-        self.config = deepcopy(config)
+        from .machine_config import apply_machine_config
+        self.config = apply_machine_config(config)
         self.mode = mode
         self.cfg = ControlConfig.from_dict(self.config.get('control', self.config))
         self.cfg.validate()
@@ -139,7 +140,9 @@ class ControlRuntime:
     def stop(self):
         self._stop_requested.set()
         self._enqueue('stop')
-    def configure(self, config): self._enqueue('configure', deepcopy(config))
+    def configure(self, config):
+        from .machine_config import apply_machine_config
+        self._enqueue('configure', apply_machine_config(config))
     def shutdown(self):
         if self._scene is not None:
             self._scene.close()

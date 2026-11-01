@@ -193,7 +193,8 @@ class OverviewTests(unittest.TestCase):
         self.assertEqual(points[1][2]['color_rgba'], [.1, .3, 1., 1.])
         paths = [row for row in plots if row[0] == 'simPlotLineStrip']
         self.assertEqual(paths[0][2]['color_rgba'], [.12, .9, .3, 1.])
-        self.assertEqual(paths[1][2]['color_rgba'], [.65, .65, .65, 1.])
+        self.assertEqual(paths[1][2]['color_rgba'], [1., .05, .85, 1.])
+        self.assertGreater(paths[1][2]['thickness'],paths[0][2]['thickness'])
         self.assertEqual(len(field_edges(ControlConfig())), 24)
         self.assertNotIn('simFlushPersistentMarkers', [row[0] for row in client.calls])
 
@@ -221,7 +222,7 @@ class OverviewTests(unittest.TestCase):
         self.assertEqual(geometry['trail'][-1], [10., 0., 5.])
         for changes in (dict(targets=[[float('nan'), 0, 5], [1, 2, 3]]),
                         dict(targets=[[1000, 0, 5], [1, 2, 3]]),
-                        dict(targets=[[1, 2, 3]]),
+                        dict(targets=[[1, 2, 3]]*3),
                         dict(planned_path=[[1, 2]])):
             bad = runtime.snapshot()
             bad.update(changes)

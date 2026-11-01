@@ -51,3 +51,7 @@ docs/references-20260915/sources/*.pdf
 
 # Large generated figure inputs (raw experiments remain local)
 /docs/research-summary-20261008/**/input_campaign.json
+
+# Local experiment catalogue, annotations and reversible derived-view archives
+/experiment_data/
+/output/

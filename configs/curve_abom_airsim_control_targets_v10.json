@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "protocol_revision": 10,
+  "protocol_revision_note": "Pure control, exact 03 Overview map, no obstacles. One common controller frozen after predeclared 0.3/0.6/0.9s development grid on ordinary Hermite. Rest-to-rest target references. Unchanged speed/slew limits and control-error gates.",
+  "experiment_kind": "SIX_GROUP_SIMPLIFIED_SEARCH_AIRSIM_REPLAY_PILOT",
+  "scope": "AirSim execution replay of frozen plans found with a separately declared simplified model; not optimization with AirSim as oracle, real flight, or a real-time planning claim.",
+  "editor": "D:/UE_4.27/Engine/Binaries/Win64/UE4Editor.exe",
+  "project": "external/AirSim/Unreal/Environments/Blocks/Blocks.uproject",
+  "map": "/Game/DroneControlOverview/Maps/DroneControlOverview",
+  "host": "127.0.0.1",
+  "port": 41461,
+  "vehicle": "ResearchDrone",
+  "rpc_timeout_s": 8.0,
+  "lifecycle_rpc_timeout_s": 30.0,
+  "settings": {
+    "SettingsVersion": 1.2,
+    "SimMode": "Multirotor",
+    "ApiServerAddress": "127.0.0.1",
+    "ApiServerPort": 41461,
+    "PhysicsEngineName": "FastPhysicsEngine",
+    "ClockType": "SteppableClock",
+    "ClockSpeed": 1.0,
+    "ViewMode": "NoDisplay",
+    "EngineSound": false,
+    "LogMessagesVisible": false,
+    "RecordUIVisible": false,
+    "Recording": {
+      "Enabled": false
+    },
+    "Vehicles": {
+      "ResearchDrone": {
+        "VehicleType": "SimpleFlight",
+        "DefaultVehicleState": "Disarmed",
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "Yaw": 0,
+        "AllowAPIAlways": true,
+        "EnableCollisions": true,
+        "EnableCollisionPassthrough": false,
+        "RC": {
+          "RemoteControlID": -1,
+          "AllowAPIWhenDisconnected": true
+        }
+      }
+    },
+    "CameraDefaults": {
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 1280,
+          "Height": 720,
+          "FOV_Degrees": 90
+        }
+      ]
+    }
+  },
+  "controller": {
+    "position_gain": 2.0,
+    "max_command_speed_mps": 4.0,
+    "max_command_slew_mps2": 4.0,
+    "first_command_ramp_interval_s": 0.02,
+    "command_duration_s": 0.3,
+    "yaw_deg": 0.0,
+    "velocity_error_gain": 0.8,
+    "acceleration_feedforward_s": 0.9
+  },
+  "initialization": {
+    "lift_velocity_zup_mps": 0.5,
+    "lift_duration_s": 3.0,
+    "minimum_lift_height_zup_m": 1.0,
+    "zero_velocity_preparation_s": 1.0,
+    "position_tolerance_m": 0.02,
+    "velocity_tolerance_mps": 0.02,
+    "state_injection": "After reset, fixed vertical velocity lift and fixed zero-velocity preparation, pause and set exact curve-start p/v, zero angular velocity/acceleration and identity attitude. This is simulation-only state injection; hidden actuator/PID state equality is not claimed."
+  },
+  "execution": {
+    "step_wall_request_s": 0.02,
+    "ground_probe_step_wall_s": 0.01,
+    "max_state_gap_s": 0.1,
+    "terminal_interpolation_max_gap_s": 0.1,
+    "max_wall_s_per_plan": 90.0,
+    "max_steps_per_plan": 3000,
+    "workspace_lower_zup_m": [
+      -5.0,
+      -8.0,
+      1.0
+    ],
+    "workspace_upper_zup_m": [
+      16.0,
+      8.0,
+      12.0
+    ],
+    "post_reference_zero_velocity_s": 1.0,
+    "terminal_rule": "Metrics use samples through T and linear actual-state interpolation at T from a valid bracketing pair; no reference extrapolation. Post-T braking is separately logged. Actual state.timestamp advances the reference; requested step durations are never accumulated as simulation time."
+  },
+  "control_error_gates": {
+    "sampled_peak_position_m": 0.5,
+    "terminal_position_m": 0.25,
+    "terminal_velocity_mps": 0.5
+  },
+  "target_scene": {
+    "schema_version": 1,
+    "scene_id": "control_targets_seed_1101",
+    "seed": 1101,
+    "boundary": {
+      "p0": [
+        0.0,
+        0.0,
+        5.0
+      ],
+      "v0": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "a0": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p1": [
+        8.0,
+        0.0,
+        5.0
+      ],
+      "v1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "a1": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "obstacles": [],
+    "purpose": "Pure control, rest-to-rest target tracking on the exact 03 Overview map",
+    "generation": "explicit target"
+  },
+  "visualization": {
+    "enabled": true,
+    "capture_overview": true,
+    "final_display_hold_s": 8.0
+  }
+}

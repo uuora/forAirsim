@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "completed_pairs_or_triples": 9,
+  "screened_proposals_audited": 1152,
+  "pruned_records_audited": 2,
+  "observed_screened_case_rollouts": 3454,
+  "source_snapshot_hashes_verified": true,
+  "raw_record_sha256": {
+    "abom_301.json": "c6ae8d7560697a2e454cfb3242a4a9bd5f1cc7808ad55fc0c47fdffde08eb38b",
+    "abom_302.json": "d919c7b5ceba0b47f84d1bbe58de6f0106039b2d70dea56e91c4a14a86dc7ecc",
+    "abom_303.json": "c6153659b88fb14ce8858c21fdba9b907cd9ae1628b1f3cd07967c71c9dab71c",
+    "abom_perturb_301.json": "e32dbd9109e8eec94aa8113feedc8aacf8768e20dbdb8d8c96923ad8757616c2",
+    "abom_perturb_302.json": "fae3adb4411a9a98e528fbada1f1dbf090cf15249ea96bde7db8d6dced1bce55",
+    "abom_perturb_303.json": "ebb1f4a56c90c007319f099bd16de1e74d1d4e69ec6edb600e34222f04f7c762",
+    "gaussian_301.json": "a9f76f02e89846e5c4a73d66a21beb6a013ba9c5e1b224fe0d337a25b20eef02",
+    "gaussian_302.json": "2f280dc2243cafec66646ba0912369da5cf000c972b8e44279f0053532fda53a",
+    "gaussian_303.json": "84757e3768fe0bae13ada3290d25281f63a305941f2f5b12c6dae37df85ed78d",
+    "manifest.json": "372ab33cc710bcfe80e593aac2d95d5fcc5892dc212a357656e8e829e503ab3e",
+    "rows.json": "cd0113b1e5fa487907f7de6e768418fd198c829e029f9ae16bfeabc293dc2b33",
+    "summary.json": "13a304f24afb91a17e123d220a243964aa94723c3e77ecf6d00de2752eda1cfd"
+  },
+  "scope": "deterministic record consistency, bounds vs measured paired baseline, summary arithmetic, and adaptive-order replay; no empirical flight or formal interval proof"
+}

@@ -1,0 +1,49 @@
+name: Curve research numerical checks
+
+on:
+  push:
+    branches: [codex/hermite-disturbance]
+  pull_request:
+    paths:
+      - 'python/trajectory_research/**'
+      - 'python/*research*.py'
+      - 'python/*parameter*.py'
+      - '.github/workflows/curve-research.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  numerical-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONPATH: python
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          submodules: false
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.10'
+      - run: python -m pip install numpy==1.26.4
+      # Desktop queue/receipt tests require Qt/psutil; dynamics source tests
+      # require local AirSim modifications. Those are checked on Windows.
+      - name: Research mathematics and campaign evidence bindings
+        run: >-
+          python -m unittest
+          test_research_curves test_research_constraints test_research_curve_task
+          test_research_uncertainty test_research_search test_research_campaign
+          test_research_directional test_research_directional_task
+          test_research_parameterizations test_research_blackbox test_research_perturbation_task
+          test_research_parameter_campaign test_research_parameter_budget test_research_staged
+          test_research_initial_curve_adapter
+          test_research_screened_search test_research_control_bounded test_research_quality_bound
+          test_research_timed_tracking
+          dual_target_control.test_core dual_target_control.test_bezier_parameters
+          dual_target_control.test_trajectory_objective dual_target_control.test_trajectory_profile
+          dual_target_control.test_turning dual_target_control.test_terminal_corridor
+          dual_target_control.test_waypoint_spacing
+      - name: Replay compressed ABOM budget evidence
+        run: python python/verify_abom_budget_bundles.py

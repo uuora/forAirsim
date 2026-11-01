@@ -106,6 +106,51 @@ class NativeScene:
                 self._thread.start()
             self._queue.put('show' if visible else 'hide')
 
+    def update_config(self,config):
+        with self._lock:
+            if self._closed:return
+            self._queue.put(('config',deepcopy(config)))
+
+    def sync_targets(self,payload):
+        with self._lock:
+            if self._closed:raise RuntimeError('标记观察线程已关闭')
+            if self._thread is None:
+                self._thread=threading.Thread(target=self._work,name='dual-target-native-scene',daemon=True);self._thread.start()
+            self._queue.put(('targets',deepcopy(payload)))
+
+    def _sync_targets(self,payload):
+        import numpy as np
+        import airsim
+        if self._client is None:self._initialize()
+        receipts=[]
+        for i,name in enumerate(('DC_TargetRed','DC_TargetBlue')):
+            point=payload['points'][i] if i<len(payload['points']) else None
+            xyz=np.array([0.,0.,1000.]) if point is None else np.asarray([point[0],point[1],-point[2]])+payload['origin']
+            if point is not None:
+                if not self._client.simSetObjectScale(name,airsim.Vector3r(1.2,1.2,1.2)):raise RuntimeError('目标缩放失败：'+name)
+            if not self._client.simSetObjectPose(name,airsim.Pose(airsim.Vector3r(*xyz),airsim.Quaternionr()),teleport=True):raise RuntimeError('目标放置失败：'+name)
+            actual=self._client.simGetObjectPose(name).position;actual=[actual.x_val,actual.y_val,actual.z_val]
+            if not np.allclose(actual,xyz,atol=.002):raise RuntimeError('目标位置读回不符：'+name)
+            scale=self._client.simGetObjectScale(name);scale=[scale.x_val,scale.y_val,scale.z_val]
+            if point is not None and not np.allclose(scale,[1.2]*3,atol=.001):raise RuntimeError('目标尺寸读回不符：'+name)
+            receipts.append(dict(name=name,visible=point is not None,requested_ned=xyz.tolist(),observed_ned=actual,scale=scale,
+                route_index=payload['route_index'],reference_time_s=payload['reference_time_s'],
+                scope='Asynchronous display-thread pose/scale readback; no flight commands'))
+        self.runtime._accept_target_receipts(payload,receipts)
+
+    def _field_bounds_command(self):
+        task=self.config.get('preparation',{}).get('task')
+        if task:
+            import numpy as np
+            points=np.asarray([task['start'],*task['points']],dtype=float)
+            low=points.min(axis=0)-[3.,3.,2.];high=points.max(axis=0)+[3.,3.,2.]
+            low[2]=max(0.,low[2])
+            values=[low[0],high[0],low[1],high[1],low[2],high[2]]
+        else:
+            bounds=ControlConfig.from_dict(self.config.get('control',self.config))
+            values=[getattr(bounds,key) for key in ('x_min','x_max','y_min','y_max','height_min','height_max')]
+        return 'ke /Script/Blocks.DroneControlObserver SetFieldBounds '+' '.join(str(float(v)) for v in values)
+
     def close(self, timeout=None):
         with self._lock:
             if not self._closed:
@@ -143,6 +188,9 @@ class NativeScene:
         self._airsim = airsim
 
     def _switch(self, visible):
+        if visible and self._visible:
+            # Repeated connect/configure/start requests preserve mouse framing.
+            return
         if visible:
             state = self.runtime.snapshot()
             if state.get('mode') != 'airsim' or not state.get('connected'):
@@ -160,15 +208,24 @@ class NativeScene:
                 raise RuntimeError('；'.join(errors))
             return
         try:
-            bounds = ControlConfig.from_dict(self.config.get('control', self.config))
-            values = ' '.join(str(float(getattr(bounds, key))) for key in
-                ('x_min', 'x_max', 'y_min', 'y_max', 'height_min', 'height_max'))
             self._receipts.append(reflected_command(self._client,
-                'ke /Script/Blocks.DroneControlObserver SetFieldBounds ' + values, self._log_path))
-            for command in view_commands(self.config['airsim']['map'], visible):
+                self._field_bounds_command(), self._log_path))
+            commands=view_commands(self.config['airsim']['map'],visible)
+            route_view=bool(self.config.get('preparation'))
+            if route_view:
+                # Enable the initialized observer before enabling rendering, so
+                # the external camera is not flashed between the two views.
+                commands[-2],commands[-1]=commands[-1],commands[-2]
+            for command in commands:
                 if self._stopping.is_set():
                     raise _ViewCancelled()
+                if route_view and command.endswith('SetEnabled true') and getattr(self.runtime,'_observer_initialized_pid',None)!=(binding or {}).get('pid'):
+                    self._receipts.append(reflected_command(self._client,'ke /Script/Blocks.DroneControlObserver ResetOverview',self._log_path))
                 self._receipts.append(reflected_command(self._client, command, self._log_path))
+            if route_view:self.runtime._observer_initialized_pid=(binding or {}).get('pid')
+            elif self.config.get('curve_experiment',{}).get('auto_show_scene'):
+                self._receipts.append(reflected_command(self._client,
+                    'ke /Script/Blocks.DroneControlObserver SetFollow true',self._log_path))
             if self._stopping.is_set():
                 raise _ViewCancelled()
         except Exception:
@@ -224,7 +281,13 @@ class NativeScene:
                 if command == 'close' or self._stopping.is_set():
                     break
                 try:
-                    if isinstance(command, tuple) and command[0] == 'screenshot':
+                    if isinstance(command,tuple) and command[0]=='config':
+                        self.config=command[1]
+                        if self._client is not None:
+                            self._receipts.append(reflected_command(self._client,self._field_bounds_command(),self._log_path))
+                    elif isinstance(command,tuple) and command[0]=='targets':
+                        self._sync_targets(command[1])
+                    elif isinstance(command, tuple) and command[0] == 'screenshot':
                         # Development verification/export of this native viewport.
                         destination = Path(command[1]).resolve()
                         destination.parent.mkdir(parents=True, exist_ok=True)

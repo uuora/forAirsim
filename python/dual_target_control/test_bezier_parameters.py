@@ -10,11 +10,14 @@ import numpy as np
 
 from dual_target_control.core import BezierParameters, ControlConfig, RollingController
 
+# The first five fields shape the path; the rest only shape the speed profile.
+GEOMETRY_FIELDS = 5
+
 
 class BezierParameterTests(unittest.TestCase):
     def test_serialization_validation_and_immutable_bounds(self):
         defaults = BezierParameters()
-        np.testing.assert_array_equal(defaults.to_vector(), [.4, .3, .2, .45, 1.])
+        np.testing.assert_array_equal(defaults.to_vector(), [.4, .3, .2, .45, 1., .7, .55, 1.4, .2, .15])
         self.assertEqual(BezierParameters.from_vector(defaults.to_vector()), defaults)
         self.assertEqual(BezierParameters.from_dict(defaults.to_dict()), defaults)
         self.assertEqual(BezierParameters.from_dict({"outgoing_weight": .7}).outgoing_weight, .7)
@@ -61,8 +64,15 @@ class BezierParameterTests(unittest.TestCase):
              4., 4., 1.8931854477336212, 4., 4., 4., 4.], rtol=0, atol=1e-11)
 
     def test_parameter_extremes_keep_endpoints_and_curve_inside_buffer(self):
-        for choices in product((0, 1), repeat=5):
-            vector = np.where(choices, BezierParameters.upper_bounds(), BezierParameters.lower_bounds())
+        # Only the geometry fields move the path; the speed-profile fields are
+        # covered by their own bounded-speed test below.
+        defaults = BezierParameters().to_vector()
+        for choices in product((0, 1), repeat=GEOMETRY_FIELDS):
+            vector = defaults.copy()
+            vector[:GEOMETRY_FIELDS] = np.where(
+                choices,
+                BezierParameters.upper_bounds()[:GEOMETRY_FIELDS],
+                BezierParameters.lower_bounds()[:GEOMETRY_FIELDS])
             parameters = BezierParameters.from_vector(vector)
             for seed in range(8):
                 with self.subTest(choices=choices, seed=seed):
@@ -74,6 +84,26 @@ class BezierParameterTests(unittest.TestCase):
                     np.testing.assert_array_equal(path[-1], controller.targets[1])
                     self.assertTrue(np.all(path >= controller.config.inner_lower - 1e-10))
                     self.assertTrue(np.all(path <= controller.config.inner_upper + 1e-10))
+                    self.assertLessEqual(controller._target_speed, controller.config.max_speed)
+
+    def test_speed_coefficient_extremes_stay_within_command_cap(self):
+        defaults = BezierParameters().to_vector()
+        count = len(defaults) - GEOMETRY_FIELDS
+        for choices in product((0, 1), repeat=count):
+            vector = defaults.copy()
+            vector[GEOMETRY_FIELDS:] = np.where(
+                choices,
+                BezierParameters.upper_bounds()[GEOMETRY_FIELDS:],
+                BezierParameters.lower_bounds()[GEOMETRY_FIELDS:])
+            parameters = BezierParameters.from_vector(vector)
+            for seed in range(8):
+                with self.subTest(choices=choices, seed=seed):
+                    controller = RollingController(ControlConfig(seed=seed), parameters)
+                    controller.reset([18.9, -18.8, 8.9], [-3, 1, -.5])
+                    profile = controller._speed_profile
+                    self.assertTrue(np.all(np.isfinite(profile)))
+                    self.assertTrue(np.all(profile >= 0))
+                    self.assertTrue(np.all(profile <= controller.config.max_speed + 1e-12))
                     self.assertLessEqual(controller._target_speed, controller.config.max_speed)
 
     def test_parameter_change_keeps_sweep_commands_rng_and_queue(self):

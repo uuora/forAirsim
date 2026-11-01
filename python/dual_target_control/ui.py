@@ -12,6 +12,7 @@ import copy
 import json
 import math
 import os
+import subprocess
 from pathlib import Path
 import sys
 import time
@@ -35,6 +36,7 @@ DEFAULT_CONFIG = ROOT / "configs" / "dual_target_control.json"
 RED = QColor("#e6555f")
 BLUE = QColor("#3486ea")
 GREEN = QColor("#1c9e75")
+ACTUAL_TRAIL = QColor("#d51acb")
 INK = QColor("#23344e")
 STATUS_LABELS = {
     "idle": "待启动", "disconnected": "未连接", "connected": "已连接",
@@ -42,6 +44,8 @@ STATUS_LABELS = {
     "simulator_starting": "正在启动仿真", "simulator_started": "仿真已启动",
     "ready": "准备就绪", "starting": "正在起飞", "taking_off": "正在起飞",
     "takeoff": "正在起飞",
+    "configuring": "正在应用任务",
+    "moving_to_start": "前往准备点", "planning": "悬停规划中", "settling": "执行前收敛",
     "running": "飞行中", "paused": "已暂停", "pausing": "正在暂停",
     "stopping": "正在降落", "landing": "正在降落", "stopped": "已停止",
     "landed": "已降落", "error": "运行异常", "shutdown": "已关闭",
@@ -97,11 +101,24 @@ class FlightView(QWidget):
         self.reset_view()
 
     def reset_view(self):
+        self.view_plane = '3d'
         self.azimuth = math.radians(-57)
         self.elevation = math.radians(29)
         self.zoom = 1.0
         self.pan = np.zeros(2)
         self.update()
+
+    def set_plane(self,plane):
+        if plane=='3d':self.reset_view();return
+        self.view_plane=plane
+        self.azimuth=math.radians(-90)
+        self.elevation=math.pi/2 if plane=='xy' else 0.
+        self.zoom=1.;self.pan=np.zeros(2);self.update()
+
+    @staticmethod
+    def _grid_step(span):
+        raw=max(span/8.,.01);base=10**math.floor(math.log10(raw))
+        return next(v*base for v in (1,2,5,10) if v*base>=raw)
 
     def set_snapshot(self, snapshot: dict):
         self.snapshot = snapshot
@@ -109,7 +126,7 @@ class FlightView(QWidget):
         self.update()
 
     def _camera(self):
-        bounds = _bounds(self.config)
+        bounds = self._display_bounds()
         signature = (bounds, self.width(), self.height(), self.azimuth,
                      self.elevation, self.zoom, float(self.pan[0]), float(self.pan[1]))
         if signature == self._camera_signature:
@@ -127,12 +144,20 @@ class FlightView(QWidget):
         centered = self.corners - self.center
         sx = max(float(np.ptp(centered @ self.right)), 1.0)
         sy = max(float(np.ptp(centered @ self.up)), 1.0)
-        self.scale = min((self.width() - 155) / sx,
-                         (self.height() - 190) / sy) * self.zoom
+        self.scale = max(.01,min((self.width() - 110) / sx,
+                         max(40,self.height() - 155) / sy)) * self.zoom
         self.screen_center = np.array([self.width() / 2,
                                        self.height() / 2 + 6]) + self.pan
         self.projection_matrix = np.column_stack((self.right, -self.up)) * self.scale
         self.projection_offset = self.screen_center - self.center @ self.projection_matrix
+
+    def _display_bounds(self):
+        task=self.config.get('preparation',{}).get('task')
+        if not task:return _bounds(self.config)
+        points=np.array([task['start'],*task['points']],dtype=float)
+        low=points.min(axis=0);high=points.max(axis=0)
+        return (float(low[0]-3),float(high[0]+3),float(low[1]-3),float(high[1]+3),
+                0.,float(max(8,high[2]+3)))
 
     @staticmethod
     def display_points(points, max_points=None):
@@ -192,15 +217,23 @@ class FlightView(QWidget):
         painter.drawText(rect.adjusted(8, 0, -3, 0), Qt.AlignVCenter, text)
 
     def _draw_box(self, painter):
-        xmin, xmax, ymin, ymax, hmin, hmax = _bounds(self.config)
+        xmin, xmax, ymin, ymax, hmin, hmax = self._display_bounds()
         floor = [[xmin, ymin, 0], [xmax, ymin, 0], [xmax, ymax, 0], [xmin, ymax, 0]]
         painter.setPen(Qt.NoPen)
         painter.setBrush(QColor("#eaf0f6"))
         painter.drawPolygon(QPolygonF([self.project(v) for v in floor]))
-        for x in np.linspace(xmin, xmax, 9):
+        step=self._grid_step(max(xmax-xmin,ymax-ymin))
+        for x in np.arange(math.ceil(xmin/step)*step,xmax+1e-8,step):
             self._polyline(painter, [[x, ymin, 0], [x, ymax, 0]], QColor("#d8e1ec"))
-        for y in np.linspace(ymin, ymax, 9):
+            if self.view_plane in ('xy','xz'):self._label(painter,self.project([x,ymin,0]),f'{x:g}',QColor('#73869a'),(-6,10))
+        for y in np.arange(math.ceil(ymin/step)*step,ymax+1e-8,step):
             self._polyline(painter, [[xmin, y, 0], [xmax, y, 0]], QColor("#d8e1ec"))
+            if self.view_plane=='xy':self._label(painter,self.project([xmin,y,0]),f'{y:g}',QColor('#73869a'),(-35,-4))
+        if self.view_plane=='xz':
+            hstep=self._grid_step(hmax)
+            for h in np.arange(0,hmax+1e-8,hstep):
+                self._polyline(painter,[[xmin,ymin,h],[xmax,ymin,h]],QColor('#d8e1ec'))
+                self._label(painter,self.project([xmin,ymin,h]),f'{h:g}',QColor('#73869a'),(-35,-4))
         # All twelve edges belong to a physical 3D volume, not a fixed diagram.
         for a, b in ((0, 1), (0, 2), (1, 3), (2, 3), (4, 5), (4, 6),
                      (5, 7), (6, 7), (0, 4), (1, 5), (2, 6), (3, 7)):
@@ -217,9 +250,10 @@ class FlightView(QWidget):
                 ([xmin, ymax, 0], "Y / 米", "#607e9f"),
                 ([xmin, ymin, hmax], "高度 / 米", "#607e9f"))
         for end, text, color in axes:
+            if np.linalg.norm(np.array([self.project(end).x()-self.project(origin).x(),self.project(end).y()-self.project(origin).y()]))<3:continue
             self._polyline(painter, [origin, end], QColor(color), 1.8)
             self._label(painter, self.project(end), text, QColor(color), (6, -3))
-        self._label(painter, self.project(origin),
+        if self.view_plane=='3d':self._label(painter, self.project(origin),
                     f"{xmin:g}, {ymin:g}, 0", QColor("#8594a6"), (0, 27))
         painter.setFont(QFont("Microsoft YaHei", 9))
         painter.setPen(QColor("#75859a"))
@@ -256,49 +290,62 @@ class FlightView(QWidget):
                     f"({xyz[0]:.1f}, {xyz[1]:.1f}, {xyz[2]:.1f}) m",
                     QColor("#7a8a9e"), (14, 15), True)
 
-    def _drone(self, painter):
+    def _drone(self, painter, arm_pixels=None, show_label=True, ink_color=None):
+        ink = INK if ink_color is None else QColor(ink_color)
         position = _vec(self.snapshot.get("position"))
         yaw = float(self.snapshot.get("yaw", 0.0) or 0.0)
         nose = np.array([math.cos(yaw), math.sin(yaw), 0.0])
         side = np.array([-math.sin(yaw), math.cos(yaw), 0.0])
         # Keep the vehicle legible at wide bounds; only its icon is enlarged.
-        arm = max(0.65, 9.0 / max(self.scale, 0.1))
+        arm = max(0.65, 9.0 / max(self.scale, 0.1)) if arm_pixels is None else float(arm_pixels)/max(self.scale,.01)
         rotors = [position + arm * (i * nose + j * side)
                   for i, j in ((1, 1), (-1, -1), (1, -1), (-1, 1))]
-        self._polyline(painter, [rotors[0], rotors[1]], INK, 3.2)
-        self._polyline(painter, [rotors[2], rotors[3]], INK, 3.2)
+        self._polyline(painter, [rotors[0], rotors[1]], ink, 3.2)
+        self._polyline(painter, [rotors[2], rotors[3]], ink, 3.2)
         for rotor in rotors:
             projected = self.project(rotor)
-            painter.setPen(self._pen(INK, 1.7))
+            painter.setPen(self._pen(ink, 1.7))
             painter.setBrush(QColor(255, 255, 255, 230))
             painter.drawEllipse(projected, 5.5, 3.5)
         projected = self.project(position)
         painter.setPen(self._pen(QColor("#ffffff"), 1.4))
-        painter.setBrush(INK); painter.drawEllipse(projected, 5.6, 5.6)
+        painter.setBrush(ink); painter.drawEllipse(projected, 5.6, 5.6)
         end = position + nose * arm * 3.2
         self._polyline(painter, [position, end], QColor("#ec9840"), 2.5)
         self._polyline(painter, [end - nose * arm * 0.7 + side * arm * 0.4,
                                 end, end - nose * arm * 0.7 - side * arm * 0.4],
                        QColor("#ec9840"), 2.5)
-        self._label(painter, projected, "无人机", INK, (-53, -22), True)
+        if show_label:self._label(painter, projected, "无人机", ink, (-53, -22), True)
 
     def _legend(self, painter):
         painter.setPen(Qt.NoPen); painter.setBrush(QColor(255, 255, 255, 230))
-        rect = QRectF(22, self.height() - 91, min(510, self.width() - 44), 62)
+        rect = QRectF(16, self.height() - 58, min(510, self.width() - 32), 49)
         painter.drawRoundedRect(rect, 9, 9)
         painter.setFont(QFont("Microsoft YaHei", 9))
         entries = [(RED, "当前目标"), (BLUE, "下一目标"),
-                   (GREEN, "规划轨迹"), (QColor("#79899b"), "实际轨迹")]
+                   (GREEN, "参考轨迹"), (ACTUAL_TRAIL, "实际轨迹")]
         x = 38
         for color, text in entries:
-            painter.setPen(self._pen(color, 2.5)); painter.drawLine(x, self.height() - 69,
-                                                                  x + 18, self.height() - 69)
+            painter.setPen(self._pen(color, 2.5)); painter.drawLine(x, self.height() - 42,
+                                                                  x + 18, self.height() - 42)
             painter.setPen(QColor("#586b82"))
-            painter.drawText(QPointF(x + 25, self.height() - 65), text)
-            x += 119
+            painter.drawText(QPointF(x + 25, self.height() - 38), text)
+            x += min(119,(self.width()-65)/4)
         painter.setPen(QColor("#8493a6"))
-        painter.drawText(QPointF(38, self.height() - 43),
+        painter.drawText(QPointF(30, self.height() - 18),
                          "左键旋转   ·   右键平移   ·   滚轮缩放   ·   双击复位")
+
+    def _ruler(self,painter):
+        raw=65/max(self.scale,.01);base=10**math.floor(math.log10(raw))
+        metres=max(v*base for v in (1,2,5,10) if v*base<=raw)
+        length=metres*self.scale
+        painter.setPen(self._pen(INK,1.6))
+        y=self.height()-75
+        painter.drawLine(QPointF(30,y),QPointF(30+length,y))
+        for x in (30,30+length):painter.drawLine(QPointF(x,y-4),QPointF(x,y+4))
+        painter.setFont(self._label_font)
+        suffix='等比例 XY' if self.view_plane=='xy' else '等比例 X/高度' if self.view_plane=='xz' else '正交投影，轴有视角缩短'
+        painter.drawText(QPointF(30,y-9),f'{metres:g} m · {suffix}')
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -310,15 +357,21 @@ class FlightView(QWidget):
         self._camera()
         painter.setFont(QFont("Microsoft YaHei", 11, QFont.DemiBold))
         painter.setPen(INK)
-        painter.drawText(QRectF(25, 23, self.width() - 50, 27), "三维飞行场地")
+        painter.drawText(QRectF(25, 15, self.width() - 50, 27), "任务取景（安全边界见参数）" if 'preparation' in self.config else "三维飞行场地")
         painter.setFont(QFont("Microsoft YaHei", 9))
         painter.setPen(QColor("#7a8ca3"))
         painter.drawText(QRectF(self.width() - 200, 25, 175, 24), Qt.AlignRight,
                          "坐标 / 米 · 高度向上")
         self._draw_box(painter)
-        self._polyline(painter, self.snapshot.get("trail", []),
-                       QColor("#77889b"), 2.2, max_points=self.MAX_DISPLAY_TRAIL)
         self._polyline(painter, self.snapshot.get("planned_path", []), GREEN, 2.2)
+        self._polyline(painter, self.snapshot.get("trail", []),
+                       QColor('#ffffff'), 5., max_points=self.MAX_DISPLAY_TRAIL)
+        self._polyline(painter, self.snapshot.get("trail", []),
+                       ACTUAL_TRAIL, 3.1, max_points=self.MAX_DISPLAY_TRAIL)
+        preparation=self.snapshot.get('preparation_point',self.config.get('preparation',{}).get('task',{}).get('start'))
+        if preparation is not None:
+            point=self.project(preparation);painter.setPen(self._pen(QColor('#dd9221'),2));painter.setBrush(Qt.NoBrush)
+            painter.drawRect(QRectF(point.x()-6,point.y()-6,12,12));self._label(painter,point,'准备点',QColor('#a46b13'),(8,0),True)
         targets = self.snapshot.get("targets") or []
         # Painter's depth sort prevents arbitrary target-array occlusion.
         ordered = sorted(enumerate(targets[:2]),
@@ -333,6 +386,7 @@ class FlightView(QWidget):
             painter.drawText(QRectF(0, self.height() * .5 - 12, self.width(), 25),
                              Qt.AlignCenter, "连接仿真后显示无人机与目标")
         self._legend(painter)
+        self._ruler(painter)
         painter.end()
 
     def mousePressEvent(self, event):
@@ -344,6 +398,7 @@ class FlightView(QWidget):
         if self._mouse is not None:
             delta = event.pos() - self._mouse
             if self._button == Qt.LeftButton:
+                self.view_plane='3d'
                 self.azimuth += math.radians(delta.x() * .5)
                 self.elevation = max(math.radians(5), min(math.radians(85),
                                      self.elevation + math.radians(delta.y() * .4)))
@@ -538,6 +593,11 @@ class ControlWindow(QMainWindow):
         self.apply_button = QPushButton("应用参数")
         self.apply_button.clicked.connect(self._apply)
         layout.addWidget(self.apply_button)
+        experiments_button=QPushButton('六组控制实验：固定 / 随机目标')
+        experiments_button.setToolTip('打开原03运行框架的六组实时实验；不自动起飞。共用41460端口，先停止当前飞行。')
+        experiments_button.clicked.connect(lambda:subprocess.Popen(
+            [str(ROOT/'.venv/pythonw.exe'),str(ROOT/'python/run_route_experiment_panel.py')],cwd=ROOT))
+        layout.addWidget(experiments_button)
         self.message = QLabel("打开窗口不会自动起飞。")
         self.message.setObjectName("message"); self.message.setWordWrap(True)
         self.message.setMinimumHeight(33); layout.addWidget(self.message)
@@ -750,7 +810,7 @@ class ControlWindow(QMainWindow):
         paused = status == "paused"
         landing_failure = status == "error" and running
         transition = status in {"connecting", "launching", "simulator_starting", "starting",
-                                "taking_off", "takeoff", "stopping", "landing", "pausing"}
+                                "taking_off", "takeoff", "stopping", "landing", "pausing", "configuring", "moving_to_start", "planning", "settling"}
         connected = bool(snapshot.get("connected", False))
         operable = not self._closing and self._pending_mode is None
         can_view_map = mode == "airsim" and connected and operable

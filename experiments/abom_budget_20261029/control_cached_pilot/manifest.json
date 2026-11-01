@@ -1,0 +1,35 @@
+{
+  "args": {
+    "output": "reports/abom_budget_20261029/control_cached_pilot",
+    "budget": 64,
+    "seeds": [
+      301,
+      302,
+      303
+    ],
+    "methods": [
+      "abom",
+      "abom_perturb",
+      "gaussian"
+    ],
+    "upstream": "D:\\forAirsim\\tmp\\abom_deploy_probe\\upstream"
+  },
+  "sources": {
+    "python\\run_control_budget_research.py": "08c968d0dfd8fdb3bb93e6a15536acc6a56b0d991eddfa4d24b13173d8c9b0f9",
+    "python\\trajectory_research\\search.py": "8e288aa09349219d19245d2e06461cd9938992f81924f46463e7304b041188b2",
+    "python\\trajectory_research\\screened_search.py": "e715fd8aec9262824acaa1e7fa2b96a853158b272509e22f18d176a819249ff0",
+    "python\\trajectory_research\\control_bounded.py": "8d80c8261169654a850773ec519397cb299db1378a39ecc94dd1edae08302632",
+    "python\\dual_target_control\\core.py": "e4d9c5ef92de26215e4be607d2d4eea0c97c2d59582cbb995662290ff55727b7",
+    "python\\dual_target_control\\trajectory_objective.py": "3344e8e8419db1df89a9cc113a17817984f51ffff1d57218a795607d5445b9c7",
+    "python\\validate_dual_target_turning.py": "13a07c4772301dad8502e3f844257ce8663611db5ce248020cae9cd41b7a88fc"
+  },
+  "platform": "Windows-10-10.0.26200-SP0",
+  "protocol": "fixed-controller-partial-case-pilot-v2-cached",
+  "scope": "5D production planner parameters, fixed controller, first-order lagged point mass; no AirSim or real-flight validation",
+  "primary": "same proposals and selected score; completed case rollouts and interleaved wall/CPU time",
+  "order_learning": "empirical failure-frequency / observed average wall-time; censored heuristic, not calibrated probability",
+  "timing": "warm Python process; all modes cache identical training cases; network construction included; validation and auditing excluded",
+  "validation": "30 pre-existing regression/heldout conditions applied only after candidate selection; no selection based on them",
+  "novelty": "exact bound pruning is standard; this pilot evaluates task-specific implementation, not priority claims",
+  "excluded_one_time_optimizer_warmup_s": 1.3845326999999088
+}

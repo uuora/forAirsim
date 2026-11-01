@@ -1,0 +1,14 @@
+{
+  "staged_tree_tested": "3b0ac479b3013c470ecbffd407a561659d253ea2",
+  "clean_directory_export": true,
+  "path_contains_spaces": true,
+  "evidence_files_restored": 1542,
+  "audited_records": 36,
+  "fixed_success": 12,
+  "online_success": 16,
+  "focused_tests": 12,
+  "focused_test_failures": 0,
+  "python_environment_reused": true,
+  "second_computer_tested": false,
+  "scope": "Read-only evidence recomputation and import/interface tests; no new AirSim flight, no clean Python installation claim"
+}
