@@ -1,0 +1,41 @@
+{
+  "protocol": "geometric_hybrid_v1",
+  "architecture": "external geometric desired-attitude/collective + SimpleFlight angle/rate PID and mixer",
+  "threshold_status": "provisional commissioning limits; frozen per run, not method-comparison acceptance limits",
+  "visualization": {"capture_overview": false},
+  "airsim": {
+    "host": "127.0.0.1", "port": 41460, "vehicle": "DroneControl",
+    "rpc_timeout": 2.0, "command_duration": 0.12,
+    "editor": "D:/UE_4.27/Engine/Binaries/Win64/UE4Editor.exe",
+    "project": "external/AirSim/Unreal/Environments/Blocks/Blocks.uproject",
+    "map": "/Game/DroneControlOverview/Maps/DroneControlOverview",
+    "settings": "configs/dual_target_airsim_settings.json"
+  },
+  "start": [0, 0, -5], "yaw": 0,
+  "controller": {
+    "kp": [2.0, 2.0, 3.0], "kv": [2.2, 2.2, 2.5],
+    "gravity": 9.80665, "hover_throttle": 0.4,
+    "max_tilt_rad": 0.4363323129985824,
+    "min_throttle": 0.08, "max_throttle": 0.8,
+    "max_acceleration": 5.0
+  },
+  "execution": {"hz": 50, "start_timeout_s": 35, "settle_timeout_s": 12,
+    "start_hold_s": 1, "terminal_hold_s": 1, "start_position_m": 0.1,
+    "start_speed_mps": 0.1, "start_attitude_rad": 0.05235987755982989},
+  "limits": {
+    "position_error_m": 0.5, "attitude_error_rad": 0.17453292519943295,
+    "terminal_position_m": 0.15, "terminal_speed_mps": 0.15,
+    "terminal_attitude_rad": 0.08726646259971647,
+    "safety_position_error_m": 1.5, "safety_tilt_rad": 0.6108652381980153,
+    "safety_rate_radps": 3.0, "safety_speed_mps": 6.0,
+    "max_state_interval_s": 0.1,
+    "bounds_ned_min": [-20, -20, -15], "bounds_ned_max": [20, 20, -1]
+  },
+  "cases": {
+    "hover": {"offsets": [[0,0,0]], "segment_durations": [6]},
+    "line": {"offsets": [[4,0,-0.5]], "segment_durations": [8]},
+    "turn": {"offsets": [[3,0,-0.5],[3,3,-1]], "segment_durations": [5,5],
+      "velocities": [[0,0,0],[0.4,0.4,-0.1],[0,0,0]]},
+    "waypoints": {"offsets": [[3,0,0],[4,3,-1],[1,4,-0.5]], "segment_durations": [5,5,5]}
+  }
+}

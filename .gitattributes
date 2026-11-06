@@ -14,3 +14,17 @@ python/*staged*.py -text whitespace=cr-at-eol
 python/check_perturbation_energy_identity.py -text whitespace=cr-at-eol
 experiments/hermite_perturbation_20261027/** -text whitespace=cr-at-eol
 docs/research-hermite-20261027/figures/** -text whitespace=cr-at-eol
+
+# Byte-bound geometric commissioning configs and portable evidence
+configs/geometric*.json -text
+experiments/geometric_control_20261105/** -text
+打开几何控制实验.cmd -text
+
+python/geometric_validation/*.py -text whitespace=cr-at-eol
+python/*geometric*.py -text whitespace=cr-at-eol
+python/dual_target_control/route_view.py -text whitespace=cr-at-eol
+python/dual_target_control/route_scene.py -text whitespace=cr-at-eol
+configs/geometric*.json -text whitespace=cr-at-eol
+experiments/geometric_control_20261105/** -text whitespace=cr-at-eol
+scripts/*geometric* -text whitespace=cr-at-eol
+鎵撳紑鍑犱綍鎺у埗瀹為獙.cmd -text whitespace=cr-at-eol

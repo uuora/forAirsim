@@ -1,0 +1,1256 @@
+{
+  "archive_sha256": "6b59212accd81974324f31075be40478d1a89af9671c02f1b39820775e24f328",
+  "files": {
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/audit.json": {
+      "sha256": "c2d28bb44167a68802db67e42b392b437f23c8b08d9ffe4c7078422381b42200",
+      "bytes": 499
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/cleanup.json": {
+      "sha256": "a2a60db0f71921d877929a502371fd517b8423ff75b8efe93d6b1d373e85bc8b",
+      "bytes": 23
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/config.json": {
+      "sha256": "7648678c3d25b8d8dc13cda79eed45b17e18d2dee39219b3a1c711946331f062",
+      "bytes": 3058
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/events.json": {
+      "sha256": "aa6bc504681a63f612c2b9a60fdb5085f29df7b1ce5b42e54d4c8c975bde1b99",
+      "bytes": 154
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/manifest.json": {
+      "sha256": "8d586042924ec2b7b5560078a116599148cb459e29db882e71f785d793f2f007",
+      "bytes": 5618
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/report.json": {
+      "sha256": "a129474f1af59d16cc5c61bfd88b219881dafc51fcfb765cd07d683afb71f9d1",
+      "bytes": 452
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/samples.jsonl": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/runtime.py": {
+      "sha256": "191ed3ade9d667bb5eef44145f95335924c66b3aa8ac1c36b73bba12eb2f52d8",
+      "bytes": 23812
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/audit.json": {
+      "sha256": "87245e0858286f7c95a6bea9fe7c747849fd4c80c368bc554b6aa29f98f37136",
+      "bytes": 1680
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/cleanup.json": {
+      "sha256": "b962bfcdbc0286dbc0be2c1e7e7fb85578c7eb11123e8ffa154944586abfb5a8",
+      "bytes": 76
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/config.json": {
+      "sha256": "7648678c3d25b8d8dc13cda79eed45b17e18d2dee39219b3a1c711946331f062",
+      "bytes": 3058
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/events.json": {
+      "sha256": "fd36cacaeaac4543675fac2c1bc25cd4b2a920a10e85c5edeff16f946248c609",
+      "bytes": 373
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/manifest.json": {
+      "sha256": "2b1d6edab3f51a2ad9f18a6ec70be47d1fda57847c84dd7168c03307718ccf36",
+      "bytes": 10227
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/metrics_samples.csv": {
+      "sha256": "b2a798a9ac56bd0991ba79cd548672cda639cb57b9bd65f6fb78dad6775ecdfd",
+      "bytes": 32779
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/physics_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/report.json": {
+      "sha256": "ad8e26830214ec80558945978053ee0eb69ceccee7198b1c8ec943d2369dd524",
+      "bytes": 1719
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/samples.jsonl": {
+      "sha256": "68032c912b2245cb89c54c7330d84c01a7dd73a58b5bc7b0a9bb161ad02f480b",
+      "bytes": 615724
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/runtime.py": {
+      "sha256": "7ee6ebcf26f4030cbe83ab9d9edf85c8c37e528f1c4d25be14da025079a7c5c5",
+      "bytes": 24336
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_184945_189401_hover/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/audit.json": {
+      "sha256": "ab7b1322aeec8d5c1501405d2d7f8760a743ee9fd9dfd630f4f0a1d005b3bf24",
+      "bytes": 1805
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/cleanup.json": {
+      "sha256": "b962bfcdbc0286dbc0be2c1e7e7fb85578c7eb11123e8ffa154944586abfb5a8",
+      "bytes": 76
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/config.json": {
+      "sha256": "7648678c3d25b8d8dc13cda79eed45b17e18d2dee39219b3a1c711946331f062",
+      "bytes": 3058
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/events.json": {
+      "sha256": "3b07cea4925be3d1a8ae762a7058eee1c71bf32ec98b7ee057970c9a983fb464",
+      "bytes": 374
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/manifest.json": {
+      "sha256": "31621d5f93536086066b8707588b2304e407f63d583bf913d1ff5265f2765928",
+      "bytes": 10226
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/metrics_samples.csv": {
+      "sha256": "061d0e24889e70c32b5c0309820d8b3d6c15c0e6479086bc10a9c764131386d4",
+      "bytes": 60556
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/physics_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/report.json": {
+      "sha256": "8f7a89364260d5e7970124c9042c5829903b0e32ec3ff8d1eb329dae447c5dae",
+      "bytes": 1843
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/samples.jsonl": {
+      "sha256": "a4650417f816a65c8e010556597be2ca9e712db4fa70af37424996dafc33b44f",
+      "bytes": 1055145
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/runtime.py": {
+      "sha256": "7ee6ebcf26f4030cbe83ab9d9edf85c8c37e528f1c4d25be14da025079a7c5c5",
+      "bytes": 24336
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185023_800079_line/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/audit.json": {
+      "sha256": "79f4b7d9708eb85771f44ea34527c0a22019e273650c8fd9de86f98392bc3d52",
+      "bytes": 1800
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/cleanup.json": {
+      "sha256": "b962bfcdbc0286dbc0be2c1e7e7fb85578c7eb11123e8ffa154944586abfb5a8",
+      "bytes": 76
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/config.json": {
+      "sha256": "7648678c3d25b8d8dc13cda79eed45b17e18d2dee39219b3a1c711946331f062",
+      "bytes": 3058
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/events.json": {
+      "sha256": "ee976e1ad6d1a4c5cb79545d68caf6cfd519703a13a33438f357ee2be1ea9833",
+      "bytes": 371
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/manifest.json": {
+      "sha256": "af34ba2256e92fe27dcdc7a88f2fde196f88785e31478dd426f7625082fb12d6",
+      "bytes": 10279
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/metrics_samples.csv": {
+      "sha256": "2d37d5d91bdfff771380ed926188b402d74ad63d2f6eb751e6477652844488b1",
+      "bytes": 73046
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/physics_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/report.json": {
+      "sha256": "632ee715b4d1e3eb701586ed382f1ffe1b8a2aea9dc8f7c25c20ba2071539323",
+      "bytes": 1837
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/samples.jsonl": {
+      "sha256": "36089339e49c215fb61baa5342f8b4b4c19618dfae09235b08c6f3bc7e6dde6c",
+      "bytes": 1372621
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/runtime.py": {
+      "sha256": "7ee6ebcf26f4030cbe83ab9d9edf85c8c37e528f1c4d25be14da025079a7c5c5",
+      "bytes": 24336
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185114_623910_turn/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/audit.json": {
+      "sha256": "f613a6d3ed72d5c9799d8cd00d031b3298a091dba19ccd1c6bf7eac576c08dd4",
+      "bytes": 1801
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/cleanup.json": {
+      "sha256": "b962bfcdbc0286dbc0be2c1e7e7fb85578c7eb11123e8ffa154944586abfb5a8",
+      "bytes": 76
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/config.json": {
+      "sha256": "7648678c3d25b8d8dc13cda79eed45b17e18d2dee39219b3a1c711946331f062",
+      "bytes": 3058
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/events.json": {
+      "sha256": "eb529d422e7e004b61186c152d561e11f3e5b00e947691d213842ea2a396574e",
+      "bytes": 375
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/manifest.json": {
+      "sha256": "08905ccf90eda386623cfa0b596e1ffec04feeaa8ec81b4c65137155dd256e39",
+      "bytes": 10279
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/metrics_samples.csv": {
+      "sha256": "6fa0cfddbc30ec1a257e1689be6d4a1c2f6063d239c338a97379c393e53d04a2",
+      "bytes": 105845
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/physics_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/report.json": {
+      "sha256": "075b83b4b238e571d015b561ea7c53aac659c901229df0d45049243f09695f61",
+      "bytes": 1845
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/samples.jsonl": {
+      "sha256": "1daa2e4607d24f2863d81bb462f6ebe5e288295db91027e401f54ee498ddcec2",
+      "bytes": 1780208
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/runtime.py": {
+      "sha256": "7ee6ebcf26f4030cbe83ab9d9edf85c8c37e528f1c4d25be14da025079a7c5c5",
+      "bytes": 24336
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_commissioning_20261105_v2/geometric_20261105_185152_555951_waypoints/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/audit.json": {
+      "sha256": "6cc54360ee30c2bbef4c7b1eab76216a34f10a71230f961ab97ad127d0b4663d",
+      "bytes": 1796
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/cleanup.json": {
+      "sha256": "b962bfcdbc0286dbc0be2c1e7e7fb85578c7eb11123e8ffa154944586abfb5a8",
+      "bytes": 76
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/config.json": {
+      "sha256": "6365694469ba451261e001564b6e6ac032acd6635a154c24296686401b8840d1",
+      "bytes": 3402
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/events.json": {
+      "sha256": "e11df7f55e35f671f5430c521e748038871a4599917bec5f18ee93f041e108c9",
+      "bytes": 374
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/manifest.json": {
+      "sha256": "d8f3f383bc031d372a9a46c4efcd5bdcff7822eeff567dc5f7db6b00c7c55e30",
+      "bytes": 10279
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/metrics_samples.csv": {
+      "sha256": "6e2d48d82157bbfa3b12a532128f2a3677a414435a58c11c0a476039f7a7e516",
+      "bytes": 74920
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/physics_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/report.json": {
+      "sha256": "9608aef33062d708a472d34d4057a62cf775e4920083934beb83a892d7cde8fd",
+      "bytes": 1840
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/samples.jsonl": {
+      "sha256": "49fa16dc2c2b198fea43372f49db1f91b1acb648e72df1bfa7835214d9c7332c",
+      "bytes": 1368067
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/runtime.py": {
+      "sha256": "7ee6ebcf26f4030cbe83ab9d9edf85c8c37e528f1c4d25be14da025079a7c5c5",
+      "bytes": 24336
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_commissioning_20261105_speed1p5/geometric_20261105_185335_528506_waypoints/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/audit.json": {
+      "sha256": "57c77e65718f960cdbdad7b0b870e2e418acb7a96e6853894639f4ed52dfb3d3",
+      "bytes": 1838
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/cleanup.json": {
+      "sha256": "b962bfcdbc0286dbc0be2c1e7e7fb85578c7eb11123e8ffa154944586abfb5a8",
+      "bytes": 76
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/config.json": {
+      "sha256": "db30b3970ea20a9d4c829afda4fd895307f7bc7c9273cfddf7ede34e6b2cfac9",
+      "bytes": 3267
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/events.json": {
+      "sha256": "99abcb95303cacda9b816edaf764f4062aaac952b2b4c162c46edc1ea5016ba1",
+      "bytes": 374
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/manifest.json": {
+      "sha256": "e5d21d0fc27df2dba0dd2639a3915b261f7542d630eae4101b1b7d22756440c8",
+      "bytes": 10278
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/metrics_samples.csv": {
+      "sha256": "c0282f91473095472f19cc4221551fa900fc26141a21da2fa17fa4446e53f3af",
+      "bytes": 60736
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/physics_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/report.json": {
+      "sha256": "aa44cb0a9ac7f09effc6937581151bd4a5aa5886669f039272fc499390097b51",
+      "bytes": 1882
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/samples.jsonl": {
+      "sha256": "61fa920531522dbaa94b4399a124f90d6a68ef61417351a2f0f9a9f012019877",
+      "bytes": 1177870
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/runtime.py": {
+      "sha256": "7ee6ebcf26f4030cbe83ab9d9edf85c8c37e528f1c4d25be14da025079a7c5c5",
+      "bytes": 24336
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_commissioning_20261105_speed2p0/geometric_20261105_185450_190609_waypoints/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_live_qt_20261105_v1/final_status_qt.png": {
+      "sha256": "3e50ec2125586ea5a4527e4ac8ff8e8e19d752440754db1a40e626491201700c",
+      "bytes": 177234
+    },
+    "reports/geometric_live_qt_20261105_v1/idle_check.json": {
+      "sha256": "e41d998bb1005bdc384aab9a881ddab5c1f816ab5c7c901690b511f4be4782c7",
+      "bytes": 121
+    },
+    "reports/geometric_live_qt_20261105_v1/independent_reaudit.json": {
+      "sha256": "cccdef337110f29398e131eb17e43335e864f361bcf3032dcde07a66de0a81ba",
+      "bytes": 1826
+    },
+    "reports/geometric_live_qt_20261105_v1/request.json": {
+      "sha256": "116f4a0604d3ae623027551ba25ffe1f51b30af7c2262f1ee7e99c6fd12dc1bf",
+      "bytes": 1632
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/audit.json": {
+      "sha256": "cccdef337110f29398e131eb17e43335e864f361bcf3032dcde07a66de0a81ba",
+      "bytes": 1826
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/cleanup.json": {
+      "sha256": "b962bfcdbc0286dbc0be2c1e7e7fb85578c7eb11123e8ffa154944586abfb5a8",
+      "bytes": 76
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/config.json": {
+      "sha256": "7648678c3d25b8d8dc13cda79eed45b17e18d2dee39219b3a1c711946331f062",
+      "bytes": 3058
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/events.json": {
+      "sha256": "971117dc225904b098105d5694deb62a4a67a6c1bc434a021ebe78ffc1254765",
+      "bytes": 374
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/manifest.json": {
+      "sha256": "a707944c767c2bb9d4328d05ffe4120e39ab94bf88c005c44773cdcf8cbbf0c2",
+      "bytes": 10275
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/metrics_samples.csv": {
+      "sha256": "8e0b0db04461d104879636e93227a1d3c42f2854b7c51baf470fbf96577c0411",
+      "bytes": 49296
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/physics_startup.log": {
+      "sha256": "dd99fc67f37623984c6b8034c992dd929ef00efe3bc8ecb2c684755edce5ba52",
+      "bytes": 70472
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/report.json": {
+      "sha256": "7ca6da70825eca3f1eb5f48eebdb3783dbac0e40265d2526dccb78d36574cea1",
+      "bytes": 1864
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/samples.jsonl": {
+      "sha256": "68f0052add416fb04da178733ea204cd19d88ee1d29dc1e35701dcdcde37642a",
+      "bytes": 933463
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/common/VectorMath.hpp": {
+      "sha256": "cb26770f193d509dcfc169e320e050b7cbf7f7f17c8a1810071442cc3bfff133",
+      "bytes": 26875
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/AirSimSimpleFlightEstimator.hpp": {
+      "sha256": "bfbc76a8b852d7f8d11f7121820de00f07d625ef1e9652d94b1d9f13e9d64457",
+      "bytes": 3886
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleLevelController.hpp": {
+      "sha256": "b189193082dc6f13a53a10718f9eaa93ef4a1e077780af3bcd48bfae2b83a6bf",
+      "bytes": 4240
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/AngleRateController.hpp": {
+      "sha256": "8576a11d5c5b661b45d27afbe75885fbe890b1ba11993b88c2705bd40a5b68f7",
+      "bytes": 1864
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Mixer.hpp": {
+      "sha256": "6fc435f5d81c8f505d45be225ce8a75ad3ca214b2f78556c05bd6202f37ac366",
+      "bytes": 2573
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/firmware/Params.hpp": {
+      "sha256": "61fd59692f7a80bfc41694c07525f11b54a454503d2ea466299572089362e206",
+      "bytes": 4623
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/firmwares/simple_flight/SimpleFlightApi.hpp": {
+      "sha256": "9e099d07c4636c794713b00d33db26f09d5855319c10b4d14593196ac02a3c89",
+      "bytes": 19055
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/MultiRotorParams.hpp": {
+      "sha256": "e98e7a3289d8ba852e189b5694923ae13e90046b9b2906d0610e6bf92233013b",
+      "bytes": 28889
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorActuator.hpp": {
+      "sha256": "10b30eafd456bf110539f6f4b7f8f9e92bace7ac854edd4cb15533ef613628b2",
+      "bytes": 5826
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/AirLib/include/vehicles/multirotor/RotorParams.hpp": {
+      "sha256": "6042cb10bdfe1100b63cd0fd9415ee275a2e2b015baa0427c2bdb4c686b9e324",
+      "bytes": 2704
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/PythonClient/airsim/client.py": {
+      "sha256": "baad642c4ef369bdba64a794fd4a51215e88a1614481defd04faa3f1f291d5a1",
+      "bytes": 78269
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/external/AirSim/PythonClient/airsim/types.py": {
+      "sha256": "4eec051b2ebe98f52cd217bae4db3bf58efb762d3721520c830c01bdf6dd2fba",
+      "bytes": 19541
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/dual_target_control/dynamics.py": {
+      "sha256": "6f4815e8a31a8c64eb1395063d62e9d780a8df4397b60f7fa3421cb47f1a71d8",
+      "bytes": 5611
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/dual_target_control/machine_config.py": {
+      "sha256": "5119a77a0903ffb3c620fee298954448acc9160032336dd9e48d5d52c87be6b4",
+      "bytes": 670
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/__init__.py": {
+      "sha256": "556d76b4380590212da3f869d1c5c71c99f1bd2ac35f236e2f2a5058909bafdb",
+      "bytes": 128
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/audit.py": {
+      "sha256": "514236bd82531349af86866c27b2bda23f7d36f69c0115946130af4c72958faa",
+      "bytes": 12499
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/core.py": {
+      "sha256": "d031205585290193d8507f29314d44b73abf585264feae140ab18ca5d2a73955",
+      "bytes": 8204
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/qt_panel.py": {
+      "sha256": "10af689d88b652d303c8b3fd30f66bf06bbf82dcdb96b886a140b66b71d5a7ff",
+      "bytes": 18121
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/reference.py": {
+      "sha256": "7e28f8bfc8ec194767efe37b86644a3207234af9db1f4666d3bf4686a8ad4953",
+      "bytes": 4858
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/runtime.py": {
+      "sha256": "7ee6ebcf26f4030cbe83ab9d9edf85c8c37e528f1c4d25be14da025079a7c5c5",
+      "bytes": 24336
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/test_audit.py": {
+      "sha256": "4938942520b1b70ea509fde6fd76f54cea25b894e4bde4af452bba6a664623e2",
+      "bytes": 8223
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/test_core.py": {
+      "sha256": "3a0cefd184c0da0ede176bb8037d035df10cd0d49d2f0d96f76f2e4bfec15f33",
+      "bytes": 8825
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/test_qt_panel.py": {
+      "sha256": "985574721cf6f4e0a088f52f5ff750b00ed438dd015b71393b659b3c7341c278",
+      "bytes": 6185
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/geometric_validation/test_runtime.py": {
+      "sha256": "86e8044075107f0259290a6f4fcd7630d86ecc68348a49aa9f343a8af0030104",
+      "bytes": 5596
+    },
+    "reports/geometric_live_qt_20261105_v1/runs/geometric_20261105_185713_483699_hover/source/python/run_geometric_control_validation.py": {
+      "sha256": "9bdce2dd633d85ff7bec4fc575a9c7244efc86c6824c9ccc73f64e3e2d8c5268",
+      "bytes": 2611
+    },
+    "reports/geometric_live_qt_20261105_v1/tracking_qt.png": {
+      "sha256": "437a41a74a4fceb541fe68271f3f372f06e70f9ca761700929ab9a3b5a70b59f",
+      "bytes": 175895
+    },
+    "reports/geometric_live_qt_20261105_v1/tracking_qt_capture.json": {
+      "sha256": "45b84f8158bd4cc2a2f81c4db9bf63eb16283b0d09554605932891905dd333a6",
+      "bytes": 774
+    },
+    "reports/geometric_live_qt_20261105_v1/verification.json": {
+      "sha256": "f73259b991d3494dcb8958763303c278188f6cc7000e07435fa7a974287851d2",
+      "bytes": 1246
+    },
+    "reports/geometric_validation_summary_20261105_v2/attempts.csv": {
+      "sha256": "19d0d24fb5406f069fda2617be3def9cd5576cfc46ca97787a085fb402739115",
+      "bytes": 5235
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_184945_189401_hover.pdf": {
+      "sha256": "63faeb6795d1115b488003682f51c4cacee35a8baf736e7280bae203b03dfabf",
+      "bytes": 26313
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_184945_189401_hover.png": {
+      "sha256": "6e477e40d65bec5651800f280e506acd34ca9a73e8d5684ed520303570d0a9e5",
+      "bytes": 168987
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_184945_189401_hover.svg": {
+      "sha256": "d74cdbcf712630bd7a395310e221705246b450444e7c405f6516a1cb687baec9",
+      "bytes": 188125
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185023_800079_line.pdf": {
+      "sha256": "36004312f4e4ab15f95f1690d2ce0eb2ba6f1f7249a83507e5efb0414a466847",
+      "bytes": 34187
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185023_800079_line.png": {
+      "sha256": "026530c023b088e9157cd17054abce2c6da64ae3bb0c2dc7b474c20b3614e93f",
+      "bytes": 192459
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185023_800079_line.svg": {
+      "sha256": "927a27ecdaa3e3a9028739dc02bcbad3bfdb291400b2df980def66af8fe5aee5",
+      "bytes": 213360
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185114_623910_turn.pdf": {
+      "sha256": "f98d77a0236f17e21f61ee9d6e43ae011f2c6d6c925b72280bbb9e6c4ae482ba",
+      "bytes": 40615
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185114_623910_turn.png": {
+      "sha256": "14e04652ab1631bf99ca40c178296b5885cc5dbcb79996a5f60ed8bf3c44876d",
+      "bytes": 207364
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185114_623910_turn.svg": {
+      "sha256": "21c3778443ac803411daf83f3b222be2826da70121cb28dcdfa8284f07807d6d",
+      "bytes": 243697
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185152_555951_waypoints.pdf": {
+      "sha256": "48d00b1a9ab397b2ca1ed3566697891a2384a9fcdfca9436c321e582e7e3fbbd",
+      "bytes": 46898
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185152_555951_waypoints.png": {
+      "sha256": "b2525a36d9ec3cd79f718628f09076896608fd865608e43a3d908c41720c4503",
+      "bytes": 233908
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185152_555951_waypoints.svg": {
+      "sha256": "841bd47547356e5d09c3f5ffb710e58111dd48dce8880a5be4f7b91ecf4b389c",
+      "bytes": 308874
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185335_528506_waypoints.pdf": {
+      "sha256": "78e6840a48f712df54d4e94c8930b35d680155596d54829aae5e76156ea5422d",
+      "bytes": 43727
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185335_528506_waypoints.png": {
+      "sha256": "ba82f574fc3ac19272c58119f1384ec4ce398ac7249ba4bf80e5dab33d770eae",
+      "bytes": 313707
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185335_528506_waypoints.svg": {
+      "sha256": "e3caf0b847833c675c7c2552e83ea1a3decf37c30d598b00031c618f9e51d3b3",
+      "bytes": 259137
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185450_190609_waypoints.pdf": {
+      "sha256": "ff370b67444fc6653730c1beea32625b2f1a8ceb30d599d36f505779ae24bad0",
+      "bytes": 42926
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185450_190609_waypoints.png": {
+      "sha256": "c51c8338a8a8294c3beb6aed0a65ad6b9a7700ebf335ce43cae29e98cb61dd6c",
+      "bytes": 353702
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185450_190609_waypoints.svg": {
+      "sha256": "5aa038a8825ec650cb29fe89486bf9715c3be9d79266f91cfb54168a4cb3d2be",
+      "bytes": 249122
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185713_483699_hover.pdf": {
+      "sha256": "269104fc79d7c6aa081343c2b36a26292e965b94ca87d29cb454b699686b1cc5",
+      "bytes": 29370
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185713_483699_hover.png": {
+      "sha256": "29ef399f9bce26e5ff51440570a7b11f60862cdaebdcc2df2299aaa4101314da",
+      "bytes": 170836
+    },
+    "reports/geometric_validation_summary_20261105_v2/plots/geometric_20261105_185713_483699_hover.svg": {
+      "sha256": "da0377952ada3e77c1edfa97a0c1628ac02b5ec2674c764a8fa4f31f81e75785",
+      "bytes": 188406
+    },
+    "reports/geometric_validation_summary_20261105_v2/postflight_metadata_change.json": {
+      "sha256": "90433e8911413422d60281d419e171061bca1a67bf6c064ac3c30454a14a7a42",
+      "bytes": 711
+    },
+    "reports/geometric_validation_summary_20261105_v2/provenance.json": {
+      "sha256": "3df4e86e6333d444b2e1513b17a4eabf894af38a2f956ef3808427e21e5828d0",
+      "bytes": 46252
+    },
+    "reports/geometric_validation_summary_20261105_v2/SUMMARY.md": {
+      "sha256": "8a8e36a18ce8aa108f99a6316ea8f3c120ab2281e3193a149c9070fac480428b",
+      "bytes": 7645
+    }
+  },
+  "omitted_runtime_cache": [
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/089bc3deNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/09b713d3NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/11b06015NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/11b82873NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/218409f6NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/2657c409NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/2ad2a7fdNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/50a675f9NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/52ed2538NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/58fb7916NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/6bead350NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/7391eb11NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/7b241018NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/7f39060aNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/866581fdNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/8c0e1344NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/8e9331e2NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/9c1a1723NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/a02d411dNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/c36c8202NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/cc8b2eebNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/d63b3057NoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/d859983cNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/db6fd95fNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/eecbcddaNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/AssetRegistryCache/fb34bd6bNoDeps.bin",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Intermediate/Config/CoalescedSourceConfigs/GameUserSettings.ini",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Saved/Config/CrashReportClient/UE4CC-Windows-9D0B15114392759321E216A335DA8AC1/CrashReportClient.ini",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Saved/Config/Windows/Engine.ini",
+    "reports/geometric_commissioning_20261105_v1/geometric_20261105_184804_228575_hover/ue_user/Saved/Config/Windows/GameUserSettings.ini"
+  ],
+  "attempts": 8,
+  "armed_flights": 7,
+  "normal_completion": 7,
+  "control_passed": 6,
+  "audit_passed": 7,
+  "accepted_flights": 6,
+  "source_inputs_unchanged": true
+}

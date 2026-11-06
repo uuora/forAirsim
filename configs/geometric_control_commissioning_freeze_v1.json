@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "status": "FROZEN_COMMISSIONING_LIMITS",
+  "frozen_local_date": "2026-11-05",
+  "protocol": "geometric_hybrid_v1",
+  "scope": "后续本基线调试复现共用的工程门槛；不是高速全任务可行性或统计安全证明，也不预设未来轨迹方法比较的任务规格",
+  "controller": {
+    "kp": [
+      2.0,
+      2.0,
+      3.0
+    ],
+    "kv": [
+      2.2,
+      2.2,
+      2.5
+    ],
+    "gravity": 9.80665,
+    "hover_throttle": 0.4,
+    "max_tilt_rad": 0.4363323129985824,
+    "min_throttle": 0.08,
+    "max_throttle": 0.8,
+    "max_acceleration": 5.0
+  },
+  "execution": {
+    "hz": 50,
+    "start_timeout_s": 35,
+    "settle_timeout_s": 12,
+    "start_hold_s": 1,
+    "terminal_hold_s": 1,
+    "start_position_m": 0.1,
+    "start_speed_mps": 0.1,
+    "start_attitude_rad": 0.05235987755982989
+  },
+  "limits": {
+    "position_error_m": 0.5,
+    "attitude_error_rad": 0.17453292519943295,
+    "terminal_position_m": 0.15,
+    "terminal_speed_mps": 0.15,
+    "terminal_attitude_rad": 0.08726646259971647,
+    "safety_position_error_m": 1.5,
+    "safety_tilt_rad": 0.6108652381980153,
+    "safety_rate_radps": 3.0,
+    "safety_speed_mps": 6.0,
+    "max_state_interval_s": 0.1,
+    "bounds_ned_min": [
+      -20,
+      -20,
+      -15
+    ],
+    "bounds_ned_max": [
+      20,
+      20,
+      -1
+    ]
+  },
+  "config_sha256": {
+    "configs/geometric_control_validation.json": "d3eeec9fe8f213b68da4e712eb0da6b6faef6a46227313d1e29ea94bfbf221d1",
+    "configs/geometric_control_speed_1p5.json": "6365694469ba451261e001564b6e6ac032acd6635a154c24296686401b8840d1",
+    "configs/geometric_control_speed_2p0.json": "db30b3970ea20a9d4c829afda4fd895307f7bc7c9273cfddf7ede34e6b2cfac9"
+  },
+  "evidence_roots": [
+    "reports/geometric_commissioning_20261105_v1",
+    "reports/geometric_commissioning_20261105_v2",
+    "reports/geometric_commissioning_20261105_speed1p5",
+    "reports/geometric_commissioning_20261105_speed2p0",
+    "reports/geometric_live_qt_20261105_v1"
+  ],
+  "decision": "保留当前混合控制器作为已测低速范围的候选基线。2倍速姿态误差越界，停止晋级；不放宽阈值，不据此宣称最优或适合全部任务。",
+  "attitude_gate_semantics": "参考加速度/航向生成的同步参考姿态误差为主门槛；反馈修正姿态指令误差以同一界另列诊断。实际倾角/角速度独立中止保护。",
+  "change_policy": "未来修改门槛、增益、控制/执行实现或物理条件应新建版本，保留失败并分条件组；不得回填历史日志。",
+  "numerical_rationale": {
+    "position_0p5m": "局部3–5米位移任务的初步可解释工程容差，误差峰值/超限时长全部保留，尚非应用任务验收依据",
+    "attitude_10deg": "初期姿态跟踪调试界，与25度指令锥及35度实际倾角保护分开，不能只检查欧拉角或均值",
+    "timing_0p1s": "50Hz目标周期的5倍断档保护，不因本机约32Hz实测改变该上限",
+    "endpoint": "0.15米/0.15m/s/5度连续1秒，区分短时接近与稳定完成；准备为0.1米/0.1m/s/3度连续1秒"
+  },
+  "environment": {
+    "python": "3.10.21 | packaged by Anaconda, Inc. | (main, Aug 27 2026, 14:35:39) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "airsim": "1.8.1",
+      "PyQt5": "5.15.11",
+      "msgpack-rpc-python": "0.4.1",
+      "tornado": "4.5.3",
+      "psutil": "7.2.2"
+    }
+  }
+}

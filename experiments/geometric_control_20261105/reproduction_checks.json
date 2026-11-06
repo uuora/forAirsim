@@ -1,0 +1,68 @@
+{
+  "offline_tests": {
+    "run": 39,
+    "passed": 39
+  },
+  "qt_idle_check": true,
+  "restored_exact_files": 303,
+  "replayed_records": [
+    {
+      "run_id": "geometric_20261105_185335_528506_waypoints",
+      "expected_audit": true,
+      "actual_audit": true,
+      "expected_control": true,
+      "actual_control": true
+    },
+    {
+      "run_id": "geometric_20261105_185450_190609_waypoints",
+      "expected_audit": true,
+      "actual_audit": true,
+      "expected_control": false,
+      "actual_control": false
+    },
+    {
+      "run_id": "geometric_20261105_184804_228575_hover",
+      "expected_audit": false,
+      "actual_audit": false,
+      "expected_control": false,
+      "actual_control": false
+    },
+    {
+      "run_id": "geometric_20261105_184945_189401_hover",
+      "expected_audit": true,
+      "actual_audit": true,
+      "expected_control": true,
+      "actual_control": true
+    },
+    {
+      "run_id": "geometric_20261105_185023_800079_line",
+      "expected_audit": true,
+      "actual_audit": true,
+      "expected_control": true,
+      "actual_control": true
+    },
+    {
+      "run_id": "geometric_20261105_185114_623910_turn",
+      "expected_audit": true,
+      "actual_audit": true,
+      "expected_control": true,
+      "actual_control": true
+    },
+    {
+      "run_id": "geometric_20261105_185152_555951_waypoints",
+      "expected_audit": true,
+      "actual_audit": true,
+      "expected_control": true,
+      "actual_control": true
+    },
+    {
+      "run_id": "geometric_20261105_185713_483699_hover",
+      "expected_audit": true,
+      "actual_audit": true,
+      "expected_control": true,
+      "actual_control": true
+    }
+  ],
+  "actual_new_flights": 0,
+  "note": "Windows long-path restoration/audit verified; historical source snapshots untouched."
+}

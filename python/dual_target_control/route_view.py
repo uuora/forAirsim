@@ -5,6 +5,10 @@ from .ui import FlightView
 
 
 class RouteFlightView(FlightView):
+    # Pure display datum, below the local H=0 origin and the resting vehicle.
+    # This is not an estimate of UE terrain or a modification of telemetry.
+    REFERENCE_HEIGHT_M=-1.
+
     def __init__(self,config,parent=None):
         super().__init__(config,parent);self.setMinimumSize(350,200)
         from .route_scene import RouteScene
@@ -16,10 +20,16 @@ class RouteFlightView(FlightView):
 
     def _display_bounds(self):
         task=self.config.get('preparation',{}).get('task')
-        if not task:return super()._display_bounds()
+        if not task:
+            x0,x1,y0,y1,_,z1=super()._display_bounds()
+            return (x0,x1,y0,y1,self.REFERENCE_HEIGHT_M,z1)
         points=np.asarray([task['start'],*task['points']],dtype=float)
         low=points.min(axis=0)-[1.8,1.8,1.];high=points.max(axis=0)+[1.8,1.8,1.]
-        return (low[0],high[0],low[1],high[1],max(0.,low[2]),high[2])
+        # A floor at (lowest waypoint - 1 m) floated above takeoff/landing.
+        # AirSim's local height origin is also above the resting vehicle, so
+        # use an explicitly labelled reference below H=0, not a terrain claim.
+        # Bounds remain task-based; telemetry must never reframe the camera.
+        return (low[0],high[0],low[1],high[1],self.REFERENCE_HEIGHT_M,high[2])
 
     def _camera(self):
         bounds=self._display_bounds()
@@ -71,4 +81,4 @@ class RouteFlightView(FlightView):
             for marker in self._landmarks():
                 p=self.project(marker['position']);d=math.hypot(p.x()-event.pos().x(),p.y()-event.pos().y())
                 if d<18:nearest=marker;break
-            self.setToolTip((nearest['id']+'  '+str(nearest['position'])+' m\n显示经过标记不等于控制判据通过。') if nearest else '左拖旋转，右拖平移，滚轮缩放，双击复位；运行时不自动缩放。')
+            self.setToolTip((nearest['id']+'  '+str(nearest['position'])+' m\n显示经过标记不等于控制判据通过。') if nearest else f'左拖旋转，右拖平移，滚轮缩放，双击复位；运行时不自动缩放。\n平台仅为 H={self.REFERENCE_HEIGHT_M:g}m 坐标参考面，不是UE地面。')

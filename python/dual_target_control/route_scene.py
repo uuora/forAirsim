@@ -24,7 +24,7 @@ class RouteScene:
         if self.theme not in PALETTES:self.theme='dark'
         self.cache=None;self.cache_key=None;self.labels=[]
         self.toggle=QPushButton(view);self.toggle.setCursor(Qt.PointingHandCursor)
-        self.toggle.setToolTip('切换地图外观；保持当前视角、轨迹和飞行参数。')
+        self.toggle.setToolTip('切换地图外观；保持当前视角、轨迹和飞行参数。\n平台为标注高度的坐标参考面，不是UE地面。')
         self.toggle.clicked.connect(lambda:self.set_theme('light' if self.theme=='dark' else 'dark',True))
         self.set_theme(self.theme)
 
@@ -151,7 +151,7 @@ class RouteScene:
         glow=QRadialGradient(q,30);glow.setColorAt(0,alpha(self.p['drone'],28));glow.setColorAt(1,alpha(self.p['drone'],0))
         painter.setBrush(glow);painter.setPen(Qt.NoPen);painter.drawEllipse(q,30,30)
         FlightView._drone(v,painter,arm_pixels=12.,show_label=False,ink_color=self.p['drone'])
-        text='无人机'
+        text=f'无人机  H={p[2]:.2f}m'
         velocity=v.snapshot.get('velocity')
         if velocity is not None:text+=f'  {np.linalg.norm(_vec(velocity)):.1f}m/s'
         self.note(painter,p,text,self.p['text'],(-125,-42))
