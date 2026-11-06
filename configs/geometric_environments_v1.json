@@ -1,0 +1,61 @@
+{
+  "schema": "geometric_environments_v1",
+  "default_environment": "baseline",
+  "base_task": "configs/geometric_planner_task.json",
+  "environments": [
+    {
+      "id": "baseline",
+      "label": "E0 · 基准三维过点",
+      "focus": "保留原有三维连续过点任务",
+      "config": "configs/geometric_planners_v1.json"
+    },
+    {
+      "id": "straight",
+      "label": "E1 · 直线加减速",
+      "focus": "直线连续过点、起步加速与末端制动",
+      "config": "configs/geometric_environment_plans/straight.json",
+      "task": {
+        "points_ned": [[0,0,-5],[4,0,-5],[8,0,-5],[12,0,-5]],
+        "initial_segment_durations": [6,6,6],
+        "tangent_speed_mps": 0.8,
+        "yaw": 0
+      }
+    },
+    {
+      "id": "planar_s",
+      "label": "E2 · 平面 S 弯",
+      "focus": "固定高度下连续改变横向加速度方向",
+      "config": "configs/geometric_environment_plans/planar_s.json",
+      "task": {
+        "points_ned": [[0,0,-5],[4,0,-5],[7,3,-5],[10,0,-5],[14,0,-5]],
+        "initial_segment_durations": [6,6,6,6],
+        "tangent_speed_mps": 0.8,
+        "yaw": 0
+      }
+    },
+    {
+      "id": "climb_descent",
+      "label": "E3 · 三维升降转弯",
+      "focus": "上升、下降与水平转向耦合，任务高度4–9米",
+      "config": "configs/geometric_environment_plans/climb_descent.json",
+      "task": {
+        "points_ned": [[0,0,-5],[4,0,-7],[7,4,-9],[3,8,-6],[-1,5,-4]],
+        "initial_segment_durations": [6,7,8,7],
+        "tangent_speed_mps": 0.8,
+        "yaw": 0
+      }
+    },
+    {
+      "id": "large_turn",
+      "label": "E4 · 大转向连续过点",
+      "focus": "约135度方向变化；不包含原地180度折返",
+      "config": "configs/geometric_environment_plans/large_turn.json",
+      "task": {
+        "points_ned": [[0,0,-5],[4,0,-5],[1,3,-5],[-3,1,-6],[-5,-3,-5]],
+        "initial_segment_durations": [6,6,7,7],
+        "tangent_speed_mps": 0.8,
+        "yaw": 0
+      }
+    }
+  ]
+}

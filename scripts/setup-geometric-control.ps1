@@ -30,6 +30,6 @@ if ($EngineRoot) {
     $taskOptions['engine_root']=$EngineRoot
     $taskOptions | ConvertTo-Json | Set-Content -LiteralPath $taskLocal -Encoding UTF8
 }
-& $taskPython -c "import numpy,PyQt5,psutil,airsim,matplotlib; print('Geometric dependencies OK; no simulator or flight started')"
+& $taskPython -c "import numpy,scipy,PyQt5,psutil,airsim,matplotlib; print('Geometric dependencies OK; no simulator or flight started')"
 if ($LASTEXITCODE -ne 0) { throw 'Dependency import check failed.' }
 & (Join-Path $PSScriptRoot 'open-geometric-control-panel.ps1') -Check

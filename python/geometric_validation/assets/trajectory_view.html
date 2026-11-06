@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title><style>__STYLE__</style>
+</head>
+<body>
+<main>
+<nav id="environments" role="tablist" aria-label="实验环境"></nav>
+<div class="toolbar">
+  <fieldset id="methods" aria-label="轨迹方案"></fieldset>
+  <label class="reference"><input id="reference" type="checkbox"><span class="reference-swatch"></span>参考</label>
+  <div class="segmented arrangement" role="group" aria-label="对比布局">
+    <button type="button" data-arrangement="overlay" aria-pressed="true">叠加</button>
+    <button type="button" data-arrangement="separate" aria-pressed="false">并排</button>
+  </div>
+  <label class="line-weight">线宽<input id="line-width" type="range" min="3" max="10" step="1" value="6" aria-label="实测轨迹线宽"><output id="line-value" for="line-width">6</output></label>
+  <div class="segmented scale" role="group" aria-label="三维比例">
+    <button type="button" data-scale="display" aria-pressed="true">展示比例</button>
+    <button type="button" data-scale="metric" aria-pressed="false">等米制</button>
+  </div>
+  <select id="camera" aria-label="观察视角"><option value="oblique">斜视</option><option value="top">俯视 XY</option><option value="front">正视 X高度</option><option value="side">侧视 Y高度</option><option value="custom" disabled>自定义视角</option></select>
+</div>
+<div id="plot" role="img" aria-label="三种方案实测三维轨迹"></div>
+<div id="empty" hidden>未选择轨迹</div>
+<div class="status"><span id="coordinates">X / Y / 高度 · m</span><span id="scale-note">展示轴比例 1.55 : 1.10 : 0.80</span></div>
+</main>
+<script>__PLOTLY__</script>
+<script id="trajectory-data" type="application/json">__DATA__</script>
+<script>__SCRIPT__</script>
+</body></html>

@@ -1,8 +1,8 @@
 """Independent geometric-validation panel; rendering never calls AirSim.
 
 The existing map uses [X, Y, height] while this protocol records NED.  This
-adapter is the only coordinate conversion for the display.  The icon shows
-measured yaw only; full attitude is evaluated from timestamped quaternions.
+adapter is the only coordinate conversion for the display. The body and rotor
+planes follow the measured quaternion; the icon remains an enlarged schematic.
 """
 from __future__ import annotations
 
@@ -21,14 +21,14 @@ from PyQt5.QtCore import Qt, QTimer, QUrl
 from PyQt5.QtGui import QDesktopServices, QFont, QFontDatabase
 from PyQt5.QtWidgets import (
     QApplication, QCheckBox, QComboBox, QFrame, QHBoxLayout, QLabel, QMainWindow,
-    QPushButton, QVBoxLayout, QWidget,
+    QPlainTextEdit, QPushButton, QStyle, QVBoxLayout, QWidget,
 )
 
 from dual_target_control.route_view import RouteFlightView
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CONFIG = ROOT / "configs" / "geometric_control_validation.json"
+DEFAULT_CONFIG = ROOT / "configs" / "geometric_planners_v1.json"
 CASES = (("hover", "1 · 悬停"), ("line", "2 · 直线"),
          ("turn", "3 · 平滑转弯"), ("waypoints", "4 · 三维多航点"))
 
@@ -106,8 +106,7 @@ class MapAdapter:
         self.markers.append(dict(id="E", kind="goal", position=self.points[-1], state="pending"))
         self.contact = set()
         self.view_config = {"preparation": {"task": {"start": self.start, "points": self.points}}}
-        # New reference generator only. This plotting preview is discarded for
-        # execution; runtime regenerates and times its own frozen reference.
+        # Pure preview; the runtime separately decodes the frozen execution plan.
         self.path = [height_vector(point) for point in reference.sample_path(160)]
         self._path_input = None
 
@@ -125,6 +124,9 @@ class MapAdapter:
         position = height_vector(frame["position"])
         velocity = height_vector(frame.get("velocity", [0, 0, 0]))
         yaw = measured_yaw(frame["quaternion_wxyz"])
+        from .core import quaternion_to_matrix, matrix_to_euler
+        rotation = quaternion_to_matrix(frame["quaternion_wxyz"])
+        flip = np.diag([1., 1., -1.])
         self.trail.append(position)
         reference = frame.get("reference_position")
         if reference is not None:
@@ -141,16 +143,30 @@ class MapAdapter:
                         if m["state"] != "visited"), self.points[-1])
         return dict(config=self.view_config, connected=True, position=position, velocity=velocity,
                     yaw=yaw, trail=list(self.trail), planned_path=self.path or list(self.reference),
-                    route_markers=self.markers, targets=[pending])
+                    route_markers=self.markers, targets=[pending],
+                    body_rotation_height=(flip @ rotation @ flip).tolist(),
+                    attitude_rpy_rad=list(matrix_to_euler(rotation)))
 
 
 class GeometricControlWindow(QMainWindow):
     """Starts only the new runtime, and only on an explicit start click."""
-    def __init__(self, config_path: Path = DEFAULT_CONFIG, runner=None):
+    def __init__(self, config_path: Path = DEFAULT_CONFIG, runner=None, viewport_factory=None):
         super().__init__()
         self.config_path = Path(config_path).resolve()
         self.config = json.loads(self.config_path.read_text(encoding="utf-8-sig"))
+        from .environments import load_catalog, load_environment_config
+        self.environments=load_catalog()['environments']
+        selected=next((e for e in self.environments if (ROOT/e['config']).resolve()==self.config_path),None)
+        if selected is None:
+            selected=dict(id='custom',label='当前独立配置',config=str(self.config_path))
+            self.environments=[selected]
+        else:
+            self.config=load_environment_config(selected['id'])
+        self._environment_id=selected['id']
         self._runner = runner
+        self._viewport_factory = viewport_factory
+        self.viewport = None
+        self._scene_visible = False
         self._thread = None
         self._stop_event = threading.Event()
         self._result = None
@@ -158,8 +174,8 @@ class GeometricControlWindow(QMainWindow):
         self._closing = False
         self.run_dir = None
         self.mailbox = LatestTelemetry()
-        self.adapter = MapAdapter(self.config, "hover")
-        self.setWindowTitle("几何控制验证 · 独立协议 · AirSim")
+        self.adapter = MapAdapter(self.config, next(iter(self.config['cases'])))
+        self.setWindowTitle("三种轨迹规划 · 几何控制 · AirSim")
         self.resize(1240, 880)
         self.setMinimumSize(800, 650)
         self.setStyleSheet("QMainWindow{background:#edf2f7;} QLabel{color:#24384b;} "
@@ -169,28 +185,57 @@ class GeometricControlWindow(QMainWindow):
         self.setCentralWidget(root)
         layout = QVBoxLayout(root)
         layout.setContentsMargins(16, 14, 16, 14)
-        title = QLabel("几何轨迹跟踪 · 控制基线验证")
+        title = QLabel("轨迹规划 · 统一几何控制")
         title.setStyleSheet("font-size:20px;font-weight:600;")
         layout.addWidget(title)
-        subtitle = QLabel("独立配置与日志；先验证控制器，再开展轨迹方法比较。打开窗口和切换任务不连接、不起飞。")
+        subtitle = QLabel("三维连续过点" if 'comparison' in self.config else "控制基线验证")
         subtitle.setWordWrap(True)
         layout.addWidget(subtitle)
+        environment_row=QHBoxLayout()
+        environment_row.addWidget(QLabel('实验环境'))
+        self.environment_combo=QComboBox()
+        self.environment_combo.setMinimumWidth(220)
+        for entry in self.environments:
+            self.environment_combo.addItem(entry['label'],entry['id'])
+            self.environment_combo.setItemData(self.environment_combo.count()-1,entry.get('focus',''),Qt.ToolTipRole)
+        self.environment_combo.setCurrentIndex(self.environment_combo.findData(self._environment_id))
+        self.environment_combo.setEnabled(len(self.environments)>1)
+        self.environment_combo.currentIndexChanged.connect(self._change_environment)
+        environment_row.addWidget(self.environment_combo)
+        self.environment_info=QLabel()
+        self.environment_info.setWordWrap(True)
+        environment_row.addWidget(self.environment_info,1)
+        layout.addLayout(environment_row)
         task_row = QHBoxLayout()
-        task_row.addWidget(QLabel("验证级别"))
+        task_row.addWidget(QLabel("轨迹方案" if 'comparison' in self.config else "验证级别"))
         self.case_combo = QComboBox()
-        for key, text in CASES:
-            if key in self.config["cases"]:
-                self.case_combo.addItem(text, key)
+        for key, spec in self.config['cases'].items():
+            self.case_combo.addItem(spec.get('label', dict(CASES).get(key, key)), key)
         self.case_combo.currentIndexChanged.connect(self._change_case)
         task_row.addWidget(self.case_combo)
         self.task_summary = QLabel()
         self.task_summary.setWordWrap(True)
         task_row.addWidget(self.task_summary, 1)
+        self.threshold_label=QLabel()
+        self.threshold_label.setToolTip('位置是相对同步参考的三维欧氏误差；姿态是相对R_reference的SO(3)总旋转角误差。')
+        task_row.addWidget(self.threshold_label)
         layout.addLayout(task_row)
         self.launch_checkbox = QCheckBox("启动独立AirSim（端口未运行时）")
         self.launch_checkbox.setChecked(False)
         self.launch_checkbox.setToolTip("仅在明确点击“开始所选验证”后生效；窗口打开与勾选不启动进程。")
-        layout.addWidget(self.launch_checkbox)
+        scene_row = QHBoxLayout()
+        scene_row.addWidget(self.launch_checkbox)
+        scene_row.addStretch()
+        self.scene_button = QPushButton("显示 UE 视口")
+        self.scene_button.setIcon(self.style().standardIcon(QStyle.SP_ComputerIcon))
+        self.scene_button.setMinimumWidth(145)
+        self.scene_button.setToolTip("显示或隐藏当前 AirSim 原生视口；不触发起飞。")
+        self.scene_button.clicked.connect(self.toggle_scene)
+        scene_row.addWidget(self.scene_button)
+        layout.addLayout(scene_row)
+        self.scene_status = QLabel()
+        self.scene_status.setWordWrap(True)
+        layout.addWidget(self.scene_status)
         frame = QFrame()
         frame.setObjectName("card")
         frame_layout = QVBoxLayout(frame)
@@ -208,15 +253,17 @@ class GeometricControlWindow(QMainWindow):
         tools.addWidget(reset)
         frame_layout.addLayout(tools)
         layout.addWidget(frame, 1)
-        limits = QLabel("图标仅显示实测偏航，不显示横滚/俯仰。姿态误差依据日志中的带时间戳实际/参考姿态按 SO(3) 计算。\n"
-                        "参考绿色，实测紫红；地图 H = −NED z。参考预览仅供绘图，执行参考会独立生成和计时。\n"
-                        "地图接近/经过标记不是控制通过判据；显示抽样不参与评价。")
-        limits.setWordWrap(True)
-        layout.addWidget(limits)
+        self.attitude_label = QLabel("实测姿态   横滚 —°   俯仰 —°   偏航 —°")
+        layout.addWidget(self.attitude_label)
         self.status = QLabel("空闲 · 尚未连接 AirSim")
         self.status.setWordWrap(True)
         self.status.setTextInteractionFlags(Qt.TextSelectableByMouse)
         layout.addWidget(self.status)
+        self.error_details = QPlainTextEdit()
+        self.error_details.setReadOnly(True)
+        self.error_details.setMaximumHeight(120)
+        self.error_details.hide()
+        layout.addWidget(self.error_details)
         actions = QHBoxLayout()
         self.start_button = QPushButton("开始所选验证")
         self.start_button.clicked.connect(self.start)
@@ -230,6 +277,9 @@ class GeometricControlWindow(QMainWindow):
         self.open_button.setEnabled(False)
         self.open_button.clicked.connect(self.open_run)
         actions.addWidget(self.open_button)
+        self.compare_button = QPushButton("三种实测对比")
+        self.compare_button.clicked.connect(self.open_comparison)
+        actions.addWidget(self.compare_button)
         layout.addLayout(actions)
         self.timer = QTimer(self)
         self.timer.setInterval(100)
@@ -241,6 +291,44 @@ class GeometricControlWindow(QMainWindow):
     def active(self):
         return self._thread is not None and self._thread.is_alive()
 
+    def _change_environment(self,*_):
+        if self.active or self._closing:
+            self.environment_combo.blockSignals(True)
+            self.environment_combo.setCurrentIndex(self.environment_combo.findData(self._environment_id))
+            self.environment_combo.blockSignals(False)
+            return
+        environment_id=self.environment_combo.currentData()
+        entry=next(e for e in self.environments if e['id']==environment_id)
+        try:
+            path=(ROOT/entry['config']).resolve()
+            from .environments import load_environment_config
+            cfg=load_environment_config(environment_id) if environment_id!='custom' else json.loads(path.read_text(encoding='utf-8-sig'))
+            old_case=self.case_combo.currentData()
+            case=old_case if old_case in cfg['cases'] else next(iter(cfg['cases']))
+            from .reference import build_reference
+            build_reference(cfg,case)
+        except (OSError,ValueError,KeyError) as exc:
+            self.environment_combo.blockSignals(True)
+            self.environment_combo.setCurrentIndex(self.environment_combo.findData(self._environment_id))
+            self.environment_combo.blockSignals(False)
+            self.error_details.setPlainText(str(exc));self.error_details.show()
+            self.status.setText('环境配置不可用。')
+            return
+        self.config_path,self.config=path,cfg
+        self._environment_id=environment_id
+        self.case_combo.blockSignals(True)
+        self.case_combo.clear()
+        for key,spec in cfg['cases'].items():
+            self.case_combo.addItem(spec.get('label',dict(CASES).get(key,key)),key)
+        self.case_combo.setCurrentIndex(self.case_combo.findData(case))
+        self.case_combo.blockSignals(False)
+        self.mailbox=LatestTelemetry();self.run_dir=None
+        self.open_button.setEnabled(False)
+        self.error_details.clear();self.error_details.hide()
+        self._change_case()
+        self.view.reset_view()
+        self.status.setText('空闲 · '+entry['label'])
+
     def _change_case(self, *_):
         if self.active:
             return
@@ -250,7 +338,37 @@ class GeometricControlWindow(QMainWindow):
         self.view.set_snapshot(self.adapter.idle_snapshot())
         spec = self.config["cases"][case]
         durations = spec.get("segment_durations", [])
-        self.task_summary.setText(f"{len(self.adapter.points)} 个任务点 · 预声明参考时长 {sum(durations):g} s · 参数来自独立配置")
+        self.task_summary.setText(f"{len(self.adapter.points)} 个任务点 · 参考时长 {sum(durations):.3f} s")
+        limits=self.config.get('limits')
+        self.threshold_label.setText((f"误差：位置≤{limits['position_error_m']:g}m · "
+            f"姿态≤{math.degrees(limits['attitude_error_rad']):g}°" if limits else ''))
+        from .environments import task_summary
+        summary=task_summary(self.config)
+        self.environment_info.setText((f"航点折线 {summary['polyline_length_m']:.1f} m · "
+            f"航点高度 {summary['altitude_min_m']:g}–{summary['altitude_max_m']:g} m · "
+            f"中途点 {summary['intermediate_points']}" if summary else ''))
+        self.attitude_label.setText("实测姿态   横滚 —°   俯仰 —°   偏航 —°")
+        if self.viewport is not None:
+            self.viewport.update_task(self.adapter.view_config)
+            self.viewport.update_snapshot(self.view.snapshot)
+
+    def toggle_scene(self):
+        if self._closing:
+            return
+        try:
+            if self.viewport is None:
+                factory = self._viewport_factory
+                if factory is None:
+                    from .viewport import GeometricViewport
+                    factory = GeometricViewport
+                self.viewport = factory(self.config, self.adapter.view_config)
+                self.viewport.update_snapshot(self.view.snapshot)
+            self.scene_button.setEnabled(False)
+            self.scene_status.setText("正在显示 UE 视口…" if not self._scene_visible else "正在隐藏 UE 视口…")
+            self.viewport.request(not self._scene_visible)
+        except Exception as exc:
+            self.scene_button.setEnabled(True)
+            self.scene_status.setText(f"UE 视口不可用：{exc}")
 
     def start(self):
         if self.active or self._closing:
@@ -260,8 +378,12 @@ class GeometricControlWindow(QMainWindow):
         self._result, self._error = None, None
         self.mailbox = LatestTelemetry()
         self.run_dir = None
+        self.error_details.clear()
+        self.error_details.hide()
         case = self.case_combo.currentData()
+        config_path=self.config_path
         launch = self.launch_checkbox.isChecked()
+        self.environment_combo.setEnabled(False)
         self.case_combo.setEnabled(False)
         self.launch_checkbox.setEnabled(False)
         self.start_button.setEnabled(False)
@@ -275,7 +397,7 @@ class GeometricControlWindow(QMainWindow):
                 if runner is None:
                     from .runtime import run
                     runner = run
-                self._result = runner(self.config_path, case, output_root=None,
+                self._result = runner(config_path, case, output_root=None,
                                       telemetry=self.mailbox.publish, stop_event=self._stop_event,
                                       launch=launch)
             except BaseException as exc:
@@ -297,7 +419,12 @@ class GeometricControlWindow(QMainWindow):
                 # Both conversion and painting are on the Qt thread.
                 self.adapter.update_metadata(frame)
                 if frame.get("position") is not None:
-                    self.view.set_snapshot(self.adapter.adapt(frame))
+                    snapshot = self.adapter.adapt(frame)
+                    self.view.set_snapshot(snapshot)
+                    roll, pitch, yaw = np.degrees(snapshot["attitude_rpy_rad"])
+                    self.attitude_label.setText(f"实测姿态   横滚 {roll:+.2f}°   俯仰 {pitch:+.2f}°   偏航 {yaw:+.2f}°")
+                    if self.viewport is not None:
+                        self.viewport.update_snapshot(snapshot)
                 if not self._stop_event.is_set():
                     t = frame.get("t")
                     label = f" · 参考时间 {float(t):.2f} s" if t is not None else ""
@@ -318,28 +445,61 @@ class GeometricControlWindow(QMainWindow):
                                     f"控制约束：{verdict(report.get('control_constraints_passed'))} · "
                                     f"数据审计：{verdict(report.get('data_audit_passed'))} · "
                                     f"降落确认：{verdict(report.get('cleanup', {}).get('landed'))}。完整依据见本次记录。")
+                if 'waypoint_passage_passed' in report:
+                    self.status.setText(self.status.text()+f"\n连续过点：{verdict(report['waypoint_passage_passed'])}")
+                if report.get("error"):
+                    self.error_details.setPlainText(str(report["error"]))
+                    self.error_details.show()
+                    self.status.setText(self.status.text() + "\n失败原因：" + str(report["error"]).splitlines()[0])
             elif result is not None:
                 self.run_dir = str(result)
                 self.status.setText("运行结束；请分别查看完成状态、控制约束和独立审计。")
             if self._error:
                 self.status.setText(f"运行异常：{self._error}。请检查失败记录及降落回执。")
+                self.error_details.setPlainText(self._error)
+                self.error_details.show()
             self.open_button.setEnabled(bool(self.run_dir))
+            self.environment_combo.setEnabled(len(self.environments)>1 and not self._closing)
             self.case_combo.setEnabled(True)
             self.launch_checkbox.setEnabled(True)
             self.start_button.setEnabled(not self._closing)
             self.stop_button.setEnabled(False)
             if self._closing:
                 self.close()
+        if self.viewport is not None:
+            update = self.viewport.take_update()
+            if update:
+                self._scene_visible = update.get("scene_visible", self._scene_visible)
+                self.scene_status.setText(update.get("scene_message", ""))
+                self.scene_button.setText("隐藏 UE 视口" if self._scene_visible else "显示 UE 视口")
+                if update.get("scene_status") in ("VISIBLE", "HIDDEN", "ERROR"):
+                    self.scene_button.setEnabled(not self._closing)
+            if self._closing and not self.active and self.viewport.close(timeout=0):
+                self.close()
 
     def open_run(self):
         if self.run_dir:
             QDesktopServices.openUrl(QUrl.fromLocalFile(str(Path(self.run_dir).resolve())))
+
+    def open_comparison(self):
+        from .environments import matching_comparison
+        page=matching_comparison(self.config)
+        if page:
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(page.resolve())))
+        else:
+            self.status.setText("当前环境与条件尚无批量实测对比记录。")
 
     def closeEvent(self, event):
         if self.active:
             self._closing = True
             self.start_button.setEnabled(False)
             self.stop()
+            event.ignore()
+            return
+        if self.viewport is not None and not self.viewport.close(timeout=0):
+            self._closing = True
+            self.start_button.setEnabled(False)
+            self.scene_button.setEnabled(False)
             event.ignore()
             return
         self.timer.stop()
@@ -349,9 +509,13 @@ class GeometricControlWindow(QMainWindow):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Independent geometric-control Qt validation (opens idle)")
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument("--environment", help="Task preset ID; selecting does not connect or fly")
     parser.add_argument("--check", action="store_true", help="Offscreen Qt smoke check without AirSim imports/RPC")
     parser.add_argument("--preview", type=Path, help="Save a Qt UI preview only; implies --check")
     args = parser.parse_args(argv)
+    if args.environment:
+        from .environments import config_for
+        args.config=config_for(args.environment)
     checking = args.check or args.preview is not None
     if checking:
         os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
@@ -366,11 +530,15 @@ def main(argv=None):
     window.show()
     if checking:
         app.processEvents()
-        for index in range(window.case_combo.count()):
-            window.case_combo.setCurrentIndex(index)
-            for plane in ("3d", "xy", "xz"):
-                window.view.set_plane(plane)
-                app.processEvents()
+        initial_environment=window.environment_combo.currentIndex()
+        for env_index in range(window.environment_combo.count()):
+            window.environment_combo.setCurrentIndex(env_index)
+            for index in range(window.case_combo.count()):
+                window.case_combo.setCurrentIndex(index)
+                for plane in ("3d", "xy", "xz"):
+                    window.view.set_plane(plane)
+                    app.processEvents()
+        window.environment_combo.setCurrentIndex(initial_environment)
         window.case_combo.setCurrentIndex(0)
         window.view.set_plane("3d")
         app.processEvents()

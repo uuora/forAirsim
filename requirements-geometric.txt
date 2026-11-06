@@ -1,5 +1,6 @@
 # Python 3.10; no Torch/ABOM required. AirSim client installed separately --no-deps.
 numpy==1.26.4
+scipy==1.15.3
 PyQt5==5.15.11
 psutil==7.2.2
 matplotlib==3.10.9

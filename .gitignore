@@ -26,6 +26,7 @@ downloads/
 # Local capture sessions and generated scene assets
 datasets/
 assets/
+!/python/geometric_validation/assets/
 models/
 
 # Downloaded publisher PDFs are kept locally, not redistributed

@@ -150,7 +150,8 @@ class RouteScene:
             painter.setPen(v._pen(alpha(self.p['muted'],170),1));painter.setBrush(alpha(self.p['bg'],85));painter.drawEllipse(v.project(drop),7,3.5)
         glow=QRadialGradient(q,30);glow.setColorAt(0,alpha(self.p['drone'],28));glow.setColorAt(1,alpha(self.p['drone'],0))
         painter.setBrush(glow);painter.setPen(Qt.NoPen);painter.drawEllipse(q,30,30)
-        FlightView._drone(v,painter,arm_pixels=12.,show_label=False,ink_color=self.p['drone'])
+        FlightView._drone(v,painter,arm_pixels=12.,show_label=False,ink_color=self.p['drone'],
+                          body_rotation=v.snapshot.get('body_rotation_height'))
         text=f'无人机  H={p[2]:.2f}m'
         velocity=v.snapshot.get('velocity')
         if velocity is not None:text+=f'  {np.linalg.norm(_vec(velocity)):.1f}m/s'

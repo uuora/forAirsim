@@ -1,0 +1,2 @@
+# Keep the upstream Plotly distribution intact and omit minified source diffs.
+plotly-gl3d-3.1.0.min.js -diff

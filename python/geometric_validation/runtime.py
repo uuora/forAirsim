@@ -22,12 +22,20 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / 'configs/geometric_control_validation.json'
 
 
+def filesystem_path(path):
+    path=Path(path).resolve()
+    if os.name=='nt' and not str(path).startswith('\\\\?\\'):
+        value=str(path)
+        return Path('\\\\?\\UNC\\'+value[2:] if value.startswith('\\\\') else '\\\\?\\'+value)
+    return path
+
+
 def write_json(path, data):
-    Path(path).write_text(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False), encoding='utf-8')
+    filesystem_path(path).write_text(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False), encoding='utf-8')
 
 
 def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    return hashlib.sha256(filesystem_path(path).read_bytes()).hexdigest()
 
 
 def path_at(value):
@@ -39,12 +47,16 @@ def load_config(path=DEFAULT_CONFIG):
     cfg = json.loads(Path(path).read_text(encoding='utf-8-sig'))
     from dual_target_control.machine_config import apply_machine_config
     cfg = apply_machine_config(cfg)
-    if cfg['protocol'] != 'geometric_hybrid_v1' or cfg['visualization']['capture_overview'] is not False:
+    if cfg['protocol'] not in ('geometric_hybrid_v1', 'geometric_planner_pass_v1') or cfg['visualization']['capture_overview'] is not False:
         raise ValueError('Wrong protocol or capture_overview enabled')
     from .reference import build_reference
     from .core import command
     for case in cfg['cases']:
         ref = build_reference(cfg, case)
+        if cfg['protocol'] == 'geometric_planner_pass_v1':
+            from .audit import frozen_plan_issues
+            issues = frozen_plan_issues(cfg, case)
+            if issues: raise ValueError('; '.join(issues))
         for t in np.linspace(0, ref.duration, 301):
             r = ref.sample(float(t))
             # Validation catches nonfinite reference/controller configuration before RPC.
@@ -69,8 +81,9 @@ def local_preflight(cfg):
     vehicle = settings['Vehicles'][a['vehicle']]
     if vehicle['VehicleType'] != 'SimpleFlight' or settings.get('ClockSpeed',1) != 1:
         raise ValueError('Requires SimpleFlight at ClockSpeed 1')
-    if not all(p.is_file() for p in files):
-        raise FileNotFoundError('Missing runtime dependency: '+str(result))
+    missing = [str(p) for p in files if not p.is_file()]
+    if missing:
+        raise FileNotFoundError('Missing runtime dependencies (no flight started):\n'+'\n'.join(missing))
     result['airsim_commit'] = subprocess.check_output(['git','-C',str(ROOT/'external/AirSim'),'rev-parse','HEAD'], text=True).strip()
     result['source_binary_build_link'] = 'UNVERIFIED: binary hashes and live physics receipt bind runtime; source checkout alone does not prove compiled bytes'
     return result
@@ -208,8 +221,8 @@ def run(config_path=DEFAULT_CONFIG, case='hover', output_root=None, telemetry=No
     folder=path_at(output_root or 'logs')/('geometric_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f')+'_'+case)
     folder.mkdir(parents=True,exist_ok=False);write_json(folder/'config.json',cfg)
     manifest=dict(protocol=cfg['protocol'],case=case,architecture=cfg['architecture'],sources={},config_sha256=digest(folder/'config.json'),
-        created_utc_ns=time.time_ns(),threshold_status=cfg['threshold_status'],scope='AirSim commissioning, no images, no obstacle or optimizer input')
-    source_paths=list(Path(__file__).parent.glob('*.py'))+[ROOT/'python/run_geometric_control_validation.py',
+        created_utc_ns=time.time_ns(),threshold_status=cfg['threshold_status'],scope='AirSim control validation, no images or obstacles; frozen reference only')
+    source_paths=list(Path(__file__).parent.glob('*.py'))+[ROOT/'python/run_geometric_control_validation.py', ROOT/'python/run_geometric_planner_comparison.py',
         ROOT/'python/dual_target_control/dynamics.py',ROOT/'python/dual_target_control/machine_config.py',
         ROOT/'external/AirSim/PythonClient/airsim/client.py',ROOT/'external/AirSim/PythonClient/airsim/types.py']
     source_base=ROOT/'external/AirSim/AirLib'
@@ -223,8 +236,9 @@ def run(config_path=DEFAULT_CONFIG, case='hover', output_root=None, telemetry=No
         'include/vehicles/multirotor/MultiRotorParams.hpp','include/common/VectorMath.hpp']]
     snap=folder/'source';snap.mkdir()
     for p in source_paths:
-        if p.is_file():
-            relative=p.relative_to(ROOT);dest=snap/relative;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(p.read_bytes())
+        source=filesystem_path(p)
+        if source.is_file():
+            relative=p.relative_to(ROOT);dest=filesystem_path(snap/relative);dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(source.read_bytes())
             manifest['sources'][str(relative)]=digest(dest)
     write_json(folder/'manifest.json',manifest)
     recorder=Recorder(folder);events=[];c=None;owned=False;process=None;outcome='FAILED';error=None;cleanup={'landed':False};completion=None
@@ -255,6 +269,10 @@ def run(config_path=DEFAULT_CONFIG, case='hover', output_root=None, telemetry=No
         c,process=connect(cfg,folder,launch);live=inspect_live(c,cfg,folder);manifest['live']=live
         initial_collision=live['initial_state']['collision_timestamp_ns']
         manifest['condition_fingerprint']=hashlib.sha256(json.dumps(dict(config=cfg,sources=manifest['sources'],runtime=manifest['local_preflight']['files'],settings=live['loaded_settings']),sort_keys=True).encode()).hexdigest()
+        if 'comparison' in cfg:
+            from .planners import common_fingerprint
+            manifest['comparison_fingerprint']=hashlib.sha256(json.dumps(dict(common=common_fingerprint(cfg),sources=manifest['sources'],
+                runtime=manifest['local_preflight']['files'],settings=live['loaded_settings']),sort_keys=True).encode()).hexdigest()
         write_json(folder/'manifest.json',manifest)
         c.enableApiControl(True,vehicle_name=name);owned=True
         if not c.armDisarm(True,vehicle_name=name): raise RuntimeError('Arming rejected')
@@ -285,7 +303,11 @@ def run(config_path=DEFAULT_CONFIG, case='hover', output_root=None, telemetry=No
         initial_collision=r['collision_timestamp_ns']
         manifest['airborne_collision_baseline_ns']=initial_collision
         event('AIRBORNE_COLLISION_BASELINE',timestamp_ns=initial_collision)
-        plan_begin=time.perf_counter();ref=build_reference(cfg,case);manifest['planning_wall_s']=time.perf_counter()-plan_begin
+        plan_begin=time.perf_counter();ref=build_reference(cfg,case);decode_wall=time.perf_counter()-plan_begin
+        frozen=cfg['cases'][case].get('frozen_reference')
+        manifest['planning_wall_s']=frozen['planning']['wall_s'] if frozen else decode_wall
+        manifest['planning_location']='offline_before_flight' if frozen else 'airborne_reference_generation'
+        manifest['reference_decode_wall_s']=decode_wall
         write_json(folder/'manifest.json',manifest)
         # Switch to geometric hover and re-establish the same starting state before release.
         phase='GEOMETRIC_SETTLING';begin=time.perf_counter();stable=None;release_stamp=None;last_stamp=None;terminal_stable=None
@@ -363,10 +385,13 @@ def run(config_path=DEFAULT_CONFIG, case='hover', output_root=None, telemetry=No
         write_json(folder/'events.json',events);write_json(folder/'cleanup.json',cleanup)
         report=dict(protocol=cfg['protocol'],case=case,outcome=outcome,error=error,normal_completion=outcome=='COMPLETED',
             actual_completion_time_s=completion,planning_wall_s=manifest.get('planning_wall_s'),cleanup=cleanup,
+            planning_location=manifest.get('planning_location'),reference_decode_wall_s=manifest.get('reference_decode_wall_s'),
             control_constraints_passed=False,data_audit_passed=False,owned_simulator_pid=process.pid if process else None)
         write_json(folder/'report.json',report)
         from .audit import audit
         result=audit(folder);report.update(control_constraints_passed=result['control_constraints_passed'],data_audit_passed=result['data_audit_passed'],metrics=result['metrics'])
-        report['accepted']=report['normal_completion'] and report['control_constraints_passed'] and report['data_audit_passed'] and cleanup.get('landed') is True
+        if 'waypoint_passage_passed' in result:
+            report.update(waypoint_passage_passed=result['waypoint_passage_passed'],waypoint_passages=result['waypoint_passages'])
+        report['accepted']=report['normal_completion'] and report['control_constraints_passed'] and report['data_audit_passed'] and all(cleanup.get(k) is True for k in ('landed','disarmed','api_control_released')) and report.get('waypoint_passage_passed', True)
         write_json(folder/'report.json',report)
     return dict(run_dir=str(folder),report=report)

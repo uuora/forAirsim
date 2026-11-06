@@ -290,12 +290,17 @@ class FlightView(QWidget):
                     f"({xyz[0]:.1f}, {xyz[1]:.1f}, {xyz[2]:.1f}) m",
                     QColor("#7a8a9e"), (14, 15), True)
 
-    def _drone(self, painter, arm_pixels=None, show_label=True, ink_color=None):
+    def _drone(self, painter, arm_pixels=None, show_label=True, ink_color=None, body_rotation=None):
         ink = INK if ink_color is None else QColor(ink_color)
         position = _vec(self.snapshot.get("position"))
         yaw = float(self.snapshot.get("yaw", 0.0) or 0.0)
         nose = np.array([math.cos(yaw), math.sin(yaw), 0.0])
         side = np.array([-math.sin(yaw), math.cos(yaw), 0.0])
+        if body_rotation is not None:
+            rotation = np.asarray(body_rotation, dtype=float)
+            if rotation.shape != (3, 3) or not np.isfinite(rotation).all():
+                raise ValueError('Invalid display body rotation')
+            nose, side = rotation[:, 0], rotation[:, 1]
         # Keep the vehicle legible at wide bounds; only its icon is enlarged.
         arm = max(0.65, 9.0 / max(self.scale, 0.1)) if arm_pixels is None else float(arm_pixels)/max(self.scale,.01)
         rotors = [position + arm * (i * nose + j * side)
@@ -306,10 +311,21 @@ class FlightView(QWidget):
             projected = self.project(rotor)
             painter.setPen(self._pen(ink, 1.7))
             painter.setBrush(QColor(255, 255, 255, 230))
-            painter.drawEllipse(projected, 5.5, 3.5)
+            if body_rotation is None:
+                painter.drawEllipse(projected, 5.5, 3.5)
+            else:
+                angles = np.linspace(0, 2 * math.pi, 25)
+                ring = rotor + .44 * arm * (np.cos(angles)[:, None] * nose + np.sin(angles)[:, None] * side)
+                painter.drawPolygon(self._polygon(self.project_points(ring)))
         projected = self.project(position)
         painter.setPen(self._pen(QColor("#ffffff"), 1.4))
-        painter.setBrush(ink); painter.drawEllipse(projected, 5.6, 5.6)
+        painter.setBrush(ink)
+        if body_rotation is None:
+            painter.drawEllipse(projected, 5.6, 5.6)
+        else:
+            body = [position + .32 * arm * (i * nose + j * side)
+                    for i, j in ((1, 1), (-1, 1), (-1, -1), (1, -1))]
+            painter.drawPolygon(self._polygon(self.project_points(body)))
         end = position + nose * arm * 3.2
         self._polyline(painter, [position, end], QColor("#ec9840"), 2.5)
         self._polyline(painter, [end - nose * arm * 0.7 + side * arm * 0.4,

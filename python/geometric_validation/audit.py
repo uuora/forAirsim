@@ -32,6 +32,80 @@ def matrix_euler(roll,pitch,yaw):
     return Z@Y@X
 
 
+def _polynomial_value(coef, duration, u, d=0):
+    return sum((math.factorial(k)/math.factorial(k-d)*np.asarray(coef[k])*u**(k-d)/duration**d
+                for k in range(d, len(coef))), start=np.zeros(3))
+
+
+def frozen_plan_issues(cfg, case):
+    """Independent polynomial/constraint checks, without generator or RPC imports."""
+    issues=[]
+    try:
+        spec=cfg['cases'][case];plan=spec['frozen_reference'];common=cfg['comparison'];search=common['time_search']
+        coef=np.asarray(plan['coefficients'],dtype=float);durations=np.asarray(plan['segment_durations'],dtype=float)
+        points=np.asarray(common['task']['points_ned'],dtype=float);n=len(durations)
+        if plan['format']!='normalized_power_v1' or coef.shape!=(n,8,3) or points.shape!=(n+1,3):
+            return ['Invalid frozen polynomial schema']
+        if not np.isfinite(coef).all() or not np.isfinite(durations).all() or np.any(durations<=0):
+            return ['Nonfinite frozen polynomial or invalid durations']
+        if plan['method']!=spec['method'] or not np.array_equal(points,plan['points']) or not np.array_equal(points[0],cfg['start']):
+            issues.append('Frozen planner/task identity mismatch')
+        if not np.array_equal(durations,spec['segment_durations']) or plan['yaw']!=cfg['yaw']:
+            issues.append('Frozen timing/heading mismatch')
+        bounds=search['segment_bounds_s']
+        if np.any(durations<bounds[0]-1e-7) or np.any(durations>bounds[1]+1e-7):issues.append('Segment time outside search domain')
+        for i,(c,T) in enumerate(zip(coef,durations)):
+            for side in (0,1):
+                if not np.allclose(_polynomial_value(c,T,side),points[i+side],atol=1e-7,rtol=0):issues.append('Frozen waypoint mismatch')
+            for d in (1,2,3):
+                if i==0 and np.linalg.norm(_polynomial_value(c,T,0,d))>1e-7:issues.append('Frozen start derivative nonzero')
+                if i==n-1 and np.linalg.norm(_polynomial_value(c,T,1,d))>1e-7:issues.append('Frozen terminal derivative nonzero')
+                if i and not np.allclose(_polynomial_value(c,T,0,d),_polynomial_value(coef[i-1],durations[i-1],1,d),atol=1e-7,rtol=0):
+                    issues.append('Frozen curve is not C3')
+            if i and np.linalg.norm(_polynomial_value(c,T,0,1))<search['min_knot_speed_mps']-1e-6:
+                issues.append('Frozen waypoint speed below reference gate')
+            from numpy.polynomial import polynomial as pp
+            for d,cap in ((1,search['max_speed_mps']),(2,search['max_acceleration_mps2']),(3,search['max_jerk_mps3'])):
+                square=np.zeros(1)
+                for axis in range(3):
+                    poly=pp.polyder(c[:,axis],d)/T**d
+                    square=pp.polyadd(square,pp.polymul(poly,poly))
+                roots=pp.polyroots(pp.polyder(square))
+                probes=[0.,1.]+[float(r.real) for r in roots if abs(r.imag)<1e-7 and 0<r.real<1]
+                if max(pp.polyval(u,square) for u in probes)>cap**2+1e-5:issues.append('Frozen derivative limit violated: '+str(d))
+            for axis in range(3):
+                roots=pp.polyroots(pp.polyder(c[:,axis]))
+                probes=[0.,1.]+[float(r.real) for r in roots if abs(r.imag)<1e-7 and 0<r.real<1]
+                values=[pp.polyval(u,c[:,axis]) for u in probes]
+                if min(values)<cfg['limits']['bounds_ned_min'][axis] or max(values)>cfg['limits']['bounds_ned_max'][axis]:
+                    issues.append('Frozen curve outside safety box')
+    except Exception as exc:
+        issues.append('Invalid frozen reference: '+repr(exc))
+    return list(dict.fromkeys(issues))
+
+
+def measured_passages(rows, cfg, case):
+    rule=cfg['comparison']['passage'];plan=cfg['cases'][case]['frozen_reference']
+    times=np.r_[0.,np.cumsum(plan['segment_durations'])];previous=-math.inf;results=[]
+    tracking=[r for r in rows if r.get('phase')=='TRACKING']
+    for i,point in enumerate(plan['points'][1:-1],1):
+        window=[r for r in tracking if r['t']>previous and abs(r['t']-times[i])<=rule['reference_time_window_s']]
+        valid=[r for r in window if np.linalg.norm(np.asarray(r['position'])-point)<=rule['position_tolerance_m']
+               and np.linalg.norm(r['velocity'])>=rule['min_actual_speed_mps']]
+        hit=valid[0] if valid else None
+        nearest=min(window,key=lambda r:np.linalg.norm(np.asarray(r['position'])-point)) if window else None
+        result=dict(waypoint_index=i,passed=hit is not None,reference_time_s=float(times[i]),
+            actual_time_s=hit['t'] if hit else None,
+            distance_m=float(np.linalg.norm(np.asarray(hit['position'])-point)) if hit else None,
+            actual_speed_mps=float(np.linalg.norm(hit['velocity'])) if hit else None,
+            nearest_distance_m=float(np.linalg.norm(np.asarray(nearest['position'])-point)) if nearest else None,
+            nearest_speed_mps=float(np.linalg.norm(nearest['velocity'])) if nearest else None)
+        results.append(result)
+        # A missing earlier point cannot be made valid by a later point.
+        previous=hit['t'] if hit else math.inf
+    return all(r['passed'] for r in results), results
+
+
 def calculate(rows,cfg):
     data=[];issues=[];l=cfg['limits'];cc=cfg['controller']
     for r in rows:
@@ -115,9 +189,13 @@ def _audit(directory):
         for d in range(4):matrix.append([0 if k<d else math.factorial(k)/math.factorial(k-d)*u**(k-d) for k in range(8)])
     deriv=[knots]+[np.asarray(task.get(key,np.zeros_like(knots))) for key in ['velocities','accelerations','jerks']]
     coefs=[]
-    for i,T in enumerate(durations):
-        b=np.asarray([deriv[d][j]*T**d for j in (i,i+1) for d in range(4)])
-        coefs.append(np.linalg.solve(matrix,b))
+    if 'frozen_reference' in task:
+        issues.extend(frozen_plan_issues(cfg,manifest['case']))
+        coefs=np.asarray(task['frozen_reference']['coefficients'])
+    else:
+        for i,T in enumerate(durations):
+            b=np.asarray([deriv[d][j]*T**d for j in (i,i+1) for d in range(4)])
+            coefs.append(np.linalg.solve(matrix,b))
     for row in rows:
         if row.get('phase') not in ('TRACKING','GEOMETRIC_SETTLING'):continue
         t=row['t']
@@ -151,6 +229,9 @@ def _audit(directory):
     output=dict(protocol=cfg['protocol'],data_audit_passed=not issues,control_constraints_passed=bool(passes),issues=issues,metrics=metrics,
         normal_completion=report['normal_completion'],raw_jsonl_sha256=sha(directory/'samples.jsonl'),
         audit_scope='Recorded state/command arithmetic, timing, snapshot and CSV consistency; not an independent sensor, binary-build proof, or flight success')
+    if cfg['protocol']=='geometric_planner_pass_v1':
+        passage_passed, passages=measured_passages(rows,cfg,manifest['case'])
+        output.update(waypoint_passage_passed=passage_passed,waypoint_passages=passages)
     (directory/'audit.json').write_text(json.dumps(output,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8')
     return output
 

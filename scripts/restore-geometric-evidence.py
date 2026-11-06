@@ -3,8 +3,10 @@ import argparse,hashlib,json,zipfile,os
 from pathlib import Path,PurePosixPath
 ROOT=Path(__file__).resolve().parents[1]
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--destination',type=Path);a=p.parse_args()
-    package=ROOT/'experiments/geometric_control_20261105'
+    p=argparse.ArgumentParser();p.add_argument('--destination',type=Path)
+    p.add_argument('--package',type=Path,default=ROOT/'experiments/geometric_control_20261105')
+    a=p.parse_args()
+    package=a.package.resolve()
     manifest=json.loads((package/'evidence_manifest.json').read_text(encoding='utf-8'))
     archive=package/'evidence.zip'
     if hashlib.sha256(archive.read_bytes()).hexdigest()!=manifest['archive_sha256']:raise ValueError('Archive hash mismatch')

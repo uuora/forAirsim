@@ -1,0 +1,960 @@
+{
+  "protocol": "geometric_planner_pass_v1",
+  "architecture": "external geometric desired-attitude/collective + SimpleFlight angle/rate PID and mixer",
+  "threshold_status": "development feasibility limits, frozen before flights; not a statistical or global-optimality experiment",
+  "visualization": {
+    "capture_overview": false
+  },
+  "airsim": {
+    "host": "127.0.0.1",
+    "port": 41460,
+    "vehicle": "DroneControl",
+    "rpc_timeout": 2.0,
+    "command_duration": 0.12,
+    "editor": "D:/UE_4.27/Engine/Binaries/Win64/UE4Editor.exe",
+    "project": "external/AirSim/Unreal/Environments/Blocks/Blocks.uproject",
+    "map": "/Game/DroneControlOverview/Maps/DroneControlOverview",
+    "settings": "configs/dual_target_airsim_settings.json"
+  },
+  "start": [
+    0,
+    0,
+    -5
+  ],
+  "yaw": 0,
+  "controller": {
+    "kp": [
+      2.0,
+      2.0,
+      3.0
+    ],
+    "kv": [
+      2.2,
+      2.2,
+      2.5
+    ],
+    "gravity": 9.80665,
+    "hover_throttle": 0.4,
+    "max_tilt_rad": 0.4363323129985824,
+    "min_throttle": 0.08,
+    "max_throttle": 0.8,
+    "max_acceleration": 5.0
+  },
+  "execution": {
+    "hz": 50,
+    "start_timeout_s": 35,
+    "settle_timeout_s": 12,
+    "start_hold_s": 1,
+    "terminal_hold_s": 1,
+    "start_position_m": 0.1,
+    "start_speed_mps": 0.1,
+    "start_attitude_rad": 0.05235987755982989
+  },
+  "limits": {
+    "position_error_m": 0.5,
+    "attitude_error_rad": 0.17453292519943295,
+    "terminal_position_m": 0.15,
+    "terminal_speed_mps": 0.15,
+    "terminal_attitude_rad": 0.08726646259971647,
+    "safety_position_error_m": 1.5,
+    "safety_tilt_rad": 0.6108652381980153,
+    "safety_rate_radps": 3.0,
+    "safety_speed_mps": 6.0,
+    "max_state_interval_s": 0.1,
+    "bounds_ned_min": [
+      -20,
+      -20,
+      -15
+    ],
+    "bounds_ned_max": [
+      20,
+      20,
+      -1
+    ]
+  },
+  "cases": {
+    "bezier_pass": {
+      "label": "Bezier · 连续过点",
+      "method": "bezier",
+      "points": [
+        [
+          4,
+          0,
+          -7
+        ],
+        [
+          7,
+          4,
+          -9
+        ],
+        [
+          3,
+          8,
+          -6
+        ],
+        [
+          -1,
+          5,
+          -4
+        ]
+      ],
+      "segment_durations": [
+        4.930107972935579,
+        5.098038697522676,
+        5.953670570221883,
+        6.140078056216863
+      ],
+      "frozen_reference": {
+        "format": "normalized_power_v1",
+        "method": "bezier",
+        "points": [
+          [
+            0.0,
+            0.0,
+            -5.0
+          ],
+          [
+            4.0,
+            0.0,
+            -7.0
+          ],
+          [
+            7.0,
+            4.0,
+            -9.0
+          ],
+          [
+            3.0,
+            8.0,
+            -6.0
+          ],
+          [
+            -1.0,
+            5.0,
+            -4.0
+          ]
+        ],
+        "segment_durations": [
+          4.930107972935579,
+          5.098038697522676,
+          5.953670570221883,
+          6.140078056216863
+        ],
+        "coefficients": [
+          [
+            [
+              0.0,
+              0.0,
+              -5.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              93.98565891926792,
+              -26.29390918898976,
+              -43.70609081101029
+            ],
+            [
+              -216.3627131900965,
+              68.36416389137338,
+              99.63583610862676
+            ],
+            [
+              175.70082688367393,
+              -59.59952749504347,
+              -80.40047250495667
+            ],
+            [
+              -49.32377261284529,
+              17.529272792659842,
+              22.470727207340218
+            ]
+          ],
+          [
+            [
+              4.0,
+              0.0,
+              -7.0
+            ],
+            [
+              3.1721129673474455,
+              1.8126359813413957,
+              -1.8126359813413966
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              49.088042865231756,
+              43.50486267572549,
+              -41.27758258535299
+            ],
+            [
+              -128.83370222103477,
+              -97.80109482627604,
+              106.01016659130724
+            ],
+            [
+              112.87261818976818,
+              78.19562455749745,
+              -91.81378968598634
+            ],
+            [
+              -33.29907180131267,
+              -21.712028388288296,
+              26.89384166137329
+            ]
+          ],
+          [
+            [
+              7.0,
+              4.0,
+              -9.0
+            ],
+            [
+              -0.5862769498307099,
+              4.690215598645667,
+              0.5862769498307099
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -68.02755079469937,
+              38.66482425100081,
+              55.62014212295688
+            ],
+            [
+              152.97557071503286,
+              -105.3600522431218,
+              -127.71630816850242
+            ],
+            [
+              -122.33436666640482,
+              94.08228055629483,
+              103.54424034378839
+            ],
+            [
+              33.97262369590186,
+              -28.07726816281942,
+              -29.03435124807353
+            ]
+          ],
+          [
+            [
+              3.0,
+              8.0,
+              -6.0
+            ],
+            [
+              -4.1422147560244635,
+              0.5177768445030537,
+              2.5888842225152873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -57.155704879510665,
+              -115.35553689006109,
+              18.222315549694134
+            ],
+            [
+              149.60033597889907,
+              275.2999580026374,
+              -51.50020998681202
+            ],
+            [
+              -130.88026878311925,
+              -228.63996640210996,
+              46.800167989449626
+            ],
+            [
+              38.57785243975535,
+              65.17776844503058,
+              -14.111157774847102
+            ]
+          ]
+        ],
+        "yaw": 0,
+        "construction": "C3 septic endpoint interpolation; Bezier/Hermite equivalent",
+        "planning": {
+          "location": "offline_before_flight",
+          "coefficient_evaluations": 36,
+          "optimizer": "SciPy SLSQP",
+          "success": true,
+          "iterations": 7,
+          "message": "Optimization terminated successfully",
+          "objective": "sum of segment durations",
+          "search": {
+            "segment_bounds_s": [
+              3.5,
+              9.0
+            ],
+            "max_speed_mps": 1.6,
+            "max_acceleration_mps2": 1.5,
+            "max_jerk_mps3": 3.0,
+            "min_knot_speed_mps": 0.65,
+            "max_iterations": 60
+          },
+          "optimality": "local numerical candidate under reference constraints; not global or AirSim time optimum",
+          "initial_duration_s": 28.0,
+          "snap_integral_m2ps7": 25.72191695554639,
+          "peak_speed_mps": 1.6000000000000263,
+          "peak_acceleration_mps2": 1.033584128492215,
+          "peak_jerk_mps3": 1.2520224233318276,
+          "wall_s": 0.20126829999981055,
+          "timing_scope": "plan call including on-demand imports, solve, validation and metadata; excludes interpreter startup and campaign imports; cold/warm differences are not controlled"
+        },
+        "libraries": {
+          "numpy": "1.26.4",
+          "scipy": "1.15.3"
+        }
+      }
+    },
+    "hermite_pass": {
+      "label": "Hermite · 连续过点",
+      "method": "hermite",
+      "points": [
+        [
+          4,
+          0,
+          -7
+        ],
+        [
+          7,
+          4,
+          -9
+        ],
+        [
+          3,
+          8,
+          -6
+        ],
+        [
+          -1,
+          5,
+          -4
+        ]
+      ],
+      "segment_durations": [
+        4.9301079729352555,
+        5.0980386975225915,
+        5.953670570221803,
+        6.140078056216876
+      ],
+      "frozen_reference": {
+        "format": "normalized_power_v1",
+        "method": "hermite",
+        "points": [
+          [
+            0.0,
+            0.0,
+            -5.0
+          ],
+          [
+            4.0,
+            0.0,
+            -7.0
+          ],
+          [
+            7.0,
+            4.0,
+            -9.0
+          ],
+          [
+            3.0,
+            8.0,
+            -6.0
+          ],
+          [
+            -1.0,
+            5.0,
+            -4.0
+          ]
+        ],
+        "segment_durations": [
+          4.9301079729352555,
+          5.0980386975225915,
+          5.953670570221803,
+          6.140078056216876
+        ],
+        "coefficients": [
+          [
+            [
+              0.0,
+              0.0,
+              -5.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              93.98565891926728,
+              -26.293909188986863,
+              -43.70609081101031
+            ],
+            [
+              -216.36271319009575,
+              68.364163891366,
+              99.63583610862716
+            ],
+            [
+              175.70082688367356,
+              -59.59952749503714,
+              -80.40047250495715
+            ],
+            [
+              -49.323772612845225,
+              17.529272792658002,
+              22.470727207340364
+            ]
+          ],
+          [
+            [
+              4.0,
+              0.0,
+              -7.0
+            ],
+            [
+              3.1721129673473905,
+              1.812635981341366,
+              -1.812635981341366
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              49.088042865230705,
+              43.5048626757255,
+              -41.277582585351524
+            ],
+            [
+              -128.83370222103187,
+              -97.80109482627616,
+              106.0101665913039
+            ],
+            [
+              112.87261818976569,
+              78.19562455749764,
+              -91.81378968598338
+            ],
+            [
+              -33.29907180131194,
+              -21.712028388288374,
+              26.893841661372416
+            ]
+          ],
+          [
+            [
+              7.0,
+              4.0,
+              -9.0
+            ],
+            [
+              -0.5862769498307007,
+              4.690215598645605,
+              0.5862769498307007
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -68.0275507946975,
+              38.664824251000326,
+              55.62014212295518
+            ],
+            [
+              152.97557071502897,
+              -105.36005224312044,
+              -127.71630816849876
+            ],
+            [
+              -122.33436666640162,
+              94.08228055629351,
+              103.54424034378548
+            ],
+            [
+              33.972623695900936,
+              -28.077268162819067,
+              -29.034351248072646
+            ]
+          ],
+          [
+            [
+              3.0,
+              8.0,
+              -6.0
+            ],
+            [
+              -4.142214756024472,
+              0.517776844503059,
+              2.5888842225152953
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -57.155704879507915,
+              -115.35553689005647,
+              18.222315549693178
+            ],
+            [
+              149.6003359788924,
+              275.2999580026264,
+              -51.50020998680948
+            ],
+            [
+              -130.8802687831137,
+              -228.63996640210078,
+              46.8001679894475
+            ],
+            [
+              38.57785243975377,
+              65.17776844502792,
+              -14.111157774846514
+            ]
+          ]
+        ],
+        "yaw": 0,
+        "construction": "C3 septic endpoint interpolation; Bezier/Hermite equivalent",
+        "planning": {
+          "location": "offline_before_flight",
+          "coefficient_evaluations": 36,
+          "optimizer": "SciPy SLSQP",
+          "success": true,
+          "iterations": 7,
+          "message": "Optimization terminated successfully",
+          "objective": "sum of segment durations",
+          "search": {
+            "segment_bounds_s": [
+              3.5,
+              9.0
+            ],
+            "max_speed_mps": 1.6,
+            "max_acceleration_mps2": 1.5,
+            "max_jerk_mps3": 3.0,
+            "min_knot_speed_mps": 0.65,
+            "max_iterations": 60
+          },
+          "optimality": "local numerical candidate under reference constraints; not global or AirSim time optimum",
+          "initial_duration_s": 28.0,
+          "snap_integral_m2ps7": 25.721916955552274,
+          "peak_speed_mps": 1.600000000000004,
+          "peak_acceleration_mps2": 1.0335841284923362,
+          "peak_jerk_mps3": 1.2520224233320414,
+          "wall_s": 0.3475361000000703,
+          "timing_scope": "plan call including on-demand imports, solve, validation and metadata; excludes interpreter startup and campaign imports; cold/warm differences are not controlled"
+        },
+        "libraries": {
+          "numpy": "1.26.4",
+          "scipy": "1.15.3"
+        }
+      }
+    },
+    "bspline_pass": {
+      "label": "B-spline · 连续过点",
+      "method": "bspline",
+      "points": [
+        [
+          4,
+          0,
+          -7
+        ],
+        [
+          7,
+          4,
+          -9
+        ],
+        [
+          3,
+          8,
+          -6
+        ],
+        [
+          -1,
+          5,
+          -4
+        ]
+      ],
+      "segment_durations": [
+        5.829172340694175,
+        3.9945763467630524,
+        4.655757330541789,
+        6.4599882288303
+      ],
+      "frozen_reference": {
+        "format": "normalized_power_v1",
+        "method": "bspline",
+        "points": [
+          [
+            0.0,
+            0.0,
+            -5.0
+          ],
+          [
+            4.0,
+            0.0,
+            -7.0
+          ],
+          [
+            7.0,
+            4.0,
+            -9.0
+          ],
+          [
+            3.0,
+            8.0,
+            -6.0
+          ],
+          [
+            -1.0,
+            5.0,
+            -4.0
+          ]
+        ],
+        "segment_durations": [
+          5.829172340694175,
+          3.9945763467630524,
+          4.655757330541789,
+          6.4599882288303
+        ],
+        "coefficients": [
+          [
+            [
+              0.0,
+              0.0,
+              -4.999999999999999
+            ],
+            [
+              1.230134460501146e-15,
+              1.230134460501146e-15,
+              -1.0354690155434865e-14
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -3.255216534308812e-30,
+              -3.255216534308812e-30,
+              3.665047992730861e-14
+            ],
+            [
+              21.593250821502632,
+              -4.593599828706098,
+              -7.971391550694082
+            ],
+            [
+              -29.701332626302946,
+              8.053203531797328,
+              9.054384928213024
+            ],
+            [
+              14.724020288601825,
+              -4.1518603367762275,
+              -3.5838411978428484
+            ],
+            [
+              -2.615938483801516,
+              0.6922566336849971,
+              0.5008478203239333
+            ]
+          ],
+          [
+            [
+              4.0,
+              5.898059818321144e-17,
+              -7.0
+            ],
+            [
+              5.412900374181415,
+              1.251482311576539,
+              -3.159626756363475
+            ],
+            [
+              -0.7176538315911392,
+              2.455968299026873,
+              -0.24621750089268418
+            ],
+            [
+              -2.4836076773506295,
+              1.0778541342541528,
+              1.451700769714401
+            ],
+            [
+              0.5268411244944861,
+              -0.5240757473583567,
+              0.23653128640390417
+            ],
+            [
+              0.5603615898409764,
+              -0.35068216012214565,
+              -0.29178938984919844
+            ],
+            [
+              -0.37151883544969266,
+              0.0718625235058227,
+              -0.008067824260694276
+            ],
+            [
+              0.07267725587458539,
+              0.01759063911711447,
+              0.017469415247746003
+            ]
+          ],
+          [
+            [
+              7.000000000000001,
+              4.0,
+              -9.0
+            ],
+            [
+              -0.33150887276755125,
+              7.111508209730463,
+              0.3078110757560088
+            ],
+            [
+              -4.687113166225083,
+              0.6596509952852403,
+              3.879719335886267
+            ],
+            [
+              0.5394248118868272,
+              -3.91442847891135,
+              -0.11082186173306706
+            ],
+            [
+              0.5528120224504889,
+              -1.0774554083846766,
+              -1.3508016802090725
+            ],
+            [
+              -0.3065500824214486,
+              0.9676327718520786,
+              0.05734304504116493
+            ],
+            [
+              0.34398639216681864,
+              0.488816190271607,
+              0.2863205521139649
+            ],
+            [
+              -0.11105110509005107,
+              -0.2357242798433602,
+              -0.06957046685526656
+            ]
+          ],
+          [
+            [
+              3.0000000000000004,
+              8.0,
+              -6.0
+            ],
+            [
+              -8.49499772205205,
+              -2.0831021224061046,
+              5.340899802195977
+            ],
+            [
+              0.019743732947644907,
+              -10.569528554583197,
+              -2.214587890655319
+            ],
+            [
+              7.154063412545159,
+              7.955296917611613,
+              -4.405398859452634
+            ],
+            [
+              1.0862634613839055,
+              10.536140323507535,
+              2.9494783004442056
+            ],
+            [
+              -2.9556423581183617,
+              -5.398385094268801,
+              1.6163401289967438
+            ],
+            [
+              -3.092491650521544,
+              -8.286582945078855,
+              -1.4319790814148292
+            ],
+            [
+              2.2830611238152496,
+              4.846161475217811,
+              0.14524759988585714
+            ]
+          ]
+        ],
+        "yaw": 0,
+        "construction": "clamped degree-7 interpolating B-spline, C6 interior",
+        "planning": {
+          "location": "offline_before_flight",
+          "coefficient_evaluations": 46,
+          "optimizer": "SciPy SLSQP",
+          "success": true,
+          "iterations": 9,
+          "message": "Optimization terminated successfully",
+          "objective": "sum of segment durations",
+          "search": {
+            "segment_bounds_s": [
+              3.5,
+              9.0
+            ],
+            "max_speed_mps": 1.6,
+            "max_acceleration_mps2": 1.5,
+            "max_jerk_mps3": 3.0,
+            "min_knot_speed_mps": 0.65,
+            "max_iterations": 60
+          },
+          "optimality": "local numerical candidate under reference constraints; not global or AirSim time optimum",
+          "initial_duration_s": 28.0,
+          "snap_integral_m2ps7": 0.5001516243835318,
+          "peak_speed_mps": 1.6000000000000218,
+          "peak_acceleration_mps2": 0.6325466214396976,
+          "peak_jerk_mps3": 0.32874606551707913,
+          "wall_s": 0.2427545000000464,
+          "timing_scope": "plan call including on-demand imports, solve, validation and metadata; excludes interpreter startup and campaign imports; cold/warm differences are not controlled"
+        },
+        "libraries": {
+          "numpy": "1.26.4",
+          "scipy": "1.15.3"
+        }
+      }
+    }
+  },
+  "comparison": {
+    "task": {
+      "points_ned": [
+        [
+          0,
+          0,
+          -5
+        ],
+        [
+          4,
+          0,
+          -7
+        ],
+        [
+          7,
+          4,
+          -9
+        ],
+        [
+          3,
+          8,
+          -6
+        ],
+        [
+          -1,
+          5,
+          -4
+        ]
+      ],
+      "initial_segment_durations": [
+        6,
+        7,
+        8,
+        7
+      ],
+      "tangent_speed_mps": 0.8,
+      "yaw": 0
+    },
+    "time_search": {
+      "segment_bounds_s": [
+        3.5,
+        9.0
+      ],
+      "max_speed_mps": 1.6,
+      "max_acceleration_mps2": 1.5,
+      "max_jerk_mps3": 3.0,
+      "min_knot_speed_mps": 0.65,
+      "max_iterations": 60
+    },
+    "passage": {
+      "position_tolerance_m": 0.5,
+      "min_actual_speed_mps": 0.5,
+      "reference_time_window_s": 1.0,
+      "rule": "ordered measured samples inside each waypoint radius and speed gate, within the frozen knot time window; no interpolation; final waypoint uses stationary terminal hold"
+    },
+    "task_spec_sha256": "d93e017a4bb57cdccfb2a21b4f17e2ef22d8dd43e51de8a12626ba1074a1d2b4",
+    "scope": "three reference constructions, shared controller and local time search; real flight feasibility only",
+    "environment": {
+      "id": "climb_descent",
+      "label": "E3 · 三维升降转弯",
+      "focus": "上升、下降与水平转向耦合，任务高度4–9米",
+      "catalog_sha256": "b81310001c8a767281692a67b5448e2e5e7430802dd9a24d0e4b387efe44e280"
+    }
+  }
+}

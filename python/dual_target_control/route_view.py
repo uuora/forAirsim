@@ -77,7 +77,8 @@ class RouteFlightView(FlightView):
             if position is not None and self.snapshot.get('connected'):
                 p=self.project(position)
                 if math.hypot(p.x()-event.pos().x(),p.y()-event.pos().y())<28:
-                    self.setToolTip('四旋翼无人机：保留原机臂与旋翼图标，橙色箭头表示机头偏航。\n图标为放大示意；轨迹坐标与网格仍按米绘制。');return
+                    posture='实测横滚、俯仰、偏航' if self.snapshot.get('body_rotation_height') is not None else '实测偏航'
+                    self.setToolTip(f'四旋翼无人机：{posture}；橙色箭头为机头。\n图标为放大示意；轨迹坐标与网格仍按米绘制。');return
             for marker in self._landmarks():
                 p=self.project(marker['position']);d=math.hypot(p.x()-event.pos().x(),p.y()-event.pos().y())
                 if d<18:nearest=marker;break

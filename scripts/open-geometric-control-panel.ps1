@@ -11,5 +11,10 @@ if ($Check) {
 } else {
     $taskWindowPython = Join-Path (Split-Path $taskPython) 'pythonw.exe'
     if (!(Test-Path -LiteralPath $taskWindowPython)) { $taskWindowPython=$taskPython }
-    Start-Process -FilePath $taskWindowPython -ArgumentList @(('"'+$taskPanel+'"')) -WorkingDirectory $taskRoot -WindowStyle Hidden
+    $taskLogDir = Join-Path $taskRoot '.runtime/gui_logs'
+    New-Item -ItemType Directory -Path $taskLogDir -Force | Out-Null
+    $taskLogName = Get-Date -Format 'yyyyMMdd_HHmmss_fffffff'
+    Start-Process -FilePath $taskWindowPython -ArgumentList @(('"'+$taskPanel+'"')) -WorkingDirectory $taskRoot -WindowStyle Normal `
+        -RedirectStandardOutput (Join-Path $taskLogDir ($taskLogName+'.stdout.log')) `
+        -RedirectStandardError (Join-Path $taskLogDir ($taskLogName+'.stderr.log'))
 }

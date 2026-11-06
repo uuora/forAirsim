@@ -68,6 +68,20 @@ class FakeClient:
 
 
 class RuntimeContractTests(unittest.TestCase):
+    def test_snapshot_paths_longer_than_windows_legacy_limit(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/('nested_'*18)/('source_'*18)/'receipt.json'
+            extended=runtime.filesystem_path(path)
+            extended.parent.mkdir(parents=True)
+            try:
+                runtime.write_json(path,{'snapshot':True})
+                self.assertEqual(json.loads(extended.read_text(encoding='utf-8')),{'snapshot':True})
+                self.assertEqual(len(runtime.digest(path)),64)
+            finally:
+                extended.unlink(missing_ok=True)
+                extended.parent.rmdir()
+                extended.parent.parent.rmdir()
+
     def test_loading_default_config_does_not_open_rpc_or_launch(self):
         with patch("socket.create_connection", side_effect=AssertionError("Unexpected socket")), \
              patch("subprocess.Popen", side_effect=AssertionError("Unexpected launch")):

@@ -1,0 +1,2 @@
+# Keep the published evidence package and manifest byte-identical.
+* -text whitespace=cr-at-eol

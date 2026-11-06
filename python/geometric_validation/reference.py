@@ -94,7 +94,43 @@ class Reference:
         return [self.sample(t)["p"] for t in np.linspace(0., self.duration, max(2, int(count)))]
 
 
+class FrozenReference(Reference):
+    """Decode a frozen reference; never optimize on the flight control thread."""
+    def __init__(self, plan):
+        if plan.get("format") != "normalized_power_v1":
+            raise ValueError("Unsupported frozen polynomial format")
+        self.points = np.asarray(plan["points"], dtype=float)
+        self.segment_durations = np.asarray(plan["segment_durations"], dtype=float)
+        coefficients = np.asarray(plan["coefficients"], dtype=float)
+        n = len(self.segment_durations)
+        if n<1 or self.points.shape!=(n+1, 3) or coefficients.shape!=(n, 8, 3):
+            raise ValueError("Invalid frozen reference dimensions")
+        if not all(np.isfinite(x).all() for x in (self.points, self.segment_durations, coefficients)) or np.any(self.segment_durations<=0):
+            raise ValueError("Nonfinite reference or nonpositive duration")
+        self.start, self.end = self.points[0].copy(), self.points[-1].copy()
+        self.times = np.r_[0., np.cumsum(self.segment_durations)]
+        self.duration = float(self.times[-1])
+        self.yaw = float(plan["yaw"])
+        if not math.isfinite(self.yaw):
+            raise ValueError("Invalid reference yaw")
+        self.polynomials = [[[Polynomial(coef[:, axis]).deriv(d)/T**d for axis in range(3)]
+                             for d in range(5)] for coef, T in zip(coefficients, self.segment_durations)]
+        for i, segment in enumerate(self.polynomials):
+            for side in (0, 1):
+                if not np.allclose([p(side) for p in segment[0]], self.points[i+side], atol=1e-7):
+                    raise ValueError("Frozen curve does not interpolate waypoints")
+            for d in (1, 2, 3):
+                if i==0 and not np.allclose([p(0) for p in segment[d]], 0, atol=1e-7):
+                    raise ValueError("Frozen start is not at rest")
+                if i==n-1 and not np.allclose([p(1) for p in segment[d]], 0, atol=1e-7):
+                    raise ValueError("Frozen end is not at rest")
+                if i and not np.allclose([p(0) for p in segment[d]], [p(1) for p in self.polynomials[i-1][d]], atol=1e-7):
+                    raise ValueError("Frozen reference is not C3")
+
+
 def build_reference(config: dict, case: str) -> Reference:
+    if "frozen_reference" in config["cases"][case]:
+        return FrozenReference(config["cases"][case]["frozen_reference"])
     case_cfg = {"start": config.get("start", [0., 0., -5.]),
                 "yaw": config.get("yaw", 0.), **config["cases"][case]}
     return Reference(case_cfg)
