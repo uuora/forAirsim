@@ -106,7 +106,10 @@ def matching_comparison(config, reports_root=None):
     if 'comparison' not in config:
         return None
     identity=common_fingerprint(apply_machine_config(config))
-    pages=sorted(Path(reports_root or ROOT/'reports').glob('geometric_three_planners_*/index.html'),reverse=True)
+    root=Path(reports_root or ROOT/'reports')
+    pages=list(root.glob('geometric_three_planners_*/index.html'))
+    pages+=list(root.glob('geometric_selected_comparison_*/group_*/index.html'))
+    pages.sort(key=lambda p:p.stat().st_mtime_ns,reverse=True)
     for page in pages:
         try:
             old=json.loads((page.parent/'config_frozen.json').read_text(encoding='utf-8'))

@@ -166,6 +166,19 @@ class PanelTests(unittest.TestCase):
         self.assertEqual(len(window.view.snapshot["planned_path"]), 160)
         window.close()
 
+    def test_record_selection_entry_blocks_start_and_only_opens_the_data_dialog(self):
+        runner=Mock();window=GeometricControlWindow(self.path,runner=runner)
+        with patch('geometric_validation.record_comparison_ui.RecordComparisonDialog') as factory:
+            dialog=factory.return_value;dialog.busy=False;dialog.isVisible.return_value=True
+            def attempt_start():
+                self.assertFalse(window.start_button.isEnabled())
+                window.start()
+            dialog.exec_.side_effect=attempt_start
+            window.select_records_button.click()
+            factory.assert_called_once_with(window,'custom');dialog.exec_.assert_called_once()
+            runner.assert_not_called();self.assertTrue(window.start_button.isEnabled())
+        window._record_dialog=None;window.close()
+
     def test_launch_requires_start_and_result_verdicts_remain_separate(self):
         calls = []
 

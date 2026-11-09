@@ -173,6 +173,7 @@ class GeometricControlWindow(QMainWindow):
         self._error = None
         self._closing = False
         self.run_dir = None
+        self._record_dialog = None
         self.mailbox = LatestTelemetry()
         self.adapter = MapAdapter(self.config, next(iter(self.config['cases'])))
         self.setWindowTitle("三种轨迹规划 · 几何控制 · AirSim")
@@ -273,13 +274,20 @@ class GeometricControlWindow(QMainWindow):
         self.stop_button.setEnabled(False)
         actions.addWidget(self.stop_button)
         actions.addStretch()
+        data_actions = QHBoxLayout()
+        data_actions.addStretch()
         self.open_button = QPushButton("打开本次记录")
         self.open_button.setEnabled(False)
         self.open_button.clicked.connect(self.open_run)
-        actions.addWidget(self.open_button)
+        data_actions.addWidget(self.open_button)
         self.compare_button = QPushButton("三种实测对比")
         self.compare_button.clicked.connect(self.open_comparison)
-        actions.addWidget(self.compare_button)
+        data_actions.addWidget(self.compare_button)
+        self.select_records_button = QPushButton("选择记录生成对比")
+        self.select_records_button.setIcon(self.style().standardIcon(QStyle.SP_FileDialogDetailedView))
+        self.select_records_button.clicked.connect(self.select_records)
+        data_actions.addWidget(self.select_records_button)
+        layout.addLayout(data_actions)
         layout.addLayout(actions)
         self.timer = QTimer(self)
         self.timer.setInterval(100)
@@ -371,7 +379,7 @@ class GeometricControlWindow(QMainWindow):
             self.scene_status.setText(f"UE 视口不可用：{exc}")
 
     def start(self):
-        if self.active or self._closing:
+        if self.active or self._closing or (self._record_dialog is not None and self._record_dialog.isVisible()):
             return
         self._change_case()
         self._stop_event = threading.Event()
@@ -389,6 +397,7 @@ class GeometricControlWindow(QMainWindow):
         self.start_button.setEnabled(False)
         self.stop_button.setEnabled(True)
         self.open_button.setEnabled(False)
+        self.select_records_button.setEnabled(False)
         self.status.setText("正在执行接口/运行条件核验；通过后才起飞。")
 
         def work():
@@ -464,6 +473,7 @@ class GeometricControlWindow(QMainWindow):
             self.launch_checkbox.setEnabled(True)
             self.start_button.setEnabled(not self._closing)
             self.stop_button.setEnabled(False)
+            self.select_records_button.setEnabled(not self._closing)
             if self._closing:
                 self.close()
         if self.viewport is not None:
@@ -489,7 +499,26 @@ class GeometricControlWindow(QMainWindow):
         else:
             self.status.setText("当前环境与条件尚无批量实测对比记录。")
 
+    def select_records(self):
+        if self.active or self._closing:
+            return
+        if self._record_dialog is None:
+            from .record_comparison_ui import RecordComparisonDialog
+            self._record_dialog = RecordComparisonDialog(self, self._environment_id)
+        else:
+            self._record_dialog.scan()
+        self.start_button.setEnabled(False)
+        self._record_dialog.exec_()
+        self.start_button.setEnabled(not self._closing)
+        if self._closing:
+            self.close()
+
     def closeEvent(self, event):
+        if self._record_dialog is not None and self._record_dialog.busy:
+            self._closing = True
+            self._record_dialog.reject()
+            event.ignore()
+            return
         if self.active:
             self._closing = True
             self.start_button.setEnabled(False)

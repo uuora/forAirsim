@@ -159,17 +159,19 @@ def render(folder):
          if r.get('run_dir') else value(r.get('error',r['status'])))+'</li>' for r in summary['results'])
     environment=summary.get('environment',cfg.get('comparison',{}).get('environment',{}))
     environment_label=html.escape(environment.get('label','E0 · 基准三维过点'))
-    page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>三种轨迹 · 实测对比</title>
+    title=html.escape(summary.get('title','三种轨迹 · 实测对比'))
+    coverage=('本页只包含所选已有记录，未选择的方案不计为失败。' if summary.get('selection') else '每方案一次开发覆盖。')
+    page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'''+title+'''</title>
 <style>body{font:15px sans-serif;margin:28px;color:#20242a;line-height:1.6}table{border-collapse:collapse;width:100%}
 td,th{padding:7px 9px;border-bottom:1px solid #d7dce1;text-align:left}img{width:100%;max-width:1200px}a{color:#007486}
 .trajectory-frame{border:0;width:100%;height:720px}.table-scroll{overflow-x:auto}table{min-width:1050px}
 h1{font-size:24px}h2{font-size:18px}@media(max-width:620px){body{margin:12px;font-size:14px}}</style>
-<h1>三种轨迹 · 实测对比</h1><p>'''+environment_label+''' · 本批条件一致性：'''+value(summary['comparable_conditions'])+'''。</p>
+<h1>'''+title+'''</h1><p>'''+environment_label+''' · 本批条件一致性：'''+value(summary['comparable_conditions'])+'''。</p>
 <h2>三维轨迹对比</h2>'''+spatial_content+'''
 <p>展示轴比例 X:Y:H = 1.55:1.10:0.80（非等米制）</p>
 <p><a href="trajectory_3d.svg">三维图SVG</a> · <a href="trajectory_3d.png">三维图PNG</a> ·
 <a href="trajectory_3d_metric.png">等米制图PNG</a> · <a href="trajectory_3d_metric.svg">等米制图SVG</a></p>
-<p>每方案一次开发覆盖。Bézier 与 Hermite 是等价换基，不作独立算法优劣结论。时间搜索只约束参考运动学，尚未自动搜索真实闭环的最快可行时间。</p>
+<p>'''+coverage+'''Bézier 与 Hermite 是等价换基，不作独立算法优劣结论。时间搜索只约束参考运动学，尚未自动搜索真实闭环的最快可行时间。</p>
 <div class="table-scroll"><table><thead><tr>'''+''.join('<th>'+h+'</th>' for h in headings)+'''</tr></thead><tbody>'''+body+'''</tbody></table></div>
 <p>实际时间含末端稳定保持，起飞、准备与降落另记。规划耗时见原始报告，含不同的首次导入开销，不直接排名。</p>
 <img src="comparison.png" alt="三方案实测轨迹与误差叠加图">
