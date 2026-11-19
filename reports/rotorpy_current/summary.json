@@ -1,0 +1,394 @@
+{
+  "groups": [
+    {
+      "method": "bezier",
+      "arm": "heading_baseline",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {
+        "tilt": 5,
+        "heading": 3
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "bezier",
+      "arm": "velocity",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 43,
+      "failures": {
+        "attitude": 42,
+        "tilt": 77,
+        "reference_speed": 57,
+        "heading": 58
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "bezier",
+      "arm": "collective",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 43,
+      "failures": {
+        "attitude": 42,
+        "tilt": 77,
+        "reference_speed": 57,
+        "heading": 58
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "bezier",
+      "arm": "toppquad",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {
+        "tilt": 28,
+        "heading": 14,
+        "attitude": 3
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "hermite",
+      "arm": "heading_baseline",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {
+        "tilt": 5,
+        "heading": 3
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "hermite",
+      "arm": "velocity",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 43,
+      "failures": {
+        "attitude": 42,
+        "tilt": 77,
+        "reference_speed": 57,
+        "heading": 58
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "hermite",
+      "arm": "collective",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 43,
+      "failures": {
+        "attitude": 42,
+        "tilt": 77,
+        "reference_speed": 57,
+        "heading": 58
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "hermite",
+      "arm": "toppquad",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {
+        "tilt": 28,
+        "heading": 14,
+        "attitude": 3
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "bspline",
+      "arm": "heading_baseline",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {},
+      "command_outside": 0
+    },
+    {
+      "method": "bspline",
+      "arm": "velocity",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {
+        "tilt": 21,
+        "heading": 6
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "bspline",
+      "arm": "collective",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {
+        "tilt": 21,
+        "heading": 6
+      },
+      "command_outside": 0
+    },
+    {
+      "method": "bspline",
+      "arm": "toppquad",
+      "attempts": 100,
+      "completed": 100,
+      "rotor_feasible": 100,
+      "speed_feasible": 100,
+      "failures": {
+        "attitude": 3,
+        "tilt": 10
+      },
+      "command_outside": 0
+    }
+  ],
+  "paired": [
+    {
+      "method": "bezier",
+      "comparator": "heading_baseline",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": -1.8461926081845963
+    },
+    {
+      "method": "bezier",
+      "comparator": "heading_baseline",
+      "cohort": "双方参考限速与推力合规",
+      "n": 100,
+      "reference_s": -1.8461926081845963
+    },
+    {
+      "method": "bezier",
+      "comparator": "heading_baseline",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": -1.8461926081845963,
+      "complete_s": -1.8399999999999999,
+      "position_rmse_m": 0.007614040017449343,
+      "position_peak_m": 0.021632402628308754,
+      "attitude_peak_deg": 1.3298840812277812
+    },
+    {
+      "method": "bezier",
+      "comparator": "velocity",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": 0.49014118072040347
+    },
+    {
+      "method": "bezier",
+      "comparator": "velocity",
+      "cohort": "双方参考限速与推力合规",
+      "n": 43,
+      "reference_s": 0.4775942462228251
+    },
+    {
+      "method": "bezier",
+      "comparator": "velocity",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": 0.49014118072040347,
+      "complete_s": 0.4299999999999997,
+      "position_rmse_m": -0.004967692318877448,
+      "position_peak_m": 0.003028402447915815,
+      "attitude_peak_deg": -1.6007546706445561
+    },
+    {
+      "method": "bezier",
+      "comparator": "collective",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": 0.49014117971700344
+    },
+    {
+      "method": "bezier",
+      "comparator": "collective",
+      "cohort": "双方参考限速与推力合规",
+      "n": 43,
+      "reference_s": 0.4775942462087759
+    },
+    {
+      "method": "bezier",
+      "comparator": "collective",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": 0.49014117971700344,
+      "complete_s": 0.4299999999999997,
+      "position_rmse_m": -0.004967692318765239,
+      "position_peak_m": 0.003028404383752757,
+      "attitude_peak_deg": -1.6007546678488715
+    },
+    {
+      "method": "hermite",
+      "comparator": "heading_baseline",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": -1.8461926081330446
+    },
+    {
+      "method": "hermite",
+      "comparator": "heading_baseline",
+      "cohort": "双方参考限速与推力合规",
+      "n": 100,
+      "reference_s": -1.8461926081330446
+    },
+    {
+      "method": "hermite",
+      "comparator": "heading_baseline",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": -1.8461926081330446,
+      "complete_s": -1.8399999999999999,
+      "position_rmse_m": 0.007614040017524984,
+      "position_peak_m": 0.021632402621038452,
+      "attitude_peak_deg": 1.3298840804655154
+    },
+    {
+      "method": "hermite",
+      "comparator": "velocity",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": 0.4901411807214746
+    },
+    {
+      "method": "hermite",
+      "comparator": "velocity",
+      "cohort": "双方参考限速与推力合规",
+      "n": 43,
+      "reference_s": 0.477594246221404
+    },
+    {
+      "method": "hermite",
+      "comparator": "velocity",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": 0.4901411807214746,
+      "complete_s": 0.4299999999999997,
+      "position_rmse_m": -0.0049676923188790925,
+      "position_peak_m": 0.003028402561062994,
+      "attitude_peak_deg": -1.600754670648139
+    },
+    {
+      "method": "hermite",
+      "comparator": "collective",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": 0.49014117971804705
+    },
+    {
+      "method": "hermite",
+      "comparator": "collective",
+      "cohort": "双方参考限速与推力合规",
+      "n": 43,
+      "reference_s": 0.4775942462074241
+    },
+    {
+      "method": "hermite",
+      "comparator": "collective",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": 0.49014117971804705,
+      "complete_s": 0.4299999999999997,
+      "position_rmse_m": -0.004967692318765787,
+      "position_peak_m": 0.003028404496901005,
+      "attitude_peak_deg": -1.6007546678522075
+    },
+    {
+      "method": "bspline",
+      "comparator": "heading_baseline",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": -2.744814207348122
+    },
+    {
+      "method": "bspline",
+      "comparator": "heading_baseline",
+      "cohort": "双方参考限速与推力合规",
+      "n": 100,
+      "reference_s": -2.744814207348122
+    },
+    {
+      "method": "bspline",
+      "comparator": "heading_baseline",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": -2.744814207348122,
+      "complete_s": -2.71,
+      "position_rmse_m": 0.01284866439446597,
+      "position_peak_m": 0.0157255835268651,
+      "attitude_peak_deg": 1.3623159888773086
+    },
+    {
+      "method": "bspline",
+      "comparator": "velocity",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": 0.39256358480154274
+    },
+    {
+      "method": "bspline",
+      "comparator": "velocity",
+      "cohort": "双方参考限速与推力合规",
+      "n": 100,
+      "reference_s": 0.39256358480154274
+    },
+    {
+      "method": "bspline",
+      "comparator": "velocity",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": 0.39256358480154274,
+      "complete_s": 0.40000000000000036,
+      "position_rmse_m": -0.0027784831062405285,
+      "position_peak_m": 0.0017537210719988927,
+      "attitude_peak_deg": -0.2918693180705354
+    },
+    {
+      "method": "bspline",
+      "comparator": "collective",
+      "cohort": "双方参考推力合规",
+      "n": 100,
+      "reference_s": 0.39256357217192184
+    },
+    {
+      "method": "bspline",
+      "comparator": "collective",
+      "cohort": "双方参考限速与推力合规",
+      "n": 100,
+      "reference_s": 0.39256357217192184
+    },
+    {
+      "method": "bspline",
+      "comparator": "collective",
+      "cohort": "双方正常完成",
+      "n": 100,
+      "reference_s": 0.39256357217192184,
+      "complete_s": 0.40000000000000036,
+      "position_rmse_m": -0.0027784831073985813,
+      "position_peak_m": 0.0017536947632269748,
+      "attitude_peak_deg": -0.2918693210710712
+    }
+  ]
+}

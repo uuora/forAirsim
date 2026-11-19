@@ -1,5 +1,7 @@
 # TOPPQuad · AirSim 轨迹控制
 
+**RotorPy 实验**　[运行说明](docs/使用说明/TOPPQuad三基线仿真.md#当前-rotorpy-随机航路批次) · [实验结果](reports/rotorpy_current/conclusion.md) · [论文式图集 PDF](reports/rotorpy_current/paper_figures/paper_figures.pdf) · [本机三维回放](http://127.0.0.1:8765/)
+
 双击 [打开几何控制实验.cmd](打开几何控制实验.cmd)。控制台默认加载 Bézier、Hermite、B 样条三条 TOPPQuad 参考，选择其中一种后可手动开始验证。现有 AirSim 实例可通过“显示 UE 视口”观察。
 
 - **弹出三维地图**会把当前地图移到独立、可缩放的窗口。关闭地图窗口或点击控制台的“收回三维地图”即可还原。

@@ -21,28 +21,32 @@ UPSTREAM_COMMIT = "3db181cb0c76baaa1669f859f16a83060c2ee7a0"
 NODE_COUNT = 61
 
 
-def load_solver(checkout):
+def load_solver(checkout, *, checked_sha256=None):
     path = Path(checkout).resolve() / "TOPPQuad/TQ_trajectory.py"
     relative = "TOPPQuad/TQ_trajectory.py"
-    expected = subprocess.check_output(
-        ["git", "-C", str(path.parents[1]), "show", f"{UPSTREAM_COMMIT}:{relative}"]
-    )
-    if path.read_bytes().replace(b"\r\n", b"\n") != expected:
-        raise ValueError("TOPPQuad source differs from the pinned Git revision")
+    source_sha256 = digest(path)
+    if checked_sha256 is None:
+        expected = subprocess.check_output(
+            ["git", "-C", str(path.parents[1]), "show", f"{UPSTREAM_COMMIT}:{relative}"]
+        )
+        if path.read_bytes().replace(b"\r\n", b"\n") != expected:
+            raise ValueError("TOPPQuad source differs from the pinned Git revision")
+    elif source_sha256 != checked_sha256:
+        raise ValueError("TOPPQuad source changed after startup verification")
     module_spec = importlib.util.spec_from_file_location("toppquad_upstream", path)
     module = importlib.util.module_from_spec(module_spec)
     module_spec.loader.exec_module(module)
-    return module.TQ_trajectory, digest(path)
+    return module.TQ_trajectory, source_sha256
 
 
-def solve_path(solver_type, reference, speed_cap):
+def solve_path(solver_type, reference, speed_cap, node_count=NODE_COUNT):
     # A uniform grid in the baseline's original time is a regular path
     # parameter away from the stationary endpoints. Use ENU in TOPPQuad.
-    progress = np.linspace(0., 1., NODE_COUNT)
+    progress = np.linspace(0., 1., node_count)
     samples = [reference.sample(s * reference.duration) for s in progress]
-    step = reference.duration / (NODE_COUNT - 1)
+    step = reference.duration / (node_count - 1)
     solver = solver_type(np.asarray(reference.points)[:, [1, 0, 2]] * [1, 1, -1],
-                         n=NODE_COUNT, vmax=speed_cap)
+                         n=node_count, vmax=speed_cap)
     path = {}
     for target, key in zip(
         ("x", "x_dot", "x_ddot", "x_dddot", "x_ddddot"),
@@ -50,9 +54,9 @@ def solve_path(solver_type, reference, speed_cap):
     ):
         ned = np.array([row[key] for row in samples])
         path[target] = ned[:, [1, 0, 2]] * [1, 1, -1]
-    solver.set_min_snap_traj(dict(path, d_s=np.full(NODE_COUNT - 1, step),
-                                  h=np.ones(NODE_COUNT),
-                                  T=np.full((NODE_COUNT, 4), solver.Trest),
+    solver.set_min_snap_traj(dict(path, d_s=np.full(node_count - 1, step),
+                                  h=np.ones(node_count),
+                                  T=np.full((node_count, 4), solver.Trest),
                                   vel=path["x_dot"], acc=path["x_ddot"],
                                   ms=None, t=progress * reference.duration))
     result, success, solve_wall = solver.get_optimized_traj()
@@ -93,13 +97,13 @@ def compose(plan, warp, duration):
                 segment_durations=(np.diff(knots) * duration).tolist())
 
 
-def retime(cfg, case, solver_type, source_hash):
+def retime(cfg, case, solver_type, source_hash, *, node_count=NODE_COUNT):
     begin = time.perf_counter()
     spec = cfg["cases"][case]
     baseline = spec["frozen_reference"]
     ref = FrozenReference(baseline)
     policy = cfg["comparison"]["time_search"]
-    progress, times, solve_wall, solution = solve_path(solver_type, ref, policy["max_speed_mps"])
+    progress, times, solve_wall, solution = solve_path(solver_type, ref, policy["max_speed_mps"], node_count)
     warp = fit_progress(progress, times)
     # Apply one common time dilation to the smoothed profile. The original
     # controller's speed, acceleration and jerk gates apply to the export.

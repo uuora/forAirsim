@@ -1,0 +1,16 @@
+{
+  "expected": 1200,
+  "unique_records": 1200,
+  "verified_closed_loop": 1200,
+  "planning_rejected": 0,
+  "failures": [],
+  "cross_campaign_checks": {
+    "geometry_and_heading": 1200,
+    "sample_counts": 1200,
+    "run_receipts": 1200,
+    "distinct_random_points": 400,
+    "archived_entries_verified": 142,
+    "removed_arm_folders": 907,
+    "unique_pairs": 900
+  }
+}

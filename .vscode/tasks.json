@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "RotorPy · 打开本地实验服务",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/python.exe",
+      "args": ["-u", "python/serve_rotorpy_paper.py", "reports/rotorpy_current"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "presentation": {"reveal": "always", "panel": "dedicated"},
+      "problemMatcher": []
+    },
+    {
+      "label": "RotorPy · 100 条随机航路 · 运行或继续",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/python.exe",
+      "args": ["-u", "python/run_rotorpy_campaign.py", "--jobs", "12"],
+      "options": {"cwd": "${workspaceFolder}", "env": {"PYTHONPATH": "${workspaceFolder}/.runtime/toppquad_deps;${workspaceFolder}/.runtime/rotorpy_deps;${workspaceFolder}/python", "OPENBLAS_NUM_THREADS": "1", "OMP_NUM_THREADS": "1"}},
+      "presentation": {"reveal": "always", "panel": "dedicated", "clear": true},
+      "problemMatcher": []
+    }
+  ]
+}

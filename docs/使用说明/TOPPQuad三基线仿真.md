@@ -48,3 +48,43 @@ AirSim 使用 SimpleFlight 与原 Qt 几何跟踪器，跟踪时沿用基线固�
 | B 样条 | 11.493 | 7.744 | 13.679 | 14.988 | 0.082 |
 
 三条同条件记录均通过正常完成、跟踪、过点、独立数据审计与安全降落验收。受平滑与原参考门槛影响，三条最终导出参考均比原基线慢。每种方案仅一次，当前结果支持该任务下的接入可行性。原始状态、命令、回执和派生图表见新工作区的 [实测对比页](../../reports/geometric_three_planners_toppquad_20261119_v1/index.html)。
+
+## 当前 RotorPy 随机航路批次
+
+[打开实验入口](../../RotorPy仿真实验.html) · [实时进度与三维回放](http://127.0.0.1:8765/)。
+
+当前入口为 python/run_rotorpy_campaign.py。首次运行从系统随机源生成 100 条航路，并先保存 reports/rotorpy_current/design.json。之后继续运行使用该文件中的同一批航点。三种路径构造分别比较稳健计时＋航向跟踪、速度 TOPP、速度＋总推力 TOPP 和 TOPPQuad，共 1,200 项。各组使用同一航向函数，统一比较首飞。规划失败、仿真失败和通过均有独立回执。
+
+当前看板以参考逐电机推力、参考飞行时间和闭环完成时间为主。闭环完成时间及跟踪误差按同航路双方正常完成的样本配对。位置、过点速度、倾角、机头误差和整体姿态等门槛保留为逐项比较数据。刷新统计使用已有数据。
+
+[论文式图集](http://127.0.0.1:8765/paper_figures/)提供按本项目三种路径组织的推力箱线图、参考时间箱线图和同路线时间缩短率直方图，并附离散解与连续参考的计时差。用 python/run_rotorpy_paper_figures.py 可从原记录重新导出 PNG、SVG 和整套 PDF。
+
+### 查看当前批次
+
+双击根目录的 [RotorPy仿真实验.html](../../RotorPy仿真实验.html)，或打开 [当前看板](http://127.0.0.1:8765/)。若本地服务尚未启动，在 VS Code 中打开本项目文件夹，按 Ctrl+Shift+P 搜索“运行任务”，选择“RotorPy · 打开本地实验服务”。“RotorPy · 100 条随机航路 · 运行或继续”使用默认目录 reports/rotorpy_current，已有设计时按其中的航点继续。
+
+### 新跑一批并打开结果
+
+在项目根目录的 PowerShell 终端执行。每批使用新的目录名。中断后用同一个目录名再执行，脚本按已保存的航点继续缺少回执的工况。
+
+~~~powershell
+$batch = 'reports/rotorpy_batch_01'
+$env:PYTHONPATH = '.runtime/toppquad_deps;.runtime/rotorpy_deps;python'
+$env:OPENBLAS_NUM_THREADS = '1'
+$env:OMP_NUM_THREADS = '1'
+.\.venv\python.exe -X utf8 -u python/run_rotorpy_campaign.py --output $batch --jobs 8
+~~~
+
+可在第一轮命令末尾加 --pilot，先验证 3 条航路、36 项工况。随后用同一目录运行完整命令便会补齐全批。出现 finished.json 后，可在同一个终端生成图集。
+
+~~~powershell
+.\.venv\python.exe -X utf8 python/run_rotorpy_paper_figures.py --source $batch
+~~~
+
+另开终端，在项目根目录为该批启动服务。保持该终端运行，然后打开 [新批次看板](http://127.0.0.1:8766/) 或 [新批次图集](http://127.0.0.1:8766/paper_figures/)。
+
+~~~powershell
+.\.venv\python.exe -u python/serve_rotorpy_paper.py reports/rotorpy_batch_01 --port 8766
+~~~
+
+批次目录中的 design.json 保存 100 条航路和协议，runs.csv 为逐次汇总，paired.csv 为同航路配对，waypoints.csv 为逐航点数据。三种 CSV 可用 Excel 或 VS Code 打开。逐条时序在 route_编号/路径构造/方法/ 下，simulation.csv.gz 是 50 Hz 实测时序，reference_metrics.csv 是参考时序，heading.csv 是机头时序。三维看板可按路线、构造和方法直接选择对应的数据。
