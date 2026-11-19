@@ -11,7 +11,7 @@ from unittest.mock import Mock, patch
 
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
-from PyQt5.QtGui import QImage, QPainter
+from PyQt5.QtGui import QColor, QImage, QPainter
 from PyQt5.QtWidgets import QApplication
 import numpy as np
 
@@ -116,6 +116,17 @@ class AdapterTests(unittest.TestCase):
         adapter.adapt(frame)
         frame["position"] = [3, 1, -5]
         self.assertEqual(adapter.adapt(frame)["route_markers"][1]["state"], "visited")
+
+    def test_tracking_view_keeps_takeoff_and_landing_in_the_full_trace(self):
+        adapter = MapAdapter(CONFIG, "turn")
+        frame = dict(quaternion_wxyz=[1, 0, 0, 0])
+        snapshots = [adapter.adapt(dict(frame, phase=phase, position=point))
+                     for phase, point in (("PREPARING", [0, 0, -1]), ("TRACKING", [0, 1, -5]),
+                                          ("LANDING", [2, 3, -2]))]
+        self.assertEqual(snapshots[-1]["tracking_trail"], [[0, 1, 5]])
+        self.assertEqual(snapshots[-1]["trail"], [[0, 0, 1], [0, 1, 5], [2, 3, 2]])
+        adapter.set_task(CONFIG, "line")
+        self.assertEqual(adapter.idle_snapshot()["tracking_trail"], [])
 
     def test_mailbox_never_waits_for_display_and_retains_one_time_path(self):
         mailbox = LatestTelemetry()
@@ -279,7 +290,6 @@ class PanelTests(unittest.TestCase):
         window.close()
 
     def test_roll_and_pitch_change_drone_pixels_without_changing_camera(self):
-        from dual_target_control.ui import FlightView
         window = GeometricControlWindow(self.path)
         view = window.view
         view.resize(900, 580)
@@ -296,14 +306,89 @@ class PanelTests(unittest.TestCase):
             image.fill(0)
             painter = QPainter(image)
             painter.setRenderHint(QPainter.Antialiasing)
-            FlightView._drone(view, painter, arm_pixels=12., show_label=False,
-                              body_rotation=view.snapshot['body_rotation_height'])
+            view.draw_drone(painter, QColor("#28445c"), view.snapshot['body_rotation_height'])
             painter.end()
             images.append(image.bits().asstring(image.byteCount()))
             np.testing.assert_array_equal(view.projection_matrix, camera)
         self.assertNotEqual(images[0], images[1])
         self.assertNotEqual(images[0], images[2])
         self.assertNotEqual(images[1], images[2])
+        window.close()
+
+    def test_popout_reuses_the_map_and_tracks_telemetry(self):
+        runner, viewport = Mock(), Mock()
+        window = GeometricControlWindow(self.path, runner=runner, viewport_factory=viewport)
+        window.show()
+        self.app.processEvents()
+        original_height = window.height()
+        view = window.view
+        view.set_height_scale(1.5)
+        view.azimuth += .2
+        view.zoom = 1.3
+        camera = (view.azimuth, view.elevation, view.zoom, view.height_scale)
+        window.map_button.click()
+        self.app.processEvents()
+        self.assertTrue(window.map_window.isWindow())
+        self.assertIsNone(window.map_window.parentWidget())
+        self.assertTrue(window.map_window.isVisible())
+        self.assertIs(window.map_frame.parentWidget(), window.map_window)
+        self.assertFalse(window.map_holder.isVisible())
+        self.assertLess(window.height(), original_height)
+
+        window.case_combo.setCurrentIndex(window.case_combo.findData("turn"))
+        self.assertIn(window.case_combo.currentText(), window.map_window.windowTitle())
+        window.mailbox.publish(dict(position=[1, 2, -5], quaternion_wxyz=[1, 0, 0, 0]))
+        window.refresh()
+        self.assertEqual(view.snapshot["position"], [1, 2, 5])
+        window.map_window.close()
+        self.app.processEvents()
+
+        self.assertFalse(window.map_window.isVisible())
+        self.assertIs(window.map_frame.parentWidget(), window.map_holder)
+        self.assertIs(window.view, view)
+        self.assertEqual(view.snapshot["position"], [1, 2, 5])
+        self.assertEqual((view.azimuth, view.elevation, view.zoom, view.height_scale), camera)
+        runner.assert_not_called()
+        viewport.assert_not_called()
+        window.toggle_map()
+        window.close()
+        self.assertFalse(window.map_window.isVisible())
+
+    def test_preview_framing_fits_the_route_and_uses_equal_metres_in_section_views(self):
+        from .qt_panel import TOPPQUAD_CONFIG
+        window = GeometricControlWindow(TOPPQUAD_CONFIG)
+        view = window.view
+        plan = np.asarray(view.snapshot["planned_path"])
+        for width, height in [(620, 330), (920, 650), (560, 710)]:
+            view.resize(width, height)
+            view.set_include_takeoff(False)
+            for plane in ("3d", "xy", "xz"):
+                view.set_plane(plane)
+                view.set_height_scale(2.)
+                view._camera()
+                self.assertTrue(all(view.plot_rect().contains(view.project(point)) for point in plan))
+                if plane != "3d":
+                    axes = [0, 1] if plane == "xy" else [0, 2]
+                    np.testing.assert_allclose(np.linalg.norm(view.projection_matrix[axes], axis=1),
+                                               [view.scale, view.scale], rtol=0, atol=1e-9)
+                else:
+                    self.assertAlmostEqual(np.linalg.norm(view.projection_matrix[2]) / view.scale,
+                                           2 * math.cos(view.elevation))
+
+        view.reset_view()
+        view.resize(920, 500)
+        view.set_height_scale(1.)
+        view._camera()
+        tight_scale = view.scale
+        self.assertGreater(view._display_bounds()[4], 0)
+        view.set_include_takeoff(True)
+        view._camera()
+        self.assertLess(view.scale, tight_scale)
+        self.assertTrue(view.plot_rect().contains(view.project([0, 0, 0])))
+        view.set_snapshot(dict(view.snapshot, position=[100, 100, 100], connected=True))
+        matrix = view.projection_matrix.copy()
+        view._camera()
+        np.testing.assert_array_equal(view.projection_matrix, matrix)
         window.close()
 
     def test_telemetry_updates_full_attitude_and_numeric_readout(self):

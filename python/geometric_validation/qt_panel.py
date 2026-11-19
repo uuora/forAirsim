@@ -24,11 +24,12 @@ from PyQt5.QtWidgets import (
     QPlainTextEdit, QPushButton, QStyle, QVBoxLayout, QWidget,
 )
 
-from dual_target_control.route_view import RouteFlightView
+from .map_view import RouteMapView, RouteMapWindow
 
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / "configs" / "geometric_planners_v1.json"
+TOPPQUAD_CONFIG = ROOT / "configs" / "geometric_toppquad_v1.json"
 CASES = (("hover", "1 · 悬停"), ("line", "2 · 直线"),
          ("turn", "3 · 平滑转弯"), ("waypoints", "4 · 三维多航点"))
 
@@ -88,6 +89,7 @@ class MapAdapter:
     """Pure display state. Decimated samples are never used for evaluation."""
     def __init__(self, config: dict, case: str):
         self.trail = deque(maxlen=1200)
+        self.tracking_trail = deque(maxlen=1200)
         self.reference = deque(maxlen=1200)
         self.set_task(config, case)
 
@@ -95,6 +97,7 @@ class MapAdapter:
         from .reference import build_reference
         reference = build_reference(config, case)
         self.trail.clear()
+        self.tracking_trail.clear()
         self.reference.clear()
         self.start = height_vector(reference.start)
         self.points = [height_vector(point) for point in reference.points[1:]]
@@ -117,7 +120,7 @@ class MapAdapter:
             self._path_input = path
 
     def idle_snapshot(self):
-        return dict(config=self.view_config, connected=False, trail=[], planned_path=self.path,
+        return dict(config=self.view_config, connected=False, trail=[], tracking_trail=[], planned_path=self.path,
                     route_markers=self.markers)
 
     def adapt(self, frame: dict):
@@ -128,6 +131,8 @@ class MapAdapter:
         rotation = quaternion_to_matrix(frame["quaternion_wxyz"])
         flip = np.diag([1., 1., -1.])
         self.trail.append(position)
+        if frame.get("phase", "TRACKING") == "TRACKING":
+            self.tracking_trail.append(position)
         reference = frame.get("reference_position")
         if reference is not None:
             self.reference.append(height_vector(reference))
@@ -142,7 +147,8 @@ class MapAdapter:
         pending = next((m["position"] for m in self.markers[1:]
                         if m["state"] != "visited"), self.points[-1])
         return dict(config=self.view_config, connected=True, position=position, velocity=velocity,
-                    yaw=yaw, trail=list(self.trail), planned_path=self.path or list(self.reference),
+                    yaw=yaw, trail=list(self.trail), tracking_trail=list(self.tracking_trail),
+                    planned_path=self.path or list(self.reference),
                     route_markers=self.markers, targets=[pending],
                     body_rotation_height=(flip @ rotation @ flip).tolist(),
                     attitude_rpy_rad=list(matrix_to_euler(rotation)))
@@ -150,7 +156,7 @@ class MapAdapter:
 
 class GeometricControlWindow(QMainWindow):
     """Starts only the new runtime, and only on an explicit start click."""
-    def __init__(self, config_path: Path = DEFAULT_CONFIG, runner=None, viewport_factory=None):
+    def __init__(self, config_path: Path = TOPPQUAD_CONFIG, runner=None, viewport_factory=None):
         super().__init__()
         self.config_path = Path(config_path).resolve()
         self.config = json.loads(self.config_path.read_text(encoding="utf-8-sig"))
@@ -158,7 +164,8 @@ class GeometricControlWindow(QMainWindow):
         self.environments=load_catalog()['environments']
         selected=next((e for e in self.environments if (ROOT/e['config']).resolve()==self.config_path),None)
         if selected is None:
-            selected=dict(id='custom',label='当前独立配置',config=str(self.config_path))
+            label = '基准三维过点' if self.config.get('protocol') == 'geometric_toppquad_pass_v1' else '当前配置'
+            selected=dict(id='custom',label=label,config=str(self.config_path))
             self.environments=[selected]
         else:
             self.config=load_environment_config(selected['id'])
@@ -172,12 +179,16 @@ class GeometricControlWindow(QMainWindow):
         self._result = None
         self._error = None
         self._closing = False
+        self.map_window = None
+        self._docked_geometry = None
         self.run_dir = None
         self.mailbox = LatestTelemetry()
         self.adapter = MapAdapter(self.config, next(iter(self.config['cases'])))
-        self.setWindowTitle("三种轨迹规划 · 几何控制 · AirSim")
-        self.resize(1240, 880)
-        self.setMinimumSize(800, 650)
+        title_text = ("TOPPQuad 轨迹控制" if self.config.get("protocol") == "geometric_toppquad_pass_v1"
+                      else "基线轨迹控制")
+        self.setWindowTitle(f"{title_text} · AirSim")
+        self.resize(1160, 800)
+        self.setMinimumWidth(610)
         self.setStyleSheet("QMainWindow{background:#edf2f7;} QLabel{color:#24384b;} "
                            "QPushButton{padding:8px 14px;} QComboBox{padding:6px;} "
                            "QFrame#card{background:white;border:1px solid #cdd8e1;border-radius:7px;}")
@@ -185,16 +196,14 @@ class GeometricControlWindow(QMainWindow):
         self.setCentralWidget(root)
         layout = QVBoxLayout(root)
         layout.setContentsMargins(16, 14, 16, 14)
-        title = QLabel("轨迹规划 · 统一几何控制")
+        layout.setSpacing(8)
+        title = QLabel(title_text)
         title.setStyleSheet("font-size:20px;font-weight:600;")
         layout.addWidget(title)
-        subtitle = QLabel("三维连续过点" if 'comparison' in self.config else "控制基线验证")
-        subtitle.setWordWrap(True)
-        layout.addWidget(subtitle)
         environment_row=QHBoxLayout()
         environment_row.addWidget(QLabel('实验环境'))
         self.environment_combo=QComboBox()
-        self.environment_combo.setMinimumWidth(220)
+        self.environment_combo.setMinimumWidth(165)
         for entry in self.environments:
             self.environment_combo.addItem(entry['label'],entry['id'])
             self.environment_combo.setItemData(self.environment_combo.count()-1,entry.get('focus',''),Qt.ToolTipRole)
@@ -215,17 +224,22 @@ class GeometricControlWindow(QMainWindow):
         task_row.addWidget(self.case_combo)
         self.task_summary = QLabel()
         self.task_summary.setWordWrap(True)
-        task_row.addWidget(self.task_summary, 1)
+        task_row.addStretch()
         self.threshold_label=QLabel()
         self.threshold_label.setToolTip('位置是相对同步参考的三维欧氏误差；姿态是相对R_reference的SO(3)总旋转角误差。')
         task_row.addWidget(self.threshold_label)
         layout.addLayout(task_row)
+        layout.addWidget(self.task_summary)
         self.launch_checkbox = QCheckBox("启动独立AirSim（端口未运行时）")
         self.launch_checkbox.setChecked(False)
         self.launch_checkbox.setToolTip("仅在明确点击“开始所选验证”后生效；窗口打开与勾选不启动进程。")
         scene_row = QHBoxLayout()
         scene_row.addWidget(self.launch_checkbox)
         scene_row.addStretch()
+        self.map_button = QPushButton("弹出三维地图")
+        self.map_button.setToolTip("把地图移到独立窗口，继续同步显示路线和实测轨迹。")
+        self.map_button.clicked.connect(self.toggle_map)
+        scene_row.addWidget(self.map_button)
         self.scene_button = QPushButton("显示 UE 视口")
         self.scene_button.setIcon(self.style().standardIcon(QStyle.SP_ComputerIcon))
         self.scene_button.setMinimumWidth(145)
@@ -236,23 +250,40 @@ class GeometricControlWindow(QMainWindow):
         self.scene_status = QLabel()
         self.scene_status.setWordWrap(True)
         layout.addWidget(self.scene_status)
-        frame = QFrame()
-        frame.setObjectName("card")
-        frame_layout = QVBoxLayout(frame)
+        self.map_holder = QWidget()
+        self.map_holder.setLayout(QVBoxLayout())
+        self.map_holder.layout().setContentsMargins(0, 0, 0, 0)
+        self.map_frame = QFrame()
+        self.map_frame.setObjectName("card")
+        self.map_holder.layout().addWidget(self.map_frame)
+        frame_layout = QVBoxLayout(self.map_frame)
         frame_layout.setContentsMargins(1, 1, 1, 1)
-        self.view = RouteFlightView(self.adapter.view_config)
+        self.view = RouteMapView(self.adapter.view_config)
         frame_layout.addWidget(self.view, 1)
         tools = QHBoxLayout()
-        for text, plane in (("三维", "3d"), ("XY 等比例", "xy"), ("X / 高度等比例", "xz")):
+        tools.setContentsMargins(6, 2, 6, 4)
+        for text, plane in (("三维", "3d"), ("XY 俯视", "xy"), ("X / 高度", "xz")):
             button = QPushButton(text)
             button.clicked.connect(lambda _checked=False, mode=plane: self.view.set_plane(mode))
             tools.addWidget(button)
+        self.height_scale = QComboBox()
+        for scale in (1., 1.5, 2.):
+            self.height_scale.addItem(f"高度 ×{scale:g}", scale)
+        self.height_scale.setToolTip("只放大三维显示的高度轴。XY 和 X/高度视图使用等比例。")
+        self.height_scale.currentIndexChanged.connect(
+            lambda: self.view.set_height_scale(self.height_scale.currentData()))
+        self.view.plane_changed.connect(lambda plane: self.height_scale.setEnabled(plane == "3d"))
+        tools.addWidget(self.height_scale)
+        include_takeoff = QCheckBox("含起降")
+        include_takeoff.setToolTip("显示起飞和降落的轨迹，并把全程高度范围纳入取景。")
+        include_takeoff.toggled.connect(self.view.set_include_takeoff)
+        tools.addWidget(include_takeoff)
         tools.addStretch()
         reset = QPushButton("重置视角")
         reset.clicked.connect(self.view.reset_view)
         tools.addWidget(reset)
         frame_layout.addLayout(tools)
-        layout.addWidget(frame, 1)
+        layout.addWidget(self.map_holder, 1)
         self.attitude_label = QLabel("实测姿态   横滚 —°   俯仰 —°   偏航 —°")
         layout.addWidget(self.attitude_label)
         self.status = QLabel("空闲 · 尚未连接 AirSim")
@@ -290,6 +321,56 @@ class GeometricControlWindow(QMainWindow):
     @property
     def active(self):
         return self._thread is not None and self._thread.is_alive()
+
+    def toggle_map(self):
+        if self._closing:
+            return
+        if self.map_window is not None and self.map_frame.parentWidget() is self.map_window:
+            self._dock_map()
+            return
+        first_open = self.map_window is None
+        if first_open:
+            self.map_window = RouteMapWindow()
+            self.map_window.setStyleSheet(self.styleSheet())
+            self.map_window.dock_requested.connect(self._dock_map)
+        self.map_window.setWindowTitle(f"三维轨迹地图 · {self.case_combo.currentText()}")
+        self.map_window.layout().addWidget(self.map_frame)
+        self.map_holder.hide()
+        self.map_button.setText("收回三维地图")
+        if not self.isMaximized() and not self.isFullScreen():
+            self._docked_geometry = self.saveGeometry()
+            # Qt updates the main window's minimum size after the map is hidden.
+            QTimer.singleShot(0, self._compact_for_map)
+        if first_open:
+            area = self.screen().availableGeometry()
+            map_width = min(940, max(self.map_frame.minimumSizeHint().width(), area.width() - 670))
+            map_height = min(720, area.height() - 64)
+            self.map_window.resize(map_width, map_height)
+            if not self.isMaximized() and area.width() >= 635 + map_width + 32:
+                self.move(area.left() + 12, area.top() + 36)
+                self.map_window.move(area.left() + 659, area.top() + 36)
+            else:
+                self.map_window.move(area.right() - map_width - 14, area.top() + 36)
+        self.map_window.show()
+        self.map_frame.show()
+
+    def _compact_for_map(self):
+        if (self._docked_geometry is not None and self.map_frame.parentWidget() is self.map_window
+                and not self.isMaximized() and not self.isFullScreen()):
+            self.resize(635, 335)
+
+    def _dock_map(self):
+        if self.map_window is None or self.map_frame.parentWidget() is not self.map_window:
+            return
+        self.map_holder.layout().addWidget(self.map_frame)
+        self.map_window.hide()
+        self.map_holder.show()
+        self.map_frame.show()
+        self.map_button.setText("弹出三维地图")
+        if self._docked_geometry is not None:
+            if not self.isMaximized() and not self.isFullScreen():
+                self.restoreGeometry(self._docked_geometry)
+            self._docked_geometry = None
 
     def _change_environment(self,*_):
         if self.active or self._closing:
@@ -334,8 +415,9 @@ class GeometricControlWindow(QMainWindow):
             return
         case = self.case_combo.currentData()
         self.adapter.set_task(self.config, case)
-        self.view.config = self.adapter.view_config
-        self.view.set_snapshot(self.adapter.idle_snapshot())
+        self.view.set_task(self.adapter.idle_snapshot())
+        if self.map_window is not None:
+            self.map_window.setWindowTitle(f"三维轨迹地图 · {self.case_combo.currentText()}")
         spec = self.config["cases"][case]
         durations = spec.get("segment_durations", [])
         self.task_summary.setText(f"{len(self.adapter.points)} 个任务点 · 参考时长 {sum(durations):.3f} s")
@@ -503,13 +585,16 @@ class GeometricControlWindow(QMainWindow):
             event.ignore()
             return
         self.timer.stop()
+        if self.map_window is not None:
+            self.map_window.close()
         event.accept()
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Independent geometric-control Qt validation (opens idle)")
-    parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument("--config", type=Path, default=TOPPQUAD_CONFIG)
     parser.add_argument("--environment", help="Task preset ID; selecting does not connect or fly")
+    parser.add_argument("--detached-map", action="store_true", help="Open the map in a separate window")
     parser.add_argument("--check", action="store_true", help="Offscreen Qt smoke check without AirSim imports/RPC")
     parser.add_argument("--preview", type=Path, help="Save a Qt UI preview only; implies --check")
     args = parser.parse_args(argv)
@@ -528,6 +613,8 @@ def main(argv=None):
     app.setFont(QFont("Microsoft YaHei", 9))
     window = GeometricControlWindow(args.config)
     window.show()
+    if args.detached_map:
+        window.toggle_map()
     if checking:
         app.processEvents()
         initial_environment=window.environment_combo.currentIndex()
@@ -544,7 +631,8 @@ def main(argv=None):
         app.processEvents()
         if args.preview:
             args.preview.parent.mkdir(parents=True, exist_ok=True)
-            if not window.grab().save(str(args.preview.resolve())):
+            preview_widget = window.map_window if args.detached_map else window
+            if not preview_widget.grab().save(str(args.preview.resolve())):
                 raise RuntimeError("Could not save Qt preview")
         assert not window.active
         assert not window.launch_checkbox.isChecked()

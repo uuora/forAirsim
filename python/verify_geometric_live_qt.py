@@ -50,8 +50,7 @@ def main(argv=None):
     paths = [Path(__file__).resolve(), cfgpath, ROOT / "python/geometric_validation/qt_panel.py",
              ROOT / "python/geometric_validation/reference.py", ROOT / "python/geometric_validation/runtime.py",
              ROOT / "python/geometric_validation/core.py", ROOT / "python/geometric_validation/audit.py",
-             ROOT / "python/dual_target_control/route_view.py", ROOT / "python/dual_target_control/route_scene.py",
-             ROOT / "python/dual_target_control/ui.py"]
+             ROOT / "python/geometric_validation/map_view.py", ROOT / "python/geometric_validation/route_scene.py"]
     sources = {str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in paths if path.is_file()}
     intake = dict(mode="airsim" if args.airsim else "check", case=args.case, launch_allowed=args.launch,
                   timeout_stop_request_s=args.timeout, config=str(cfgpath), sources_sha256=sources,

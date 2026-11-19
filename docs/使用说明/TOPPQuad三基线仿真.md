@@ -7,10 +7,14 @@
 在该分支工作树中运行：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts/open-geometric-control-panel.ps1 -ToppQuad
+powershell -ExecutionPolicy Bypass -File scripts/open-geometric-control-panel.ps1
 ```
 
-选择带 TOPPQuad 标签的方法后，按原界面操作连接或启动 AirSim，并开始仿真。这个入口使用随分支保存的冻结配置，运行面板及仿真无需安装 CasADi。追加 `-Check` 可离屏核验面板和方法切换。
+默认加载 TOPPQuad 冻结配置。选择一种方法后，按控制台提示连接或启动 AirSim，手动开始仿真。运行 Qt 和飞行无需安装 CasADi。追加 `-Check` 可离屏核验面板，`-Baseline` 打开原三种基线。
+
+点“弹出三维地图”可把同一地图移到独立窗口，继续同步路线、飞机姿态与实测轨迹。地图窗口可自由缩放，关闭它会把地图收回控制台。可用 `-DetachedMap` 直接分窗启动。
+
+三维地图默认按航线取景、等比例投影，实测线显示跟踪阶段。勾选“含起降”可看全程实测和完整高度范围。选择“高度 ×1.5”或“高度 ×2”可放大三维投影的竖向变化。图上高度读数始终是原始米制坐标，XY 和 X / 高度保持等比例。三维左拖旋转，右拖平移，滚轮缩放。
 
 ## 重新求解及运行批次
 
@@ -24,6 +28,8 @@ python -m pip install casadi==3.7.2
 python python/run_geometric_planner_comparison.py --toppquad-upstream .runtime/toppquad_upstream --config configs/geometric_planners_v1.json --output configs/geometric_toppquad_rebuilt.json
 python python/run_geometric_planner_comparison.py --config configs/geometric_toppquad_rebuilt.json --airsim --launch
 ```
+
+`D:/TOPPQuad` 本机已有上游源码。使用随目录保存的 CasADi 时，在重新求解前可设置 `$env:PYTHONPATH = (Resolve-Path .runtime/toppquad_deps).Path`，并使用 `./.venv/python.exe`。
 
 生成配置时要求输出文件不存在。批次每种方法飞行一次，保留状态、命令、过点核验、独立审计、降落回执与图表。上一项的降落、解除武装或 API 释放未确认时，后续项目保留为未运行。
 
@@ -41,4 +47,4 @@ AirSim 使用 SimpleFlight 与原 Qt 几何跟踪器，跟踪时沿用基线固�
 | Hermite | 10.737 | 7.814 | 13.229 | 14.616 | 0.111 |
 | B 样条 | 11.493 | 7.744 | 13.679 | 14.988 | 0.082 |
 
-三条同条件记录均通过正常完成、跟踪、过点、独立数据审计与安全降落验收。受平滑与原参考门槛影响，三条最终导出参考均比原基线慢。每种方案仅一次，当前结果支持该任务下的接入可行性。原始状态、命令、回执和派生图表在主工作区的 `reports/geometric_toppquad_20261119_v1/`。
+三条同条件记录均通过正常完成、跟踪、过点、独立数据审计与安全降落验收。受平滑与原参考门槛影响，三条最终导出参考均比原基线慢。每种方案仅一次，当前结果支持该任务下的接入可行性。原始状态、命令、回执和派生图表见新工作区的 [实测对比页](../../reports/geometric_three_planners_toppquad_20261119_v1/index.html)。

@@ -4,55 +4,12 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 
-# Runtime logs and local settings
-logs/*
-!logs/.gitkeep
-Documents/
-/settings.json
-
-# Unreal generated output
-external/AirSim/Unreal/Environments/Blocks/Binaries/
-external/AirSim/Unreal/Environments/Blocks/Build/
-external/AirSim/Unreal/Environments/Blocks/Intermediate/
-external/AirSim/Unreal/Environments/Blocks/Saved/
-external/AirSim/Unreal/Environments/Blocks/DerivedDataCache/
-external/AirSim/Unreal/Environments/Blocks/Plugins/AirSim/Binaries/
-external/AirSim/Unreal/Environments/Blocks/Plugins/AirSim/Intermediate/
-
-# Native build output and downloaded archives
-external/AirSim/**/build/
-downloads/
-
-# Local capture sessions and generated scene assets
-datasets/
-assets/
-!/python/geometric_validation/assets/
-models/
-
-# Downloaded publisher PDFs are kept locally, not redistributed
-docs/references-20260915/sources/*.pdf
-
-# Editor-local settings (absolute local paths)
-.vscode/
-
-# Credentials, machine-local state and generated experiment output
+# Local settings, simulator caches and experiment output
+/.runtime/
+/.unreal-cache/
+/.vscode/
+/reports/
+/logs/*
+!/logs/.gitkeep
 .env
 .env.*
-!.env.example
-/.runtime/
-/reports/
-/runs/
-/tmp/
-*.lnk
-
-# Frozen per-run copies stay with the local experiment archive
-/configs/**/source_bundle/
-*.pt
-*.pth
-
-# Large generated figure inputs (raw experiments remain local)
-/docs/research-summary-20261008/**/input_campaign.json
-
-# Local experiment catalogue, annotations and reversible derived-view archives
-/experiment_data/
-/output/

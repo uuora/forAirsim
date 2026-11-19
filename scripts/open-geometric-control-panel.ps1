@@ -1,11 +1,13 @@
-param([switch]$Check,[switch]$ToppQuad)
+param([switch]$Check,[switch]$ToppQuad,[switch]$Baseline,[switch]$DetachedMap)
 $ErrorActionPreference = 'Stop'
+if ($ToppQuad -and $Baseline) { throw 'Choose TOPPQuad or baseline, not both.' }
 $taskRoot = Split-Path $PSScriptRoot -Parent
 $taskPython = @('.venv/python.exe','.venv/Scripts/python.exe') | ForEach-Object { Join-Path $taskRoot $_ } | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 if (!$taskPython) { throw 'Run scripts/setup-geometric-control.ps1 with Python 3.10 first.' }
 $taskPanel = Join-Path $taskRoot 'python/run_geometric_control_panel.py'
-$taskConfig = Join-Path $taskRoot 'configs/geometric_toppquad_v1.json'
-$taskArguments = if ($ToppQuad) { @('--config',$taskConfig) } else { @() }
+$taskArguments = @()
+if ($Baseline) { $taskArguments += @('--environment','baseline') }
+if ($DetachedMap) { $taskArguments += '--detached-map' }
 $env:PYTHONUTF8='1'
 if ($Check) {
     & $taskPython $taskPanel --check @taskArguments
@@ -16,8 +18,7 @@ if ($Check) {
     $taskLogDir = Join-Path $taskRoot '.runtime/gui_logs'
     New-Item -ItemType Directory -Path $taskLogDir -Force | Out-Null
     $taskLogName = Get-Date -Format 'yyyyMMdd_HHmmss_fffffff'
-    $taskLaunchArguments = @(('"'+$taskPanel+'"'))
-    if ($ToppQuad) { $taskLaunchArguments += @('--config',('"'+$taskConfig+'"')) }
+    $taskLaunchArguments = @(('"'+$taskPanel+'"')) + $taskArguments
     Start-Process -FilePath $taskWindowPython -ArgumentList $taskLaunchArguments -WorkingDirectory $taskRoot -WindowStyle Normal `
         -RedirectStandardOutput (Join-Path $taskLogDir ($taskLogName+'.stdout.log')) `
         -RedirectStandardError (Join-Path $taskLogDir ($taskLogName+'.stderr.log'))

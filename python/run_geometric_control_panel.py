@@ -1,4 +1,4 @@
-"""New geometric validation GUI; leaves the original 03 and route entries intact."""
+"""Open the Qt geometric-control workbench."""
 from geometric_validation.qt_panel import main
 
 

@@ -13,8 +13,8 @@ import re
 import threading
 import time
 
-from .overview import OverviewStream
 from .core import ControlConfig
+from .native_overlay import NativeOverlay
 from .simulator import ROOT
 
 
@@ -111,33 +111,6 @@ class NativeScene:
             if self._closed:return
             self._queue.put(('config',deepcopy(config)))
 
-    def sync_targets(self,payload):
-        with self._lock:
-            if self._closed:raise RuntimeError('标记观察线程已关闭')
-            if self._thread is None:
-                self._thread=threading.Thread(target=self._work,name='dual-target-native-scene',daemon=True);self._thread.start()
-            self._queue.put(('targets',deepcopy(payload)))
-
-    def _sync_targets(self,payload):
-        import numpy as np
-        import airsim
-        if self._client is None:self._initialize()
-        receipts=[]
-        for i,name in enumerate(('DC_TargetRed','DC_TargetBlue')):
-            point=payload['points'][i] if i<len(payload['points']) else None
-            xyz=np.array([0.,0.,1000.]) if point is None else np.asarray([point[0],point[1],-point[2]])+payload['origin']
-            if point is not None:
-                if not self._client.simSetObjectScale(name,airsim.Vector3r(1.2,1.2,1.2)):raise RuntimeError('目标缩放失败：'+name)
-            if not self._client.simSetObjectPose(name,airsim.Pose(airsim.Vector3r(*xyz),airsim.Quaternionr()),teleport=True):raise RuntimeError('目标放置失败：'+name)
-            actual=self._client.simGetObjectPose(name).position;actual=[actual.x_val,actual.y_val,actual.z_val]
-            if not np.allclose(actual,xyz,atol=.002):raise RuntimeError('目标位置读回不符：'+name)
-            scale=self._client.simGetObjectScale(name);scale=[scale.x_val,scale.y_val,scale.z_val]
-            if point is not None and not np.allclose(scale,[1.2]*3,atol=.001):raise RuntimeError('目标尺寸读回不符：'+name)
-            receipts.append(dict(name=name,visible=point is not None,requested_ned=xyz.tolist(),observed_ned=actual,scale=scale,
-                route_index=payload['route_index'],reference_time_s=payload['reference_time_s'],
-                scope='Asynchronous display-thread pose/scale readback; no flight commands'))
-        self.runtime._accept_target_receipts(payload,receipts)
-
     def _field_bounds_command(self):
         task=self.config.get('preparation',{}).get('task')
         if task:
@@ -181,9 +154,7 @@ class NativeScene:
             try: client.client.close()
             except Exception: pass
             raise
-        marker_config = deepcopy(self.config)
-        marker_config.setdefault('overview', {})['ue_debug_markers'] = True
-        self._markers = OverviewStream(marker_config, self.runtime)
+        self._markers = NativeOverlay(self.config)
         self._client, self._window = client, window
         self._airsim = airsim
 
@@ -223,9 +194,6 @@ class NativeScene:
                     self._receipts.append(reflected_command(self._client,'ke /Script/Blocks.DroneControlObserver ResetOverview',self._log_path))
                 self._receipts.append(reflected_command(self._client, command, self._log_path))
             if route_view:self.runtime._observer_initialized_pid=(binding or {}).get('pid')
-            elif self.config.get('curve_experiment',{}).get('auto_show_scene'):
-                self._receipts.append(reflected_command(self._client,
-                    'ke /Script/Blocks.DroneControlObserver SetFollow true',self._log_path))
             if self._stopping.is_set():
                 raise _ViewCancelled()
         except Exception:
@@ -271,7 +239,7 @@ class NativeScene:
                 except queue.Empty:
                     if self._visible:
                         try:
-                            warning = self._markers._draw(self._client, self._airsim, self.runtime.snapshot())
+                            warning = self._markers.draw(self._client, self._airsim, self.runtime.snapshot())
                             self._publish(scene_message=(
                                 'UE4 鼠标观察：左拖旋转、右拖平移、滚轮缩放；双击无人机聚焦。'
                                 + (' ' + warning if warning else '')))
@@ -285,15 +253,6 @@ class NativeScene:
                         self.config=command[1]
                         if self._client is not None:
                             self._receipts.append(reflected_command(self._client,self._field_bounds_command(),self._log_path))
-                    elif isinstance(command,tuple) and command[0]=='targets':
-                        self._sync_targets(command[1])
-                    elif isinstance(command, tuple) and command[0] == 'screenshot':
-                        # Development verification/export of this native viewport.
-                        destination = Path(command[1]).resolve()
-                        destination.parent.mkdir(parents=True, exist_ok=True)
-                        if self._visible:
-                            self._client.simRunConsoleCommand(
-                                'HighResShot 1200x800 filename="' + destination.as_posix() + '"')
                     else:
                         self._switch(command == 'show')
                 except _ViewCancelled:
