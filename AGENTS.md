@@ -268,3 +268,9 @@
 - 支持方案/参考开关、线宽、斜视/俯视/侧视、展示比例/等米制、联动旋转缩放和PNG导出。库和数据内嵌，无CDN。旧图及源码保存在`plot_before_interactive/`、旧总页在`page_before_interactive/`；`interactive_view_revision.json`核对762个原始输入未改，浏览器回执为`interactive_browser_check/verification.json`，网页截图不属于AirSim相机图。
 - 84项几何离线检查通过。没有新增飞行或更改控制器、物理、门槛、原始报告；未来条件另组。minimum-snap和实际闭环最快可行时间搜索仍未完成。
 - 用户明确要求“把工作上传到git”，授权发布当前几何实验代码、说明与实测证据包至原交接分支。当前说明及独立证据包在`experiments/geometric_planners_20261106/`；旧调试包保留。AirSim本地更改与现有补丁一致，不另提交子模块环境/生成物；不上传UE、虚拟环境或DLL，不改原`D:/foraisim`旧工作树。
+
+## 2026-11-19：TOPPQuad 接入三种冻结基线
+
+- 在 `codex/toppquad-baselines` 分支开发 `geometric_toppquad_pass_v1`，官方优化求解器固定 Git 提交 `3db181cb0c76baaa1669f859f16a83060c2ee7a0`。以新配置运行，禁止与旧基线混为同条件重复。
+- TOPPQuad 对固定 Bézier、Hermite、B 样条路径求解时间。上游使用 Crazyflie 动力学，AirSim 执行平滑和限幅后的时间重参数化，复用 SimpleFlight 几何跟踪器与固定偏航。原始求解时长不能当成实际完成时间。
+- 首轮默认三维连续过点三次都通过验收，记录在主工作区 `reports/geometric_toppquad_20261119_v1/`。导出均慢于原基线参考，当前没有实测提速证据。关闭相机截图，仍为纯控制仿真。

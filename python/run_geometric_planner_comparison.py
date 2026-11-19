@@ -11,6 +11,8 @@ from geometric_validation.runtime import load_config
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--prepare", action="store_true")
+    p.add_argument("--toppquad-upstream", type=Path, metavar="CHECKOUT",
+                   help="Offline retiming of --config using the pinned TOPPQuad checkout")
     p.add_argument("--environment", help="Task preset ID from --list-environments")
     p.add_argument("--list-environments", action="store_true")
     p.add_argument("--prepare-environments", action="store_true", help="Offline generation of every preset; no flight")
@@ -21,6 +23,12 @@ def main():
     p.add_argument("--method", choices=METHODS)
     p.add_argument("--output", type=Path)
     a = p.parse_args()
+    if a.toppquad_upstream:
+        if not a.output or a.airsim or a.launch or a.prepare or a.environment or a.prepare_environments or a.list_environments or a.method:
+            p.error("--toppquad-upstream requires --output and a frozen input --config")
+        from geometric_validation.toppquad import prepare_toppquad
+        print(prepare_toppquad(a.config, a.output, a.toppquad_upstream))
+        return 0
     if a.launch and not a.airsim:
         p.error("--launch requires --airsim")
     if a.list_environments or a.prepare_environments or a.environment:

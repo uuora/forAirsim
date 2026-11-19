@@ -44,7 +44,8 @@ def frozen_plan_issues(cfg, case):
         spec=cfg['cases'][case];plan=spec['frozen_reference'];common=cfg['comparison'];search=common['time_search']
         coef=np.asarray(plan['coefficients'],dtype=float);durations=np.asarray(plan['segment_durations'],dtype=float)
         points=np.asarray(common['task']['points_ned'],dtype=float);n=len(durations)
-        if plan['format']!='normalized_power_v1' or coef.shape!=(n,8,3) or points.shape!=(n+1,3):
+        powers = {'normalized_power_v1': 8, 'toppquad_power_v1': 36}.get(plan['format'])
+        if powers is None or coef.shape!=(n,powers,3) or points.shape!=(n+1,3):
             return ['Invalid frozen polynomial schema']
         if not np.isfinite(coef).all() or not np.isfinite(durations).all() or np.any(durations<=0):
             return ['Nonfinite frozen polynomial or invalid durations']
@@ -53,7 +54,8 @@ def frozen_plan_issues(cfg, case):
         if not np.array_equal(durations,spec['segment_durations']) or plan['yaw']!=cfg['yaw']:
             issues.append('Frozen timing/heading mismatch')
         bounds=search['segment_bounds_s']
-        if np.any(durations<bounds[0]-1e-7) or np.any(durations>bounds[1]+1e-7):issues.append('Segment time outside search domain')
+        if plan['format'] == 'normalized_power_v1' and (np.any(durations<bounds[0]-1e-7) or np.any(durations>bounds[1]+1e-7)):
+            issues.append('Segment time outside search domain')
         for i,(c,T) in enumerate(zip(coef,durations)):
             for side in (0,1):
                 if not np.allclose(_polynomial_value(c,T,side),points[i+side],atol=1e-7,rtol=0):issues.append('Frozen waypoint mismatch')
@@ -202,7 +204,7 @@ def _audit(directory):
         if t>times[-1]:expected=[knots[-1]]+[np.zeros(3)]*4
         else:
             i=min(max(0,int(np.searchsorted(times,t,side='right'))-1),len(durations)-1);u=(t-times[i])/durations[i]
-            expected=[sum((math.factorial(k)/math.factorial(k-d)*coefs[i][k]*u**(k-d)/durations[i]**d for k in range(d,8)),start=np.zeros(3)) for d in range(5)]
+            expected=[_polynomial_value(coefs[i],durations[i],u,d) for d in range(5)]
         if any(not np.allclose(row['reference'][k],v,atol=1e-7,rtol=1e-8) for k,v in zip(['p','v','a','jerk','snap'],expected)) or abs(row['reference']['yaw']-task['yaw'])>1e-10:
             issues.append('Reference differs from frozen task');break
     if releases:
@@ -229,7 +231,7 @@ def _audit(directory):
     output=dict(protocol=cfg['protocol'],data_audit_passed=not issues,control_constraints_passed=bool(passes),issues=issues,metrics=metrics,
         normal_completion=report['normal_completion'],raw_jsonl_sha256=sha(directory/'samples.jsonl'),
         audit_scope='Recorded state/command arithmetic, timing, snapshot and CSV consistency; not an independent sensor, binary-build proof, or flight success')
-    if cfg['protocol']=='geometric_planner_pass_v1':
+    if cfg['protocol'] in ('geometric_planner_pass_v1', 'geometric_toppquad_pass_v1'):
         passage_passed, passages=measured_passages(rows,cfg,manifest['case'])
         output.update(waypoint_passage_passed=passage_passed,waypoint_passages=passages)
     (directory/'audit.json').write_text(json.dumps(output,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8')

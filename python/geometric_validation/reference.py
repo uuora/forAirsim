@@ -94,16 +94,20 @@ class Reference:
         return [self.sample(t)["p"] for t in np.linspace(0., self.duration, max(2, int(count)))]
 
 
+RETIME_FORMAT = "toppquad_power_v1"
+
+
 class FrozenReference(Reference):
     """Decode a frozen reference; never optimize on the flight control thread."""
     def __init__(self, plan):
-        if plan.get("format") != "normalized_power_v1":
+        if plan.get("format") not in ("normalized_power_v1", RETIME_FORMAT):
             raise ValueError("Unsupported frozen polynomial format")
         self.points = np.asarray(plan["points"], dtype=float)
         self.segment_durations = np.asarray(plan["segment_durations"], dtype=float)
         coefficients = np.asarray(plan["coefficients"], dtype=float)
         n = len(self.segment_durations)
-        if n<1 or self.points.shape!=(n+1, 3) or coefficients.shape!=(n, 8, 3):
+        powers = 36 if plan["format"] == RETIME_FORMAT else 8
+        if n<1 or self.points.shape!=(n+1, 3) or coefficients.shape!=(n, powers, 3):
             raise ValueError("Invalid frozen reference dimensions")
         if not all(np.isfinite(x).all() for x in (self.points, self.segment_durations, coefficients)) or np.any(self.segment_durations<=0):
             raise ValueError("Nonfinite reference or nonpositive duration")

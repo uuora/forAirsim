@@ -47,13 +47,13 @@ def load_config(path=DEFAULT_CONFIG):
     cfg = json.loads(Path(path).read_text(encoding='utf-8-sig'))
     from dual_target_control.machine_config import apply_machine_config
     cfg = apply_machine_config(cfg)
-    if cfg['protocol'] not in ('geometric_hybrid_v1', 'geometric_planner_pass_v1') or cfg['visualization']['capture_overview'] is not False:
+    if cfg['protocol'] not in ('geometric_hybrid_v1', 'geometric_planner_pass_v1', 'geometric_toppquad_pass_v1') or cfg['visualization']['capture_overview'] is not False:
         raise ValueError('Wrong protocol or capture_overview enabled')
     from .reference import build_reference
     from .core import command
     for case in cfg['cases']:
         ref = build_reference(cfg, case)
-        if cfg['protocol'] == 'geometric_planner_pass_v1':
+        if cfg['protocol'] in ('geometric_planner_pass_v1', 'geometric_toppquad_pass_v1'):
             from .audit import frozen_plan_issues
             issues = frozen_plan_issues(cfg, case)
             if issues: raise ValueError('; '.join(issues))
