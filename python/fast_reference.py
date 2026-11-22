@@ -13,7 +13,7 @@ from trajectory_research.route_evaluation import rollout_reference, sampled_rout
 
 
 GEOMETRIES = ("hermite", "bezier")
-ARMS = ("ordinary", "toppquad")
+ARMS = ("ordinary", "toppquad", "toppquad-fixed")
 
 
 def ordinary_plan(spec, geometry):
@@ -29,7 +29,7 @@ def ordinary_plan(spec, geometry):
                 parameters=segments[0]["parameters"])
 
 
-def validate(curve):
+def validate(curve, *, profile_model=None):
     limits = curve.spec["command_limits"]
     times = np.unique(np.r_[np.arange(0.,curve.duration_s,.02), curve.ends, curve.duration_s])
     q,v,a = [curve.sample(times, derivative=d) for d in range(3)]
@@ -38,7 +38,15 @@ def validate(curve):
     bounds = route_derivative_bounds(curve.segments,depth=2)
     feasible = m["control_error_gates_passed"] and all(x<=y for x,y in
         zip(bounds,(limits["max_speed_mps"],limits["max_slew_mps2"],30.)))
-    return dict(model_feasible=bool(feasible), derivative_bounds=list(bounds), metrics=m)
+    result = dict(model_feasible=bool(feasible), derivative_bounds=list(bounds), metrics=m)
+    if profile_model is not None:
+        from segment_retiming import sampled_motor_forces, tracking_reserves
+        margin = curve.spec["retiming"].get("tracking_error_margin_m", 0.)
+        reserve = tracking_reserves(times, q, v, a, vel, curve.spec, m["max_position_error_m"], margin)
+        motors = sampled_motor_forces(times, a, profile_model)
+        result.update(tracking_reserves=reserve, sampled_fixed_yaw_motor_forces=motors)
+        result["model_feasible"] &= reserve["peak_margin_passed"] and reserve["braking_passed"] and motors["passed"]
+    return result
 
 
 def decode(plan):
@@ -56,8 +64,11 @@ def solve_blocks(base, dynamics_model):
     blocks = [[segment] for segment in moving] if base.spec["policy"] == "stop" else [moving]
     optimize_speed = (base.spec["policy"] == "pass"
                       and base.spec.get("retiming", {}).get("continuous_waypoint_speed") == "optimize")
+    gains = (.9, .9, .9)
+    if base.spec["policy"] == "pass" and "continuous_profile" in base.spec.get("retiming", {}):
+        gains = base.spec.get("tracking", {}).get("acceleration_feedforward_s", gains)
     return [(block, solve_motion(block, limits["max_speed_mps"], limits["max_slew_mps2"], dynamics_model,
-                                 fixed_waypoint_speed=not optimize_speed))
+                                 fixed_waypoint_speed=not optimize_speed, feedforward_s=gains))
             for block in blocks]
 
 
@@ -91,7 +102,7 @@ def nominal_command_bounds(curve):
     return route_derivative_bounds(command_primitives, depth=3)[:2]
 
 
-def retimed(base_plan, blocks, fraction):
+def retimed(base_plan, blocks, fraction=None, *, profile=None):
     from route_timing import export_motion
 
     spec = base_plan["route"]
@@ -100,8 +111,11 @@ def retimed(base_plan, blocks, fraction):
     for block, solution in blocks:
         # h=1 is baseline timing. At free via points the exported speed is
         # determined by the blended h rather than a waypoint speed equality.
-        h = (1. + fraction * (np.asarray(solution["h"]) - 1.)).tolist()
-        segments,end_indices = export_motion(block,dict(solution,h=h))
+        if profile is None:
+            h = (1. + fraction * (np.asarray(solution["h"]) - 1.)).tolist()
+            segments, end_indices = export_motion(block, dict(solution, h=h))
+        else:
+            segments, end_indices = export_motion(block, solution, time_map=profile)
         offset = len(pieces)
         pieces.extend(segments)
         # Use the same cumulative sum as RouteCurve so the last event is
@@ -122,7 +136,45 @@ def retimed(base_plan, blocks, fraction):
     plan = deepcopy(base_plan)
     plan.update(group_id=base_plan["representation"]+"_toppquad",solver=solutions,retiming_fraction=fraction,
                 waypoint_times=times,timed_segments=[dict(coefficients=p.coefficients.tolist(),duration_s=p.duration_s) for p in pieces])
+    if profile is not None:
+        plan["retiming_profile"] = dict(mode="segmented", interpolation="quintic_smoothstep",
+                                       phase_knots_s=profile.knots.tolist(), fractions=profile.fractions.tolist())
     return plan
+
+
+def validate_timing(candidate, nominal_limits, *, enforce_reserve, check_profile):
+    curve = decode(candidate)
+    model = candidate["dynamics_model"] if check_profile else None
+    validation = validate(curve, profile_model=model)
+    bounds = nominal_command_bounds(curve)
+    passed = all(bound <= limit for bound, limit in zip(bounds, nominal_limits))
+    validation.update(nominal_command_bounds=bounds, nominal_command_limits=nominal_limits, nominal_reserve_passed=passed)
+    if enforce_reserve:
+        validation["model_feasible"] &= passed
+    return curve.duration_s, validation
+
+
+def select_segment_timing(base_plan, blocks, nominal_limits, seed_fractions):
+    from segment_retiming import SegmentTimeMap, search_profiles
+
+    (segments, solution), = blocks
+    knots = np.r_[0., np.cumsum([piece.duration_s for piece in segments])]
+
+    def make_candidate(fractions):
+        return retimed(base_plan, blocks, profile=SegmentTimeMap(solution, knots, fractions))
+
+    def evaluate(fractions):
+        duration, validation = validate_timing(make_candidate(fractions), nominal_limits,
+                                               enforce_reserve=True, check_profile=True)
+        return dict(fractions=list(fractions), duration_s=duration, model_feasible=validation["model_feasible"],
+                    validation=validation)
+
+    best, trials = search_profiles(len(knots), seed_fractions, evaluate)
+    # Keep the rejected baseline-shaped evaluation if no profile passes. The
+    # execution owner persists the rejection and lands before reference start.
+    selected = list(best) if best is not None else [0.] * len(knots)
+    winner = next(row for row in trials if row["fractions"] == selected)
+    return make_candidate(selected), winner["validation"], trials
 
 
 def make_plan(output, spec, method, dynamics_model):
@@ -135,35 +187,37 @@ def make_plan(output, spec, method, dynamics_model):
     plan = ordinary_plan(spec,geometry)
     plan["dynamics_model"] = dynamics_model
     candidates = []
-    if arm == "toppquad":
+    solves = 0
+    if arm != "ordinary":
         retiming = spec.get("retiming", {})
         source = retiming.get("frozen_source")
         blocks = frozen_blocks(plan, source) if source else solve_blocks(decode_route(plan), dynamics_model)
+        solves = 0 if source else len(blocks)
         limits = spec["command_limits"]
         nominal_limits = [limits["max_speed_mps"] * retiming.get("nominal_speed_fraction", 1.),
                           limits["max_slew_mps2"] * retiming.get("nominal_slew_fraction", 1.)]
-        for fraction in retiming.get("fractions", [1.]):
-            candidate = retimed(plan, blocks, fraction)
-            curve = decode(candidate)
-            validation = validate(curve)
-            bounds = nominal_command_bounds(curve)
-            validation["nominal_command_bounds"] = bounds
-            validation["nominal_command_limits"] = nominal_limits
-            validation["nominal_reserve_passed"] = all(bound <= limit for bound, limit in zip(bounds, nominal_limits))
-            # A source-bound sweep records nominal reserve overruns while the
-            # unchanged command limiter and the usual proxy/flight gates apply.
-            if retiming and source is None:
-                validation["model_feasible"] &= validation["nominal_reserve_passed"]
-            candidates.append(dict(fraction=fraction, duration_s=curve.duration_s, validation=validation))
-            if validation["model_feasible"]:
-                break
-        plan = candidate
+        fractions = retiming.get("fractions", [1.])
+        segment_experiment = (spec["policy"] == "pass" and retiming.get("continuous_profile") == "segmented"
+                              and source is None)
+        if arm == "toppquad" and segment_experiment:
+            plan, validation, candidates = select_segment_timing(plan, blocks, nominal_limits, fractions)
+        else:
+            for fraction in fractions:
+                candidate = retimed(plan, blocks, fraction)
+                duration, validation = validate_timing(candidate, nominal_limits,
+                                                      enforce_reserve=bool(retiming and source is None),
+                                                      check_profile=segment_experiment)
+                candidates.append(dict(fraction=fraction, duration_s=duration, validation=validation))
+                if validation["model_feasible"]:
+                    break
+            plan = candidate
+        plan["group_id"] = method
     else:
         validation = validate(decode(plan))
     elapsed = perf_counter()-started
     plan["selection_provenance"] = dict(model_feasible=validation["model_feasible"],result_json="validation.json")
     evidence = dict(plan,counts=dict(selected_validation_calls=len(candidates) or 1,
-                                   toppquad_solves=len(blocks) if arm == "toppquad" and source is None else 0,
+                                   toppquad_solves=solves,
                                    airsim_search_calls=0),
                     timings=dict(search_plus_selected_validation_wall_s=elapsed),validation=validation,retiming_candidates=candidates)
     (output/"validation.json").write_text(json.dumps(evidence,ensure_ascii=False,indent=2,allow_nan=False),encoding="utf8")

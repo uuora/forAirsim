@@ -33,6 +33,8 @@
   },
   "retiming": {
     "continuous_waypoint_speed": "optimize",
+    "continuous_profile": "segmented",
+    "tracking_error_margin_m": 0.13,
     "nominal_speed_fraction": 0.74,
     "nominal_slew_fraction": 0.86,
     "fractions": [0.25, 0.125, 0.0625, 0.03125]

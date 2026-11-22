@@ -23,7 +23,8 @@ class PreparedRouteRuntime(RouteLiveRuntime):
         Path(__file__).with_name('prepared_worker_client.py'),
         ROOT / 'python/prepared_route_planner.py', ROOT / 'python/fast_reference.py',
         Path(__file__).with_name('dynamics.py'),
-        ROOT / 'python/route_timing.py', ROOT / 'python/trajectory_research/route_evaluation.py',
+        ROOT / 'python/route_timing.py', ROOT / 'python/segment_retiming.py',
+        ROOT / 'python/trajectory_research/route_evaluation.py',
         ROOT / 'python/trajectory_research/curve_task.py', ROOT / 'configs/fast_route.json',
         ROOT / '.runtime/toppquad_upstream/TOPPQuad/TQ_trajectory.py',
     ]

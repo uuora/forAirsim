@@ -86,7 +86,8 @@ class LiveCurveRuntime(ControlRuntime):
             if result.is_file():
                 record=json.loads(result.read_text(encoding='utf-8'))
                 if record.get('parameters')!=plan['parameters']:raise ValueError('冻结参数与规划记录不一致')
-                for key in ('segments','route','boundary','family','representation','timed_segments','waypoint_times','solver'):
+                for key in ('segments','route','boundary','family','representation','timed_segments','waypoint_times',
+                            'solver','retiming_fraction','retiming_profile'):
                     if key in plan and record.get(key)!=plan[key]:raise ValueError('冻结完整方案与规划记录不一致：'+key)
                 self.live_planning=dict(counts=record.get('counts'),timings=record.get('timings'),
                     source_sha256=hashlib.sha256(result.read_bytes()).hexdigest(),

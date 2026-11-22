@@ -50,7 +50,8 @@ def path_sample(segments, ends, phase, order):
     return xyz
 
 
-def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoint_speed=True):
+def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoint_speed=True,
+                 feedforward_s=(.9, .9, .9)):
     """Optimize motion only. Constant dwell is inserted by the route decoder."""
     base, digest = author_solver()
     import casadi as ca
@@ -62,6 +63,7 @@ def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoin
     fixed_via_phases = via_phases if fixed_waypoint_speed else ()
     # The baseline uses north/east/height. The author uses east/north/up.
     enu = [path_sample(segments, ends, grid, d)[:, [1, 0, 2]] for d in range(5)]
+    ff_enu = ca.repmat(ca.DM(np.asarray(feedforward_s)[[1, 0, 2]]), 1, GRID)
     zero = np.zeros((GRID, 3))
 
     class RouteTOPPQuad(base):
@@ -103,11 +105,9 @@ def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoin
             jerk_over_rate = scaled(enu[3], h) + scaled(enu[2], 1.5*hp) + scaled(enu[1], hpp/2)
             opti.subject_to(ca.sum1(acc**2) <= acceleration**2)
             opti.subject_to(ca.sum1(jerk_over_rate**2) * h.T <= 30.**2)
-            # The inherited velocity controller sends v + 0.9 a at zero
-            # tracking error. Its command and slew are both limited to six.
             rate = ca.sqrt(h)
-            nominal_command = scaled(enu[1],rate) + .9*acc
-            nominal_slew = acc + .9*jerk_over_rate*ca.repmat(rate.T,3,1)
+            nominal_command = scaled(enu[1],rate) + ff_enu*acc
+            nominal_slew = acc + ff_enu*jerk_over_rate*ca.repmat(rate.T,3,1)
             opti.subject_to(ca.sum1(nominal_command**2) <= speed**2)
             opti.subject_to(ca.sum1(nominal_slew**2) <= acceleration**2)
 
@@ -141,6 +141,7 @@ def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoin
     raw_via_speed = np.linalg.norm(path_sample(segments, ends, via_phases, 1), axis=1)
     raw_via_speed *= np.sqrt(spline(via_phases))
     return dict(anchors=grid.tolist(), h=h.tolist(), solver_s=float(seconds),
+                nominal_feedforward_neu_s=list(feedforward_s),
                 fixed_waypoint_speed=fixed_waypoint_speed,
                 raw_waypoint_speeds_mps=raw_via_speed.tolist(),
                 discrete_duration_s=float(result["t"][-1]), source_sha256=digest,
@@ -150,11 +151,11 @@ def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoin
                                       * newtons_per_unit).tolist())
 
 
-def export_motion(segments, solution):
+def export_motion(segments, solution, *, time_map=None):
     """Quintic position interpolation from path samples, physical velocities and accelerations."""
     ends = np.cumsum([p.duration_s for p in segments])
     anchors = np.array(solution["anchors"])
-    h = CubicSpline(anchors, solution["h"], bc_type="natural")
+    h = CubicSpline(anchors, solution["h"], bc_type="natural") if time_map is None else time_map
     interior = anchors[np.min(np.abs(anchors[:,None]-ends),axis=1) > 1.e-8]
     edges = np.sort(np.r_[interior, ends])
     u, weights = leggauss(8)

@@ -1,6 +1,7 @@
 """Verify a selected AirSim batch against its recorded telemetry and render its two tables."""
 import argparse
 import csv
+import hashlib
 from html import escape
 import json
 import os
@@ -12,6 +13,32 @@ import numpy as np
 
 def read_json(path):
     return path.read_text(encoding="utf-8-sig")
+
+
+def check_segment_selection(directory, report, plan, duration):
+    evidence_path = directory / "validation.json"
+    if not evidence_path.is_file():
+        evidence_path = Path(report["config"]["curve_experiment"]["plans_file"]).with_name("validation.json")
+    raw = evidence_path.read_bytes()
+    evidence = json.loads(raw)
+    trials = evidence["retiming_candidates"]
+    passing = [r for r in trials if r["validation"]["model_feasible"]]
+    profile = plan["retiming_profile"]
+    selected = [r for r in passing if r["fractions"] == profile["fractions"]]
+    counts = evidence["counts"]
+    stages = [e["stage"] for e in report["preparation_events"]]
+    sequence = ["MOVING_TO_START_ARRIVED", "PLANNING_REQUEST_SUBMITTED", "PLANNING_FINISHED", "REFERENCE_STARTED"]
+    after_arrival = ([stage for stage in stages if stage in sequence] == sequence)
+    passed = (len(selected) == 1 and np.isclose(selected[0]["duration_s"], duration, rtol=0., atol=1.e-8)
+              and duration <= min(r["duration_s"] for r in passing) + 1.e-8
+              and len(profile["fractions"]) == len(plan["route"]["waypoints"]) + 1
+              and profile == evidence["retiming_profile"] and plan["retiming_fraction"] is None
+              and len(plan["solver"]) == 1 and plan["solver"][0]["fixed_waypoint_speed"] is False
+              and counts["toppquad_solves"] == 1 and counts["airsim_search_calls"] == 0
+              and counts["selected_validation_calls"] == len(trials) and after_arrival
+              and hashlib.sha256(raw).hexdigest() == report["planning_evidence"]["source_sha256"])
+    return dict(passed=bool(passed), evaluated=len(trials), feasible=len(passing), after_arrival=after_arrival,
+                toppquad_solves=counts["toppquad_solves"], fractions=profile["fractions"])
 
 
 def flight_metrics(directory):
@@ -44,6 +71,14 @@ def flight_metrics(directory):
     plan = manifest["plan"]
     route = plan["route"]
     row["retiming_fraction"] = plan.get("retiming_fraction")
+    selection_ok = True
+    if (arm == "toppquad" and policy == "pass" and settings.get("continuous_profile") == "segmented"
+            and not settings.get("frozen_source")):
+        try:
+            row["segment_selection"] = check_segment_selection(directory, report, plan, T)
+        except (OSError, KeyError, TypeError, ValueError) as error:
+            row["segment_selection"] = dict(passed=False, error=str(error))
+        selection_ok = row["segment_selection"]["passed"]
     speed_times = np.r_[t[t<T],T]
     row["reference_peak_speed_mps"] = float(np.linalg.norm(columns("qvx","qvy","qvz")[t<T],axis=1).max())
     actual_speed = np.array([np.interp(speed_times,t,axis) for axis in v.T]).T
@@ -85,11 +120,13 @@ def flight_metrics(directory):
         ("terminal_velocity_error_mps",vias[-1]["speed_mps"]), ("terminal_position_error_m",vias[-1]["distance_m"])))
     limits = route["command_limits"]
     peak_limit = route.get("peak_position_limit_m", .5)
-    accepted = (row["outcome"]=="COMPLETED" and report.get("sources_unchanged") and row["safe_landing"] and
+    accepted = (row["outcome"]=="COMPLETED" and selection_ok and report.get("sources_unchanged") and row["safe_landing"] and
                 row["samples"]==report["samples"] and consistent and all(w["passed"] for w in vias) and
                 max_error<=peak_limit and gaps.max()<=.1+1e-9 and cmd_peak<=limits["max_speed_mps"]+1e-7 and
                 slew_peak<=limits["max_slew_mps2"]+1e-7 and not any(s["paused"]=="True" for s in samples))
     failed = []
+    if not selection_ok:
+        failed.append("分段计时选择")
     if max_error>peak_limit:
         failed.append("全程位置")
     failed.extend(f"W{i+1}" for i,w in enumerate(vias[:-1]) if not w["passed"])
@@ -113,7 +150,7 @@ def render(directory):
     rows = []
     for trial in batch["results"]:
         try:
-            row = flight_metrics(Path(trial["run"]))
+            row = flight_metrics(directory / Path(trial["run"]))
         except (KeyError, OSError, ValueError) as exc:
             geom, arm = trial["method"].rsplit("_",1)
             row = dict(policy=trial["policy"], geometry=geom, arm=arm, run=trial["run"],
@@ -140,10 +177,16 @@ def render(directory):
         for row in sorted(group,key=lambda r:(r["policy"],r["arm"])):
             target = quote(os.path.relpath(row["run"],directory).replace(os.sep,"/"),safe="/")
             policy = "连续过点" if row["policy"]=="pass" else "逐点停稳"
-            method = "普通基线" if row["arm"]=="ordinary" else "TOPPQuad"
+            selection = row.get("segment_selection", {})
+            method = ("普通基线" if row["arm"]=="ordinary" else
+                      "TOPPQuad 分段" if selection else "TOPPQuad 固定比例")
             html.append(f'<tr><td><a href="{target}/summary.json">{policy} / {method}</a></td>')
             terminal = (row.get("waypoints") or [{}])[-1].get("speed_mps")
-            for value in [row.get(k) for k in ("retiming_fraction","reference_s","execution_s","planning_s","reference_peak_speed_mps","tracking_peak_speed_mps","peak_error_m")]+[terminal]:
+            fractions = selection.get("fractions")
+            fixed = row.get("retiming_fraction")
+            percentages = fractions if fractions is not None else ([] if fixed is None else [fixed])
+            html.append("<td>" + (" → ".join(f"{v:.2%}" for v in percentages) or "—") + "</td>")
+            for value in [row.get(k) for k in ("reference_s","execution_s","planning_s","reference_peak_speed_mps","tracking_peak_speed_mps","peak_error_m")]+[terminal]:
                 html.append("<td>—</td>" if value is None else f"<td>{value:.3f}</td>")
             detail = row.get("error") or "、".join(row.get("failed_checks", []))
             result = "通过" if row["passed"] else "未通过" + (f"<br><small>{escape(detail)}</small>" if detail else "")

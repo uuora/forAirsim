@@ -88,7 +88,7 @@ a{color:#185953;text-underline-offset:2px}a:hover{color:#0a3334}
 <tr><th scope="row">上游端部角速度差分</th><td>首步各分量 |Δω/Δs| ≤ 0.1，末步 ≤ 0.01。AirSim 端的偏航指令上限单独按表 8 执行。</td></tr>
 <tr><th scope="row">时间映射与导出</th><td>节点 h 下限 10⁻⁶。使用自然三次样条并约束区间内部为正。用八点高斯求积得到节点间时间，再按位置、物理速度和加速度做五次插值，显式保留航点节点。</td></tr>
 <tr><th scope="row">参考导数限制</th><td>规划节点的参考速度模长 ≤ 6 m/s，加速度模长 ≤ 6 m/s²，加加速度（jerk）模长 ≤ 30 m/s³。</td></tr>
-<tr><th scope="row">与执行指令匹配的约束</th><td>以 vᵣ、aᵣ、jᵣ 表示参考速度、加速度与加加速度。前馈系数 K 按北、东、高度轴分别为 0.90、0.90、0.42 s。原始求解之后，把 h 向普通计时的 h = 1 收缩，并按预设比例顺序检查。导出参考在各多项式段上验证名义指令 ‖vᵣ + K aᵣ‖ ≤ 4.44 m/s、‖aᵣ + K jᵣ‖ ≤ 5.16 m/s²，同时通过共同模型预检。候选比例和原始求解保存在规划记录中。</td></tr>
+<tr><th scope="row">分段计时与执行指令约束</th><td>连续路线一次求解，按北、东、高度轴使用 0.90、0.90、0.42 s 前馈。起终点与各中间点的收缩系数由搜索选取，各航段内平滑连接。候选按整条路线核验预计跟踪误差、剩余制动能力、采样标称推力和名义指令 ‖vᵣ + K aᵣ‖ ≤ 4.44 m/s、‖aᵣ + K jᵣ‖ ≤ 5.16 m/s²。在通过预检的已测候选中取参考时间最短者。固定比例对照使用同一组预检条件。<a href="../README.md">运行方法和参数</a></td></tr>
 </tbody><tfoot><tr><td colspan="2">依据　<a href="../.runtime/toppquad_upstream/TOPPQuad/TQ_trajectory.py">固定版本的上游求解器</a>　<a href="../python/route_timing.py">TOPPQuad 接口</a>　<a href="../python/fast_reference.py">基线与共同预检</a></td></tr></tfoot></table></div></section>
 <section><div class="sheet"><table><caption>表 8　准备、共同预检、飞行控制与保护</caption>
 <thead><tr><th scope="col">阶段或参数</th><th scope="col">当前设置</th></tr></thead>

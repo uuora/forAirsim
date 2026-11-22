@@ -36,7 +36,8 @@ def configuration(policy,geometry,arm,start=None,points=None,*,sweep=None):
               tracking=preset["tracking"],retiming=preset["retiming"],
               time_scale=preset["time_scale"],max_speed=limits["max_speed_mps"],max_slew=limits["max_slew_mps2"])
     if sweep:
-        task["retiming"] = dict(task["retiming"], fractions=[sweep["fraction"]], frozen_source=sweep["source"])
+        task["retiming"] = dict(task["retiming"], continuous_profile="fixed",
+                                fractions=[sweep["fraction"]], frozen_source=sweep["source"])
     spec=prepared_spec(**task)
     cfg=read(ROOT/"configs/dual_target_control.json")
     cfg["control"].update(max_speed=task["max_speed"],max_acceleration=task["max_slew"])
@@ -113,7 +114,9 @@ class Panel(QMainWindow):
             result="通过" if r.get("outcome")=="COMPLETED" and accepted.get("task_success") else "未通过"
             group="逐点停稳" if task["policy"]=="stop" else "连续过点"
             geometry,arm=r["method"].rsplit("_",1)
-            method="普通基线" if arm=="ordinary" else "TOPPQuad"
+            plan=r["config"].get("curve_experiment", {}).get("plan", {})
+            method=("普通基线" if arm=="ordinary" else
+                    "TOPPQuad 分段" if plan.get("retiming_profile") else "TOPPQuad 固定比例")
             stamp=p.parent.name.removeprefix("dual_target_airsim_")
             self.records.addItem(f"{stamp}  {group}  {geometry.title()} / {method}  {result}",str(p.parent))
 
@@ -221,6 +224,8 @@ class Panel(QMainWindow):
             elif snap["connected"] and snap["status"] in ("READY","STOPPED","ERROR"):self.next_trial()
 
     def begin_suite(self,jobs,*,sweep_source=None):
+        if any(job[2] == "toppquad-fixed" for job in jobs):
+            self.arm.addItem("TOPPQuad 固定比例（对照）", "toppquad-fixed")
         prefix = "retiming_sweep_" if sweep_source else "verification_"
         dest=ROOT/"reports"/(prefix+datetime.now().strftime("%Y%m%d_%H%M%S_%f"))
         dest.mkdir(parents=True)
@@ -289,6 +294,7 @@ def main():
     action.add_argument("--replay",type=Path,metavar="RUN_DIRECTORY")
     action.add_argument("--retiming-sweep",nargs="+",type=float,metavar="FRACTION")
     parser.add_argument("--retiming-source",type=Path,metavar="LIVE_MANIFEST")
+    parser.add_argument("--waypoints", type=json.loads, metavar="JSON", help="Ordered waypoints for --verify-flights")
     args=parser.parse_args()
     if bool(args.retiming_sweep) != bool(args.retiming_source):
         parser.error("--retiming-sweep and --retiming-source are required together")
@@ -302,8 +308,19 @@ def main():
         QTimer.singleShot(100,panel.close)
     if args.verify_flights:
         jobs=[s.split("/") for s in args.verify_flights]
-        if any(len(j)!=3 or j[0] not in ("stop","pass") or j[1] not in ("hermite","bezier") or j[2] not in ("ordinary","toppquad") for j in jobs):parser.error("Invalid flight selection")
+        if any(len(j)!=3 or j[0] not in ("stop","pass") or j[1] not in ("hermite","bezier")
+               or j[2] not in ("ordinary","toppquad","toppquad-fixed")
+               or (j[2]=="toppquad-fixed" and j[0]!="pass") for j in jobs):parser.error("Invalid flight selection")
+        if args.waypoints is not None:
+            try:
+                for policy in {job[0] for job in jobs}:
+                    configuration(policy, "hermite", "ordinary", points=args.waypoints)
+            except (TypeError, ValueError) as exc:
+                parser.error(str(exc))
+            panel.points.setText(json.dumps(args.waypoints))
         QTimer.singleShot(500,lambda:panel.begin_suite(jobs))
+    elif args.waypoints is not None:
+        parser.error("--waypoints requires --verify-flights")
     if args.retiming_sweep:
         path = args.retiming_source.resolve()
         raw = path.read_bytes()

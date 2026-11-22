@@ -40,6 +40,14 @@ def prepared_spec(points,policy='stop',seed=1201,*,start=(0.,0.,5.),position_err
             raise ValueError('名义速度与变化率占比须在 (0, 1] 内')
         if retiming.get('continuous_waypoint_speed', 'fixed') not in ('fixed', 'optimize'):
             raise ValueError('连续过点速度模式无效')
+        profile = retiming.get('continuous_profile', 'fixed')
+        if profile not in ('fixed', 'segmented'):
+            raise ValueError('连续计时模式无效')
+        if policy == 'pass' and profile == 'segmented':
+            if retiming.get('continuous_waypoint_speed') != 'optimize':
+                raise ValueError('分段计时需要自由过点速度')
+            if not 0 <= retiming.get('tracking_error_margin_m', 0.) < spec.get('peak_position_limit_m', .5):
+                raise ValueError('预测误差裕量须小于位置门槛')
         fractions = retiming['fractions']
         if not fractions or any(not 0 < value <= 1 for value in fractions) or fractions != sorted(set(fractions), reverse=True):
             raise ValueError('计时系数须在 (0, 1] 内并按严格降序排列')
