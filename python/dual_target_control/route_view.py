@@ -1,0 +1,101 @@
+"""Task-sized orthographic route monitor; fixed camera during execution."""
+import math
+import numpy as np
+from .ui import FlightView
+
+
+class RouteFlightView(FlightView):
+    # Pure display datum, below the local H=0 origin and the resting vehicle.
+    # This is not an estimate of UE terrain or a modification of telemetry.
+    REFERENCE_HEIGHT_M=-1.
+
+    def __init__(self,config,parent=None):
+        super().__init__(config,parent);self.setMinimumSize(350,200)
+        from .route_scene import RouteScene
+        self.scene=RouteScene(self)
+        self.launch_anchor=None
+        self.anchor_session=None
+
+    def set_snapshot(self,snapshot):
+        cfg=snapshot.get('config') or self.config
+        session=cfg.get('curve_experiment',{}).get('execution_id')
+        if session!=self.anchor_session:
+            self.launch_anchor=None
+            self.anchor_session=session
+        if self.launch_anchor is None and snapshot.get('connected') and snapshot.get('position') is not None:
+            self.launch_anchor=list(snapshot['position'])
+        super().set_snapshot(snapshot)
+
+    def reset_view(self):
+        self.view_plane='3d';self.azimuth=math.radians(-51);self.elevation=math.radians(28)
+        self.zoom=1.;self.pan=np.zeros(2);self.update()
+
+    def _display_bounds(self):
+        task=self.config.get('preparation',{}).get('task')
+        if not task:
+            x0,x1,y0,y1,_,z1=super()._display_bounds()
+            return (x0,x1,y0,y1,self.REFERENCE_HEIGHT_M,z1)
+        points=np.asarray([[0.,0.,0.],self.launch_anchor or [0.,0.,0.],task['start'],*task['points']],dtype=float)
+        low=points.min(axis=0)-[1.8,1.8,1.];high=points.max(axis=0)+[1.8,1.8,1.]
+        # A floor at (lowest waypoint - 1 m) floated above takeoff/landing.
+        # AirSim's local height origin is also above the resting vehicle, so
+        # use an explicitly labelled reference below H=0, not a terrain claim.
+        # Bounds remain task-based; telemetry must never reframe the camera.
+        return (low[0],high[0],low[1],high[1],self.REFERENCE_HEIGHT_M,high[2])
+
+    def _camera(self):
+        bounds=self._display_bounds()
+        signature=(bounds,self.width(),self.height(),self.azimuth,self.elevation,self.zoom,*self.pan)
+        if signature==self._camera_signature:return
+        self._camera_signature=signature
+        az,el=self.azimuth,self.elevation
+        self.right=np.array([-math.sin(az),math.cos(az),0.])
+        self.up=np.array([-math.sin(el)*math.cos(az),-math.sin(el)*math.sin(az),math.cos(el)])
+        self.depth=np.cross(self.right,self.up)
+        xmin,xmax,ymin,ymax,zmin,zmax=bounds
+        self.center=np.array([(xmin+xmax)/2,(ymin+ymax)/2,(zmin+zmax)/2])
+        self.corners=self._frame_points(bounds)
+        projected=(self.corners-self.center)@np.column_stack((self.right,self.up))
+        span=np.maximum(np.ptp(projected,axis=0),.1)
+        self.scale=min(max(60,self.width()-110)/span[0],max(60,self.height()-116)/span[1])*self.zoom
+        self.screen_center=np.array([self.width()/2,self.height()/2+3])+self.pan
+        self.projection_matrix=np.column_stack((self.right,-self.up))*self.scale
+        projected_center=(projected.min(axis=0)+projected.max(axis=0))/2
+        self.projection_offset=self.screen_center-self.center@self.projection_matrix-projected_center*np.array([1.,-1.])*self.scale
+
+    def _frame_points(self, bounds):
+        xmin,xmax,ymin,ymax,zmin,zmax=bounds
+        task=self.config.get('preparation',{}).get('task')
+        floor=np.array([[xmin,ymin,zmin],[xmax,ymin,zmin],[xmax,ymax,zmin],[xmin,ymax,zmin]])
+        frame=[*floor,*(floor-[0,0,.23]),[xmin,ymin,zmax]]
+        if task:frame.extend([[0.,0.,0.],self.launch_anchor or [0.,0.,0.],task['start'],*task['points']])
+        return np.asarray(frame,dtype=float)
+
+    def _landmarks(self):
+        markers=self.snapshot.get('route_markers')
+        if markers:return markers
+        task=self.config.get('preparation',{}).get('task')
+        if not task:return []
+        return [dict(id='S',kind='start',position=task['start'],state='fixed'),
+            *[dict(id=f'W{i+1}',kind='via',position=p,state='pending') for i,p in enumerate(task['points'][:-1])],
+            dict(id='E',kind='goal',position=task['points'][-1],state='pending')]
+
+
+    def paintEvent(self,event):
+        self.scene.paint()
+
+    def mouseMoveEvent(self,event):
+        super().mouseMoveEvent(event)
+        if self._mouse is None:
+            self._camera();nearest=None
+            position=self.snapshot.get('position')
+            if position is not None and self.snapshot.get('connected'):
+                p=self.project(position)
+                if math.hypot(p.x()-event.pos().x(),p.y()-event.pos().y())<28:
+                    posture='实测横滚、俯仰、偏航' if self.snapshot.get('body_rotation_height') is not None else '实测偏航'
+                    self.setToolTip(f'四旋翼无人机：{posture}；橙色箭头为机头。\n图标为放大示意；轨迹坐标与网格仍按米绘制。');return
+            for marker in self._landmarks():
+                p=self.project(marker['position']);d=math.hypot(p.x()-event.pos().x(),p.y()-event.pos().y())
+                if d<18:nearest=marker;break
+            reference_height=self._display_bounds()[4]
+            self.setToolTip((nearest['id']+'  '+str(nearest['position'])+' m\n显示经过标记不等于控制判据通过。') if nearest else f'左拖旋转，右拖平移，滚轮缩放，双击复位；运行时不自动缩放。\n平台仅为 H={reference_height:.2f}m 坐标参考面，不是UE地面。')

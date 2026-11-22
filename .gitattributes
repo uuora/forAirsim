@@ -3,4 +3,6 @@ patches/*.patch -text
 python/** -text whitespace=cr-at-eol
 scripts/** -text whitespace=cr-at-eol
 configs/geometric*.json -text whitespace=cr-at-eol
+configs/fast_route.json -text whitespace=cr-at-eol
+configs/dual_target_control.json -text whitespace=cr-at-eol
 打开几何控制实验.cmd -text whitespace=cr-at-eol

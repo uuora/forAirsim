@@ -1,0 +1,7 @@
+numpy==1.26.4
+scipy==1.15.3
+PyQt5==5.15.11
+airsim==1.8.1
+msgpack-rpc-python==0.4.1
+psutil==7.2.2
+casadi==3.7.2

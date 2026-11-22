@@ -1,0 +1,44 @@
+{
+  "start": [
+    0.0,
+    0.0,
+    5.0
+  ],
+  "waypoints": [
+    [
+      8.0,
+      0.0,
+      5.0
+    ],
+    [
+      12.0,
+      6.0,
+      7.0
+    ],
+    [
+      6.0,
+      10.0,
+      6.0
+    ]
+  ],
+  "seed": 1201,
+  "pass_speed_mps": 1.2,
+  "dwell_s": 1.0,
+  "time_scale": 1.25,
+  "position_error_limit_m": 0.30,
+  "tracking": {
+    "acceleration_feedforward_s": [0.90, 0.90, 0.42],
+    "proxy_lag_s": [0.72, 0.72, 0.23],
+    "proxy_delay_s": [0.16, 0.16, 0.20]
+  },
+  "retiming": {
+    "continuous_waypoint_speed": "optimize",
+    "nominal_speed_fraction": 0.74,
+    "nominal_slew_fraction": 0.86,
+    "fractions": [0.25, 0.125, 0.0625, 0.03125]
+  },
+  "command_limits": {
+    "max_speed_mps": 6.0,
+    "max_slew_mps2": 6.0
+  }
+}

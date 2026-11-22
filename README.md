@@ -1,20 +1,61 @@
-# TOPPQuad · AirSim 轨迹控制
+# AirSim 快基线与 TOPPQuad
 
-**RotorPy 实验**　[运行说明](docs/使用说明/TOPPQuad三基线仿真.md#当前-rotorpy-随机航路批次) · [实验结果](reports/rotorpy_current/conclusion.md) · [论文式图集 PDF](reports/rotorpy_current/paper_figures/paper_figures.pdf) · [本机三维回放](http://127.0.0.1:8765/)
+双击 **打开轨迹实验面板.cmd**。在 Qt5 窗口选择逐点停稳或连续过点、Hermite 或 Bézier，再选普通基线或 TOPPQuad。点击 **启动 / 连接 AirSim** 后可在 UE 场景里观察。点击 **开始所选飞行** 才会起飞。飞机先到准备点，再悬停规划，执行结束后降落。
 
-双击 [打开几何控制实验.cmd](打开几何控制实验.cmd)。控制台默认加载 Bézier、Hermite、B 样条三条 TOPPQuad 参考，选择其中一种后可手动开始验证。现有 AirSim 实例可通过“显示 UE 视口”观察。
+窗口下方可以选择一条记录，点击 **回放** 或拖动时间轴。绿线是参考，紫红线是 AirSim 实测位置，橙色箭头为机头。左拖旋转，右拖平移，滚轮缩放，双击恢复任务全景。**打开数据** 会打开所选飞行的原始目录。**查看批次对比** 可查看最近完成的批次，Hermite 和 Bézier 分表展示。
 
-- **弹出三维地图**会把当前地图移到独立、可缩放的窗口。关闭地图窗口或点击控制台的“收回三维地图”即可还原。
-- 地图默认按航线取景，显示跟踪阶段的轨迹。勾选“含起降”可看全程实测和完整高度范围。高度 ×1.5 和 ×2 仅影响三维显示。XY 俯视和 X / 高度剖面使用等比例。
-- 原三种基线及 E0–E4 任务可用 `./打开几何控制实验.cmd -Baseline` 打开。添加 `-DetachedMap` 可直接分窗。
+## 两组方法共用的设置
 
-| 目录 | 内容 |
-| --- | --- |
-| `python/geometric_validation` | 路径和时间参数化、Qt 地图、AirSim 跟踪与独立审计 |
-| `configs` | 三种基线、TOPPQuad 冻结参考、AirSim 设置 |
-| `.runtime/toppquad_upstream` | 固定版本的 TOPPQuad 上游 Git 源码 |
-| `reports`、`logs` | 当前 TOPPQuad 批量结果和单次飞行原始记录 |
+完整的[实验条件、规划设置、执行步骤与实测验收表](docs/实验条件与设置.html)可直接用浏览器打开。
 
-在本机，`external/AirSim` 与 `.venv` 复用 `D:\forAirsim` 的仿真和 Python 环境。其他机器需准备相同的 AirSim/UE 构建与 Python 依赖，详见 [AirSim 补丁](patches/README.md) 和 [运行与复现](docs/使用说明/TOPPQuad三基线仿真.md)。
+快基线取自 `D:\forAirsim` 旧轨迹实验面板的协议 15。普通 Hermite 和普通 Bézier 用相同端点状态构造同一条分段五次曲线。TOPPQuad 对所选曲线做一次离线计时，随后共用原面板的速度反馈、偏航控制、起降和验收。
 
-[TOPPQuad 实测对比](reports/geometric_three_planners_toppquad_20261119_v1/index.html) · [数据字典](docs/使用说明/几何控制数据字典.md)
+| 项目 | 默认值或验收条件 |
+|---|---|
+| 准备点与有序航点，米 | (0, 0, 5) → (8, 0, 5) → (12, 6, 7) → (6, 10, 6) |
+| 普通基线每段运动时长 | 段长除以 1.6 后加 1 秒，截在 3 至 7 秒之间，再除以统一倍率 1.25 |
+| 速度指令模长 / 指令变化率 | ≤ 6 m/s ／ ≤ 6 m/s² |
+| 偏航指令变化率 / 控制频率 | ≤ 120°/s ／ 50 Hz |
+| 逐点停稳的中间点 | 停留 1 s，停留结束时位置误差 ≤ 0.30 m、实测速度 ≤ 0.30 m/s |
+| 连续过点的中间点 | 普通基线参考速度 1.20 m/s，TOPPQuad 联合求解过点速度；计划过点时位置误差 ≤ 0.30 m、实测速度 ≥ 0.50 m/s |
+| 终点与全程 | 参考终速为零。参考结束时位置误差 ≤ 0.25 m、实测速度 ≤ 0.50 m/s。全程采样位置误差峰值 ≤ 0.30 m |
+| 运行保护 | 实际状态越界、新碰撞或相邻状态间隔超过 0.10 s 中止。复用协议 15，横滚、俯仰没有单独的角度验收门槛 |
+
+准备和规划墙钟与参考执行时间分别记录。速度指令上限和实测峰值分别报告。默认路线普通基线连续过点为 13.782 s，逐点停稳为 15.782 s，后者包含两次各 1 s 的停留。
+
+实时跟踪的加速度前馈按北、东、高度轴分别取 0.90、0.90、0.42 秒，两种方法使用同一组数值。共同预检使用按轴校准的一阶速度滞后和指令延迟，基于这一条路线的实测速度响应近似，验收以 AirSim 遥测为准。
+
+## TOPPQuad 接口
+
+使用本机固定版本 `3db181cb0c76baaa1669f859f16a83060c2ee7a0` 的上游 `TQ_trajectory.py`，载入前校验源码。两种方法共用 AirSim 的 GenericQuadX 和 SimpleFlight，并将当前实例核验的动力参数写入规划任务。TOPPQuad 用同一机型的质量、惯量、重力、推力上限和 Quad-X 力矩分配执行刚体计时。普通基线按距离规则计时，两者共用速度跟踪代理预检。固定路线、连续过点时的参考速度、停留时间和执行器的速度指令接口来自本实验。
+
+连续过点整条路线一起计时。逐点停稳逐段计时，随后插入原有停留段。求解器保留上游时间目标、角速度正则项、四元数动力学及单电机推力约束，同时施加这套基线的速度、加速度、jerk 和名义速度指令约束。TOPPQuad 求得原始时间映射后，按预设比例将其向普通基线时间映射收缩，保持同一条几何路径。连续过点时，求解器可改变两个中间点的相位速率。导出后过点速度由收缩后的相位速率确定，原始求解速度和执行参考速度分别记录。选用第一个通过共同预检且全段名义指令上界分别不超过执行速度和变化率上限 74% 和 86% 的候选。日志同时保存原始求解和执行版本，推力记录对应原始求解。飞行记录保存最终执行的参考和时间映射。上游每节点推力变化限制和悬停容差按 GenericQuadX 的标称悬停推力等比例换算。规划刚体方程使用标称动力参数，SimpleFlight 飞控、旋翼响应和空气阻力由 AirSim 执行阶段模拟。旧批次按原记录中的门槛和条件复核。
+
+## 文件与复现
+
+- `configs/fast_route.json` 定义默认任务和速度指令限制。坐标使用北、东、向上，高度单位为米。
+- `reports/prepared_route_plan_*/` 保存冻结参考和模型校验。 `logs/dual_target_airsim_*/` 保存执行记录，包括 `states.csv`、`live_states.jsonl`、`summary.json`、落地回执和条件指纹。
+- 本机通过 `.venv` 和 `external/AirSim` 复用现有 forAirsim 环境。TOPPQuad 源码和 CasADi 位于项目自己的 `.runtime/toppquad_upstream` 和 `.runtime/toppquad_deps`。
+- VS Code 的 **运行任务 → AirSim · 打开轨迹实验面板** 也可以打开同一窗口。
+
+换机器时需要相同的已编译 Blocks 场景、UE 4.27 和本机核对过的 Python 依赖版本（`requirements.txt`）。TOPPQuad 源码可从固定提交恢复到上述目录。本机已安装。
+
+```powershell
+git clone https://github.com/maokat12/lbTOPPQuad.git .runtime/toppquad_upstream
+git -C .runtime/toppquad_upstream checkout --detach 3db181cb0c76baaa1669f859f16a83060c2ee7a0
+```
+
+在项目根目录运行以下命令可以检查界面，或按给定顺序实飞。批量在可见窗口中执行，每次确认落地后继续。
+
+```powershell
+.\打开轨迹实验面板.cmd --check
+.\打开轨迹实验面板.cmd --verify-flights pass/hermite/ordinary pass/hermite/toppquad
+```
+
+## 连续过点的计时比例实飞扫描
+
+使用已完成的连续过点 TOPPQuad 飞行的 live_manifest.json 作为来源。面板按严格升序执行指定的比例，所有档位复用同一份求解结果。扫描记录名义指令余量检查，执行仍受共用速度与变化率限幅以及原航点、终点和位置误差门槛约束。某一档未通过或未确认落地，批次停止提高比例。原始日志和未执行档位可在批次回执中核对。
+
+```powershell
+.\打开轨迹实验面板.cmd --retiming-source "logs\<已完成的飞行目录>\live_manifest.json" --retiming-sweep .125 .15 .175 .2
+```

@@ -56,6 +56,26 @@ def validate_receipt(profile, loaded_profile, receipt, vehicle):
                 verification='Live UE physics initialization receipt; nominal parameters, not a thrust calibration')
 
 
+def generic_quadx_model(receipt):
+    if receipt.get('verified') is not True or receipt.get('model') != 'GenericQuadX':
+        raise RuntimeError('规划需要当前 AirSim 的 GenericQuadX 动力回执。')
+    keys = ('model', 'mass_kg', 'inertia_diag_kgm2', 'nominal_gravity_mps2',
+            'max_thrust_per_rotor_n', 'max_torque_per_rotor_nm', 'max_rpm')
+    model = {key: receipt[key] for key in keys}
+    # AirSim MultiRotorParams::setupFrameGenericQuad and initializeRotorQuadX.
+    # Rotor order is front-right, rear-left, front-left, rear-right.
+    arm_projection = 0.2275 / math.sqrt(2)
+    yaw_per_thrust = model['max_torque_per_rotor_nm'] / model['max_thrust_per_rotor_n']
+    # AirSim body FRD -> solver body FLU. Each column is the wrench per newton.
+    model['thrust_allocation_flu'] = [
+        [1., 1., 1., 1.],
+        [-arm_projection, arm_projection, arm_projection, -arm_projection],
+        [-arm_projection, arm_projection, -arm_projection, arm_projection],
+        [-yaw_per_thrust, -yaw_per_thrust, yaw_per_thrust, yaw_per_thrust],
+    ]
+    return model
+
+
 def read_live_dynamics(client, config, preferred_pid=None):
     profile = requested_profile(config)
     if profile is None:
