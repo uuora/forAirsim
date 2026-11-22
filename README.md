@@ -59,6 +59,19 @@ git -C .runtime/toppquad_upstream checkout --detach 3db181cb0c76baaa1669f859f16a
 .\打开轨迹实验面板.cmd --verify-flights pass/hermite/toppquad --waypoints "[[7,1,5],[10,7,6],[5,11,7]]"
 ```
 
+## 长距离路线预设
+
+实验面板的路线下拉框可填写 36 m 短直线及五条 72 m 预设。72 m 组每段约 12 m，覆盖等高直线、90° 和 135° 航向转折、累计上升 8 m 和累计下降 8 m。各路线使用同一 AirSim 场景，长度按航点间三维直线距离求和。路线坐标保存在 [长距离预设](configs/long_distance_routes.json)。
+
+```powershell
+.\打开轨迹实验面板.cmd --route-preset turn_135
+.\.venv\python.exe python/run_long_distance_experiment.py --airsim
+```
+
+第二条命令执行 18 架次对照，每架次从新开的仿真实例起飞。可加 `--routes straight_72 turn_135` 只跑指定预设。每次状态和结果保存在 `reports/long_distance_run_*/`。
+
+36/72 m 对照、五条长路线的速度与误差、计时改变量的推导及学习加速设计见 [长距离分段计时实验](reports/long_distance_retiming_20261122/README.md)。
+
 ## 连续过点的计时比例实飞扫描
 
 使用已完成的连续过点 TOPPQuad 飞行的 live_manifest.json 作为来源。面板按严格升序执行指定的比例，所有档位复用同一份求解结果。扫描记录名义指令余量检查，执行仍受共用速度与变化率限幅以及原航点、终点和位置误差门槛约束。某一档未通过或未确认落地，批次停止提高比例。原始日志和未执行档位可在批次回执中核对。

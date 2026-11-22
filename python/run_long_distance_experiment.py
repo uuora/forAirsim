@@ -85,7 +85,7 @@ def run_selected(routes):
             row.update(state="ERROR", error=str(exc))
         write_json(results_path, schedule)
         print(f"{tag}: {row['state']} pass={row.get('passed')} landed={row.get('safe_landing')}", flush=True)
-        if not row.get("safe_landing"):
+        if not row.get("safe_landing") or row.get("outcome") == "STOPPED":
             break
     return int(not all(row.get("passed") for row in schedule))
 
