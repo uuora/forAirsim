@@ -188,11 +188,15 @@ def make_plan(output, spec, method, dynamics_model):
     plan["dynamics_model"] = dynamics_model
     candidates = []
     solves = 0
+    timings = {}
     if arm != "ordinary":
         retiming = spec.get("retiming", {})
         source = retiming.get("frozen_source")
+        raw_started = perf_counter()
         blocks = frozen_blocks(plan, source) if source else solve_blocks(decode_route(plan), dynamics_model)
+        timings["frozen_source_read_wall_s" if source else "raw_toppquad_wall_s"] = perf_counter() - raw_started
         solves = 0 if source else len(blocks)
+        selection_started = perf_counter()
         limits = spec["command_limits"]
         nominal_limits = [limits["max_speed_mps"] * retiming.get("nominal_speed_fraction", 1.),
                           limits["max_slew_mps2"] * retiming.get("nominal_slew_fraction", 1.)]
@@ -212,14 +216,17 @@ def make_plan(output, spec, method, dynamics_model):
                     break
             plan = candidate
         plan["group_id"] = method
+        timings["retiming_selection_wall_s"] = perf_counter() - selection_started
     else:
+        validation_started = perf_counter()
         validation = validate(decode(plan))
-    elapsed = perf_counter()-started
+        timings["ordinary_validation_wall_s"] = perf_counter() - validation_started
+    timings["search_plus_selected_validation_wall_s"] = perf_counter()-started
     plan["selection_provenance"] = dict(model_feasible=validation["model_feasible"],result_json="validation.json")
     evidence = dict(plan,counts=dict(selected_validation_calls=len(candidates) or 1,
                                    toppquad_solves=solves,
                                    airsim_search_calls=0),
-                    timings=dict(search_plus_selected_validation_wall_s=elapsed),validation=validation,retiming_candidates=candidates)
+                    timings=timings,validation=validation,retiming_candidates=candidates)
     (output/"validation.json").write_text(json.dumps(evidence,ensure_ascii=False,indent=2,allow_nan=False),encoding="utf8")
     path = output/"airsim_replay_plan.json"
     path.write_text(json.dumps(dict(schema_version=1,plans=[plan]),ensure_ascii=False,allow_nan=False),encoding="utf8")
