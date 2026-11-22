@@ -37,6 +37,8 @@
 
 ## 文件与复现
 
+三条连续过点路线的 12 架次实测、节点系数曲线和可独立复算的遥测包见[分段计时实测结果](reports/segment_retiming_20261122/README.md)。
+
 - `configs/fast_route.json` 定义默认任务和速度指令限制。坐标使用北、东、向上，高度单位为米。
 - `reports/prepared_route_plan_*/` 保存冻结参考和模型校验。 `logs/dual_target_airsim_*/` 保存执行记录，包括 `states.csv`、`live_states.jsonl`、`summary.json`、落地回执和条件指纹。
 - 本机通过 `.venv` 和 `external/AirSim` 复用现有 forAirsim 环境。TOPPQuad 源码和 CasADi 位于项目自己的 `.runtime/toppquad_upstream` 和 `.runtime/toppquad_deps`。
