@@ -71,15 +71,17 @@ class RouteScene:
         floor=np.array([[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0]])
         if not section:
             # The shallow plinth is a coordinate reference, never scene physics.
-            base=floor-[0,0,.23]
+            padding = v.config.get('ue_visualization', {}).get('floor_padding_m', 0.)
+            deck = floor + padding * np.array([[-1,-1,0],[1,-1,0],[1,1,0],[-1,1,0]])
+            base=deck-[0,0,.23]
             shadow=self.polygon(base)
             for i in range(8,0,-1):
                 path=QPainterPath();path.addPolygon(shadow.translated(0,i*1.5));painter.setPen(v._pen(QColor(0,0,0,2+i),i*2.))
                 painter.setBrush(QColor(0,0,0,2+i));painter.drawPath(path)
             painter.setPen(v._pen(QColor(p['side']),.8));painter.setBrush(QColor(p['side']))
-            for i in range(4):painter.drawPolygon(self.polygon([floor[i],floor[(i+1)%4],base[(i+1)%4],base[i]]))
+            for i in range(4):painter.drawPolygon(self.polygon([deck[i],deck[(i+1)%4],base[(i+1)%4],base[i]]))
             gradient=QLinearGradient(0,50,v.width(),v.height()-40);gradient.setColorAt(0,QColor(p['plane']));gradient.setColorAt(1,QColor(p['plane2']))
-            painter.setBrush(gradient);painter.setPen(v._pen(QColor(p['border']),1.));painter.drawPolygon(self.polygon(floor))
+            painter.setBrush(gradient);painter.setPen(v._pen(QColor(p['border']),1.));painter.drawPolygon(self.polygon(deck))
             for x in np.arange(math.ceil(x0/minor)*minor,x1+1e-7,minor):
                 self.line(painter,[[x,y0,z0],[x,y1,z0]],p['minor'],.65)
             for y in np.arange(math.ceil(y0/minor)*minor,y1+1e-7,minor):
@@ -104,10 +106,25 @@ class RouteScene:
                 self.line(painter,[point(lo,z),point(hi,z)],p['major'],.9);self.tick(painter,point(lo,z),f'{z:g}',(-26,3))
             for distance in np.arange(math.ceil(lo/step)*step,hi+1e-7,step):
                 self.tick(painter,point(distance,z0),f'{distance:g}',(-5,18))
+        if v.config.get('small_field'):
+            if not section:
+                self.line(painter, [*floor, floor[0]], p['border'], 1.)
+            if v.view_plane == '3d':
+                ceiling = floor + [0., 0., z1-z0]
+                for i, corner in enumerate(ceiling):
+                    self.line(painter, [floor[i], corner], p['border'], 1., Qt.DashLine)
+                    self.line(painter, [corner, ceiling[(i+1) % 4]], p['border'], 1., Qt.DashLine)
+            elif section:
+                outline = [point(lo,z0), point(hi,z0), point(hi,z1), point(lo,z1), point(lo,z0)]
+                self.line(painter, outline, p['border'], 1.)
         origin=[x0,y0,z0]
-        for end,name,offset in [([x1,y0,z0],'X / m',(8,9)),([x0,y1,z0],'Y / m',(4,-8)),([x0,y0,z1],'H / m',(-12,-12))]:
+        compact = 'launch' in v.config.get('small_field', {})
+        ends = [[x0+1.12,y0,z0],[x0,y0+1.12,z0],[x0,y0,z0+1.12]] if compact else [[x1,y0,z0],[x0,y1,z0],[x0,y0,z1]]
+        names = ('X', 'Y', 'Z') if compact else ('X / m', 'Y / m', 'H / m')
+        colors = ('#e77169', '#56bb79', '#71a7ef') if compact else (p['border'],) * 3
+        for end,name,color,offset in zip(ends,names,colors,((8,9),(4,-8),(-12,-12))):
             if np.linalg.norm((np.array(end)-origin)@v.projection_matrix)<4:continue
-            self.line(painter,[origin,end],p['border'],1.2);self.tick(painter,end,name,offset)
+            self.line(painter,[origin,end],color,1.6 if compact else 1.2);self.tick(painter,end,name,offset)
         if v.view_plane=='3d':
             self.tick(painter,origin,f'{z0:g}',(-22,3));self.tick(painter,[x0,y0,z1],f'{z1:g}',(-22,3))
         return step,z0
@@ -198,12 +215,13 @@ class RouteScene:
         painter=QPainter(v);painter.setRenderHint(QPainter.Antialiasing);painter.drawPixmap(0,0,self.cache)
         painter.setClipRect(QRectF(3,46,v.width()-6,v.height()-81))
         plan=v.display_points(v.snapshot.get('planned_path',[]),600);trail=v.display_points(v.snapshot.get('trail',[]),600)
+        compact = bool(v.config.get('small_field'))
         if len(trail)>1 and v.view_plane not in ('xz','yz'):
             shadow=trail.copy();shadow[:,2]=self.z0
-            self.line(painter,shadow,alpha(self.p['bg'],100),4.)
-        self.line(painter,plan,self.p['reference'],1.9,Qt.DashLine)
-        self.line(painter,trail,alpha(self.p['actual'],28),8.)
-        self.line(painter,trail,self.p['actual'],2.6)
+            self.line(painter,shadow,alpha(self.p['bg'],100),2. if compact else 4.)
+        self.line(painter,plan,self.p['reference'],1.2 if compact else 1.9,Qt.DashLine)
+        self.line(painter,trail,alpha(self.p['actual'],28),3.2 if compact else 8.)
+        self.line(painter,trail,self.p['actual'],1.6 if compact else 2.6)
         position=v.snapshot.get('position')
         if position is not None and v.snapshot.get('connected'):
             q=v.project(position);self.labels.append(QRectF(q.x()-26,q.y()-24,70,47))

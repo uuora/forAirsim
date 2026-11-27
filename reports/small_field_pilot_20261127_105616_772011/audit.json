@@ -1,0 +1,126 @@
+{
+  "requested": 1,
+  "passed": 1,
+  "flights": [
+    {
+      "run": "D:\\foraisimTOPPQuad\\logs\\dual_target_airsim_20261127_105623_109520",
+      "method": "hermite_ordinary",
+      "outcome": "COMPLETED",
+      "error": null,
+      "policy": "pass",
+      "safe_landing": true,
+      "passed": true,
+      "measured_takeoff_zup_m": [
+        0.0,
+        0.0,
+        0.2020450783893466
+      ],
+      "checks": {
+        "reference_limits": true,
+        "shared_clock": true,
+        "preparation": true,
+        "recorded_tilt": true,
+        "yaw_slew": true,
+        "telemetry_acceptance": true,
+        "metrics_match": true,
+        "source_snapshots": true,
+        "configuration": true,
+        "physics": true,
+        "recording_disabled": true,
+        "vehicle_bounds_match_visual_scale": true,
+        "ground_launch": true
+      },
+      "measured_start_ned_m": [
+        0.0,
+        0.0,
+        -0.4893199158832431
+      ],
+      "reference": {
+        "passed": true,
+        "peak_speed_mps": 1.584000000000007,
+        "peak_acceleration_mps2": 1.1596044685677822,
+        "min_position_zup_m": [
+          0.0,
+          0.0,
+          0.5
+        ],
+        "max_position_zup_m": [
+          3.7217884575162365,
+          3.4528620804939263,
+          1.2868236746677792
+        ],
+        "inside_field": true,
+        "terminal_reference_at_rest": true
+      },
+      "metrics": {
+        "control_error_gates_passed": true,
+        "acceptance_checks": {
+          "waypoints": true,
+          "terminal_hold": true,
+          "tilt": true,
+          "spatial_bounds": true,
+          "sample_clock": true
+        },
+        "waypoint_results": [
+          {
+            "index": 0,
+            "point": [
+              3.6,
+              1.0,
+              0.9
+            ],
+            "minimum_distance_m": 0.0,
+            "hit_time_s": 3.102066176,
+            "hit_distance_m": 0.29181826863846333,
+            "hit_speed_mps": 1.0778517409061674,
+            "passed": true
+          },
+          {
+            "index": 1,
+            "point": [
+              2.4,
+              3.2,
+              1.25
+            ],
+            "minimum_distance_m": 0.0,
+            "hit_time_s": 6.837145856,
+            "hit_distance_m": 0.2808819194160829,
+            "hit_speed_mps": 0.8175420795489564,
+            "passed": true
+          }
+        ],
+        "terminal_hold": {
+          "reference_end_position_error_m": 0.0,
+          "reference_end_speed_mps": 0.050790648104205256,
+          "end_position_error_m": 0.0,
+          "end_speed_mps": 0.014376430481258227,
+          "continuous_s": 1.0000172916416012,
+          "minimum_distance_m": 0.0,
+          "reference_end_passed": true,
+          "end_passed": true,
+          "first_failed_time_s": null,
+          "passed": true
+        },
+        "max_sample_gap_s": 0.02700057600000072,
+        "peak_tilt_deg": 8.19085076324707,
+        "measured_peak_speed_mps": 1.7095762266205825,
+        "max_position_error_m": 0.16107035718892385,
+        "rmse_position_m": 0.05082436831636753,
+        "tracking_time_s": 12.300262400000001,
+        "acceptance_vehicle_bounds_frd_m": [
+          [
+            -0.27487437135200005,
+            -0.27487441408,
+            -0.06345351107200001
+          ],
+          [
+            0.27487437135200005,
+            0.27487441408,
+            0.10062187044000001
+          ]
+        ]
+      },
+      "condition_fingerprint": "d9121115f1538dec27aa69ed0d94903d5c3ab30455cb54afb46479a3c6999d20"
+    }
+  ]
+}

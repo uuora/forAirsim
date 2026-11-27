@@ -9,6 +9,7 @@ import hashlib,json,math,time
 from pathlib import Path
 import numpy as np
 from .runtime import ControlRuntime,from_ned,json_value,wrap_angle
+from .rotor_telemetry import RotorRecorder
 from .simulator import ROOT
 from velocity_command import limit_command
 
@@ -30,6 +31,7 @@ class LiveCurveRuntime(ControlRuntime):
         self.live_previous_command=np.zeros(3);self.live_yaw=0.;self.live_last_collision=0.
         self.live_stream=None;self.live_marker_receipts=[];self.live_planning=None
         self.live_marker_hidden=False
+        self.rotor_recorder=None;self.repeated_tracking_reads=0
         self.acceleration_feedforward = np.full(3, .9)
         super().__init__(config,mode)
 
@@ -51,7 +53,6 @@ class LiveCurveRuntime(ControlRuntime):
         self.acceleration_feedforward = np.asarray(tracking.get('acceleration_feedforward_s', [.9]*3))
         factor=float(section.get('time_scale',1.))
         if not .5<=factor<=2.:raise ValueError('参考时间倍率必须在0.5至2之间')
-        effective=deepcopy(plan);effective['parameters'][-1]/=factor
         # The canonical decoder bounds T. Time scaling is applied to the
         # resulting physical polynomial rather than silently changing its box.
         self.live_curve=self._decode_reference(plan,factor)
@@ -62,6 +63,8 @@ class LiveCurveRuntime(ControlRuntime):
                  ROOT/'python/trajectory_research/curves.py',ROOT/'python/trajectory_research/parameterizations.py',
                  ROOT/'python/velocity_command.py']
         sources+=getattr(self,'additional_source_paths',[])
+        if self.config.get('rotor_telemetry'):
+            sources.append(Path(__file__).with_name('rotor_telemetry.py'))
         snap=self._run_dir/'curve_source';snap.mkdir(exist_ok=True)
         hashes={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
         for p in sources:(snap/p.name).write_bytes(p.read_bytes())
@@ -85,9 +88,9 @@ class LiveCurveRuntime(ControlRuntime):
             if package not in result.parents:raise ValueError('方案证据路径越界')
             if result.is_file():
                 record=json.loads(result.read_text(encoding='utf-8'))
-                if record.get('parameters')!=plan['parameters']:raise ValueError('冻结参数与规划记录不一致')
+                if record.get('parameters')!=plan.get('parameters'):raise ValueError('冻结参数与规划记录不一致')
                 for key in ('segments','route','boundary','family','representation','timed_segments','waypoint_times',
-                            'solver','retiming_fraction','retiming_profile'):
+                            'base_timed_segments','solver','retiming_fraction','retiming_profile'):
                     if key in plan and record.get(key)!=plan[key]:raise ValueError('冻结完整方案与规划记录不一致：'+key)
                 self.live_planning=dict(counts=record.get('counts'),timings=record.get('timings'),
                     source_sha256=hashlib.sha256(result.read_bytes()).hexdigest(),
@@ -151,12 +154,23 @@ class LiveCurveRuntime(ControlRuntime):
             if not np.allclose(actual,xyz,atol=.002):raise RuntimeError('03目标实体位置读回不一致：'+name)
             self.live_marker_receipts.append(dict(name=name,visible=bool(target is not None),requested_ned=xyz,observed_ned=actual))
 
+    def _tracking_sample(self,p,v,yaw,stamp,observed):
+        if np.any(p<self.cfg.lower-.1) or np.any(p>self.cfg.upper+.1):raise RuntimeError('实际状态超出03场地范围')
+        if observed<0 or observed>.1:raise RuntimeError('实时状态间隔异常：'+str(observed))
+        return {}
+
     def _tick(self,dt):
         begin=time.perf_counter();p,v,yaw,rpc=self._read_state()
-        if np.any(p<self.cfg.lower-.1) or np.any(p>self.cfg.upper+.1):raise RuntimeError('实际状态超出03场地范围')
         stamp=(int(self._last_state.timestamp) if self.mode=='airsim' else int((self._start_time+sum(s.get('step_s',0.) for s in self.live_states)+dt)*1e9))
         observed=0. if self.live_previous_stamp is None else (stamp-self.live_previous_stamp)*1e-9
-        if observed<0 or observed>.1:raise RuntimeError('实时状态间隔异常：'+str(observed))
+        extra = self._tracking_sample(p,v,yaw,stamp,observed)
+        if extra is None:return
+        if self.mode=='airsim' and self.config.get('rotor_telemetry'):
+            if self.live_previous_stamp is not None and observed == 0:
+                self.repeated_tracking_reads+=1
+                return
+            if self.rotor_recorder is None:
+                self.rotor_recorder=RotorRecorder(self.config['airsim'],self.vehicle_name,stamp)
         self.live_previous_stamp=stamp
         if not self._paused:self.live_elapsed+=observed
         t=self.live_elapsed;T=self.live_curve.duration_s;u=min(t,T)
@@ -185,7 +199,7 @@ class LiveCurveRuntime(ControlRuntime):
             rate=[0.,0.,wrap_angle(yaw-self.live_states[-1]['yaw_rad'])/observed] if self.live_states and observed>0 else [0.,0.,0.]
         state=dict(sim_timestamp_ns=stamp,reference_elapsed_s=t,position_zup_m=p.tolist(),velocity_zup_mps=v.tolist(),
             reference_position_zup_m=q.tolist(),reference_velocity_zup_mps=qv.tolist(),acceleration_zup_mps2=acceleration,
-            angular_velocity_body=rate,yaw_rad=float(yaw),step_s=dt,paused=self._paused)
+            angular_velocity_body=rate,yaw_rad=float(yaw),step_s=dt,paused=self._paused,**extra)
         if not self.live_states:self.live_started_host_s=begin
         state['host_elapsed_s']=begin-self.live_started_host_s
         self.live_states.append(state);self.live_commands.append(dict(command,reference_elapsed_s=t,yaw_command_deg=math.degrees(self.live_yaw)))
@@ -196,14 +210,27 @@ class LiveCurveRuntime(ControlRuntime):
             reference_elapsed_s=t,yaw_error_deg=math.degrees(wrap_angle(desired-yaw)))
         self._aim_camera(p,self._target_point(),begin)
         self._advance_targets(t,p,v)
+        self._finish_tracking(t,T,p,v)
+
+    def _finish_tracking(self,t,T,p,v):
         if t>=T and np.linalg.norm(self.live_curve.sample(T)-p)<=.25 and np.linalg.norm(v)<=.5:
-            self._publish(targets=[],hits=self._completion_hits())
-            if not self.live_marker_hidden:self._markers(False);self.live_marker_hidden=True
-            self._active=False;self._stop('COMPLETED')
+            self._complete_tracking()
         elif t>T+10:raise TimeoutError('参考结束后10秒仍未达到终端位置/速度要求')
+
+    def _complete_tracking(self):
+        self._publish(targets=[],hits=self._completion_hits())
+        if not self.live_marker_hidden:self._markers(False);self.live_marker_hidden=True
+        self._active=False;self._stop('COMPLETED')
+
+    def _stop(self,outcome='STOPPED'):
+        if self.rotor_recorder is not None:self.rotor_recorder.stop.set()
+        super()._stop(outcome)
 
     def _save(self,outcome):
         if not self._run_dir or self._summary_written:return
+        if self.rotor_recorder is not None:
+            self.rotor_recorder.save(self._run_dir,self.live_previous_stamp or 0,self.repeated_tracking_reads)
+            self.rotor_recorder=None;self.repeated_tracking_reads=0
         if self.live_stream:self.live_stream.close();self.live_stream=None
         trace=dict(states=self.live_states,commands=self.live_commands)
         (self._run_dir/'trace.json').write_text(json.dumps(json_value(trace),ensure_ascii=False),encoding='utf-8')
@@ -228,10 +255,12 @@ class LiveCurveRuntime(ControlRuntime):
         (self._run_dir/'summary.json').write_text(json.dumps(json_value(summary),ensure_ascii=False,indent=2),encoding='utf-8')
         import csv
         with (self._run_dir/'states.csv').open('w',encoding='utf-8-sig',newline='') as stream:
-            w=csv.writer(stream);w.writerow(['t_s','px','py','pz','vx','vy','vz','qx','qy','qz','qvx','qvy','qvz','ax','ay','az','cmd_x','cmd_y','cmd_z','yaw_rad','yaw_command_deg','speed_clipped','slew_clipped','paused'])
+            extra_columns = ['sim_timestamp_ns','orientation_x','orientation_y','orientation_z','orientation_w','tilt_deg'] if 'small_field' in self.config else []
+            w=csv.writer(stream);w.writerow(['t_s','px','py','pz','vx','vy','vz','qx','qy','qz','qvx','qvy','qvz','ax','ay','az','cmd_x','cmd_y','cmd_z','yaw_rad','yaw_command_deg','speed_clipped','slew_clipped','paused'] + extra_columns)
             for s,c in zip(self.live_states,self.live_commands):
+                extra_values = [s['sim_timestamp_ns'],*s['orientation_ned_xyzw'],s['tilt_deg']] if extra_columns else []
                 w.writerow([s['reference_elapsed_s'],*s['position_zup_m'],*s['velocity_zup_mps'],*s['reference_position_zup_m'],
-                    *s.get('reference_velocity_zup_mps',[None]*3),*s['acceleration_zup_mps2'],*c['limited'],s['yaw_rad'],c['yaw_command_deg'],c['speed_clipped'],c['slew_clipped'],s['paused']])
+                    *s.get('reference_velocity_zup_mps',[None]*3),*s['acceleration_zup_mps2'],*c['limited'],s['yaw_rad'],c['yaw_command_deg'],c['speed_clipped'],c['slew_clipped'],s['paused'],*extra_values])
         manifest=json.loads((self._run_dir/'live_manifest.json').read_text(encoding='utf-8')) if (self._run_dir/'live_manifest.json').is_file() else {}
         summary['sources_unchanged']=all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in manifest.get('source_sha256',{}).items())
         (self._run_dir/'summary.json').write_text(json.dumps(json_value(summary),ensure_ascii=False,indent=2),encoding='utf-8')

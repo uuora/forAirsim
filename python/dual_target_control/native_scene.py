@@ -7,6 +7,7 @@ No images, flight commands, pause, reset, or simulator launch happen here.
 from __future__ import annotations
 
 from copy import deepcopy
+import json
 from pathlib import Path
 import queue
 import re
@@ -15,6 +16,7 @@ import time
 
 from .overview import OverviewStream
 from .core import ControlConfig
+from .route_milestones import target_marker_scale
 from .simulator import ROOT
 
 
@@ -89,6 +91,7 @@ class NativeScene:
         self._client = None
         self._markers = None
         self._receipts = []
+        self._drone_materials = []
         self._log_path = ROOT / 'logs/dual_target_control_ue.log'
 
     def _publish(self, **values):
@@ -125,14 +128,15 @@ class NativeScene:
         receipts=[]
         for i,name in enumerate(('DC_TargetRed','DC_TargetBlue')):
             point=payload['points'][i] if i<len(payload['points']) else None
+            marker_scale=target_marker_scale(self.config,payload['route_index']+i)
             xyz=np.array([0.,0.,1000.]) if point is None else np.asarray([point[0],point[1],-point[2]])+payload['origin']
             if point is not None:
-                if not self._client.simSetObjectScale(name,airsim.Vector3r(1.2,1.2,1.2)):raise RuntimeError('目标缩放失败：'+name)
+                if not self._client.simSetObjectScale(name,airsim.Vector3r(marker_scale,marker_scale,marker_scale)):raise RuntimeError('目标缩放失败：'+name)
             if not self._client.simSetObjectPose(name,airsim.Pose(airsim.Vector3r(*xyz),airsim.Quaternionr()),teleport=True):raise RuntimeError('目标放置失败：'+name)
             actual=self._client.simGetObjectPose(name).position;actual=[actual.x_val,actual.y_val,actual.z_val]
             if not np.allclose(actual,xyz,atol=.002):raise RuntimeError('目标位置读回不符：'+name)
             scale=self._client.simGetObjectScale(name);scale=[scale.x_val,scale.y_val,scale.z_val]
-            if point is not None and not np.allclose(scale,[1.2]*3,atol=.001):raise RuntimeError('目标尺寸读回不符：'+name)
+            if point is not None and not np.allclose(scale,marker_scale,atol=.001):raise RuntimeError('目标尺寸读回不符：'+name)
             receipts.append(dict(name=name,visible=point is not None,requested_ned=xyz.tolist(),observed_ned=actual,scale=scale,
                 route_index=payload['route_index'],reference_time_s=payload['reference_time_s'],
                 scope='Asynchronous display-thread pose/scale readback; no flight commands'))
@@ -140,7 +144,12 @@ class NativeScene:
 
     def _field_bounds_command(self):
         task=self.config.get('preparation',{}).get('task')
-        if task:
+        if self.config.get('small_field'):
+            (x_min, y_min, height_min), (x_max, y_max, height_max) = self.config['small_field']['bounds_zup_m']
+            ground = getattr(self.runtime, 'ground_origin_global_ned', (0., 0., 0.))
+            values = [x_min + ground[0], x_max + ground[0], y_min + ground[1], y_max + ground[1],
+                      height_min - ground[2], height_max - ground[2]]
+        elif task:
             import numpy as np
             points=np.asarray([task['start'],*task['points']],dtype=float)
             low=points.min(axis=0)-[3.,3.,2.];high=points.max(axis=0)+[3.,3.,2.]
@@ -150,6 +159,20 @@ class NativeScene:
             bounds=ControlConfig.from_dict(self.config.get('control',self.config))
             values=[getattr(bounds,key) for key in ('x_min','x_max','y_min','y_max','height_min','height_max')]
         return 'ke /Script/Blocks.DroneControlObserver SetFieldBounds '+' '.join(str(float(v)) for v in values)
+
+    def _scale_drone_visual(self):
+        if not self.config.get('ue_visualization'):
+            return
+        recipe = json.loads((ROOT / '.runtime/small_field_visuals.json').read_bytes())
+        options = self.config['airsim']
+        level = options['map']
+        pawn = f"{level}.{level.rsplit('/', 1)[-1]}:PersistentLevel.{options['vehicle']}"
+        for component, slots in recipe['components'].items():
+            target = f'{pawn}.{component}'
+            for index, slot in enumerate(slots):
+                self._receipts.append(reflected_command(self._client,
+                    f"ke {target} SetMaterial {index} {slot['scaled']}", self._log_path))
+                self._drone_materials.append(f"ke {target} SetMaterial {index} {slot['original']}")
 
     def close(self, timeout=None):
         with self._lock:
@@ -208,6 +231,7 @@ class NativeScene:
                 raise RuntimeError('；'.join(errors))
             return
         try:
+            self._scale_drone_visual()
             self._receipts.append(reflected_command(self._client,
                 self._field_bounds_command(), self._log_path))
             commands=view_commands(self.config['airsim']['map'],visible)
@@ -242,6 +266,12 @@ class NativeScene:
     def _restore(self):
         """Each rollback step runs even when another RPC fails; always hide."""
         errors = []
+        for command in self._drone_materials.copy():
+            try:
+                reflected_command(self._client, command, self._log_path)
+                self._drone_materials.remove(command)
+            except Exception as error:
+                errors.append(str(error))
         for command in view_commands(self.config['airsim']['map'], False):
             try:
                 self._receipts.append(reflected_command(self._client, command, self._log_path))

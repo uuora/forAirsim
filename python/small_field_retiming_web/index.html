@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小场地 TOPPQuad 实验回看</title>
+<style>
+:root{color-scheme:light;--ink:#142b32;--muted:#536a6d;--line:#d4e0de;--paper:#eef3f1;--base:#315f95;--auto:#097e69;--warm:#a05028}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 "Instrument Sans","Microsoft YaHei UI",system-ui,sans-serif}
+header{background:#143739;color:#f8fffb;border-bottom:4px solid #49a893}
+.heading,main{max-width:1340px;margin:auto;padding:28px clamp(14px,3vw,44px)}
+.heading{min-height:142px;display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap}
+h1,h2,h3,p{margin:0}
+h1{font-size:clamp(26px,4vw,42px);line-height:1.22;letter-spacing:-.035em}
+h2{font-size:21px;line-height:1.3}
+h3{font-size:15px}
+.heading p{color:#c4ded5;margin-top:10px}
+.files,.links{display:flex;gap:8px 14px;flex-wrap:wrap}
+.files a{color:#d4eee5;text-underline-offset:4px}
+a{color:#126854;text-underline-offset:3px}
+button,select{font:inherit;background:#fff;color:var(--ink);border:1px solid #b8ceca;border-radius:6px;min-height:38px;padding:4px 10px}
+button{cursor:pointer}
+button:hover{background:#dfeee9}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #329d86;outline-offset:3px}
+.controls,.card{background:#fff;border:1px solid var(--line);border-radius:9px}
+.controls{padding:12px 16px;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.controls label{display:flex;gap:10px;align-items:center}
+.summary{margin-left:auto;color:var(--muted);font-variant-numeric:tabular-nums}
+.card{overflow:hidden;padding:16px 18px;min-width:0}
+.card-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+.view-grid,.timing-grid,.detail-grid{display:grid;gap:14px;margin-top:14px}
+.view-grid{grid-template-columns:minmax(0,1.13fr) minmax(0,1fr)}
+.timing-grid,.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.legend,.muted,.chart-note{font-size:13px;color:var(--muted)}
+.legend{display:flex;gap:12px;margin:4px 0 8px;flex-wrap:wrap}
+.base{color:var(--base)}.auto{color:var(--auto)}.warn{color:var(--warm)}
+.scroll{overflow:auto}
+table{width:100%;border-collapse:collapse;text-align:left;font-variant-numeric:tabular-nums}
+th,td{padding:7px 8px;border-bottom:1px solid #e6edeb;white-space:nowrap}
+thead{color:var(--muted);background:#f2f6f5;font-size:13px}
+tbody tr:last-child td{border-bottom:0}
+td a{white-space:nowrap}
+canvas{display:block;width:100%;height:222px}
+.spatial{height:312px;background:#f3f8f7;border:1px solid #e0e9e7;border-radius:6px;position:relative;overflow:hidden}
+.spatial canvas{height:100%}
+.scene-label{position:absolute;left:0;top:0;font-size:11px;color:#254744;pointer-events:none}
+.player{display:flex;gap:10px;align-items:center;margin:12px 0 0}
+.player input{width:100%;min-width:36px;accent-color:var(--auto)}
+output{min-width:72px;font:14px "IBM Plex Mono",monospace;text-align:right}
+.chart-note{margin:6px 0}
+.comparison-group{margin-top:16px}
+.comparison-group th:nth-child(n+2),.comparison-group td:nth-child(n+2){text-align:right}
+#selection-note{color:var(--warm);margin:6px 0;overflow-wrap:anywhere}
+#selection-note:empty{display:none}
+details{margin-top:12px} summary{cursor:pointer;font-weight:600;margin-bottom:6px}
+[hidden]{display:none!important}
+@media(max-width:850px){.view-grid,.timing-grid,.detail-grid{grid-template-columns:1fr}.summary{margin-left:0}}
+@media(max-width:500px){.heading{padding-block:20px}.card{padding:12px}.spatial{height:260px}th,td{padding:6px}}
+</style>
+<header><div class="heading">
+  <div><h1>TOPPQuad 实验回看</h1><p>AirSim 小场地 · 普通计时与自动调整配对对照</p></div>
+  <nav class="files" aria-label="实验数据">
+    <a href="#comparisons">分基线对照</a>
+    <a href="flights.csv" download>逐架数据</a><a href="segments.csv" download>逐段数据</a>
+    <a href="pair_audit.json">配对审计</a><a href="design.json">航点与条件</a>
+  </nav>
+</div></header>
+<main>
+  <div class="controls">
+    <label>航线 <select id="route"></select></label>
+    <label>基础轨迹 <select id="geometry"></select></label>
+    <label id="retry-control" hidden>自动调整架次 <select id="attempt"><option value="initial">原始批次</option><option value="retry">同条件复测</option></select></label>
+    <span class="summary" id="summary"></span>
+  </div>
+  <section class="card" aria-labelledby="flight-title">
+    <div class="card-head"><h2 id="flight-title">飞行结果</h2><span id="pair-label" class="muted"></span></div>
+    <div id="selection-note" aria-live="polite"></div>
+    <div class="scroll"><table id="flights"></table></div>
+    <details><summary>中间航点与终点验收</summary><div class="scroll"><table id="waypoints"></table></div></details>
+  </section>
+  <div class="timing-grid">
+    <section class="card">
+      <h2>每段参考用时变化</h2>
+      <p class="chart-note">自动调整 − 普通计时。负值表示这一段缩短。</p>
+      <canvas id="delta" role="img" aria-label="逐段参考用时变化"></canvas>
+    </section>
+    <section class="card">
+      <h2>分段调整系数 α</h2>
+      <p class="chart-note">0 对应普通计时，1 对应该位置的完整 TOPPQuad 计时。相邻航点之间五次平滑过渡。</p>
+      <canvas id="alpha" role="img" aria-label="分段调整系数随路径进度变化"></canvas>
+    </section>
+  </div>
+  <section class="card" style="margin-top:14px">
+    <div class="card-head"><h2>逐段明细</h2><span class="muted" id="segment-total"></span></div>
+    <div class="scroll"><table id="segments"></table></div>
+  </section>
+  <div class="view-grid">
+    <section class="card">
+      <div class="card-head"><h2>轨迹回放</h2><div><button id="view" type="button">切换 XY</button> <button id="reset" type="button">重置视角</button></div></div>
+      <div class="legend"><span class="base">● 普通计时</span><span class="auto">● 自动调整</span></div>
+      <div class="spatial" id="scene3d"></div>
+      <div class="spatial" id="scene2d" hidden><canvas id="xy" role="img" aria-label="XY 轨迹回放"></canvas></div>
+      <div class="player"><button id="play" type="button">播放</button><input id="time" aria-label="回放时间" type="range" min="0" max="0" step="0.01"><output id="clock" for="time"></output></div>
+    </section>
+    <section class="card">
+      <h2>实测速度</h2><canvas id="speed" role="img" aria-label="实测速度随时间变化"></canvas>
+      <h3>同步位置误差</h3><canvas id="error" role="img" aria-label="实测位置与同步参考位置的误差"></canvas>
+    </section>
+  </div>
+  <section class="card" id="comparisons" aria-labelledby="comparison-title" style="margin-top:14px">
+    <div class="card-head"><h2 id="comparison-title">各基线的配对对照</h2></div>
+    <p class="chart-note">规划采用墙钟时间，运行采用 AirSim 实测跟踪用时，含终点停稳。</p>
+    <p class="chart-note">减少时间以同航线基线为参照。运行降幅为减少时间 ÷ 基线运行时间，优化效率为减少时间 ÷ 新增规划时间。两组均通过且条件匹配时计算。</p>
+    <div id="comparison-tables"></div>
+  </section>
+</main>
+<script id="data" type="application/json">/*DATA*/</script>
+<script>/*SCENE3D*/</script>
+<script>/*REPLAY*/</script>
+</html>

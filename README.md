@@ -1,81 +1,23 @@
-# AirSim 快基线与 TOPPQuad
+# AirSim 小场地轨迹实验
 
-双击 **打开轨迹实验面板.cmd**。在 Qt5 窗口选择逐点停稳或连续过点、Hermite 或 Bézier，再选普通基线或 TOPPQuad。点击 **启动 / 连接 AirSim** 后可在 UE 场景里观察。点击 **开始所选飞行** 才会起飞。飞机先到准备点，再悬停规划，执行结束后降落。
+双击「打开轨迹实验面板.cmd」进入 8 × 8 × 2.5 m 小场地。路线可选共用航线、S 型、U 型回转和三维拱形。选好路线、曲线和计时后先点击「启动 / 连接 AirSim」，再点击「开始所选飞行」。面板可回放实测轨迹、打开原始数据和回看三航线对比。
 
-窗口下方可以选择一条记录，点击 **回放** 或拖动时间轴。绿线是参考，紫红线是 AirSim 实测位置，橙色箭头为机头。左拖旋转，右拖平移，滚轮缩放，双击恢复任务全景。**打开数据** 会打开所选飞行的原始目录。**查看批次对比** 可查看最近完成的批次，Hermite 和 Bézier 分表展示。
+- **三种普通基线**为分段五次 Hermite、分段五次 Bézier 和七次 B 样条。当前 Hermite 与 Bézier 使用等价的曲线表示。
+- **TOPPQuad** 在选定几何上重计时。完整组使用原始解，自动调整组在原始解上搜索分段计时比例。两组使用同一个跟踪器和实测验收流程。
+- **连续过点**从 (0, 0, 0.50) m 准备。三维参考速度和加速度上限分别为 1.60 m/s 与 1.50 m/s。协议 18 按目标到可见机身三维外框的最短距离验收，外框随实测姿态旋转。中间点按顺序要求距离 ≤ 0.30 m 且同一样本速度 ≥ 0.50 m/s。参考结束起，终点距离 ≤ 0.25 m 与速度 ≤ 0.50 m/s 须连续保持 1 s。姿态、边界和采样保护见小场地配置。关闭 AirSim 相机截图和自动录制。[小场地配置](configs/small_field.json)
 
-## 两组方法共用的设置
+## 近期实测
 
-完整的[实验条件、规划设置、执行步骤与实测验收表](docs/实验条件与设置.html)可直接用浏览器打开。
+- [三航线配对回放](reports/small_field_retiming_pairs_20261126_111420_738367/index.html)对比三种基线各自的普通计时与自动调整。首轮 18 项中 17 项通过，三维拱形 Hermite 自动组的时序中止和通过的复测均保留。
+- [三航线五方法对照](reports/small_field_three_routes_20261126_103941_029805/README.md)保留三条航线的普通基线、Hermite 完整组和自动调整组。完整组的三项规划预检拒绝均有回执。
+- [三条航线的航点](configs/small_field_routes.json)取自冻结实验设计。仓库保留两批的冻结设计、逐架指标及审计回执。原始状态、指令、姿态和落地回执保存在实验机的 `logs/`。
+- [协议 18 机身外框验收实测](reports/small_field_pilot_20261127_105616_772011/audit.json)和 [MINVO 离线预检对比](reports/small_field_minvo_20261127/comparison.json)分别记录外框冒烟及 Hermite 预检结果。
 
-快基线取自 `D:\forAirsim` 旧轨迹实验面板的协议 15。普通 Hermite 和普通 Bézier 用相同端点状态构造同一条分段五次曲线。TOPPQuad 对所选曲线做一次离线计时，随后共用原面板的速度反馈、偏航控制、起降和验收。
-
-| 项目 | 默认值或验收条件 |
-|---|---|
-| 准备点与有序航点，米 | (0, 0, 5) → (8, 0, 5) → (12, 6, 7) → (6, 10, 6) |
-| 普通基线每段运动时长 | 段长除以 1.6 后加 1 秒，截在 3 至 7 秒之间，再除以统一倍率 1.25 |
-| 速度指令模长 / 指令变化率 | ≤ 6 m/s ／ ≤ 6 m/s² |
-| 偏航指令变化率 / 控制频率 | ≤ 120°/s ／ 50 Hz |
-| 逐点停稳的中间点 | 停留 1 s，停留结束时位置误差 ≤ 0.30 m、实测速度 ≤ 0.30 m/s |
-| 连续过点的中间点 | 普通基线参考速度 1.20 m/s，TOPPQuad 联合求解过点速度；计划过点时位置误差 ≤ 0.30 m、实测速度 ≥ 0.50 m/s |
-| 终点与全程 | 参考终速为零。参考结束时位置误差 ≤ 0.25 m、实测速度 ≤ 0.50 m/s。全程采样位置误差峰值 ≤ 0.30 m |
-| 运行保护 | 实际状态越界、新碰撞或相邻状态间隔超过 0.10 s 中止。复用协议 15，横滚、俯仰没有单独的角度验收门槛 |
-
-准备和规划墙钟与参考执行时间分别记录。速度指令上限和实测峰值分别报告。默认路线普通基线连续过点为 13.782 s，逐点停稳为 15.782 s，后者包含两次各 1 s 的停留。
-
-实时跟踪的加速度前馈按北、东、高度轴分别取 0.90、0.90、0.42 秒，两种方法使用同一组数值。共同预检使用按轴校准的一阶速度滞后和指令延迟，基于这一条路线的实测速度响应近似，验收以 AirSim 遥测为准。
-
-## TOPPQuad 接口
-
-使用本机固定版本 `3db181cb0c76baaa1669f859f16a83060c2ee7a0` 的上游 `TQ_trajectory.py`，载入前校验源码。两种方法共用 AirSim 的 GenericQuadX 和 SimpleFlight，并将当前实例核验的动力参数写入规划任务。TOPPQuad 用同一机型的质量、惯量、重力、推力上限和 Quad-X 力矩分配执行刚体计时。普通基线按距离规则计时，两者共用速度跟踪代理预检。固定路线、连续过点时的参考速度、停留时间和执行器的速度指令接口来自本实验。
-
-连续过点时，飞机在准备点悬停，TOPPQuad 对整条几何路径求解一次。原始解给出相位速率的平方 `h_raw(s)`。规划器在起点、各中间航点和终点分别选择 [0, 1] 内的系数，用五次平滑插值组成 `α(s)`，执行计时为 `h(s) = 1 + α(s) × (h_raw(s) − 1)`。过点速度由路径导数和该处相位速率共同决定。固定系数和零系数也参加搜索，在已评价且通过全部预检的候选中选参考用时最短的一条。飞行前冻结整条参考。逐点停稳按各运动段求解，使用固定比例并插入规定停留。
-
-分段策略及其固定比例对照共用按轴前馈、预测模型和名义指令余量（4.44 m/s、5.16 m/s²）。预测按全路线传播速度滞后和指令延迟，反向积分扣除转弯法向加速度后可用的制动能力。默认给预测误差预留 0.13 m，来自旧路线 37.5% 扫描中约 0.128 m 的预测低估。预检还采样核验固定偏航下的标称单旋翼推力上下界。运行时按 SimpleFlight 的实测状态验收，全程采样位置误差仍须 ≤ 0.30 m。该裕量在新路线上的适用性需要实测。
-
-每次的 `validation.json` 记录全部候选、预测和选中结果。飞行的 `live_manifest.json` 中，`retiming_profile` 保存相位节点与系数，`waypoint_times` 保存导出的过点时刻和速度，`solver` 保存原始刚体解及其推力记录。比对页独立检查准备点到达顺序、求解次数、候选选择与实际遥测。
-
-## 文件与复现
-
-三条连续过点路线的 12 架次实测、节点系数曲线和可独立复算的遥测包见[分段计时实测结果](reports/segment_retiming_20261122/README.md)。
-
-- `configs/fast_route.json` 定义默认任务和速度指令限制。坐标使用北、东、向上，高度单位为米。
-- `reports/prepared_route_plan_*/` 保存冻结参考和模型校验。 `logs/dual_target_airsim_*/` 保存执行记录，包括 `states.csv`、`live_states.jsonl`、`summary.json`、落地回执和条件指纹。
-- 本机通过 `.venv` 和 `external/AirSim` 复用现有 forAirsim 环境。TOPPQuad 源码和 CasADi 位于项目自己的 `.runtime/toppquad_upstream` 和 `.runtime/toppquad_deps`。
-- VS Code 的 **运行任务 → AirSim · 打开轨迹实验面板** 也可以打开同一窗口。
-
-换机器时需要相同的已编译 Blocks 场景、UE 4.27 和本机核对过的 Python 依赖版本（`requirements.txt`）。TOPPQuad 源码可从固定提交恢复到上述目录。本机已安装。
-
-```powershell
-git clone https://github.com/maokat12/lbTOPPQuad.git .runtime/toppquad_upstream
-git -C .runtime/toppquad_upstream checkout --detach 3db181cb0c76baaa1669f859f16a83060c2ee7a0
-```
-
-在项目根目录运行以下命令可以检查界面，或按给定顺序实飞。批量在可见窗口中执行，每次确认落地后继续。
+## 本机检查与复现
 
 ```powershell
 .\打开轨迹实验面板.cmd --check
-.\打开轨迹实验面板.cmd --verify-flights pass/hermite/ordinary pass/hermite/toppquad-fixed pass/hermite/toppquad
-.\打开轨迹实验面板.cmd --verify-flights pass/hermite/toppquad --waypoints "[[7,1,5],[10,7,6],[5,11,7]]"
+.\打开轨迹实验面板.cmd --route-preset s --verify-flights pass/hermite/ordinary pass/hermite/toppquad
 ```
 
-## 长距离路线预设
-
-实验面板的路线下拉框可填写 36 m 短直线及五条 72 m 预设。72 m 组每段约 12 m，覆盖等高直线、90° 和 135° 航向转折、累计上升 8 m 和累计下降 8 m。各路线使用同一 AirSim 场景，长度按航点间三维直线距离求和。路线坐标保存在 [长距离预设](configs/long_distance_routes.json)。
-
-```powershell
-.\打开轨迹实验面板.cmd --route-preset turn_135
-.\.venv\python.exe python/run_long_distance_experiment.py --airsim
-```
-
-第二条命令执行 18 架次对照，每架次从新开的仿真实例起飞。可加 `--routes straight_72 turn_135` 只跑指定预设。每次状态和结果保存在 `reports/long_distance_run_*/`。
-
-36/72 m 对照、五条长路线的速度与误差、计时改变量的推导及学习加速设计见 [长距离分段计时实验](reports/long_distance_retiming_20261122/README.md)。
-
-## 连续过点的计时比例实飞扫描
-
-使用已完成的连续过点 TOPPQuad 飞行的 live_manifest.json 作为来源。面板按严格升序执行指定的比例，所有档位复用同一份求解结果。扫描记录名义指令余量检查，执行仍受共用速度与变化率限幅以及原航点、终点和位置误差门槛约束。某一档未通过或未确认落地，批次停止提高比例。原始日志和未执行档位可在批次回执中核对。
-
-```powershell
-.\打开轨迹实验面板.cmd --retiming-source "logs\<已完成的飞行目录>\live_manifest.json" --retiming-sweep .125 .15 .175 .2
-```
+第一条离屏检查面板，第二条执行两架次。路线参数还可用 `u-turn` 和 `arch`。本机复用 `.venv`、已编译的 AirSim Blocks 和 UE 4.27。TOPPQuad 使用 [lbTOPPQuad](https://github.com/maokat12/lbTOPPQuad) 的固定提交 `3db181cb0c76baaa1669f859f16a83060c2ee7a0`。首次配置时将该版本检出到 `.runtime/toppquad_upstream`。主控依赖见 `requirements.txt`，AirSim 本地修改见[补丁说明](patches/README.md)。

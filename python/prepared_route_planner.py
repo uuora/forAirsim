@@ -6,24 +6,42 @@ import hashlib,json,os,sys,time,traceback
 from contextlib import redirect_stdout
 from pathlib import Path
 import numpy as np
-from dual_target_control.route_curve import route_spec
+from dual_target_control.route_curve import minimum_jerk_via_velocities, route_spec
 
 
-def prepared_spec(points,policy='stop',seed=1201,*,start=(0.,0.,5.),position_error_limit_m=None,tracking=None,retiming=None,**settings):
+def prepared_spec(points,policy='stop',seed=1201,*,start=(0.,0.,5.),position_error_limit_m=None,tracking=None,retiming=None,position_only_pass=False,small_field=None,**settings):
     # Obtain the unchanged rule/scalar schema independently of task geometry.
     spec=route_spec([[8.,0.,5.]],policy,seed,**settings)
     p=np.asarray(points,dtype=float);s=np.asarray(start,dtype=float)
     if s.shape!=(3,) or not np.isfinite(s).all():raise ValueError('准备点必须是三个有限坐标')
     if p.ndim!=2 or p.shape[1]!=3 or not 1<=len(p)<=10 or not np.isfinite(p).all():raise ValueError('请输入1至10个有限三维航点')
     chain=np.vstack([s,p]);delta=np.diff(chain,axis=0)
-    if np.any(chain<[-45,-45,3]) or np.any(chain>[45,45,23]):raise ValueError('准备点和航点须在x/y±45、高度3至23米内')
-    if np.any(np.linalg.norm(delta,axis=1)<2):raise ValueError('准备点和相邻航点至少相隔2米')
+    if small_field is None:
+        if np.any(chain<[-45,-45,3]) or np.any(chain>[45,45,23]):raise ValueError('准备点和航点须在x/y±45、高度3至23米内')
+        if np.any(np.linalg.norm(delta,axis=1)<2):raise ValueError('准备点和相邻航点至少相隔2米')
+    else:
+        lower, upper = np.asarray(small_field['bounds_zup_m'])
+        if np.any(chain < lower) or np.any(chain > upper) or np.any(np.linalg.norm(delta, axis=1) <= 0):
+            raise ValueError('准备点和航点须位于实验区内，相邻点坐标须不同')
+        if not np.array_equal(s, small_field['start']) or not np.array_equal(p, small_field['waypoints']):
+            raise ValueError('小场地实验须使用统一准备点和航点')
+        spec.update(small_field=small_field, waypoint_radius_m=small_field['waypoint_radius_m'],
+                    minimum_pass_speed_mps=small_field['minimum_pass_speed_mps'])
+    if position_only_pass and policy != 'pass':
+        raise ValueError('只验位置模式仅适用于连续过点')
     velocities=np.zeros_like(p)
     if policy=='pass':
         for i in range(len(p)-1):
             a=delta[i]/np.linalg.norm(delta[i]);b=delta[i+1]/np.linalg.norm(delta[i+1])
             if a@b<-.85:raise ValueError('连续过点暂不接受近原地掉头，请增大转弯空间')
-            velocities[i]=(a+b)/np.linalg.norm(a+b)*spec['pass_speed_mps']
+            if not position_only_pass:
+                velocities[i]=(a+b)/np.linalg.norm(a+b)*spec['pass_speed_mps']
+    if position_only_pass:
+        velocities=minimum_jerk_via_velocities(chain,spec['time_scale'])[1:]
+        spec.pop('pass_speed_mps')
+        spec.pop('minimum_pass_speed_mps')
+        spec['future_optimization'].pop('pass_speed_scale')
+        spec.update(waypoint_acceptance='position_only', waypoint_velocity_source='minimum_jerk_free_interior')
     spec.update(start=s.tolist(),waypoints=p.tolist(),waypoint_velocities=velocities.tolist())
     if position_error_limit_m is not None:
         if not 0 < position_error_limit_m <= .5:
@@ -36,17 +54,21 @@ def prepared_spec(points,policy='stop',seed=1201,*,start=(0.,0.,5.),position_err
                 raise ValueError('无效的跟踪参数：' + name)
         spec['tracking'] = tracking
     if retiming is not None:
+        if retiming.get('nominal_bound_basis', 'bernstein') not in ('bernstein', 'minvo'):
+            raise ValueError('未知名义指令上界基函数')
         if not all(0 < retiming[key] <= 1 for key in ('nominal_speed_fraction', 'nominal_slew_fraction')):
             raise ValueError('名义速度与变化率占比须在 (0, 1] 内')
         if retiming.get('continuous_waypoint_speed', 'fixed') not in ('fixed', 'optimize'):
             raise ValueError('连续过点速度模式无效')
+        if position_only_pass and retiming.get('continuous_waypoint_speed') != 'optimize':
+            raise ValueError('只验位置模式不允许TOPPQuad固定中间航点速度')
         profile = retiming.get('continuous_profile', 'fixed')
         if profile not in ('fixed', 'segmented'):
             raise ValueError('连续计时模式无效')
         if policy == 'pass' and profile == 'segmented':
             if retiming.get('continuous_waypoint_speed') != 'optimize':
                 raise ValueError('分段计时需要自由过点速度')
-            if not 0 <= retiming.get('tracking_error_margin_m', 0.) < spec.get('peak_position_limit_m', .5):
+            if small_field is None and not 0 <= retiming.get('tracking_error_margin_m', 0.) < spec.get('peak_position_limit_m', .5):
                 raise ValueError('预测误差裕量须小于位置门槛')
         fractions = retiming['fractions']
         if not fractions or any(not 0 < value <= 1 for value in fractions) or fractions != sorted(set(fractions), reverse=True):

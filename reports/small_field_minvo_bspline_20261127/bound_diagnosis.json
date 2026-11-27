@@ -1,0 +1,2984 @@
+{
+  "candidate_counts": [
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "count": 66,
+      "reference_failed": 3,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.5293419031512645,
+      "max_slew_tightening": 0.013038557318564514,
+      "gain": 0,
+      "loss": 0,
+      "bernstein_automatic": 14.2682314861951,
+      "minvo_automatic": 14.2682314861951,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6069165935320888,
+            "peak_acceleration_mps2": 1.7048313621815,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.4500007753746775,
+              4.701217825410087,
+              0.8256726076671158
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.80855593331893,
+            20.442700922734378
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6069165935320888,
+            "peak_acceleration_mps2": 1.7048313621815,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.4500007753746775,
+              4.701217825410087,
+              0.8256726076671158
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.808749049848817,
+            20.444624764580382
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "count": 74,
+      "reference_failed": 0,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.3603795354133674,
+      "max_slew_tightening": 0.013875510443766892,
+      "gain": 0,
+      "loss": 0,
+      "bernstein_automatic": 12.941079129915861,
+      "minvo_automatic": 12.941079129915861,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6061055838284886,
+            "peak_acceleration_mps2": 1.6961108596164123,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.3720601152276695,
+              5.4500000001748825,
+              1.0121441795732666
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.6889672159991296,
+            13.998157559864298
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6061055838284886,
+            "peak_acceleration_mps2": 1.6961108596164123,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.3720601152276695,
+              5.4500000001748825,
+              1.0121441795732666
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.688791371363094,
+            14.010087025396489
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "count": 58,
+      "reference_failed": 0,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.3831333807399186,
+      "max_slew_tightening": 0.008067841278962984,
+      "gain": 0,
+      "loss": 0,
+      "bernstein_automatic": 10.67650807831591,
+      "minvo_automatic": 10.67650807831591,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6019951556665657,
+            "peak_acceleration_mps2": 1.5927033299597462,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.4642316444940248
+            ],
+            "max_position_zup_m": [
+              6.450000003286312,
+              5.3500000025716625,
+              2.380699601449837
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.82197078982156,
+            13.85386241979264
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6019951556665657,
+            "peak_acceleration_mps2": 1.5927033299597462,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.4642316444940248
+            ],
+            "max_position_zup_m": [
+              6.450000003286312,
+              5.3500000025716625,
+              2.380699601449837
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.821813766651413,
+            13.85051655171422
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "count": 66,
+      "reference_failed": 3,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.529340703206999,
+      "max_slew_tightening": 0.013038556383986766,
+      "gain": 0,
+      "loss": 0,
+      "bernstein_automatic": 14.268231635780346,
+      "minvo_automatic": 14.268231635780346,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6069165933496117,
+            "peak_acceleration_mps2": 1.7048310771579203,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.450000775374691,
+              4.701217825410087,
+              0.8256726076671148
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.8085539385646707,
+            20.442699631891127
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6069165933496117,
+            "peak_acceleration_mps2": 1.7048310771579203,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.450000775374691,
+              4.701217825410087,
+              0.8256726076671148
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.8087470517743234,
+            20.444623465753903
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "count": 74,
+      "reference_failed": 0,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.3603795354132076,
+      "max_slew_tightening": 0.013875510443394745,
+      "gain": 0,
+      "loss": 0,
+      "bernstein_automatic": 12.94107912991546,
+      "minvo_automatic": 12.94107912991546,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6061055838284823,
+            "peak_acceleration_mps2": 1.696110859616301,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.372060115227668,
+              5.450000000174878,
+              1.0121441795732666
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.688967215999555,
+            13.998157559895807
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6061055838284823,
+            "peak_acceleration_mps2": 1.696110859616301,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "max_position_zup_m": [
+              6.372060115227668,
+              5.450000000174878,
+              1.0121441795732666
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.6887913713635196,
+            14.010087025431282
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "count": 58,
+      "reference_failed": 0,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.383133380739877,
+      "max_slew_tightening": 0.008067841279097099,
+      "gain": 0,
+      "loss": 0,
+      "bernstein_automatic": 10.676508078315873,
+      "minvo_automatic": 10.676508078315873,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6019951556665748,
+            "peak_acceleration_mps2": 1.5927033299598303,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.46423164449402493
+            ],
+            "max_position_zup_m": [
+              6.450000003286327,
+              5.350000002571671,
+              2.380699601449837
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.8219707898215702,
+            13.853862419775112
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6019951556665748,
+            "peak_acceleration_mps2": 1.5927033299598303,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.46423164449402493
+            ],
+            "max_position_zup_m": [
+              6.450000003286327,
+              5.350000002571671,
+              2.380699601449837
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.8218137666514163,
+            13.850516551695552
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "count": 76,
+      "reference_failed": 5,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.8146272693169716,
+      "max_slew_tightening": 0.011672445040478152,
+      "gain": 0,
+      "loss": 0,
+      "bernstein_automatic": 12.97716878457747,
+      "minvo_automatic": 12.97716878457747,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6052967266676836,
+            "peak_acceleration_mps2": 1.630430039376514,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5000000000000001
+            ],
+            "max_position_zup_m": [
+              6.450000255049744,
+              4.654217886604616,
+              0.9188484733462867
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.8516836543535033,
+            11.547782870506184
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6052967266676836,
+            "peak_acceleration_mps2": 1.630430039376514,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.5000000000000001
+            ],
+            "max_position_zup_m": [
+              6.450000255049744,
+              4.654217886604616,
+              0.9188484733462867
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.8515234422642837,
+            11.528259398748869
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "count": 80,
+      "reference_failed": 14,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.866724544487257,
+      "max_slew_tightening": 0.006006374024755345,
+      "gain": 0,
+      "loss": 4,
+      "bernstein_automatic": 13.476151941659847,
+      "minvo_automatic": 13.489111964523621,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6065652274895725,
+            "peak_acceleration_mps2": 1.6968235890568661,
+            "min_position_zup_m": [
+              -2.4501730937480343e-08,
+              -3.5223559358245696e-08,
+              0.49999999311973836
+            ],
+            "max_position_zup_m": [
+              7.08524254998682,
+              5.450000193088533,
+              1.0543867812477175
+            ],
+            "inside_field": false,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.863180029184507,
+            13.072332871541777
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6065652274895725,
+            "peak_acceleration_mps2": 1.6968235890568661,
+            "min_position_zup_m": [
+              -2.4501730937480343e-08,
+              -3.5223559358245696e-08,
+              0.49999999311973836
+            ],
+            "max_position_zup_m": [
+              7.08524254998682,
+              5.450000193088533,
+              1.0543867812477175
+            ],
+            "inside_field": false,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.862985739766233,
+            13.075822445314671
+          ]
+        }
+      }
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "count": 93,
+      "reference_failed": 3,
+      "limits": [
+        8.879999999999999,
+        5.16
+      ],
+      "eligible_rejected_by_speed": {
+        "bernstein": 0,
+        "minvo": 0
+      },
+      "max_speed_bound": 2.673927847825984,
+      "max_slew_tightening": 0.008169972268042613,
+      "gain": 0,
+      "loss": 24,
+      "bernstein_automatic": 10.822441660273377,
+      "minvo_automatic": 10.839567518162498,
+      "full": {
+        "bernstein": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6015980753315036,
+            "peak_acceleration_mps2": 1.5752075699350525,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.42346697953801166
+            ],
+            "max_position_zup_m": [
+              6.45,
+              5.349999999999999,
+              2.42835191689453
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.7670845199941065,
+            14.576400920151073
+          ]
+        },
+        "minvo": {
+          "reference": {
+            "passed": false,
+            "peak_speed_mps": 1.6015980753315036,
+            "peak_acceleration_mps2": 1.5752075699350525,
+            "min_position_zup_m": [
+              0.0,
+              0.0,
+              0.42346697953801166
+            ],
+            "max_position_zup_m": [
+              6.45,
+              5.349999999999999,
+              2.42835191689453
+            ],
+            "inside_field": true,
+            "terminal_reference_at_rest": true
+          },
+          "bounds": [
+            2.7670224747455574,
+            14.59510421042695
+          ]
+        }
+      }
+    }
+  ],
+  "limiting_candidates": [
+    {
+      "route": "u-turn",
+      "duration": 13.476151941659847,
+      "exact_peak": 5.146621603316108,
+      "peak_piece": 32,
+      "peak_piece_parameter": 1.0,
+      "exact_peak_time_s": 4.643288328391615,
+      "peak_acceleration": [
+        -0.7957387859148106,
+        -1.0775007120295113,
+        -0.26154465274813726
+      ],
+      "peak_feedforward_jerk": [
+        -4.076417241109601,
+        2.725920459878952,
+        0.08120632917340691
+      ],
+      "detail": {
+        "piece_index": 32,
+        "leaf_index": 7,
+        "leaf_start_s": 4.6310908680052885,
+        "leaf_end_s": 4.643288328391615,
+        "bernstein_vectors": [
+          [
+            -4.424607825402275,
+            1.2124407823998475,
+            -0.20728891638895447
+          ],
+          [
+            -4.5769514835823815,
+            1.3524594575280624,
+            -0.19892449109768662
+          ],
+          [
+            -4.726152568804849,
+            1.4977658565816707,
+            -0.1899458072628636
+          ],
+          [
+            -4.872156027024556,
+            1.6484197478503069,
+            -0.18033832357418153
+          ]
+        ],
+        "bernstein_norms": [
+          4.5923997816278055,
+          4.776735540144811,
+          4.96144133034537,
+          5.146621603316502
+        ],
+        "minvo_vectors": [
+          [
+            -4.39102082304157,
+            1.1803137613818626,
+            -0.2092542245957561
+          ],
+          [
+            -4.783261742511073,
+            1.5555045011977293,
+            -0.18630265869540963
+          ],
+          [
+            -4.905297322015572,
+            1.6812944099902822,
+            -0.1782856300653163
+          ],
+          [
+            -4.518261531203404,
+            1.2973724521284182,
+            -0.20225771249945285
+          ]
+        ],
+        "minvo_norms": [
+          4.551702074411641,
+          5.033278835039187,
+          5.1884948179915815,
+          4.705185514531785
+        ],
+        "minvo_worst_control": 2,
+        "phase_reference_waypoints": [
+          2.9542919813417408,
+          5.22035655013093,
+          7.205705952074178,
+          9.960116427557738,
+          13.476151941659847
+        ],
+        "bernstein_tetrahedron_volume": 1.4413409000138668e-09,
+        "minvo_tetrahedron_volume": 6.107231561247292e-10
+      },
+      "by_depth": [
+        {
+          "depth": 0,
+          "bernstein": 6.026119329584436,
+          "minvo": 5.51368732415523,
+          "bernstein_indices": [
+            100,
+            0,
+            1
+          ],
+          "minvo_indices": [
+            29,
+            0
+          ],
+          "rounding_residual": 2.2887833992611187e-16,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 1,
+          "bernstein": 5.146621603316502,
+          "minvo": 5.332042611298846,
+          "bernstein_indices": [
+            32,
+            1,
+            3
+          ],
+          "minvo_indices": [
+            29,
+            0
+          ],
+          "rounding_residual": 1.7763568394002505e-15,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 2,
+          "bernstein": 5.146621603316502,
+          "minvo": 5.236079212703998,
+          "bernstein_indices": [
+            32,
+            3,
+            3
+          ],
+          "minvo_indices": [
+            29,
+            0
+          ],
+          "rounding_residual": 9.222205069512407e-16,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 3,
+          "bernstein": 5.146621603316502,
+          "minvo": 5.188494817991582,
+          "bernstein_indices": [
+            32,
+            7,
+            3
+          ],
+          "minvo_indices": [
+            32,
+            7
+          ],
+          "rounding_residual": 8.899114524108741e-16,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 4,
+          "bernstein": 5.146621603316502,
+          "minvo": 5.167497456090582,
+          "bernstein_indices": [
+            32,
+            15,
+            3
+          ],
+          "minvo_indices": [
+            32,
+            15
+          ],
+          "rounding_residual": 9.155133597044475e-16,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 5,
+          "bernstein": 5.146621603316502,
+          "minvo": 5.157044098389579,
+          "bernstein_indices": [
+            32,
+            31,
+            3
+          ],
+          "minvo_indices": [
+            32,
+            31
+          ],
+          "rounding_residual": 9.159339953157541e-16,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 6,
+          "bernstein": 5.146621603316502,
+          "minvo": 5.151828962042738,
+          "bernstein_indices": [
+            32,
+            63,
+            3
+          ],
+          "minvo_indices": [
+            32,
+            63
+          ],
+          "rounding_residual": 2.6743472926073828e-15,
+          "weight_sum_bound": 1.0
+        }
+      ]
+    },
+    {
+      "route": "arch",
+      "duration": 10.822441660273377,
+      "exact_peak": 5.157102858046601,
+      "peak_piece": 100,
+      "peak_piece_parameter": 0.0,
+      "exact_peak_time_s": 10.543801778656677,
+      "peak_acceleration": [
+        -0.1988354584885745,
+        -0.15010817852125816,
+        -0.32541689246441197
+      ],
+      "peak_feedforward_jerk": [
+        3.7874904547616,
+        2.85792407224208,
+        2.8522723081758006
+      ],
+      "detail": {
+        "piece_index": 100,
+        "leaf_index": 0,
+        "leaf_start_s": 10.543801778656677,
+        "leaf_end_s": 10.555727706909963,
+        "bernstein_vectors": [
+          [
+            3.588654996270255,
+            2.7078158937204337,
+            2.5268554157115766
+          ],
+          [
+            3.3944177954277954,
+            2.561394466141122,
+            2.3991526845410407
+          ],
+          [
+            3.2066329526748008,
+            2.419824869618434,
+            2.2746476032485843
+          ],
+          [
+            3.025404490204667,
+            2.283185359252413,
+            2.1534933348832337
+          ]
+        ],
+        "bernstein_norms": [
+          5.157102858044561,
+          4.882493971817655,
+          4.616499649276312,
+          4.359305134702278
+        ],
+        "minvo_vectors": [
+          [
+            3.631102108539074,
+            2.7398155788318785,
+            2.5549200473703135
+          ],
+          [
+            3.1353896848359897,
+            2.3661119128705477,
+            2.227171330525172
+          ],
+          [
+            2.983871874418473,
+            2.2518733295175966,
+            2.1258890511868076
+          ],
+          [
+            3.4689044840272842,
+            2.617546312230984,
+            2.4482616613442003
+          ]
+        ],
+        "minvo_norms": [
+          5.217193534564488,
+          4.515467439315349,
+          4.30044522265942,
+          4.987868500510663
+        ],
+        "minvo_worst_control": 0,
+        "phase_reference_waypoints": [
+          2.9825508273459045,
+          6.01151378865543,
+          8.525050102302494,
+          10.822441660273377
+        ],
+        "bernstein_tetrahedron_volume": 3.87084516856918e-11,
+        "minvo_tetrahedron_volume": 1.6401496590924786e-11
+      },
+      "by_depth": [
+        {
+          "depth": 0,
+          "bernstein": 5.974911037933399,
+          "minvo": 5.560896421570006,
+          "bernstein_indices": [
+            3,
+            0,
+            2
+          ],
+          "minvo_indices": [
+            100,
+            0
+          ],
+          "rounding_residual": 1.4217791915866692e-15,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 1,
+          "bernstein": 5.210728089737626,
+          "minvo": 5.381270940032597,
+          "bernstein_indices": [
+            3,
+            1,
+            1
+          ],
+          "minvo_indices": [
+            100,
+            0
+          ],
+          "rounding_residual": 1.6616296724220897e-15,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 2,
+          "bernstein": 5.157102858044561,
+          "minvo": 5.274609407910389,
+          "bernstein_indices": [
+            100,
+            0,
+            0
+          ],
+          "minvo_indices": [
+            100,
+            0
+          ],
+          "rounding_residual": 1.0877919644084146e-15,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 3,
+          "bernstein": 5.157102858044561,
+          "minvo": 5.217193534564489,
+          "bernstein_indices": [
+            100,
+            0,
+            0
+          ],
+          "minvo_indices": [
+            100,
+            0
+          ],
+          "rounding_residual": 1.0877919644084146e-15,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 4,
+          "bernstein": 5.157102858044561,
+          "minvo": 5.187480263622685,
+          "bernstein_indices": [
+            100,
+            0,
+            0
+          ],
+          "minvo_indices": [
+            100,
+            0
+          ],
+          "rounding_residual": 1.3322676295501878e-15,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 5,
+          "bernstein": 5.157102858044561,
+          "minvo": 5.172374291934811,
+          "bernstein_indices": [
+            100,
+            0,
+            0
+          ],
+          "minvo_indices": [
+            100,
+            0
+          ],
+          "rounding_residual": 1.88411095042053e-15,
+          "weight_sum_bound": 1.0
+        },
+        {
+          "depth": 6,
+          "bernstein": 5.157102858044561,
+          "minvo": 5.164759222026147,
+          "bernstein_indices": [
+            100,
+            0,
+            0
+          ],
+          "minvo_indices": [
+            100,
+            0
+          ],
+          "rounding_residual": 1.4043333874306805e-15,
+          "weight_sum_bound": 1.0
+        }
+      ]
+    }
+  ],
+  "exact_rejection_counts": [
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "evaluated": 20,
+      "bernstein_rejected": 20,
+      "bernstein_rejected_true_exceedance": 20,
+      "minvo_rejected": 20,
+      "minvo_rejected_true_exceedance": 20
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "evaluated": 18,
+      "bernstein_rejected": 18,
+      "bernstein_rejected_true_exceedance": 18,
+      "minvo_rejected": 18,
+      "minvo_rejected_true_exceedance": 18
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "evaluated": 16,
+      "bernstein_rejected": 16,
+      "bernstein_rejected_true_exceedance": 16,
+      "minvo_rejected": 16,
+      "minvo_rejected_true_exceedance": 16
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "evaluated": 20,
+      "bernstein_rejected": 20,
+      "bernstein_rejected_true_exceedance": 20,
+      "minvo_rejected": 20,
+      "minvo_rejected_true_exceedance": 20
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "evaluated": 18,
+      "bernstein_rejected": 18,
+      "bernstein_rejected_true_exceedance": 18,
+      "minvo_rejected": 18,
+      "minvo_rejected_true_exceedance": 18
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "evaluated": 16,
+      "bernstein_rejected": 16,
+      "bernstein_rejected_true_exceedance": 16,
+      "minvo_rejected": 16,
+      "minvo_rejected_true_exceedance": 16
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "evaluated": 13,
+      "bernstein_rejected": 13,
+      "bernstein_rejected_true_exceedance": 13,
+      "minvo_rejected": 13,
+      "minvo_rejected_true_exceedance": 13
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "evaluated": 9,
+      "bernstein_rejected": 5,
+      "bernstein_rejected_true_exceedance": 5,
+      "minvo_rejected": 9,
+      "minvo_rejected_true_exceedance": 5,
+      "minvo_rejected_bound_only": 4,
+      "bound_only_peak_at_piece_endpoint": 4
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "evaluated": 40,
+      "minvo_rejected": 40,
+      "minvo_rejected_bound_only": 24,
+      "bound_only_peak_at_piece_endpoint": 24,
+      "bernstein_rejected": 16,
+      "bernstein_rejected_true_exceedance": 16,
+      "minvo_rejected_true_exceedance": 16
+    }
+  ],
+  "exact_rejections": [
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.522812394897885,
+      "bernstein_bound": 9.245101609948081,
+      "minvo_bound": 9.247313688133756,
+      "peak": 9.213241356766947,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.3948419670051442
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.391156954855791,
+      "bernstein_bound": 14.461240253100225,
+      "minvo_bound": 14.486090426203853,
+      "peak": 14.450652088925363,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.37175867147682534
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.523535370752242,
+      "bernstein_bound": 5.730645623496427,
+      "minvo_bound": 5.740318591854998,
+      "peak": 5.730645623503092,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.508025290319624,
+      "bernstein_bound": 5.805858349546252,
+      "minvo_bound": 5.794117282895548,
+      "peak": 5.780747520311194,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.4221663660147738
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.461668792499498,
+      "bernstein_bound": 6.904089583311395,
+      "minvo_bound": 6.895975503563519,
+      "peak": 6.873110289465984,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.41136727968882314
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.46541495032169,
+      "bernstein_bound": 5.320619749211846,
+      "minvo_bound": 5.328789998584996,
+      "peak": 5.3206197492178,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.481209462493187,
+      "bernstein_bound": 5.283297134503414,
+      "minvo_bound": 5.291400460612932,
+      "peak": 5.283297134502554,
+      "limit": 5.16,
+      "peak_piece": 62,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.500272924620221,
+      "bernstein_bound": 5.501464053338024,
+      "minvo_bound": 5.51069758151155,
+      "peak": 5.501464053339483,
+      "limit": 5.16,
+      "peak_piece": 62,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.432090329896925,
+      "bernstein_bound": 5.423913753647044,
+      "minvo_bound": 5.4370839958375985,
+      "peak": 5.423913753648001,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.214552888858288,
+      "bernstein_bound": 6.7625835644609475,
+      "minvo_bound": 6.7826557057642765,
+      "peak": 6.7625835644600105,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.283842528322717,
+      "bernstein_bound": 5.277121152847936,
+      "minvo_bound": 5.264082595529372,
+      "peak": 5.256261679839218,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.4283734598259693
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.284916534673837,
+      "bernstein_bound": 5.170624453250541,
+      "minvo_bound": 5.178237168670053,
+      "peak": 5.170624453295015,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.286329808365535,
+      "bernstein_bound": 5.220389084159606,
+      "minvo_bound": 5.228187285122264,
+      "peak": 5.220389084159147,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.294557834544392,
+      "bernstein_bound": 5.1752691637501735,
+      "minvo_bound": 5.182814704762502,
+      "peak": 5.175269163750994,
+      "limit": 5.16,
+      "peak_piece": 62,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.273741078972199,
+      "bernstein_bound": 5.183544971463985,
+      "minvo_bound": 5.195494348100846,
+      "peak": 5.183544971467017,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.27904079052143,
+      "bernstein_bound": 5.263285763718184,
+      "minvo_bound": 5.275637686904774,
+      "peak": 5.263285763719773,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.516390247901297,
+      "bernstein_bound": 5.244214007304017,
+      "minvo_bound": 5.269426978578428,
+      "peak": 5.244214007302879,
+      "limit": 5.16,
+      "peak_piece": 19,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.363038828509412,
+      "bernstein_bound": 6.521349426822834,
+      "minvo_bound": 6.553601070407435,
+      "peak": 6.521349426822243,
+      "limit": 5.16,
+      "peak_piece": 19,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 14.11925986306129,
+      "bernstein_bound": 9.331988772223,
+      "minvo_bound": 9.379855248076389,
+      "peak": 9.33198877222315,
+      "limit": 5.16,
+      "peak_piece": 19,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "s",
+      "duration_s": 15.032622202156395,
+      "bernstein_bound": 5.327296674421731,
+      "minvo_bound": 5.327920735124828,
+      "peak": 5.314548140600172,
+      "limit": 5.16,
+      "peak_piece": 3,
+      "peak_u": 0.39579457895629416
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 12.951279670138264,
+      "bernstein_bound": 5.290458771777255,
+      "minvo_bound": 5.276583261333488,
+      "peak": 5.276505536812695,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.4375443950411824
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 12.942145525181463,
+      "bernstein_bound": 5.2046970529595695,
+      "minvo_bound": 5.220292148050068,
+      "peak": 5.204697052954374,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 12.93339460036216,
+      "bernstein_bound": 5.315764224642115,
+      "minvo_bound": 5.331925824070642,
+      "peak": 5.3157642246464984,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 12.923770847996238,
+      "bernstein_bound": 5.172685915446955,
+      "minvo_bound": 5.190643094033815,
+      "peak": 5.172685915436015,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 12.964272096188633,
+      "bernstein_bound": 5.301328113841892,
+      "minvo_bound": 5.319836195585138,
+      "peak": 5.301328113851217,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 12.925407616686595,
+      "bernstein_bound": 5.214324550611355,
+      "minvo_bound": 5.224439533844149,
+      "peak": 5.214324550612263,
+      "limit": 5.16,
+      "peak_piece": 20,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 12.967749559076097,
+      "bernstein_bound": 5.326800342042039,
+      "minvo_bound": 5.337253856422667,
+      "peak": 5.326800342041574,
+      "limit": 5.16,
+      "peak_piece": 20,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 13.113751953528247,
+      "bernstein_bound": 5.649687712809781,
+      "minvo_bound": 5.637211405370108,
+      "peak": 5.6319604782722115,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.43085220636654836
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 13.07829186951728,
+      "bernstein_bound": 5.540422113181282,
+      "minvo_bound": 5.557726357952841,
+      "peak": 5.540422113181139,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 13.048592480706333,
+      "bernstein_bound": 5.999658872196514,
+      "minvo_bound": 6.0193272642948275,
+      "peak": 5.999658872191535,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 13.07144876587544,
+      "bernstein_bound": 5.239346644456045,
+      "minvo_bound": 5.25210027032988,
+      "peak": 5.239346644462699,
+      "limit": 5.16,
+      "peak_piece": 59,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 13.176021542905586,
+      "bernstein_bound": 5.561647715581552,
+      "minvo_bound": 5.581309025979212,
+      "peak": 5.561647715592801,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 14.944685664470798,
+      "bernstein_bound": 7.1433428070680565,
+      "minvo_bound": 7.136648383151079,
+      "peak": 7.1163019782263595,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.4105807359716831
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 14.860091891317293,
+      "bernstein_bound": 10.385644149292595,
+      "minvo_bound": 10.397189480134431,
+      "peak": 10.369949720523856,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.383357912712111
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 14.453777187646015,
+      "bernstein_bound": 6.956570788984275,
+      "minvo_bound": 6.981190893349423,
+      "peak": 6.95657078898861,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 14.243692681437704,
+      "bernstein_bound": 5.764927320929781,
+      "minvo_bound": 5.77840860211076,
+      "peak": 5.764927320921829,
+      "limit": 5.16,
+      "peak_piece": 59,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 14.29997452405387,
+      "bernstein_bound": 6.642311132184553,
+      "minvo_bound": 6.666866651920323,
+      "peak": 6.6423111321714705,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "u-turn",
+      "duration_s": 14.387607611301918,
+      "bernstein_bound": 5.5542006751322806,
+      "minvo_bound": 5.565259047222557,
+      "peak": 5.554200675133106,
+      "limit": 5.16,
+      "peak_piece": 20,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 11.067123704785548,
+      "bernstein_bound": 6.880187780150398,
+      "minvo_bound": 6.8814343024781985,
+      "peak": 6.860368736861263,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.3950999564904912
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.984271596076034,
+      "bernstein_bound": 10.16108704319674,
+      "minvo_bound": 10.173971628769962,
+      "peak": 10.149933333337488,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.36916413157932143
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.827413869821328,
+      "bernstein_bound": 6.473644719843953,
+      "minvo_bound": 6.4886146617654195,
+      "peak": 6.473644719834298,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.832705495444761,
+      "bernstein_bound": 5.54295866979028,
+      "minvo_bound": 5.557270450716914,
+      "peak": 5.542958669789838,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.876933443166482,
+      "bernstein_bound": 7.397756058088061,
+      "minvo_bound": 7.420611112149577,
+      "peak": 7.3977560580796045,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.746229624771514,
+      "bernstein_bound": 5.385376492064777,
+      "minvo_bound": 5.379464217803525,
+      "peak": 5.365827854616645,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.4137270563887305
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.730176142166988,
+      "bernstein_bound": 5.328508018042308,
+      "minvo_bound": 5.339908410491855,
+      "peak": 5.32850801803688,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.716618290673988,
+      "bernstein_bound": 5.70132087002654,
+      "minvo_bound": 5.713889122066266,
+      "peak": 5.7013208700918145,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.670437758534524,
+      "bernstein_bound": 5.205315834123598,
+      "minvo_bound": 5.198675965781329,
+      "peak": 5.186574205501744,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.41658683472416763
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.666484810807162,
+      "bernstein_bound": 5.236729464149482,
+      "minvo_bound": 5.24785826848788,
+      "peak": 5.236729464169301,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.667543278837208,
+      "bernstein_bound": 5.214488034062664,
+      "minvo_bound": 5.227315607584666,
+      "peak": 5.2144880340645905,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.691405550373632,
+      "bernstein_bound": 5.3232703679280435,
+      "minvo_bound": 5.336579465848357,
+      "peak": 5.323270367921947,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.66450583431285,
+      "bernstein_bound": 5.203805387370518,
+      "minvo_bound": 5.218691006261477,
+      "peak": 5.203805387368872,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.68550940564152,
+      "bernstein_bound": 5.306425808149845,
+      "minvo_bound": 5.3216151351156515,
+      "peak": 5.3064258081477425,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.780586451232294,
+      "bernstein_bound": 5.723957357378289,
+      "minvo_bound": 5.740380617138613,
+      "peak": 5.7239573573766895,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "hermite",
+      "route": "arch",
+      "duration_s": 10.80641783259258,
+      "bernstein_bound": 7.50262035247525,
+      "minvo_bound": 7.524268610624261,
+      "peak": 7.502620352476091,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.522812532288938,
+      "bernstein_bound": 9.245101111537451,
+      "minvo_bound": 9.24731319104313,
+      "peak": 9.213240862275613,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.39484196522984444
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.391157094206678,
+      "bernstein_bound": 14.46123939900061,
+      "minvo_bound": 14.486089566459869,
+      "peak": 14.450651226142838,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.3717586684666705
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.5235355306776,
+      "bernstein_bound": 5.730645456587266,
+      "minvo_bound": 5.7403184219916366,
+      "peak": 5.730645456584309,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.508025431053968,
+      "bernstein_bound": 5.805858082364017,
+      "minvo_bound": 5.79411701671939,
+      "peak": 5.780747254417446,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.42216636528830676
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.461668934319448,
+      "bernstein_bound": 6.904089244174823,
+      "minvo_bound": 6.895975165549769,
+      "peak": 6.873109952337791,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.4113672785818809
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.465415103747322,
+      "bernstein_bound": 5.320619628073737,
+      "minvo_bound": 5.32878987504533,
+      "peak": 5.320619628078381,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.481209614046874,
+      "bernstein_bound": 5.283297019634445,
+      "minvo_bound": 5.291400345112183,
+      "peak": 5.283297019632725,
+      "limit": 5.16,
+      "peak_piece": 62,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.50027307388938,
+      "bernstein_bound": 5.501463913702054,
+      "minvo_bound": 5.5106974410967,
+      "peak": 5.501463913702135,
+      "limit": 5.16,
+      "peak_piece": 62,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.432090474147968,
+      "bernstein_bound": 5.423913634679959,
+      "minvo_bound": 5.437083875011144,
+      "peak": 5.423913634675695,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.214553040295586,
+      "bernstein_bound": 6.762583372687248,
+      "minvo_bound": 6.782655511072551,
+      "peak": 6.762583372683255,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.283842677196747,
+      "bernstein_bound": 5.277120919544551,
+      "minvo_bound": 5.264082363160564,
+      "peak": 5.256261447526537,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.42837345931520465
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.284916684962083,
+      "bernstein_bound": 5.170624348165605,
+      "minvo_bound": 5.178237061393609,
+      "peak": 5.170624348209118,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.286329960036392,
+      "bernstein_bound": 5.220388973795679,
+      "minvo_bound": 5.228187172495683,
+      "peak": 5.220388973791291,
+      "limit": 5.16,
+      "peak_piece": 82,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.29455798523225,
+      "bernstein_bound": 5.1752690610491054,
+      "minvo_bound": 5.182814601501003,
+      "peak": 5.175269061049296,
+      "limit": 5.16,
+      "peak_piece": 62,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.273741229273167,
+      "bernstein_bound": 5.183544865191798,
+      "minvo_bound": 5.195494240159712,
+      "peak": 5.183544865186103,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.279040939743268,
+      "bernstein_bound": 5.2632856532418435,
+      "minvo_bound": 5.275637574696035,
+      "peak": 5.263285653243327,
+      "limit": 5.16,
+      "peak_piece": 41,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.516390381356022,
+      "bernstein_bound": 5.244213503440505,
+      "minvo_bound": 5.269426462886347,
+      "peak": 5.244213503440471,
+      "limit": 5.16,
+      "peak_piece": 19,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.363038960972144,
+      "bernstein_bound": 6.5213488529187105,
+      "minvo_bound": 6.553600479570126,
+      "peak": 6.521348852917708,
+      "limit": 5.16,
+      "peak_piece": 19,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 14.11925999314371,
+      "bernstein_bound": 9.33198817802895,
+      "minvo_bound": 9.379854625307269,
+      "peak": 9.331988178028794,
+      "limit": 5.16,
+      "peak_piece": 19,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "s",
+      "duration_s": 15.032622339242549,
+      "bernstein_bound": 5.327296700889156,
+      "minvo_bound": 5.327920779582448,
+      "peak": 5.314548188568758,
+      "limit": 5.16,
+      "peak_piece": 3,
+      "peak_u": 0.3957945226051186
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 12.951279670137815,
+      "bernstein_bound": 5.290458771804252,
+      "minvo_bound": 5.276583261360857,
+      "peak": 5.276505536838254,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.4375443950435389
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 12.942145525181012,
+      "bernstein_bound": 5.204697053089066,
+      "minvo_bound": 5.220292148185363,
+      "peak": 5.204697053093072,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 12.933394600361712,
+      "bernstein_bound": 5.315764224764383,
+      "minvo_bound": 5.33192582419904,
+      "peak": 5.315764224778862,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 12.92377084799579,
+      "bernstein_bound": 5.1726859295084955,
+      "minvo_bound": 5.190643108862107,
+      "peak": 5.172685929496927,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 12.964272096188193,
+      "bernstein_bound": 5.301328128271319,
+      "minvo_bound": 5.319836210801289,
+      "peak": 5.301328128256924,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 12.925407616686147,
+      "bernstein_bound": 5.214324550611033,
+      "minvo_bound": 5.224439533843839,
+      "peak": 5.214324550610589,
+      "limit": 5.16,
+      "peak_piece": 20,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 12.967749559075646,
+      "bernstein_bound": 5.326800342039062,
+      "minvo_bound": 5.337253856419571,
+      "peak": 5.326800342039976,
+      "limit": 5.16,
+      "peak_piece": 20,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 13.113751953527636,
+      "bernstein_bound": 5.649687712835661,
+      "minvo_bound": 5.637211405394702,
+      "peak": 5.631960478298369,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.43085220636897686
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 13.078291869516677,
+      "bernstein_bound": 5.540422113333265,
+      "minvo_bound": 5.5577263581119745,
+      "peak": 5.540422113324162,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 13.048592480705729,
+      "bernstein_bound": 5.999658872332796,
+      "minvo_bound": 6.019327264437706,
+      "peak": 5.999658872350645,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 13.071448765874832,
+      "bernstein_bound": 5.239346636532058,
+      "minvo_bound": 5.252100261997269,
+      "peak": 5.239346636539525,
+      "limit": 5.16,
+      "peak_piece": 59,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 13.176021542904982,
+      "bernstein_bound": 5.561647730681389,
+      "minvo_bound": 5.581309041904278,
+      "peak": 5.5616477306925125,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 14.94468566446989,
+      "bernstein_bound": 7.143342807097796,
+      "minvo_bound": 7.136648383179328,
+      "peak": 7.116301978254947,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.4105807359742445
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 14.860091891316369,
+      "bernstein_bound": 10.385644149330352,
+      "minvo_bound": 10.397189480170264,
+      "peak": 10.369949720556859,
+      "limit": 5.16,
+      "peak_piece": 102,
+      "peak_u": 0.3833579127147706
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 14.453777187645116,
+      "bernstein_bound": 6.956570789172151,
+      "minvo_bound": 6.981190893545983,
+      "peak": 6.956570789170388,
+      "limit": 5.16,
+      "peak_piece": 80,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 14.243692681436809,
+      "bernstein_bound": 5.764927312229379,
+      "minvo_bound": 5.778408592961442,
+      "peak": 5.764927312220411,
+      "limit": 5.16,
+      "peak_piece": 59,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 14.299974524052983,
+      "bernstein_bound": 6.64231115015517,
+      "minvo_bound": 6.66686667087834,
+      "peak": 6.642311150177,
+      "limit": 5.16,
+      "peak_piece": 39,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "u-turn",
+      "duration_s": 14.387607611300892,
+      "bernstein_bound": 5.554200675130903,
+      "minvo_bound": 5.565259047221135,
+      "peak": 5.554200675131286,
+      "limit": 5.16,
+      "peak_piece": 20,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 11.067123704785505,
+      "bernstein_bound": 6.880187780137699,
+      "minvo_bound": 6.881434302465964,
+      "peak": 6.860368736849213,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.3950999564894388
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.984271596075985,
+      "bernstein_bound": 10.161087043182835,
+      "minvo_bound": 10.173971628755071,
+      "peak": 10.149933333322261,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.369164131578238
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.827413869821294,
+      "bernstein_bound": 6.473644683916669,
+      "minvo_bound": 6.488614623979485,
+      "peak": 6.47364468383579,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.832705495444733,
+      "bernstein_bound": 5.5429586698179865,
+      "minvo_bound": 5.557270450745965,
+      "peak": 5.542958669822731,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.87693344316645,
+      "bernstein_bound": 7.397756058125947,
+      "minvo_bound": 7.420611112189448,
+      "peak": 7.397756058123036,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.74622962477148,
+      "bernstein_bound": 5.385376492053799,
+      "minvo_bound": 5.379464217792943,
+      "peak": 5.365827854606206,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.4137270563877092
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.73017614216696,
+      "bernstein_bound": 5.32850798785108,
+      "minvo_bound": 5.339908378739157,
+      "peak": 5.328507987837467,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.716618290673955,
+      "bernstein_bound": 5.701320838006302,
+      "minvo_bound": 5.713889088388844,
+      "peak": 5.701320837986204,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.670437758534492,
+      "bernstein_bound": 5.205315834112681,
+      "minvo_bound": 5.198675965770838,
+      "peak": 5.186574205491518,
+      "limit": 5.16,
+      "peak_piece": 101,
+      "peak_u": 0.4165868347231554
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.666484810807134,
+      "bernstein_bound": 5.236729434437232,
+      "minvo_bound": 5.247858237239248,
+      "peak": 5.236729434437173,
+      "limit": 5.16,
+      "peak_piece": 76,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.667543278837169,
+      "bernstein_bound": 5.214488034105329,
+      "minvo_bound": 5.227315607629563,
+      "peak": 5.214488034097772,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.691405550373597,
+      "bernstein_bound": 5.323270367954161,
+      "minvo_bound": 5.336579465875791,
+      "peak": 5.323270367957353,
+      "limit": 5.16,
+      "peak_piece": 51,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.66450583431281,
+      "bernstein_bound": 5.203805387167473,
+      "minvo_bound": 5.218691006047858,
+      "peak": 5.203805387169133,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.685509405641485,
+      "bernstein_bound": 5.306425807938486,
+      "minvo_bound": 5.321615134893329,
+      "peak": 5.3064258079389,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.780586451232264,
+      "bernstein_bound": 5.723957357143039,
+      "minvo_bound": 5.7403806168912235,
+      "peak": 5.7239573571465385,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bezier",
+      "route": "arch",
+      "duration_s": 10.806417832592551,
+      "bernstein_bound": 7.502620352155675,
+      "minvo_bound": 7.524268610288096,
+      "peak": 7.502620352157934,
+      "limit": 5.16,
+      "peak_piece": 24,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.189061940841475,
+      "bernstein_bound": 7.791624668099393,
+      "minvo_bound": 7.779952223058915,
+      "peak": 7.767599886273467,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.4522191239539032
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.234234497325655,
+      "bernstein_bound": 5.409852054966123,
+      "minvo_bound": 5.400934168632281,
+      "peak": 5.394227266966308,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.44872415430968443
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.201485601088748,
+      "bernstein_bound": 6.17081727008103,
+      "minvo_bound": 6.161026566037276,
+      "peak": 6.152478103712582,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.4501763977091403
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.166369335474043,
+      "bernstein_bound": 5.421565034299544,
+      "minvo_bound": 5.421580470506989,
+      "peak": 5.420922164514254,
+      "limit": 5.16,
+      "peak_piece": 88,
+      "peak_u": 0.26974353302647885
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.18093167263884,
+      "bernstein_bound": 5.342171903874056,
+      "minvo_bound": 5.342532066560825,
+      "peak": 5.3414475968542305,
+      "limit": 5.16,
+      "peak_piece": 65,
+      "peak_u": 0.5094078430573878
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.17579448988006,
+      "bernstein_bound": 5.331739857352607,
+      "minvo_bound": 5.331489815853174,
+      "peak": 5.330396635856311,
+      "limit": 5.16,
+      "peak_piece": 43,
+      "peak_u": 0.5319555786625209
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 12.99290510612156,
+      "bernstein_bound": 5.254170874903458,
+      "minvo_bound": 5.2447734715923335,
+      "peak": 5.2396938479278745,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.4459501145992408
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 12.994270347573202,
+      "bernstein_bound": 5.182276389967934,
+      "minvo_bound": 5.181978335965997,
+      "peak": 5.1814723318510225,
+      "limit": 5.16,
+      "peak_piece": 88,
+      "peak_u": 0.2935407771832098
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 12.978188502015767,
+      "bernstein_bound": 5.199731668891166,
+      "minvo_bound": 5.199469911493544,
+      "peak": 5.198236770009447,
+      "limit": 5.16,
+      "peak_piece": 65,
+      "peak_u": 0.5312221217534366
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 12.977590409862357,
+      "bernstein_bound": 5.171099643301241,
+      "minvo_bound": 5.17107886054699,
+      "peak": 5.17058750516278,
+      "limit": 5.16,
+      "peak_piece": 48,
+      "peak_u": 0.5234103014488884
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.049414138087542,
+      "bernstein_bound": 5.186577194785023,
+      "minvo_bound": 5.186649733982215,
+      "peak": 5.186057852942397,
+      "limit": 5.16,
+      "peak_piece": 26,
+      "peak_u": 0.4831216867085741
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 13.233478181254764,
+      "bernstein_bound": 5.223921173851154,
+      "minvo_bound": 5.224702967506048,
+      "peak": 5.213030777236749,
+      "limit": 5.16,
+      "peak_piece": 3,
+      "peak_u": 0.5198176428610773
+    },
+    {
+      "geometry": "bspline",
+      "route": "s",
+      "duration_s": 15.273699770004583,
+      "bernstein_bound": 7.222309051502385,
+      "minvo_bound": 7.232530463995594,
+      "peak": 7.2212265438188545,
+      "limit": 5.16,
+      "peak_piece": 3,
+      "peak_u": 0.5009403909075083
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.875791840703307,
+      "bernstein_bound": 5.24944148367767,
+      "minvo_bound": 5.251545809803284,
+      "peak": 5.235896448105649,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.48321481279167666
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.719037358765423,
+      "bernstein_bound": 8.816027938690317,
+      "minvo_bound": 8.820221364625409,
+      "peak": 8.793287016503573,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.4839720917520054
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.763851475681703,
+      "bernstein_bound": 5.257926058087859,
+      "minvo_bound": 5.257712335283445,
+      "peak": 5.257289772803212,
+      "limit": 5.16,
+      "peak_piece": 62,
+      "peak_u": 0.5405390815954437
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.580510565899996,
+      "bernstein_bound": 5.439962223728958,
+      "minvo_bound": 5.484836148271597,
+      "peak": 5.439962223731127,
+      "limit": 5.16,
+      "peak_piece": 32,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.496642026857305,
+      "bernstein_bound": 5.146621603316502,
+      "minvo_bound": 5.188494817991656,
+      "peak": 5.146621603316108,
+      "limit": 5.16,
+      "peak_piece": 32,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.500300896185166,
+      "bernstein_bound": 5.126147140751899,
+      "minvo_bound": 5.167983169607916,
+      "peak": 5.126147140751908,
+      "limit": 5.16,
+      "peak_piece": 32,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.486278504072272,
+      "bernstein_bound": 5.146621603316502,
+      "minvo_bound": 5.188494817991656,
+      "peak": 5.146621603316108,
+      "limit": 5.16,
+      "peak_piece": 32,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.584617204095823,
+      "bernstein_bound": 5.243666137032421,
+      "minvo_bound": 5.286532912459215,
+      "peak": 5.2436661370367466,
+      "limit": 5.16,
+      "peak_piece": 32,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "u-turn",
+      "duration_s": 13.476151941659847,
+      "bernstein_bound": 5.146621603316502,
+      "minvo_bound": 5.188494817991656,
+      "peak": 5.146621603316108,
+      "limit": 5.16,
+      "peak_piece": 32,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.982760450360017,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 11.059990076053037,
+      "bernstein_bound": 6.80817884056328,
+      "minvo_bound": 6.892124259767404,
+      "peak": 6.808178840561947,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.976218509867959,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 11.047424641010842,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 11.10262247445435,
+      "bernstein_bound": 5.14349248864415,
+      "minvo_bound": 5.203267475280819,
+      "peak": 5.143492488644646,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 11.047073094681807,
+      "bernstein_bound": 5.148441037082656,
+      "minvo_bound": 5.2083307979592135,
+      "peak": 5.14844103708213,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 11.02734929463831,
+      "bernstein_bound": 5.68412029952276,
+      "minvo_bound": 5.751673638087166,
+      "peak": 5.684120299522476,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.994126321307268,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.964257137146317,
+      "bernstein_bound": 5.1625253124356805,
+      "minvo_bound": 5.209583169738317,
+      "peak": 5.162525312436898,
+      "limit": 5.16,
+      "peak_piece": 79,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.94338964761187,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.968764453432026,
+      "bernstein_bound": 5.210963633978628,
+      "minvo_bound": 5.237821463769289,
+      "peak": 5.210963633978281,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.932572047772966,
+      "bernstein_bound": 5.313530502846146,
+      "minvo_bound": 5.339413399301241,
+      "peak": 5.313530502844705,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.911458349497035,
+      "bernstein_bound": 5.313530502846146,
+      "minvo_bound": 5.339413399301241,
+      "peak": 5.313530502844705,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.925426146618396,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.908452378520714,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.838105755083491,
+      "bernstein_bound": 5.157102858044561,
+      "minvo_bound": 5.217193534564562,
+      "peak": 5.157102858046601,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.908121974291367,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.837994040978774,
+      "bernstein_bound": 5.157102858044561,
+      "minvo_bound": 5.217193534564562,
+      "peak": 5.157102858046601,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.917435096321505,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.892372648172218,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.842273902358734,
+      "bernstein_bound": 5.157102858044561,
+      "minvo_bound": 5.217193534564562,
+      "peak": 5.157102858046601,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.893777994579262,
+      "bernstein_bound": 5.150915601388745,
+      "minvo_bound": 5.210862758849767,
+      "peak": 5.150915601387052,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.889009309030309,
+      "bernstein_bound": 5.139130063284825,
+      "minvo_bound": 5.16515327141982,
+      "peak": 5.139130063283412,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.867895610754378,
+      "bernstein_bound": 5.153390359050308,
+      "minvo_bound": 5.213394919404132,
+      "peak": 5.153390359051585,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.855177492963294,
+      "bernstein_bound": 5.154627810386571,
+      "minvo_bound": 5.214661074552362,
+      "peak": 5.154627810386418,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.852818534559372,
+      "bernstein_bound": 5.139130063284825,
+      "minvo_bound": 5.16515327141982,
+      "peak": 5.139130063283412,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.847654024188682,
+      "bernstein_bound": 5.139130063284825,
+      "minvo_bound": 5.16515327141982,
+      "peak": 5.139130063283412,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.84260401864655,
+      "bernstein_bound": 5.155865310053518,
+      "minvo_bound": 5.215927279608157,
+      "peak": 5.155865310052397,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.837666134734102,
+      "bernstein_bound": 5.288144600393825,
+      "minvo_bound": 5.350089766040573,
+      "peak": 5.288144600394432,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.83283816121019,
+      "bernstein_bound": 5.421559528867023,
+      "minvo_bound": 5.485410804161047,
+      "peak": 5.4215595288701035,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.830172246603043,
+      "bernstein_bound": 5.157102858044561,
+      "minvo_bound": 5.217193534564562,
+      "peak": 5.157102858046601,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.818209759136247,
+      "bernstein_bound": 5.174997104517334,
+      "minvo_bound": 5.217193534564562,
+      "peak": 5.174997104515139,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.839516264439744,
+      "bernstein_bound": 5.164659898836024,
+      "minvo_bound": 5.190440854216321,
+      "peak": 5.164659898834982,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.822403232645168,
+      "bernstein_bound": 5.200562420271594,
+      "minvo_bound": 5.226759767011517,
+      "peak": 5.200562420272796,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.897948995096856,
+      "bernstein_bound": 5.190217209369477,
+      "minvo_bound": 5.215755275946608,
+      "peak": 5.19021720936812,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.876835296820925,
+      "bernstein_bound": 5.190217209369477,
+      "minvo_bound": 5.215755275946608,
+      "peak": 5.19021720936812,
+      "limit": 5.16,
+      "peak_piece": 36,
+      "peak_u": 1.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 10.822441660273377,
+      "bernstein_bound": 5.157102858044561,
+      "minvo_bound": 5.217193534564562,
+      "peak": 5.157102858046601,
+      "limit": 5.16,
+      "peak_piece": 100,
+      "peak_u": 0.0
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 11.066457265587161,
+      "bernstein_bound": 5.1840460412373215,
+      "minvo_bound": 5.176373863065371,
+      "peak": 5.168571713189071,
+      "limit": 5.16,
+      "peak_piece": 3,
+      "peak_u": 0.5768252042556347
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 11.009904621041297,
+      "bernstein_bound": 6.851400208216683,
+      "minvo_bound": 6.84406051853352,
+      "peak": 6.829314660123976,
+      "limit": 5.16,
+      "peak_piece": 3,
+      "peak_u": 0.5850076995546898
+    },
+    {
+      "geometry": "bspline",
+      "route": "arch",
+      "duration_s": 12.676380450939337,
+      "bernstein_bound": 10.17945663171204,
+      "minvo_bound": 10.171286659443997,
+      "peak": 10.14468838581296,
+      "limit": 5.16,
+      "peak_piece": 3,
+      "peak_u": 0.590590181632477
+    }
+  ]
+}

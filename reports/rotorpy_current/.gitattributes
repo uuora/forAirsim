@@ -1,3 +1,0 @@
-# Preserve the exact bytes used by the experiment evidence hashes.
-*.json -text whitespace=cr-at-eol
-*.csv -text whitespace=cr-at-eol

@@ -1,0 +1,9 @@
+[
+  {
+    "route": "arch",
+    "geometry": "hermite",
+    "report": "D:\\foraisimTOPPQuad\\reports\\small_field_pilot_20261126_113145_900898",
+    "exit_code": 0,
+    "reason": "initial AirSim sample gap exceeded 0.10 s"
+  }
+]

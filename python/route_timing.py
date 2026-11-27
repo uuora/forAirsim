@@ -51,7 +51,7 @@ def path_sample(segments, ends, phase, order):
 
 
 def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoint_speed=True,
-                 feedforward_s=(.9, .9, .9)):
+                 feedforward_s=(.9, .9, .9), reference_speed=None, reference_acceleration=None):
     """Optimize motion only. Constant dwell is inserted by the route decoder."""
     base, digest = author_solver()
     import casadi as ca
@@ -67,6 +67,21 @@ def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoin
     zero = np.zeros((GRID, 3))
 
     class RouteTOPPQuad(base):
+        def set_initial_values(self, opti, variables):
+            if reference_speed is None:
+                super().set_initial_values(opti, variables)
+                return
+            # A slower seed starts the short, tight routes closer to hover.
+            # These arrays are restored before the solver evaluates the route.
+            seed = self.ms_traj_struct
+            keys = ('h', 'x_ddot', 'x_dddot', 'x_ddddot')
+            original = {key: seed[key] for key in keys}
+            try:
+                seed.update({key: value * .15 for key, value in original.items()})
+                super().set_initial_values(opti, variables)
+            finally:
+                seed.update(original)
+
         def set_cost(self, opti, variables):
             h, _, w, _ = variables
             travel = ca.sum1(2*ds/(ca.sqrt(h[:-1])+ca.sqrt(h[1:])))
@@ -103,7 +118,7 @@ def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoin
                 return ca.DM(values.T) * ca.repmat(scalar.T, 3, 1)
             acc = scaled(enu[2], h) + scaled(enu[1], hp/2)
             jerk_over_rate = scaled(enu[3], h) + scaled(enu[2], 1.5*hp) + scaled(enu[1], hpp/2)
-            opti.subject_to(ca.sum1(acc**2) <= acceleration**2)
+            opti.subject_to(ca.sum1(acc**2) <= (acceleration if reference_acceleration is None else reference_acceleration)**2)
             opti.subject_to(ca.sum1(jerk_over_rate**2) * h.T <= 30.**2)
             rate = ca.sqrt(h)
             nominal_command = scaled(enu[1],rate) + ff_enu*acc
@@ -111,7 +126,7 @@ def solve_motion(segments, speed, acceleration, dynamics_model, *, fixed_waypoin
             opti.subject_to(ca.sum1(nominal_command**2) <= speed**2)
             opti.subject_to(ca.sum1(nominal_slew**2) <= acceleration**2)
 
-    solver = RouteTOPPQuad(enu[0][[0,-1]], n=GRID, vmax=speed)
+    solver = RouteTOPPQuad(enu[0][[0,-1]], n=GRID, vmax=speed if reference_speed is None else reference_speed)
     if dynamics_model["model"] != "GenericQuadX":
         raise ValueError("TOPPQuad requires the AirSim GenericQuadX dynamics")
     solver.g = np.array([0., 0., dynamics_model["nominal_gravity_mps2"]])

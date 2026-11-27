@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from .curve_live import LiveCurveRuntime
 from .route_curve import decode_route,route_metrics,waypoint_results
+from .route_milestones import target_marker_scale
 from .runtime import from_ned
 from .simulator import ROOT
 
@@ -40,14 +41,15 @@ class RouteLiveRuntime(LiveCurveRuntime):
         if key==self.marker_cache:return
         for index,name in enumerate(('DC_TargetRed','DC_TargetBlue')):
             target=points[index] if index<len(points) else None
+            marker_scale=target_marker_scale(self.config,self.route_index+index)
             xyz=np.array([0.,0.,1000.]) if target is None else np.array([target[0],target[1],-target[2]])+self.marker_origin
             if target is not None:
-                if not self._client.simSetObjectScale(name,self._airsim.Vector3r(1.2,1.2,1.2)):raise RuntimeError('目标缩放设置失败：'+name)
+                if not self._client.simSetObjectScale(name,self._airsim.Vector3r(marker_scale,marker_scale,marker_scale)):raise RuntimeError('目标缩放设置失败：'+name)
             if not self._client.simSetObjectPose(name,self._airsim.Pose(self._airsim.Vector3r(*xyz),self._airsim.Quaternionr()),teleport=True):raise RuntimeError('目标实体放置失败：'+name)
             actual=self._client.simGetObjectPose(name).position;actual=[actual.x_val,actual.y_val,actual.z_val]
             if not np.allclose(actual,xyz,atol=.002):raise RuntimeError('目标坐标读回不符：'+name)
             scale=self._client.simGetObjectScale(name);scale=[scale.x_val,scale.y_val,scale.z_val]
-            if target is not None and not np.allclose(scale,[1.2]*3,atol=.001):raise RuntimeError('目标尺寸读回不符')
+            if target is not None and not np.allclose(scale,marker_scale,atol=.001):raise RuntimeError('目标尺寸读回不符')
             self.live_marker_receipts.append(dict(name=name,visible=target is not None,requested_ned=xyz.tolist(),observed_ned=actual,
                 scale=scale,route_index=self.route_index,reference_time_s=self.live_elapsed,
                 scope='Entity pose/scale readback; viewport visibility separately observed'))

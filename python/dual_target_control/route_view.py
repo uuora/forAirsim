@@ -31,6 +31,10 @@ class RouteFlightView(FlightView):
         self.zoom=1.;self.pan=np.zeros(2);self.update()
 
     def _display_bounds(self):
+        field = self.config.get('small_field')
+        if field:
+            (x_min, y_min, z_min), (x_max, y_max, z_max) = field['bounds_zup_m']
+            return x_min,x_max,y_min,y_max,z_min,z_max
         task=self.config.get('preparation',{}).get('task')
         if not task:
             x0,x1,y0,y1,_,z1=super()._display_bounds()
@@ -67,7 +71,10 @@ class RouteFlightView(FlightView):
         xmin,xmax,ymin,ymax,zmin,zmax=bounds
         task=self.config.get('preparation',{}).get('task')
         floor=np.array([[xmin,ymin,zmin],[xmax,ymin,zmin],[xmax,ymax,zmin],[xmin,ymax,zmin]])
-        frame=[*floor,*(floor-[0,0,.23]),[xmin,ymin,zmax]]
+        upper = floor + [0., 0., zmax-zmin] if self.config.get('small_field') else [[xmin,ymin,zmax]]
+        padding = self.config.get('ue_visualization', {}).get('floor_padding_m', 0.)
+        deck = floor + padding * np.array([[-1,-1,0],[1,-1,0],[1,1,0],[-1,1,0]])
+        frame=[*deck,*(deck-[0,0,.23]),*upper]
         if task:frame.extend([[0.,0.,0.],self.launch_anchor or [0.,0.,0.],task['start'],*task['points']])
         return np.asarray(frame,dtype=float)
 
@@ -76,7 +83,8 @@ class RouteFlightView(FlightView):
         if markers:return markers
         task=self.config.get('preparation',{}).get('task')
         if not task:return []
-        return [dict(id='S',kind='start',position=task['start'],state='fixed'),
+        launch = (self.config.get('small_field') or {}).get('launch', task['start'])
+        return [dict(id='S',kind='start',position=launch,state='fixed'),
             *[dict(id=f'W{i+1}',kind='via',position=p,state='pending') for i,p in enumerate(task['points'][:-1])],
             dict(id='E',kind='goal',position=task['points'][-1],state='pending')]
 

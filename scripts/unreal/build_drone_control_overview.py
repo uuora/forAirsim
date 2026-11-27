@@ -7,6 +7,7 @@ An API SceneCapture camera is supplied by AirSim settings, not by this builder.
 import hashlib
 import json
 import math
+import os
 import traceback
 from pathlib import Path
 
@@ -15,14 +16,15 @@ import unreal as ue
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ROOT / 'configs/dual_target_control.json'
-BASE = '/Game/DroneControlOverview'
-MAP = BASE + '/Maps/DroneControlOverview'
-BUILDER = 'DroneControlOverview'
+SMALL_FIELD = os.environ.get('AIRSIM_BUILD_SMALL_FIELD_MAP') == '1'
+BUILDER = 'DroneControlSmallField' if SMALL_FIELD else 'DroneControlOverview'
+BASE = '/Game/' + BUILDER
+MAP = f'{BASE}/Maps/{BUILDER}'
 VERSION = '1'
 OWNED_TAG = 'DCO_BuilderOwned'
 VERSION_TAG = 'DCO_BuilderVersion_' + VERSION
 METADATA_KEY = 'DCO_Builder'
-RECEIPT = ROOT / 'logs/dual_target_control_overview_build.json'
+RECEIPT = ROOT / 'logs' / ('small_field_map_build.json' if SMALL_FIELD else 'dual_target_control_overview_build.json')
 
 receipt = dict(map=MAP, builder=BUILDER, builder_version=VERSION,
                status='BUILDING', flight_commands=False)
@@ -37,7 +39,7 @@ def tags(actor):
 def own(actor, label):
     actor.set_actor_label(label)
     actor.set_editor_property('tags', [ue.Name(OWNED_TAG), ue.Name(VERSION_TAG)])
-    actor.set_folder_path(ue.Name('DroneControlOverview'))
+    actor.set_folder_path(ue.Name(BUILDER))
     return actor
 
 
@@ -109,16 +111,55 @@ def bounded_grid_values(low, high, spacing):
                                               int(math.floor(high / spacing)) + 1)]
 
 
+def axis_rod(name, start, end, material):
+    delta = ue.Vector(*[b - a for a, b in zip(start, end)])
+    center = tuple((a + b) / 2 for a, b in zip(start, end))
+    length = math.sqrt(delta.x**2 + delta.y**2 + delta.z**2)
+    rod = primitive(name, center, (length, 0.032, 0.032), material)
+    rod.set_actor_rotation(ue.MathLibrary.make_rot_from_x(delta), False)
+
+
+def origin_axes(materials):
+    origin = (0, 0, 0)
+    for axis, direction, wing in (
+        ('X', (1, 0, 0), (0, 1, 0)),
+        ('Y', (0, 1, 0), (1, 0, 0)),
+        ('Z', (0, 0, 1), (1, 0, 0)),
+    ):
+        base = (0, 0, 0.045) if axis != 'Z' else origin
+        tip = tuple(a + b * 1.12 for a, b in zip(base, direction))
+        name = 'DC_OriginAxis_' + axis
+        material = materials['Axis' + axis]
+        axis_rod(name, base, tip, material)
+        for number, sign in enumerate((-1, 1)):
+            tail = tuple(a - 0.16 * b + sign * 0.085 * c for a, b, c in zip(tip, direction, wing))
+            axis_rod(f'{name}_Tip{number}', tail, tip, material)
+        text_pos = tuple(t + 0.17 * d for t, d in zip(tip, direction))
+        actor = own(ue.EditorLevelLibrary.spawn_actor_from_class(
+            ue.TextRenderActor, ue.Vector(*[100 * v for v in text_pos]),
+            ue.Rotator(pitch=45, yaw=225)), name + '_Label')
+        component = actor.get_component_by_class(ue.TextRenderComponent)
+        component.set_text(axis)
+        component.set_world_size(19.0)
+        component.set_horizontal_alignment(ue.HorizTextAligment.EHTA_CENTER)
+        component.set_collision_enabled(ue.CollisionEnabled.NO_COLLISION)
+
+
 try:
-    config = json.loads(CONFIG.read_text(encoding='utf-8-sig')) if CONFIG.exists() else {}
-    control = config.get('control', {})
-    overview = config.get('overview', {})
-    xmin = float(control.get('x_min', -50.0))
-    xmax = float(control.get('x_max', 50.0))
-    ymin = float(control.get('y_min', -50.0))
-    ymax = float(control.get('y_max', 50.0))
-    spacing = float(overview.get('grid_spacing_m', 10.0))
-    padding = float(overview.get('floor_padding_m', 10.0))
+    if SMALL_FIELD:
+        field = json.loads((ROOT / 'configs/small_field.json').read_text(encoding='utf-8-sig'))
+        (xmin, ymin, _), (xmax, ymax, _) = field['bounds_zup_m']
+        spacing, padding = 1.0, field['ue_visualization']['floor_padding_m']
+    else:
+        config = json.loads(CONFIG.read_text(encoding='utf-8-sig')) if CONFIG.exists() else {}
+        control = config.get('control', {})
+        overview = config.get('overview', {})
+        xmin = float(control.get('x_min', -50.0))
+        xmax = float(control.get('x_max', 50.0))
+        ymin = float(control.get('y_min', -50.0))
+        ymax = float(control.get('y_max', 50.0))
+        spacing = float(overview.get('grid_spacing_m', 10.0))
+        padding = float(overview.get('floor_padding_m', 10.0))
     bounds = [xmin, xmax, ymin, ymax, spacing, padding]
     if not all(math.isfinite(value) for value in bounds):
         raise RuntimeError('Non-finite overview geometry')
@@ -128,6 +169,11 @@ try:
         raise RuntimeError('Visible field must stay inside the 1000 m collision floor')
     xs = bounded_grid_values(xmin, xmax, spacing)
     ys = bounded_grid_values(ymin, ymax, spacing)
+    grid_width = 0.018 if SMALL_FIELD else 0.07
+    if SMALL_FIELD:
+        half_line = grid_width / 2
+        xs = [x for x in xs if xmin + half_line <= x <= xmax - half_line]
+        ys = [y for y in ys if ymin + half_line <= y <= ymax - half_line]
     geometry = dict(x_min=xmin, x_max=xmax, y_min=ymin, y_max=ymax,
                     grid_spacing_m=spacing, floor_padding_m=padding)
     receipt['geometry'] = geometry
@@ -157,6 +203,11 @@ try:
         'DC_OverviewMarker')
     own(ue.EditorLevelLibrary.spawn_actor_from_class(ue.PlayerStart, ue.Vector(0, 0, 100)),
         'DC_PlayerStart')
+    if SMALL_FIELD:
+        observer = ue.load_class(None, '/Script/Blocks.DroneControlObserver')
+        if not observer:
+            raise RuntimeError('Blocks mouse observer is unavailable')
+        own(ue.EditorLevelLibrary.spawn_actor_from_class(observer, ue.Vector()), 'DC_MouseObserver')
 
     materials = {name: unlit_material(name, rgb) for name, rgb in {
         'Floor': (0.68, 0.71, 0.74), 'Grid': (0.16, 0.19, 0.22),
@@ -168,24 +219,30 @@ try:
     floor.set_actor_hidden_in_game(True)
     xc, yc = (xmin + xmax) / 2.0, (ymin + ymax) / 2.0
     width, depth = xmax - xmin, ymax - ymin
-    primitive('DC_VisibleFloor', (xc, yc, -0.005),
-              (width + 2 * padding, depth + 2 * padding, 0.01), materials['Floor'])
+    deck = primitive('DC_VisibleFloor', (xc, yc, -0.005),
+                     (width + 2 * padding, depth + 2 * padding, 0.01), materials['Floor'])
     for index, x in enumerate(xs):
         primitive('DC_GridX_' + str(index), (x, yc, 0.015),
-                  (0.07, depth, 0.01), materials['Axis' if abs(x) < 1e-6 else 'Grid'])
+                  (grid_width, depth, 0.01), materials['Axis' if abs(x) < 1e-6 else 'Grid'])
     for index, y in enumerate(ys):
         primitive('DC_GridY_' + str(index), (xc, y, 0.025),
-                  (width, 0.07, 0.01), materials['Axis' if abs(y) < 1e-6 else 'Grid'])
-    for name, x in [('Left', xmin), ('Right', xmax)]:
-        primitive('DC_Boundary_' + name, (x, yc, 0.04),
-                  (0.20, depth + 0.20, 0.02), materials['Boundary'])
-    for name, y in [('Near', ymin), ('Far', ymax)]:
-        primitive('DC_Boundary_' + name, (xc, y, 0.04),
-                  (width + 0.20, 0.20, 0.02), materials['Boundary'])
-    label('X', 'X +', xmax - 5.0, yc + 2.0)
-    label('Y', 'Y +', xc + 3.0, ymax - 5.0)
-    label('Field', '{:g} x {:g} m / grid {:g} m'.format(width, depth, spacing),
-          xc, ymin - min(padding * 0.6, 6.0))
+                  (width, grid_width, 0.01), materials['Axis' if abs(y) < 1e-6 else 'Grid'])
+    if SMALL_FIELD:
+        materials.update({name: unlit_material(name, rgb) for name, rgb in {
+            'AxisX': (0.72, 0.07, 0.055), 'AxisY': (0.035, 0.52, 0.14), 'AxisZ': (0.045, 0.20, 0.78),
+        }.items()})
+        origin_axes(materials)
+    else:
+        for name, x in [('Left', xmin), ('Right', xmax)]:
+            primitive('DC_Boundary_' + name, (x, yc, 0.04),
+                      (0.20, depth + 0.20, 0.02), materials['Boundary'])
+        for name, y in [('Near', ymin), ('Far', ymax)]:
+            primitive('DC_Boundary_' + name, (xc, y, 0.04),
+                      (width + 0.20, 0.20, 0.02), materials['Boundary'])
+        label('X', 'X +', xmax - 5.0, yc + 2.0)
+        label('Y', 'Y +', xc + 3.0, ymax - 5.0)
+        label('Field', '{:g} x {:g} m / grid {:g} m'.format(width, depth, spacing),
+              xc, ymin - min(padding * 0.6, 6.0))
 
     for color in ('Red', 'Blue'):
         target = primitive('DC_Target' + color, (0, 0, -500), (1.2, 1.2, 1.2),
@@ -213,12 +270,22 @@ try:
     labels = [actor.get_actor_label() for actor in actors]
     required = {'DC_CollisionFloor', 'DC_PlayerStart', 'DC_TargetRed', 'DC_TargetBlue',
                 'DC_VisibleFloor', 'DC_OverviewMarker'}
+    if SMALL_FIELD:
+        required.add('DC_MouseObserver')
     if not required.issubset(set(labels)):
         raise RuntimeError('Required overview actors absent')
     receipt.update(status='PASS', actor_labels=labels, actor_count=len(actors),
                    collision_floor_cm=dict(center=[0, 0, -50], scale=[1000, 1000, 1]),
                    target_radius_m=0.6, grid_line_count=len(xs) + len(ys),
                    external_camera_required=True)
+    if SMALL_FIELD:
+        center, extent = deck.get_actor_bounds(False)
+        map_file = ROOT / 'external/AirSim/Unreal/Environments/Blocks/Content' / (MAP[len('/Game/'):] + '.umap')
+        receipt.update(visible_floor_cm=dict(center=[center.x, center.y, center.z],
+                                             size=[2 * extent.x, 2 * extent.y, 2 * extent.z]),
+                       collision_floor_hidden=bool(floor.get_editor_property('hidden')),
+                       map_sha256=hashlib.sha256(map_file.read_bytes()).hexdigest(),
+                       builder_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
 except Exception:
     receipt.update(status='FAIL', error=traceback.format_exc())
 finally:

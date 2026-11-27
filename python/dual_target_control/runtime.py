@@ -187,6 +187,7 @@ class ControlRuntime:
         state = self._client.getMultirotorState(vehicle_name=self.vehicle_name)
         if state.landed_state != airsim.LandedState.Landed:
             raise RuntimeError('无人机已在空中；请先由原控制方落地，再开始新会话。')
+        self._calibrate_position_frame(state)
         from .dynamics import read_live_dynamics
         self._dynamics = read_live_dynamics(self._client, self.config,
             self._process.pid if self._process is not None else None)
@@ -194,13 +195,19 @@ class ControlRuntime:
         self._read_state()
         self._publish('READY', 'AirSim 已连接，点击开始起飞。', connected=True)
 
+    def _calibrate_position_frame(self, state):
+        pass
+
+    def _position_zup(self, ned_position):
+        return from_ned(ned_position)
+
     def _read_state(self):
         if self.mode == 'demo':
             return self._demo.position.copy(), self._demo.velocity.copy(), self._demo.yaw, 0.
         begin = time.perf_counter()
         state = self._client.getMultirotorState(vehicle_name=self.vehicle_name)
         kin = state.kinematics_estimated
-        position, velocity = from_ned(kin.position), from_ned(kin.linear_velocity)
+        position, velocity = self._position_zup(kin.position), from_ned(kin.linear_velocity)
         yaw = self._airsim.to_eularian_angles(kin.orientation)[2]
         if not np.isfinite(position).all() or not np.isfinite(velocity).all() or not math.isfinite(yaw):
             raise RuntimeError('AirSim 返回非有限状态。')
@@ -261,13 +268,16 @@ class ControlRuntime:
         self._paused = False
         self._publish('RUNNING', '双目标滚动规划中。轨迹参数：' + self._trajectory_name, running=True)
 
+    def _takeoff_goal(self, height):
+        return np.array([(self.cfg.x_min + self.cfg.x_max) / 2,
+                         (self.cfg.y_min + self.cfg.y_max) / 2, height])
+
     def _rise(self, height):
         # State-verified vertical approach avoids native moveOnPath's coarse
         # terminal tolerance/False acknowledgements on this installed build.
         begin = previous = time.perf_counter()
         last_command = np.zeros(3)
-        goal = np.array([(self.cfg.x_min + self.cfg.x_max) / 2,
-                         (self.cfg.y_min + self.cfg.y_max) / 2, height])
+        goal = self._takeoff_goal(height)
         rows = []
         settled = 0
         try:
@@ -417,7 +427,7 @@ class ControlRuntime:
                 # this floor; require current position and stationary readings.
                 contact = (collision.object_name == 'DC_CollisionFloor'
                            and collision.normal.z_val < -.7
-                           and np.linalg.norm(position - from_ned(collision.position)) < .3
+                           and np.linalg.norm(position - self._position_zup(collision.position)) < .3
                            and np.linalg.norm(velocity) < .12)
                 settled = settled + 1 if contact else 0
                 if not self._motors_disarmed:

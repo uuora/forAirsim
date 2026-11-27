@@ -120,7 +120,7 @@ def sampled_route_metrics(curve, times, positions, velocities, clipping,
                 quality_term=.7 * T / (T + 5 * n) + .1 * energy / (energy + 30 * n) + .2 * rmse / (rmse + .25))
 
 
-def route_derivative_bounds(segments, *, depth=2):
+def route_derivative_bounds(segments, *, depth=2, control_bound=None):
     """Factor identical derivative prefixes, retaining the existing hull bound.
 
     Power-to-Bernstein conversion is done once per segment. Physical derivative
@@ -152,7 +152,8 @@ def route_derivative_bounds(segments, *, depth=2):
             leaves = [control]
             for _ in range(int(depth)):
                 leaves = [part for leaf in leaves for part in _split_half(leaf)]
-            bound = max(math.hypot(*row) for leaf in leaves for row in leaf)
+            bound = (max(math.hypot(*row) for leaf in leaves for row in leaf)
+                     if control_bound is None else control_bound(leaves))
             if not math.isfinite(bound):
                 raise ValueError('derivative norm bound exceeded numerical range')
             maxima[order] = max(maxima[order], float(bound))

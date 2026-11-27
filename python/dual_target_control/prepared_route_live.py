@@ -44,7 +44,8 @@ class PreparedRouteRuntime(RouteLiveRuntime):
         if self.mode=='airsim' and self._client is not None:
             state=self._client.getMultirotorState(vehicle_name=self.vehicle_name)
             local=state.kinematics_estimated.position;world=self._client.simGetObjectPose(self.vehicle_name).position
-            self.marker_origin=np.array([world.x_val-local.x_val,world.y_val-local.y_val,world.z_val-local.z_val])
+            point = self._position_zup(local)
+            self.marker_origin = np.array([world.x_val, world.y_val, world.z_val]) - point * [1, 1, -1]
             self._markers(True)
         self._publish(planned_path=[],trail=[],targets=self._target_queue(),preparation_point=self._task()['start'],route_markers=self.display_milestones.markers,
             marker_world_origin_ned=self.marker_origin.tolist(),route_policy=self._task()['policy_name'],
@@ -52,6 +53,11 @@ class PreparedRouteRuntime(RouteLiveRuntime):
 
     def _event(self,stage,**values):
         self.preparation_events.append(dict(stage=stage,host_monotonic_s=time.perf_counter(),utc_ns=time.time_ns(),**values))
+        if 'small_field' in self.config and stage in ('SETTLING_ARRIVED','REFERENCE_STARTED'):
+            return
+        self._write_preparation()
+
+    def _write_preparation(self):
         (self._run_dir/'preparation.json').write_text(json.dumps(dict(events=self.preparation_events,
             samples=self.preparation_rows,scope='Preparation/hover excluded from reference tracking time; planning wall time reported separately'),ensure_ascii=False,indent=2),encoding='utf-8')
 
@@ -65,16 +71,20 @@ class PreparedRouteRuntime(RouteLiveRuntime):
         self.config['preparation']['dynamics_model'] = generic_quadx_model(self._dynamics)
         self._event('RUN_REQUESTED',task=self._task(),method=self.config['preparation']['method'])
         self.additional_source_paths = list(type(self).additional_source_paths)
+        if self.config['preparation']['task'].get('retiming', {}).get('nominal_bound_basis') == 'minvo':
+            self.additional_source_paths.append(ROOT/'python/trajectory_research/minvo.py')
         # Even failures before a trajectory exists remain identifiable as trials.
         sources=[Path(__file__).with_name(n) for n in ('curve_live.py','runtime.py','simulator.py','native_scene.py','overview.py')]
         sources+=self.additional_source_paths+[ROOT/'python/trajectory_research/curves.py',ROOT/'python/trajectory_research/parameterizations.py',ROOT/'python/velocity_command.py']
+        if self.config.get('rotor_telemetry'):
+            sources.append(Path(__file__).with_name('rotor_telemetry.py'))
         self.preparation_source_hashes={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
         snapshot=self._run_dir/'curve_source';snapshot.mkdir()
         for p in sources:(snapshot/p.name).write_bytes(p.read_bytes())
         conditions=deepcopy(self.config);section=conditions['curve_experiment']
         for key in ('plan','plans_file','plans_sha256','execution_id','batch_id'):section.pop(key,None)
-        conditions['preparation'].pop('method',None);conditions['protocol_revision']=15
-        manifest=dict(protocol_revision=15,method=self.config['preparation']['method'],mode=self.mode,
+        conditions['preparation'].pop('method',None);conditions['protocol_revision']=self.protocol_revision
+        manifest=dict(protocol_revision=self.protocol_revision,method=self.config['preparation']['method'],mode=self.mode,
             plan=self.config['curve_experiment']['plan'],conditions=conditions,source_sha256=self.preparation_source_hashes,
             effective_duration_s=None,planning_pending=True,scope='Requested task only; no computed reference or flight result yet')
         manifest['condition_fingerprint']=hashlib.sha256(json.dumps(dict(conditions=conditions,sources=self.preparation_source_hashes),sort_keys=True).encode()).hexdigest()
@@ -104,14 +114,27 @@ class PreparedRouteRuntime(RouteLiveRuntime):
         return tick,errors
 
     def _settle(self,goal,stage,timeout):
+        tolerances = self.config.get('small_field', {}).get('preparation', dict(
+            position_m=.02, speed_mps=.03, yaw_rad=.03, samples=5))
         self._publish(stage,'到准备点并收敛位置、速度与朝向。',running=True)
         begin=previous=time.perf_counter();settled=0
+        last_stamp = None
         while time.perf_counter()-begin<timeout:
             previous,errors=self._hold_tick(goal,stage,previous)
-            settled=settled+1 if errors[0]<=.02 and errors[1]<=.03 and errors[2]<=.03 else 0
-            if settled>=5:
+            if 'small_field' in self.config:
+                stamp = int(self._last_state.timestamp)
+                self.preparation_rows[-1]['sim_timestamp_ns'] = stamp
+                self.preparation_rows[-1]['new_state'] = last_stamp != stamp
+                if last_stamp == stamp:
+                    continue
+                if last_stamp is not None and not 0 < (stamp-last_stamp)*1e-9 <= self.config['small_field']['max_sample_gap_s']:
+                    settled = 0
+                last_stamp = stamp
+            limits = [tolerances['position_m'], tolerances['speed_mps'], tolerances['yaw_rad']]
+            settled=settled+1 if all(value <= limit for value, limit in zip(errors, limits)) else 0
+            if settled>=tolerances['samples']:
                 self._event(stage+'_ARRIVED',position=self.snapshot()['position'],velocity=self.snapshot()['velocity'],
-                    tolerances=dict(position_m=.02,velocity_mps=.03,yaw_rad=.03));return
+                    tolerances=dict(position_m=limits[0],velocity_mps=limits[1],yaw_rad=limits[2]));return
         raise TimeoutError('未在规定时间内收敛到准备点')
 
     def _rise(self,height):
@@ -156,7 +179,8 @@ class PreparedRouteRuntime(RouteLiveRuntime):
                 scope='Post-arrival request/collection includes unfinished startup; cold process startup is recorded separately and may overlap takeoff/preparation')
             self._event('PLANNING_FINISHED',planning_wall_s=wall,method=plan['group_id'],airsim_search_calls=0,
                 pipeline_timings=self._prepared_planning_timing)
-            self._settle(goal,'SETTLING',10.)
+            small_field = 'small_field' in self.config
+            if not small_field:self._settle(goal,'SETTLING',10.)
             if any(hashlib.sha256(Path(p).read_bytes()).hexdigest()!=h for p,h in self.preparation_source_hashes.items()):raise RuntimeError('准备/规划期间源码变化，请保留本次失败并重新运行')
             self._initialize_reference()
             frozen = plan['route'].get('retiming', {}).get('frozen_source')
@@ -169,12 +193,14 @@ class PreparedRouteRuntime(RouteLiveRuntime):
             for key in ('plans_file','plans_sha256'):section.pop(key,None)
             # Selected method and output paths are outcomes, not fixed task conditions.
             manifest['conditions']['preparation'].pop('method',None)
-            manifest['conditions']['protocol_revision']=15
+            manifest['conditions']['protocol_revision']=self.protocol_revision
             manifest['preparation_events']=self.preparation_events
             manifest['condition_fingerprint']=hashlib.sha256(json.dumps(dict(conditions=manifest['conditions'],sources=manifest['source_sha256']),sort_keys=True).encode()).hexdigest()
             manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
             (self._run_dir/'config.json').write_text(json.dumps(self.config,ensure_ascii=False,indent=2),encoding='utf-8')
-            self._event('REFERENCE_READY',duration_s=self.live_curve.duration_s);finished=True
+            self._event('REFERENCE_READY',duration_s=self.live_curve.duration_s)
+            if small_field:self._settle(goal,'SETTLING',10.)
+            finished=True
         finally:
             if worker is not None and not finished:
                 worker.cancel();self._event('PLANNING_CANCELLED',reason='Preparation/search failed or user stopped; close receipt saved after landing')
@@ -198,10 +224,11 @@ class PreparedRouteRuntime(RouteLiveRuntime):
             finally:self._prepared_planner=None
         super()._save(outcome)
         if self._run_dir and self._summary_written:
+            if 'small_field' in self.config:self._write_preparation()
             path=self._run_dir/'summary.json';summary=json.loads(path.read_text(encoding='utf-8'))
             summary.update(preparation_events=self.preparation_events,planning_after_arrival=any(e['stage']=='PLANNING_STARTED' for e in self.preparation_events),
                 planning_worker=getattr(self,'_prepared_planner_receipt',None),planning_pipeline_timings=getattr(self,'_prepared_planning_timing',None),
-                scope='Protocol15 measured preparation -> fresh model planning -> real-time execution; no AirSim search')
+                scope=f'Protocol{self.protocol_revision} measured preparation -> fresh model planning -> real-time execution; no AirSim search')
             path.write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
             (self._run_dir/'route_display.json').write_text(json.dumps(dict(markers=self.display_milestones.markers,
                 events=self.display_milestones.events,scope='Display landmarks only. Control judgments remain in summary/trace.'),ensure_ascii=False,indent=2),encoding='utf-8')

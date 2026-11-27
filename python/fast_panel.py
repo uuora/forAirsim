@@ -1,6 +1,5 @@
 """Qt5 control and timestamped playback for the forAirsim baseline and TOPPQuad."""
 import argparse
-import hashlib
 from bisect import bisect_right
 from datetime import datetime
 import json
@@ -16,10 +15,11 @@ from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import (QApplication,QComboBox,QHBoxLayout,QLabel,QLineEdit,QMainWindow,
                              QPushButton,QSlider,QVBoxLayout,QWidget)
 
-from dual_target_control.prepared_route_live import PreparedRouteRuntime
+from dual_target_control.small_field import scaled_vehicle_bounds
+from dual_target_control.small_field_live import SmallFieldRuntime
 from dual_target_control.route_view import RouteFlightView
 from dual_target_control.ui import STATUS_LABELS
-from dual_target_control.simulator import ROOT
+from dual_target_control.simulator import ROOT, SMALL_FIELD_MAP
 from prepared_route_planner import prepared_spec
 
 
@@ -27,27 +27,47 @@ def read(path):
     return json.loads(Path(path).read_text(encoding="utf-8-sig"))
 
 
-def configuration(policy,geometry,arm,start=None,points=None,*,sweep=None,route_preset=None):
-    preset=read(ROOT/"configs/fast_route.json")
-    limits=preset["command_limits"]
-    task=dict(points=preset["waypoints"] if points is None else points,start=preset["start"] if start is None else start,
-              policy=policy,seed=preset["seed"],pass_speed=preset["pass_speed_mps"],dwell_s=preset["dwell_s"],
-              position_error_limit_m=preset["position_error_limit_m"],
-              tracking=preset["tracking"],retiming=preset["retiming"],
-              time_scale=preset["time_scale"],max_speed=limits["max_speed_mps"],max_slew=limits["max_slew_mps2"])
-    if sweep:
-        task["retiming"] = dict(task["retiming"], continuous_profile="fixed",
-                                fractions=[sweep["fraction"]], frozen_source=sweep["source"])
-    spec=prepared_spec(**task)
-    cfg=read(ROOT/"configs/dual_target_control.json")
-    cfg["control"].update(max_speed=task["max_speed"],max_acceleration=task["max_slew"])
-    cfg["airsim"]["initial_height"]=task["start"][2]
-    method=f"{geometry}_{arm}"
-    cfg["preparation"]=dict(task=task,method=method,protocol_revision=15)
+def configuration(policy, geometry, arm, points=None, *, route_preset=None, small_field=True):
+    if policy != "pass" or not small_field:
+        raise ValueError("小场地实验仅支持连续过点")
+
+    preset = read(ROOT / "configs/fast_route.json")
+    field = read(ROOT / "configs/small_field.json")
+    ue_visualization = field.pop("ue_visualization")
+    field["vehicle_bounds_frd_m"] = scaled_vehicle_bounds(ue_visualization)
+    if points is not None:
+        field["waypoints"] = points
+    limits = field["command_limits"]
+    task = dict(
+        policy=policy, seed=preset["seed"], small_field=field,
+        start=field["start"], points=field["waypoints"],
+        pass_speed=field["planning_pass_speed_mps"], dwell_s=field["intermediate_reference_dwell_s"],
+        position_error_limit_m=None, tracking=preset["tracking"], retiming=preset["retiming"],
+        time_scale=1., max_speed=limits["max_speed_mps"], max_slew=limits["max_slew_mps2"],
+    )
+    spec = prepared_spec(**task)
+    cfg = read(ROOT / "configs/dual_target_control.json")
+    if os.environ.get("AIRSIM_RANDOM_TELEMETRY") == "1":
+        cfg["rotor_telemetry"] = True
+    method = f"{geometry}_{arm}"
+    cfg["preparation"] = dict(task=task, method=method, protocol_revision=SmallFieldRuntime.protocol_revision)
     if route_preset is not None:
         cfg["preparation"]["route_preset"] = route_preset
-    cfg["curve_experiment"]=dict(plan=dict(group_id=method,route=spec,planning_pending=True),
-                                  time_scale=task["time_scale"],auto_show_scene=True,execution_id=uuid.uuid4().hex)
+    cfg["curve_experiment"] = dict(
+        plan=dict(group_id=method, route=spec, planning_pending=True),
+        time_scale=task["time_scale"], auto_show_scene=True, execution_id=uuid.uuid4().hex,
+    )
+    lower, upper = field["bounds_zup_m"]
+    cfg["small_field"] = field
+    cfg["ue_visualization"] = ue_visualization
+    cfg["control"].update(
+        max_speed=task["max_speed"], max_acceleration=task["max_slew"],
+        x_min=lower[0], x_max=upper[0], y_min=lower[1], y_max=upper[1],
+        height_min=lower[2], height_max=upper[2], margin=0.,
+        arrival_radius=field["waypoint_radius_m"], target_distance_min=0., target_distance_max=0.,
+        max_yaw_rate_deg=field["max_yaw_rate_deg_s"], control_hz=field["control_hz"],
+    )
+    cfg["airsim"].update(initial_height=field["start"][2], aim_camera=False, map=SMALL_FIELD_MAP)
     return cfg
 
 
@@ -62,10 +82,13 @@ class Panel(QMainWindow):
     def __init__(self, route_presets):
         super().__init__()
         self.route_presets = route_presets
-        self.setWindowTitle("AirSim 轨迹实验 · forAirsim 快基线与 TOPPQuad")
-        self.resize(1060,760)
-        self.cfg=configuration("stop","hermite","ordinary")
-        self.runtime=PreparedRouteRuntime(self.cfg)
+        self.resize(1060, 760)
+        self.cfg = configuration("pass", "hermite", "ordinary")
+        self.common_points = self.cfg["small_field"]["waypoints"]
+        lower, upper = self.cfg["small_field"]["bounds_zup_m"]
+        title = " × ".join(f"{hi-lo:g}" for lo, hi in zip(lower, upper)) + " m"
+        self.setWindowTitle(f"AirSim 轨迹实验 · {title}")
+        self.runtime = SmallFieldRuntime(self.cfg)
         self.previous_dir=None
         self.pending=None
         self.suite=None
@@ -75,29 +98,31 @@ class Panel(QMainWindow):
         self.verification_exit=0
         widget=QWidget();self.setCentralWidget(widget);layout=QVBoxLayout(widget)
         row=QHBoxLayout();layout.addLayout(row)
-        self.policy=combo([("逐点停稳","stop"),("连续过点","pass")])
-        self.geometry=combo([("Hermite","hermite"),("Bézier","bezier")])
-        self.arm=combo([("普通基线","ordinary"),("TOPPQuad","toppquad")])
-        for title,box in (("任务",self.policy),("曲线",self.geometry),("计时",self.arm)):
-            row.addWidget(QLabel(title));row.addWidget(box)
+        self.geometry = combo([("Hermite", "hermite"), ("Bézier", "bezier"), ("B-spline", "bspline")])
+        self.arm = combo([
+            ("普通基线", "ordinary"), ("自动调整 TOPPQuad", "toppquad"), ("完整 TOPPQuad", "toppquad-full")
+        ])
+        for title, box in (("任务", QLabel("连续过点")), ("曲线", self.geometry), ("计时", self.arm)):
+            row.addWidget(QLabel(title))
+            row.addWidget(box)
         row.addStretch()
         self.launch=QPushButton("启动 / 连接 AirSim");row.addWidget(self.launch)
         self.launch.clicked.connect(self.launch_sim)
         show=QPushButton("显示 UE 场景");row.addWidget(show);show.clicked.connect(self.runtime.show_scene)
         task=self.cfg["preparation"]["task"]; edit=QHBoxLayout();layout.addLayout(edit)
-        self.route_choice = combo([("自定义路线", None)] +
-                                  [(route["label"], name) for name, route in route_presets["routes"].items()])
+        self.route_choice = combo([("共用航线", None)] +
+                                  [(route["label"], name) for name, route in route_presets.items()])
         edit.addWidget(self.route_choice)
         self.start=QLineEdit(json.dumps(task["start"]));self.start.setMaximumWidth(150)
         self.points=QLineEdit(json.dumps(task["points"]))
-        edit.addWidget(QLabel("准备点 [X,Y,高度]"));edit.addWidget(self.start)
+        self.start.setReadOnly(True)
+        self.points.setReadOnly(True)
+        edit.addWidget(QLabel("空中准备点 [X,Y,Z]"));edit.addWidget(self.start)
         edit.addWidget(QLabel("有序航点（米）"));edit.addWidget(self.points)
         self.start_button=QPushButton("开始所选飞行");edit.addWidget(self.start_button)
         self.stop_button=QPushButton("停止并降落");edit.addWidget(self.stop_button)
         self.start_button.clicked.connect(self.fly);self.stop_button.clicked.connect(self.stop)
         self.route_choice.currentIndexChanged.connect(self.apply_route_preset)
-        self.start.textEdited.connect(self.mark_custom_route)
-        self.points.textEdited.connect(self.mark_custom_route)
         self.view=RouteFlightView(self.cfg);layout.addWidget(self.view,1)
         self.status=QLabel("待启动");self.status.setWordWrap(True);layout.addWidget(self.status)
         history=QHBoxLayout();layout.addLayout(history)
@@ -106,7 +131,7 @@ class Panel(QMainWindow):
         self.play=QPushButton("回放");self.play.clicked.connect(self.toggle_replay);history.addWidget(self.play)
         self.slider=QSlider(Qt.Horizontal);self.slider.setEnabled(False);self.slider.sliderMoved.connect(self.seek);history.addWidget(self.slider,1)
         folder=QPushButton("打开数据");folder.clicked.connect(self.open_record);history.addWidget(folder)
-        self.comparison=QPushButton("查看批次对比");history.addWidget(self.comparison)
+        self.comparison=QPushButton("回看三航线对比");history.addWidget(self.comparison)
         self.comparison.clicked.connect(self.open_comparison)
         self.records.currentIndexChanged.connect(self.clear_replay)
         self.refresh_records()
@@ -114,30 +139,25 @@ class Panel(QMainWindow):
 
     def apply_route_preset(self, index):
         name = self.route_choice.itemData(index)
-        if name is not None:
-            self.start.setText(json.dumps(self.route_presets["start"]))
-            self.points.setText(json.dumps(self.route_presets["routes"][name]["waypoints"]))
-            self.policy.setCurrentIndex(self.policy.findData("pass"))
-
-    def mark_custom_route(self):
-        self.route_choice.setCurrentIndex(0)
+        route = self.route_presets.get(name)
+        self.points.setText(json.dumps(route["waypoints"] if route else self.common_points))
 
     def refresh_records(self):
         self.records.clear()
         for p in sorted((ROOT/"logs").glob("dual_target_airsim_*/summary.json"),reverse=True):
             try:
-                r=read(p); task=r["config"]["preparation"]["task"]
+                r = read(p)
             except (OSError,KeyError,ValueError):
+                continue
+            if not r.get("config", {}).get("small_field"):
                 continue
             accepted=r.get("metrics") or {}
             result="通过" if r.get("outcome")=="COMPLETED" and accepted.get("task_success") else "未通过"
-            group="逐点停稳" if task["policy"]=="stop" else "连续过点"
-            geometry,arm=r["method"].rsplit("_",1)
-            plan=r["config"].get("curve_experiment", {}).get("plan", {})
-            method=("普通基线" if arm=="ordinary" else
-                    "TOPPQuad 分段" if plan.get("retiming_profile") else "TOPPQuad 固定比例")
-            stamp=p.parent.name.removeprefix("dual_target_airsim_")
-            self.records.addItem(f"{stamp}  {group}  {geometry.title()} / {method}  {result}",str(p.parent))
+            geometry, arm = r["method"].rsplit("_", 1)
+            method = {"ordinary": "普通基线", "toppquad": "自动调整 TOPPQuad",
+                      "toppquad-full": "完整 TOPPQuad", "toppquad-fixed": "TOPPQuad 固定比例"}.get(arm, arm)
+            stamp = p.parent.name.removeprefix("dual_target_airsim_")
+            self.records.addItem(f"{stamp}  {geometry.title()} / {method}  {result}", str(p.parent))
 
     def clear_replay(self):
         self.replay=None
@@ -150,7 +170,7 @@ class Panel(QMainWindow):
         QDesktopServices.openUrl(QUrl.fromLocalFile(path))
 
     def open_comparison(self):
-        page=max((ROOT/"reports").glob("verification_*/index.html"),default=None)
+        page = max((ROOT / "reports").glob("small_field_retiming_pairs_*/index.html"), default=None)
         if page:
             QDesktopServices.openUrl(QUrl.fromLocalFile(str(page)))
         else:
@@ -168,10 +188,8 @@ class Panel(QMainWindow):
         snap=self.runtime.snapshot()
         if self.pending or snap["running"] or not snap["connected"]:return
         try:
-            cfg=configuration(self.policy.currentData(),self.geometry.currentData(),self.arm.currentData(),
-                              json.loads(self.start.text()),json.loads(self.points.text()),
-                              sweep=self.suite.get("current_sweep") if self.suite else None,
-                              route_preset=self.route_choice.currentData())
+            cfg = configuration("pass", self.geometry.currentData(), self.arm.currentData(),
+                                points=json.loads(self.points.text()), route_preset=self.route_choice.currentData())
         except (ValueError,TypeError) as exc:
             self.feedback=str(exc)
             return
@@ -222,7 +240,7 @@ class Panel(QMainWindow):
                 self.pending=None
                 if self.suite is not None:self.abort_suite(snap["message"])
         busy=bool(self.pending or running or self.suite is not None)
-        for control in (self.geometry,self.policy,self.arm,self.route_choice,self.start,self.points,self.launch,self.play,self.records):
+        for control in (self.geometry,self.arm,self.route_choice,self.start,self.points,self.launch,self.play,self.records):
             control.setEnabled(not busy)
         self.start_button.setEnabled(not busy and snap["connected"])
         if self.replay is not None:
@@ -243,28 +261,25 @@ class Panel(QMainWindow):
                 self.abort_suite(snap["message"])
             elif snap["connected"] and snap["status"] in ("READY","STOPPED","ERROR"):self.next_trial()
 
-    def begin_suite(self,jobs,*,sweep_source=None):
+    def begin_suite(self, jobs):
         if any(job[2] == "toppquad-fixed" for job in jobs):
             self.arm.addItem("TOPPQuad 固定比例（对照）", "toppquad-fixed")
-        preset = self.route_choice.currentData()
-        prefix = "retiming_sweep_" if sweep_source else "verification_"
-        dest=ROOT/"reports"/(prefix+datetime.now().strftime("%Y%m%d_%H%M%S_%f"))
+        dest = ROOT / "reports" / ("small_field_pilot_" + datetime.now().strftime("%Y%m%d_%H%M%S_%f"))
         dest.mkdir(parents=True)
-        self.suite=dict(remaining=jobs.copy(),results=[],dir=dest,expected=len(jobs))
+        field = configuration("pass", "hermite", "ordinary", points=json.loads(self.points.text()))["small_field"]
+        self.suite = dict(remaining=jobs.copy(), results=[], dir=dest, expected=len(jobs), small_field=field)
+        preset = self.route_choice.currentData()
         if preset is not None:
             self.suite["route_preset"] = preset
-        if sweep_source:
-            self.suite.update(sweep_source=sweep_source, requested_fractions=[job[3] for job in jobs])
         self.launch_sim()
 
     def next_trial(self):
-        s=self.suite
-        if not s["remaining"]:
-            self.finish_suite();return
-        policy,geom,arm,*fraction=s["remaining"].pop(0)
-        if fraction:
-            s["current_sweep"] = dict(fraction=fraction[0], source=s["sweep_source"])
-        for box,val in ((self.policy,policy),(self.geometry,geom),(self.arm,arm)):box.setCurrentIndex(box.findData(val))
+        if not self.suite["remaining"]:
+            self.finish_suite()
+            return
+        _, geometry, arm = self.suite["remaining"].pop(0)
+        self.geometry.setCurrentIndex(self.geometry.findData(geometry))
+        self.arm.setCurrentIndex(self.arm.findData(arm))
         self.fly()
 
     def record_trial(self,directory,r):
@@ -273,14 +288,10 @@ class Panel(QMainWindow):
         s["results"].append(dict(method=r["method"],policy=r["config"]["preparation"]["task"]["policy"],outcome=r["outcome"],
                                  passed=bool(r["outcome"]=="COMPLETED" and (r.get("metrics") or {}).get("task_success") and safe and r.get("sources_unchanged")),safe_landing=safe,
                                  samples=r["samples"],run=str(directory),metrics=r.get("metrics"),error=r.get("error")))
-        if not safe:self.abort_suite("未确认落地，已结束批次")
-        elif s.get("current_sweep"):
-            s["results"][-1]["requested_fraction"] = s["current_sweep"]["fraction"]
-            if not s["results"][-1]["passed"]:
-                self.abort_suite("当前档位未通过，停止提高计时比例")
-            else:
-                self.save_suite()
-        else:self.save_suite()
+        if not safe:
+            self.abort_suite("未确认落地，已结束批次")
+        else:
+            self.save_suite()
 
     def save_suite(self):
         s=self.suite
@@ -293,10 +304,14 @@ class Panel(QMainWindow):
         self.verification_exit=int(len(self.suite["results"])!=self.suite["expected"] or
                                    not all(r["passed"] for r in self.suite["results"]))
         self.save_suite()
-        from flight_comparison import render
-        verified=render(self.suite["dir"])
-        if verified["passed"]!=verified["requested"]:
-            self.verification_exit=1
+        from audit_small_field import audit_trial
+        audits = [audit_trial(Path(row["run"])) for row in self.suite["results"]]
+        passed = sum(row["passed"] for row in audits)
+        receipt = dict(requested=self.suite["expected"], passed=passed, flights=audits)
+        (self.suite["dir"] / "audit.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2),
+                                                     encoding="utf8")
+        if passed != self.suite["expected"]:
+            self.verification_exit = 1
         if sys.stdout:print(self.suite["dir"],flush=True)
         self.suite=None
         QTimer.singleShot(300,self.close)
@@ -310,56 +325,50 @@ class Panel(QMainWindow):
 
 
 def main():
-    parser=argparse.ArgumentParser()
-    route_presets = read(ROOT/"configs/long_distance_routes.json")
-    parser.add_argument("--check",action="store_true")
-    action=parser.add_mutually_exclusive_group()
-    action.add_argument("--verify-flights",nargs="+",metavar="POLICY/GEOMETRY/ARM")
-    action.add_argument("--replay",type=Path,metavar="RUN_DIRECTORY")
-    action.add_argument("--retiming-sweep",nargs="+",type=float,metavar="FRACTION")
-    parser.add_argument("--retiming-source",type=Path,metavar="LIVE_MANIFEST")
-    parser.add_argument("--waypoints", type=json.loads, metavar="JSON", help="Ordered waypoints for --verify-flights")
-    parser.add_argument("--route-preset", choices=tuple(route_presets["routes"]), help="Load a prepared route")
-    args=parser.parse_args()
-    if bool(args.retiming_sweep) != bool(args.retiming_source):
-        parser.error("--retiming-sweep and --retiming-source are required together")
-    if args.retiming_sweep and (not all(0 < f <= 1 for f in args.retiming_sweep)
-                                 or args.retiming_sweep != sorted(set(args.retiming_sweep))):
-        parser.error("Retiming fractions must be strictly increasing and in (0, 1]")
-    if args.route_preset and (args.waypoints is not None or args.retiming_sweep or args.replay):
-        parser.error("--route-preset cannot be combined with --waypoints, --retiming-sweep, or --replay")
-    if args.check:os.environ.setdefault("QT_QPA_PLATFORM","offscreen")
-    app=QApplication(sys.argv[:1]);panel=Panel(route_presets)
+    parser = argparse.ArgumentParser()
+    route_presets = read(ROOT / "configs/small_field_routes.json")
+    parser.add_argument("--check", action="store_true")
+    # Accept the flag used by prior small-field flight commands.
+    parser.add_argument("--small-field", action="store_true", help=argparse.SUPPRESS)
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument("--verify-flights", nargs="+", metavar="PASS/GEOMETRY/ARM")
+    action.add_argument("--replay", type=Path, metavar="RUN_DIRECTORY")
+    route = parser.add_mutually_exclusive_group()
+    route.add_argument("--route-preset", choices=tuple(route_presets), help="Load a small-field route")
+    route.add_argument("--waypoints", type=json.loads, metavar="JSON", help="Ordered waypoints for --verify-flights")
+    args = parser.parse_args()
+    if args.check and (args.verify_flights or args.replay):
+        parser.error("--check cannot start flights or playback")
+    if args.waypoints is not None and not args.verify_flights:
+        parser.error("--waypoints requires --verify-flights")
+    if args.route_preset and args.replay:
+        parser.error("--route-preset cannot be combined with --replay")
+    if args.verify_flights:
+        jobs = [selection.split("/") for selection in args.verify_flights]
+        geometries = {"hermite", "bezier", "bspline"}
+        arms = {"ordinary", "toppquad", "toppquad-fixed", "toppquad-full"}
+        for job in jobs:
+            if len(job) != 3 or job[0] != "pass" or job[1] not in geometries or job[2] not in arms:
+                parser.error("Invalid small-field flight selection")
+        try:
+            configuration("pass", "hermite", "ordinary", points=args.waypoints)
+        except (TypeError, ValueError) as exc:
+            parser.error(str(exc))
+    if args.check:
+        os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+    app = QApplication(sys.argv[:1])
+    panel = Panel(route_presets)
     if args.route_preset:
         panel.route_choice.setCurrentIndex(panel.route_choice.findData(args.route_preset))
     panel.show()
     if args.check:
-        assert not panel.runtime.snapshot()["connected"] and panel.arm.count()==2
-        QTimer.singleShot(100,panel.close)
+        assert not panel.runtime.snapshot()["connected"]
+        assert panel.arm.count() == 3 and panel.geometry.count() == 3 and panel.route_choice.count() == 4
+        QTimer.singleShot(100, panel.close)
     if args.verify_flights:
-        jobs=[s.split("/") for s in args.verify_flights]
-        if any(len(j)!=3 or j[0] not in ("stop","pass") or j[1] not in ("hermite","bezier")
-               or j[2] not in ("ordinary","toppquad","toppquad-fixed")
-               or (j[2]=="toppquad-fixed" and j[0]!="pass") for j in jobs):parser.error("Invalid flight selection")
         if args.waypoints is not None:
-            try:
-                for policy in {job[0] for job in jobs}:
-                    configuration(policy, "hermite", "ordinary", points=args.waypoints)
-            except (TypeError, ValueError) as exc:
-                parser.error(str(exc))
             panel.points.setText(json.dumps(args.waypoints))
-        QTimer.singleShot(500,lambda:panel.begin_suite(jobs))
-    elif args.waypoints is not None:
-        parser.error("--waypoints requires --verify-flights")
-    if args.retiming_sweep:
-        path = args.retiming_source.resolve()
-        raw = path.read_bytes()
-        plan = json.loads(raw)["plan"]
-        if plan["group_id"] not in ("hermite_toppquad", "bezier_toppquad") or plan["route"]["policy"] != "pass":
-            parser.error("Retiming sweep requires one completed continuous TOPPQuad flight manifest")
-        source = dict(path=str(path), sha256=hashlib.sha256(raw).hexdigest())
-        jobs = [("pass",plan["representation"],"toppquad",fraction) for fraction in args.retiming_sweep]
-        QTimer.singleShot(500,lambda:panel.begin_suite(jobs,sweep_source=source))
+        QTimer.singleShot(500, lambda: panel.begin_suite(jobs))
     if args.replay:
         index=panel.records.findData(str(args.replay.resolve()))
         if index<0:

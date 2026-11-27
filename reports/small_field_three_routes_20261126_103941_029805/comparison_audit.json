@@ -1,0 +1,32 @@
+{
+  "s": {
+    "suite_audit": "D:\\foraisimTOPPQuad\\reports\\small_field_pilot_20261126_103942_179790\\audit.json",
+    "same_raw_timing": true,
+    "same_base_segments": true,
+    "same_hermite_baseline_input": true,
+    "tracking_condition_fingerprints": [
+      "ed05a37f65d2ae7d3b656577f8679e88cdc42e1e81477487d660600ce0efa86a"
+    ],
+    "passed": 4
+  },
+  "u-turn": {
+    "suite_audit": "D:\\foraisimTOPPQuad\\reports\\small_field_pilot_20261126_104224_700632\\audit.json",
+    "same_raw_timing": true,
+    "same_base_segments": true,
+    "same_hermite_baseline_input": true,
+    "tracking_condition_fingerprints": [
+      "0dfeb0f985ffa934e1a1ab7b303d42287e9ba8d9c748dbb497579de5b2696fe5"
+    ],
+    "passed": 4
+  },
+  "arch": {
+    "suite_audit": "D:\\foraisimTOPPQuad\\reports\\small_field_pilot_20261126_104557_671393\\audit.json",
+    "same_raw_timing": true,
+    "same_base_segments": true,
+    "same_hermite_baseline_input": true,
+    "tracking_condition_fingerprints": [
+      "d883a1525b3789b46fb2dc0819a24769978739cd26a099e5c8aa5b81ef17051f"
+    ],
+    "passed": 4
+  }
+}

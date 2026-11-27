@@ -1,0 +1,96 @@
+{
+  "requested": 18,
+  "recorded": 18,
+  "tracked": 18,
+  "passed": 17,
+  "landed": 18,
+  "matched": 8,
+  "retries": 1,
+  "retries_passed": 1,
+  "pairs": [
+    {
+      "route": "s",
+      "geometry": "hermite",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -2.058043904,
+      "tracking_delta_pct": -11.872620283835236
+    },
+    {
+      "route": "s",
+      "geometry": "bezier",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -2.058043904,
+      "tracking_delta_pct": -11.868512110726643
+    },
+    {
+      "route": "s",
+      "geometry": "bspline",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -4.794102272,
+      "tracking_delta_pct": -25.53123502156894
+    },
+    {
+      "route": "u-turn",
+      "geometry": "hermite",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -5.298113023999999,
+      "tracking_delta_pct": -27.512073531702754
+    },
+    {
+      "route": "u-turn",
+      "geometry": "bezier",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -5.292112896000001,
+      "tracking_delta_pct": -27.493765586034915
+    },
+    {
+      "route": "u-turn",
+      "geometry": "bspline",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -7.197153536,
+      "tracking_delta_pct": -33.19496333194963
+    },
+    {
+      "route": "arch",
+      "geometry": "hermite",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": null,
+      "tracking_delta_pct": null
+    },
+    {
+      "route": "arch",
+      "geometry": "bezier",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -1.329028352,
+      "tracking_delta_pct": -10.2073732718894
+    },
+    {
+      "route": "arch",
+      "geometry": "bspline",
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -4.092087296000001,
+      "tracking_delta_pct": -25.71159283694628
+    }
+  ],
+  "retry_pairs": [
+    {
+      "route": "arch",
+      "geometry": "hermite",
+      "passed": true,
+      "landed": true,
+      "same_geometry": true,
+      "same_tracking_conditions": true,
+      "tracking_delta_s": -1.3200281599999997,
+      "tracking_delta_pct": -10.147601476014756
+    }
+  ]
+}

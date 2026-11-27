@@ -65,8 +65,8 @@ def marker_geometry(snapshot, cfg):
                 trail=_points(snapshot.get('trail', []), 300))
 
 
-def field_edges(cfg):
-    corners = [[x, y, h] for h in (cfg.height_min, cfg.height_max)
+def field_edges(cfg, bottom_lift=0.):
+    corners = [[x, y, h] for h in (cfg.height_min + bottom_lift, cfg.height_max)
                for y in (cfg.y_min, cfg.y_max) for x in (cfg.x_min, cfg.x_max)]
     pairs = ((0, 1), (1, 3), (3, 2), (2, 0), (4, 5), (5, 7),
              (7, 6), (6, 4), (0, 4), (1, 5), (2, 6), (3, 7))
@@ -205,7 +205,8 @@ class OverviewStream:
         return function(*args, **kwargs)
 
     def _draw(self, client, airsim, state):
-        cfg = ControlConfig.from_dict(state.get('config', self.config).get('control', {}))
+        config = state.get('config', self.config)
+        cfg = ControlConfig.from_dict(config.get('control', {}))
         geometry = marker_geometry(state, cfg)
         origin=np.asarray(state.get('marker_world_origin_ned',[0.,0.,0.]))
         ned = lambda rows: [airsim.Vector3r(float(x+origin[0]), float(y+origin[1]), float(-h+origin[2])) for x, y, h in rows]
@@ -224,23 +225,30 @@ class OverviewStream:
         if not self._debug_markers:
             return '；'.join(warnings)
         shared = dict(duration=self._duration, is_persistent=False)
-        for index, color in enumerate(([1., .05, .05, 1.], [.1, .3, 1., 1.])):
-            if index<len(targets):
-                self._call(client.simPlotPoints, ned([targets[index]]),
-                           color_rgba=color, size=10., **shared)
-        self._call(client.simPlotLineList, ned(field_edges(cfg)),
+        visual = config.get('ue_visualization', {})
+        if not visual:
+            for index, color in enumerate(([1., .05, .05, 1.], [.1, .3, 1., 1.])):
+                if index<len(targets):
+                    self._call(client.simPlotPoints, ned([targets[index]]),
+                               color_rgba=color, size=10., **shared)
+        bottom_lift = .012 if 'launch' in config.get('small_field', {}) else 0.
+        self._call(client.simPlotLineList, ned(field_edges(cfg, bottom_lift)),
                    color_rgba=[1., .65, .15, 1.], thickness=2., **shared)
-        for key, color in (('planned', [.12, .9, .3, 1.]),
-                           ('trail', [1., .05, .85, 1.])):
+        for key, color, thickness in (
+            ('planned', [.12, .9, .3, 1.], visual.get('reference_line_cm', 2.5)),
+            ('trail', [1., .05, .85, 1.], visual.get('actual_line_cm', 6.0)),
+        ):
             if len(geometry[key]) >= 2:
                 self._call(client.simPlotLineStrip, ned(geometry[key]),
-                           color_rgba=color, thickness=6. if key=='trail' else 2.5, **shared)
+                           color_rgba=color, thickness=thickness, **shared)
         self._draw_route_landmarks(client,airsim,state,ned,shared)
         return '；'.join(warnings)
 
     def _draw_route_landmarks(self,client,airsim,state,ned,shared):
         from .route_milestones import glyph_lines
         markers=state.get('route_markers') or []
+        small_markers = bool(state.get('config', self.config).get('ue_visualization'))
+        goal_scale = .55 if small_markers else 1.
         visited=[];strings=[];positions=[]
         for marker in markers:
             if marker['kind']=='via' and marker['state']!='visited':continue
@@ -248,10 +256,14 @@ class OverviewStream:
             if marker['kind']=='via':visited.append(point)
             else:
                 color=[.02,.65,.65,1.] if marker['kind']=='start' else [1.,.55,.05,1.]
-                self._call(client.simPlotLineList,ned(glyph_lines(marker)),color_rgba=color,thickness=4.,**shared)
-            strings.append(marker['id']);positions.append([point[0],point[1],point[2]+.85])
-        if visited:self._call(client.simPlotPoints,ned(visited),color_rgba=[.1,.45,1.,1.],size=9.,**shared)
-        if strings:self._call(client.simPlotStrings,strings,ned(positions),scale=1.2,color_rgba=[.05,.12,.18,1.],duration=self._duration)
+                points = glyph_lines(marker, goal_scale)
+                if marker['kind'] == 'start' and 'launch' in state.get('config', self.config).get('small_field', {}):
+                    points = [[x, y, h + .012] for x, y, h in points]
+                self._call(client.simPlotLineList,ned(points),color_rgba=color,thickness=4.,**shared)
+            label_height = (.28 if small_markers else .85) if marker['kind'] == 'start' else .85 * goal_scale
+            strings.append(marker['id']);positions.append([point[0],point[1],point[2]+label_height])
+        if visited:self._call(client.simPlotPoints,ned(visited),color_rgba=[.1,.45,1.,1.],size=5. if small_markers else 9.,**shared)
+        if strings:self._call(client.simPlotStrings,strings,ned(positions),scale=.85 if small_markers else 1.2,color_rgba=[.05,.12,.18,1.],duration=self._duration)
 
     def _work(self):
         client = None

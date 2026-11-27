@@ -14,6 +14,34 @@ from trajectory_research.curve_task import jerk_energy
 POLICIES={'stop':'逐点停稳','pass':'连续过点'}
 
 
+def distance_based_duration(length):
+    return min(7., max(3., length/1.6 + 1.))
+
+
+def minimum_jerk_via_velocities(chain, time_scale):
+    """Free interior velocities; endpoint velocities and knot accelerations are zero."""
+    delta = np.diff(chain, axis=0)
+    durations = [distance_based_duration(np.linalg.norm(d))/time_scale for d in delta]
+    v = np.zeros_like(chain, dtype=float)
+    if len(chain) <= 2:
+        return v
+    # Three Gauss nodes integrate the squared quadratic jerk exactly.
+    nodes, weights = np.polynomial.legendre.leggauss(3)
+    u = (nodes+1)/2
+    matrix = np.zeros((3*len(delta), len(chain)-2))
+    target = np.empty((3*len(delta), 3))
+    for i, (d,t) in enumerate(zip(delta,durations)):
+        rows = slice(3*i,3*i+3)
+        scale = np.sqrt(weights*t/2)/t**3
+        target[rows] = -np.outer(scale*(60-360*u+360*u*u),d)
+        if i:
+            matrix[rows,i-1] = scale*t*(-36+192*u-180*u*u)
+        if i < len(delta)-1:
+            matrix[rows,i] = scale*t*(-24+168*u-180*u*u)
+    v[1:-1] = np.linalg.lstsq(matrix,target,rcond=None)[0]
+    return v
+
+
 def route_spec(points,policy='stop',seed=1201,*,pass_speed=1.2,dwell_s=1.,time_scale=1.25,max_speed=6.,max_slew=6.):
     p=np.asarray(points,dtype=float)
     if p.ndim!=2 or p.shape[1]!=3 or not 1<=len(p)<=10 or not np.isfinite(p).all():raise ValueError('请输入1至10个有限的三维航点')
@@ -85,9 +113,12 @@ def waypoint_results(curve,times,positions,velocities):
         j=max(0,i-1);fraction=0. if times[i]==times[j] else (t-times[j])/(times[i]-times[j])
         p=positions[j]*(1-fraction)+positions[i]*fraction;v=velocities[j]*(1-fraction)+velocities[i]*fraction
         error=float(np.linalg.norm(p-event['point']));speed=float(np.linalg.norm(v));last=event['index']==len(curve.waypoint_times)-1
-        speed_ok=(speed<=.5 if last else speed<=curve.spec['stop_speed_limit_mps'] if curve.spec['policy']=='stop' else speed>=curve.spec['minimum_pass_speed_mps'])
+        position_only=curve.spec['policy']=='pass' and curve.spec.get('waypoint_acceptance')=='position_only'
+        speed_ok=(speed<=.5 if last else speed<=curve.spec['stop_speed_limit_mps'] if curve.spec['policy']=='stop'
+                  else position_only or speed>=curve.spec['minimum_pass_speed_mps'])
         rows.append(dict(index=event['index'],status='MEASURED',reference_time_s=t,position_error_m=error,actual_speed_mps=speed,
-            passed=bool(error<=curve.spec['waypoint_radius_m'] and speed_ok),rule='terminal_stop' if last else curve.spec['policy']))
+            passed=bool(error<=curve.spec['waypoint_radius_m'] and speed_ok),
+            rule='terminal_stop' if last else 'position_only' if position_only else curve.spec['policy']))
     return rows
 
 

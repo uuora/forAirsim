@@ -1,0 +1,14 @@
+{
+  "s": {
+    "exit_code": 0,
+    "report": "D:\\foraisimTOPPQuad\\reports\\small_field_pilot_20261126_111421_941687"
+  },
+  "u-turn": {
+    "exit_code": 0,
+    "report": "D:\\foraisimTOPPQuad\\reports\\small_field_pilot_20261126_111927_628341"
+  },
+  "arch": {
+    "exit_code": 1,
+    "report": "D:\\foraisimTOPPQuad\\reports\\small_field_pilot_20261126_112444_808879"
+  }
+}

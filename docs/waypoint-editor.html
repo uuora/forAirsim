@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>三维航点编辑器</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #172935;
+    --muted: #546872;
+    --paper: #f3f5f2;
+    --line: #dce4e0;
+    --green: #146852;
+    --mono: "IBM Plex Mono", Consolas, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font: 14px/1.5 "Instrument Sans", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  main { max-width: 1536px; margin: auto; padding: clamp(16px, 3.3vw, 46px); }
+  h1, h2, h3, p { margin: 0; }
+  h1 { font-size: clamp(28px, 3.3vw, 42px); line-height: 1.15; font-weight: 760; letter-spacing: -.045em; }
+  h2 { font-size: 17px; font-weight: 720; }
+  h3 { font-size: 14px; font-weight: 710; }
+  .page-head { display: flex; justify-content: space-between; align-items: end; gap: 14px; margin-bottom: 23px; }
+  .page-head p { margin-top: 9px; color: var(--muted); }
+  .field-size {
+    flex-shrink: 0; padding: 8px 12px; border: 1px solid #cfdad4; border-radius: 7px;
+    color: #355248; background: #edf2ed; font: 13px/1.5 var(--mono);
+  }
+  .workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(328px, 365px); gap: 19px; align-items: start; }
+  .viewer, .editor { min-width: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; }
+  .viewer { border-color: #283e4a; background: #13232d; color: #f2f7f6; }
+  .viewer-head, .viewer-foot, .editor-head, .section-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .viewer-head { padding: 15px 17px; border-bottom: 1px solid #2d414b; flex-wrap: wrap; }
+  .view-switch { display: flex; align-items: center; gap: 2px; background: #0d1b25; border-radius: 8px; padding: 3px; }
+  button, input {
+    font: inherit;
+    color: inherit;
+  }
+  button {
+    min-height: 34px; padding: 6px 10px; cursor: pointer;
+    border: 1px solid var(--line); border-radius: 7px; background: #fff;
+    font-weight: 650; white-space: nowrap;
+  }
+  button:hover { background: #eef3f0; }
+  button:disabled { cursor: default; opacity: .4; }
+  button:focus-visible, input:focus-visible, canvas:focus-visible { outline: 2px solid #3b9a82; outline-offset: 2px; }
+  .view-switch button, .zoom button { border-color: transparent; background: transparent; color: #a9bfc6; }
+  .view-switch button { min-height: 29px; padding: 3px 9px; font-size: 12px; }
+  .view-switch button:hover, .zoom button:hover { background: #29404c; color: #fff; }
+  .view-switch button[aria-pressed="true"] { background: #294650; color: #ebfffa; }
+  .viewport {
+    position: relative; overflow: hidden;
+    height: clamp(475px, 68vh, 715px);
+    background: radial-gradient(ellipse at 45% 39%, #1d3540 0%, #12242f 49%, #0d1924 100%);
+  }
+  canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+  canvas.orbiting { cursor: grabbing; }
+  .plot-key, .zoom {
+    position: absolute; display: flex; align-items: center; border: 1px solid #37505b;
+    background: #11212cdf; border-radius: 8px;
+  }
+  .plot-key { left: 14px; bottom: 14px; gap: 13px; padding: 7px 9px; color: #c4d5d9; font-size: 11px; pointer-events: none; }
+  .plot-key span { display: inline-flex; align-items: center; gap: 5px; }
+  .swatch { display: inline-block; width: 8px; height: 8px; background: #44d6bb; border-radius: 50%; }
+  .swatch.start { background: #eaf7ef; }
+  .swatch.end { background: #f6b768; border-radius: 1.5px; transform: rotate(45deg); }
+  .zoom { right: 14px; bottom: 14px; padding: 2px; }
+  .zoom button { width: 33px; min-height: 30px; padding: 0; font: 18px var(--mono); }
+  .viewer-foot { min-height: 59px; padding: 10px 17px; border-top: 1px solid #2d414b; color: #a9bec5; flex-wrap: wrap; }
+  .stats { display: flex; align-items: center; gap: 19px; font-size: 12px; }
+  .stats strong { color: #eef8f5; font: 600 15px var(--mono); margin-left: 5px; }
+  .viewer-foot p { font-size: 11px; }
+  .editor-head { padding: 15px 17px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .route-actions { display: flex; gap: 6px; }
+  .editor-head .status { flex-basis: 100%; margin-top: 0; overflow-wrap: anywhere; }
+  .editor-head .status:empty { display: none; }
+  .editor-section { padding: 15px 16px; }
+  .editor-section + .editor-section { border-top: 1px solid var(--line); }
+  .section-head { margin-bottom: 8px; }
+  .section-head small { color: var(--muted); }
+  .coords { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .coords label, .random label { color: var(--muted); font-size: 12px; }
+  input {
+    width: 100%; min-width: 0; min-height: 34px; padding: 5px 8px;
+    background: #f8faf8; border: 1px solid var(--line); border-radius: 6px;
+    color: var(--ink); font: 13px var(--mono);
+  }
+  .coords input { display: block; margin-top: 3px; }
+  .form-actions { display: flex; gap: 7px; margin-top: 9px; }
+  .form-actions .primary { flex: 1; }
+  .primary { color: #fff; background: var(--green); border-color: var(--green); }
+  .primary:hover { background: #105641; }
+  .random {
+    display: grid; grid-template-columns: 1fr 60px auto; align-items: center; gap: 8px;
+    margin-top: 12px;
+  }
+  .random label { color: var(--ink); font-weight: 650; }
+  .status { margin-top: 9px; min-height: 17px; color: var(--muted); font-size: 11px; }
+  .status.error { color: #9c3430; }
+  .quiet { min-height: 30px; font-size: 12px; background: #f8faf8; }
+  .order-hint { margin-bottom: 9px; color: var(--muted); font-size: 11px; }
+  .point-list { max-height: 335px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; }
+  ol { margin: 0; padding: 0; list-style: none; }
+  .point-row {
+    display: grid; grid-template-columns: 16px 28px minmax(0, 1fr) auto; align-items: center;
+    min-height: 41px; gap: 5px; padding: 3px 5px 3px 8px;
+  }
+  .point-row + .point-row { border-top: 1px solid #e6ece8; }
+  .point-row.selected { background: #ecf6f0; }
+  .point-row.drop-target { box-shadow: inset 0 2px var(--green); }
+  .grip { color: #6d817c; font-size: 18px; line-height: 1; cursor: grab; user-select: none; }
+  .point-index {
+    display: inline-grid; height: 24px; min-width: 24px; place-items: center;
+    font: 600 11px var(--mono); color: #246455; background: #e9f3ee; border-radius: 4px;
+  }
+  .point-index.end { background: #fbf0dc; color: #805524; }
+  .point-index.start { background: #e7eeef; color: #405d64; }
+  .point-location {
+    border: 0; background: transparent; min-height: 27px; padding: 3px 4px;
+    text-align: left; border-radius: 4px; font: 12px var(--mono);
+  }
+  .row-controls { display: flex; gap: 2px; }
+  .row-controls button { height: 26px; min-height: 26px; width: 23px; padding: 0; border-color: transparent; background: transparent; color: #456159; }
+  .row-controls button:not(:disabled):hover { background: #e1ece5; }
+  .row-controls .delete { color: #9a4744; }
+  .fixed { color: var(--muted); font-size: 11px; padding-right: 5px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 860px) {
+    .workspace { grid-template-columns: minmax(0, 1fr); }
+    .viewport { height: clamp(355px, 58vh, 580px); }
+    .point-list { max-height: 320px; }
+  }
+  @media (max-width: 460px) {
+    main { padding: 13px; }
+    .page-head { align-items: start; flex-direction: column; margin-bottom: 15px; gap: 9px; }
+    .page-head p { font-size: 12px; }
+    .viewer-head, .viewer-foot { padding: 10px 11px; }
+    .viewer-head h2 { font-size: 15px; }
+    .view-switch button { padding-inline: 6px; }
+    .editor-section { padding: 13px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="page-head">
+    <div>
+      <h1>三维航点编辑器</h1>
+      <p>按航点顺序连线，查看路线的转弯和高度变化。</p>
+    </div>
+    <span class="field-size" aria-label="场地尺寸">8 × 8 × 2.5 m</span>
+  </header>
+
+  <div class="workspace">
+    <section class="viewer" aria-labelledby="preview-title">
+      <header class="viewer-head">
+        <h2 id="preview-title">轨迹预览</h2>
+        <div class="view-switch" role="group" aria-label="观察角度">
+          <button type="button" data-view="orbit" aria-pressed="true">三维</button>
+          <button type="button" data-view="top" aria-pressed="false">俯视</button>
+          <button type="button" data-view="side" aria-pressed="false">侧视</button>
+          <button type="button" id="reset-view">复位</button>
+        </div>
+      </header>
+      <div class="viewport">
+        <canvas id="plot" tabindex="0" aria-label="可旋转缩放的三维航线图，方向键可旋转"></canvas>
+        <div class="plot-key" aria-hidden="true">
+          <span><i class="swatch start"></i>起点</span>
+          <span><i class="swatch"></i>航点</span>
+          <span><i class="swatch end"></i>终点</span>
+        </div>
+        <div class="zoom" role="group" aria-label="图形缩放">
+          <button type="button" id="zoom-out" aria-label="缩小">−</button>
+          <button type="button" id="zoom-in" aria-label="放大">+</button>
+        </div>
+      </div>
+      <footer class="viewer-foot">
+        <div class="stats"><span>航点 <strong id="point-count">0</strong></span><span>折线长 <strong id="length">0.00 m</strong></span></div>
+        <p>拖动旋转 · 滚轮缩放 · 点击选点</p>
+      </footer>
+    </section>
+
+    <aside class="editor" aria-labelledby="edit-title">
+      <header class="editor-head">
+        <h2 id="edit-title">航点设置</h2>
+        <div class="route-actions">
+          <button class="quiet" id="open-route" type="button">打开 JSON</button>
+          <button class="quiet" id="save-route" type="button">保存航线</button>
+          <input id="route-file" type="file" accept=".json,application/json" hidden>
+        </div>
+        <p class="status" id="route-status" role="status"></p>
+      </header>
+      <section class="editor-section" aria-labelledby="coordinate-title">
+        <header class="section-head">
+          <h3 id="coordinate-title">手动输入</h3><small>单位 m</small>
+        </header>
+        <form id="point-form">
+          <div class="coords">
+            <label>X <input type="number" id="x" min="0" max="8" step="any" placeholder="0–8" required></label>
+            <label>Y <input type="number" id="y" min="0" max="8" step="any" placeholder="0–8" required></label>
+            <label>Z <input type="number" id="z" min="0" max="2.5" step="any" placeholder="0–2.5" required></label>
+          </div>
+          <div class="form-actions">
+            <button class="primary" id="submit-point" type="submit">添加航点</button>
+            <button id="cancel-edit" type="button" hidden>取消</button>
+          </div>
+        </form>
+        <form class="random" id="random-form">
+          <label for="random-count">随机点数</label>
+          <input type="number" id="random-count" min="1" max="30" step="1" value="5" required>
+          <button type="submit">随机添加</button>
+        </form>
+        <p class="status" id="status" role="status">随机点会追加到当前路线。</p>
+      </section>
+      <section class="editor-section" aria-labelledby="order-title">
+        <header class="section-head">
+          <h3 id="order-title">连线顺序</h3>
+          <button class="quiet" id="nearest" type="button">最近邻排序</button>
+          <button class="quiet" id="clear" type="button">清空航点</button>
+        </header>
+        <p class="order-hint">拖动 ⋮⋮ 或用箭头排序，点击坐标可编辑。</p>
+        <div class="point-list"><ol id="points" aria-label="航点连接顺序"></ol></div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script>
+  'use strict';
+
+  const bounds = [8, 8, 2.5];
+  const origin = [0, 0, 0];
+  const start = [0, 0, 0.5];
+  const coordinateNames = ['X', 'Y', 'Z'];
+  const axisColors = ['#ff837d', '#7dd89a', '#88b7ff'];
+  const colors = { line: '#4be1c1', start: '#eaf7ef', end: '#f6b768', text: '#cfe2e4', ink: '#0b1923' };
+  const $ = id => document.getElementById(id);
+  const canvas = $('plot');
+  const ctx = canvas.getContext('2d');
+  const list = $('points');
+  const inputs = ['x', 'y', 'z'].map($);
+  const viewButtons = [...document.querySelectorAll('[data-view]')];
+  const views = {
+    orbit: { azimuth: 0.67, elevation: 0.62 },
+    top: { azimuth: 0, elevation: Math.PI / 2 },
+    side: { azimuth: 0, elevation: 0 },
+  };
+  const view = { mode: 'orbit', ...views.orbit, zoom: 1 };
+  const floor = [[0, 0, 0], [bounds[0], 0, 0], [bounds[0], bounds[1], 0], [0, bounds[1], 0]];
+  const ceiling = floor.map(([x, y]) => [x, y, bounds[2]]);
+  let nextId = 1;
+  let points = [[1.3, 1.1, .80], [2.45, 3.6, 1.65], [4, 4.55, 2.02], [5.35, 2.8, 1.57],
+                [6.6, 5.7, 1.08], [7.3, 6.6, .65]].map(makePoint);
+  let editing = null;
+  let dragged = null;
+  let dragTarget = null;
+  let pointer = null;
+  let hits = [];
+  let requestedFrame = 0;
+
+  function makePoint(position) {
+    return { id: nextId++, position };
+  }
+
+  function say(text, error = false, target = 'status') {
+    const status = $(target);
+    status.textContent = text;
+    status.classList.toggle('error', error);
+  }
+
+  function isPosition(position) {
+    return Array.isArray(position) && position.length === bounds.length &&
+      position.every((value, index) => Number.isFinite(value) && value >= 0 && value <= bounds[index]);
+  }
+
+  function distance(a, b) {
+    return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  }
+
+  function tagAt(index) {
+    return index === points.length - 1 ? 'E' : String(index + 1);
+  }
+
+  function selectPoint(id) {
+    editing = id;
+    const point = points.find(point => point.id === id);
+    inputs.forEach((input, index) => { input.value = point ? point.position[index] : ''; });
+    $('submit-point').textContent = point ? '保存修改' : '添加航点';
+    $('coordinate-title').textContent = point ? '编辑航点 ' + tagAt(points.indexOf(point)) : '手动输入';
+    $('cancel-edit').hidden = !point;
+    update();
+  }
+
+  function control(text, label, callback, disabled = false) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = text;
+    button.setAttribute('aria-label', label);
+    button.title = label;
+    button.disabled = disabled;
+    button.addEventListener('click', callback);
+    return button;
+  }
+
+  function makeRow(position, index, point = null) {
+    const row = document.createElement('li');
+    row.className = 'point-row';
+    const grip = document.createElement('span');
+    grip.className = 'grip';
+    grip.setAttribute('aria-hidden', 'true');
+    const badge = document.createElement('span');
+    badge.className = 'point-index';
+    const tag = point ? tagAt(index) : 'S';
+    badge.textContent = tag;
+    const coords = position.map(value => value.toFixed(2)).join('  ');
+    if (!point) {
+      badge.classList.add('start');
+      const text = document.createElement('span');
+      text.className = 'point-location';
+      text.textContent = coords;
+      const fixed = document.createElement('span');
+      fixed.className = 'fixed';
+      fixed.textContent = '空中起点';
+      row.append(grip, badge, text, fixed);
+      return row;
+    }
+
+    row.dataset.id = point.id;
+    row.classList.toggle('selected', point.id === editing);
+    badge.classList.toggle('end', tag === 'E');
+    grip.textContent = '⋮⋮';
+    grip.draggable = true;
+    grip.title = '拖动排序';
+    const location = control(coords, '编辑航点 ' + tag + '，' + coords, () => selectPoint(point.id));
+    location.className = 'point-location';
+    location.setAttribute('aria-pressed', String(point.id === editing));
+    const controls = document.createElement('div');
+    controls.className = 'row-controls';
+    const up = control('↑', '上移航点 ' + tag, () => move(point.id, index - 1, 'up'), index === 0);
+    const down = control('↓', '下移航点 ' + tag, () => move(point.id, index + 1, 'down'), index === points.length - 1);
+    up.dataset.action = 'up';
+    down.dataset.action = 'down';
+    const remove = control('×', '删除航点 ' + tag, () => {
+      points.splice(index, 1);
+      if (point.id === editing) selectPoint(null); else update();
+      say('已删除航点 ' + tag + '。');
+    });
+    remove.className = 'delete';
+    controls.append(up, down, remove);
+    row.append(grip, badge, location, controls);
+    return row;
+  }
+
+  function update() {
+    const scroll = list.parentElement.scrollTop;
+    list.replaceChildren(makeRow(start, -1), ...points.map((point, index) => makeRow(point.position, index, point)));
+    list.parentElement.scrollTop = scroll;
+    $('nearest').disabled = points.length < 2;
+    $('clear').disabled = points.length === 0;
+    $('save-route').disabled = points.length === 0;
+    $('point-count').textContent = points.length;
+    const ordered = [start, ...points.map(point => point.position)];
+    let length = 0;
+    for (let index = 1; index < ordered.length; index++) length += distance(ordered[index - 1], ordered[index]);
+    $('length').textContent = length.toFixed(2) + ' m';
+    if (editing !== null) $('coordinate-title').textContent = '编辑航点 ' + tagAt(points.findIndex(point => point.id === editing));
+    render();
+  }
+
+  function move(id, destination, focusAction = null) {
+    const source = points.findIndex(point => point.id === id);
+    if (source === -1 || source === destination || destination < 0 || destination >= points.length) return;
+    const [point] = points.splice(source, 1);
+    points.splice(destination, 0, point);
+    update();
+    if (focusAction) {
+      const row = list.querySelector('[data-id="' + id + '"]');
+      const button = row.querySelector('[data-action="' + focusAction + '"]:not(:disabled)');
+      (button || row.querySelector('.point-location')).focus();
+    }
+    say('连线顺序已更新。');
+  }
+
+  function finishDrag() {
+    dragTarget?.classList.remove('drop-target');
+    dragTarget = null;
+    dragged = null;
+  }
+
+  list.addEventListener('dragstart', event => {
+    const row = event.target.closest('[data-id]');
+    if (!row) return;
+    dragged = Number(row.dataset.id);
+    event.dataTransfer.setData('text/plain', row.dataset.id);
+    event.dataTransfer.effectAllowed = 'move';
+  });
+  list.addEventListener('dragover', event => {
+    const row = event.target.closest('[data-id]');
+    if (!row || dragged === null) return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+    if (dragTarget !== row) {
+      dragTarget?.classList.remove('drop-target');
+      dragTarget = row;
+      row.classList.add('drop-target');
+    }
+  });
+  list.addEventListener('drop', event => {
+    const row = event.target.closest('[data-id]');
+    if (!row || dragged === null) return;
+    event.preventDefault();
+    const id = dragged;
+    finishDrag();
+    move(id, points.findIndex(point => point.id === Number(row.dataset.id)));
+  });
+  list.addEventListener('dragend', finishDrag);
+
+  $('point-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const position = inputs.map(input => input.valueAsNumber);
+    if (!isPosition(position)) {
+      say('坐标须位于场地内。', true);
+      return;
+    }
+    const point = points.find(point => point.id === editing);
+    if (point) point.position = position; else points.push(makePoint(position));
+    selectPoint(null);
+    say(point ? '航点坐标已更新。' : '已在末尾添加航点。');
+  });
+  $('point-form').addEventListener('invalid', event => {
+    const index = inputs.indexOf(event.target);
+    say(coordinateNames[index] + ' 请输入 0 至 ' + bounds[index] + ' m。', true);
+  }, true);
+  $('cancel-edit').addEventListener('click', () => { selectPoint(null); say('已取消修改。'); });
+  $('random-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const count = $('random-count').valueAsNumber;
+    for (let index = 0; index < count; index++) {
+      points.push(makePoint(bounds.map(upper => Math.round(Math.random() * upper * 100) / 100)));
+    }
+    update();
+    say('已追加 ' + count + ' 个随机航点。');
+  });
+  $('nearest').addEventListener('click', () => {
+    const remaining = [...points];
+    const ordered = [];
+    let previous = start;
+    while (remaining.length) {
+      let closest = 0;
+      for (let index = 1; index < remaining.length; index++) {
+        if (distance(previous, remaining[index].position) < distance(previous, remaining[closest].position)) closest = index;
+      }
+      const [point] = remaining.splice(closest, 1);
+      ordered.push(point);
+      previous = point.position;
+    }
+    points = ordered;
+    update();
+    say('已从起点依次连接最近的未访问航点。');
+  });
+  $('clear').addEventListener('click', () => {
+    points = [];
+    selectPoint(null);
+    say('已清空航点，保留固定起点。');
+  });
+
+  function routeData() {
+    return {
+      schema_version: 1,
+      coordinate_frame: 'XYZ_Z_UP',
+      units: 'm',
+      field_size_m: bounds,
+      origin,
+      start,
+      waypoints: points.map(point => point.position),
+    };
+  }
+
+  $('save-route').addEventListener('click', () => {
+    const json = JSON.stringify(routeData(), null, 2) + '\n';
+    const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = '航线-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json';
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    say('下载 ' + link.download, false, 'route-status');
+  });
+
+  $('open-route').addEventListener('click', () => $('route-file').click());
+  $('route-file').addEventListener('change', async event => {
+    const file = event.target.files[0];
+    if (!file) return;
+    event.target.value = '';
+    $('open-route').disabled = true;
+    const previous = JSON.stringify(routeData().waypoints);
+    try {
+      const route = JSON.parse(await file.text());
+      const expected = routeData();
+      const metadata = ['schema_version', 'coordinate_frame', 'units', 'field_size_m', 'origin', 'start'];
+      if (metadata.some(key => JSON.stringify(route?.[key]) !== JSON.stringify(expected[key]))) {
+        throw new Error('此文件与编辑器的坐标系、场地或起点不匹配。');
+      }
+      if (!Array.isArray(route.waypoints) || route.waypoints.length === 0 || !route.waypoints.every(isPosition)) {
+        throw new Error('航线须包含至少一个场地内的 XYZ 航点。');
+      }
+      if (previous !== JSON.stringify(expected.waypoints)) {
+        throw new Error('读取期间航点已修改，请重新打开文件。');
+      }
+      points = route.waypoints.map(makePoint);
+      selectPoint(null);
+      say('已打开 ' + file.name + '（' + points.length + ' 个航点）', false, 'route-status');
+    } catch (error) {
+      const message = error instanceof SyntaxError ? '文件不是有效的 JSON。' : error.message;
+      say(message, true, 'route-status');
+    } finally {
+      $('open-route').disabled = false;
+    }
+  });
+
+  function setView(mode) {
+    Object.assign(view, views[mode], { mode, zoom: 1 });
+    updateViewButtons();
+    render();
+  }
+
+  function updateViewButtons() {
+    viewButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === view.mode)));
+  }
+
+  function adjustZoom(factor) {
+    view.zoom = Math.min(4, Math.max(0.65, view.zoom * factor));
+    render();
+  }
+
+  viewButtons.forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
+  $('reset-view').addEventListener('click', () => setView('orbit'));
+  $('zoom-out').addEventListener('click', () => adjustZoom(1 / 1.2));
+  $('zoom-in').addEventListener('click', () => adjustZoom(1.2));
+  canvas.addEventListener('wheel', event => {
+    event.preventDefault();
+    adjustZoom(Math.exp(-Math.max(-90, Math.min(90, event.deltaY)) * 0.003));
+  }, { passive: false });
+
+  function orbit(dx, dy) {
+    view.azimuth += dx;
+    view.elevation = Math.max(-0.12, Math.min(Math.PI / 2, view.elevation + dy));
+    if (view.mode !== 'orbit') {
+      view.mode = 'orbit';
+      updateViewButtons();
+    }
+    render();
+  }
+
+  canvas.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || pointer) return;
+    pointer = { id: event.pointerId, x: event.offsetX, y: event.offsetY, dx: 0, dy: 0, moved: false };
+    canvas.setPointerCapture(event.pointerId);
+  });
+  canvas.addEventListener('pointermove', event => {
+    if (pointer?.id !== event.pointerId) return;
+    pointer.dx += event.offsetX - pointer.x;
+    pointer.dy += event.offsetY - pointer.y;
+    pointer.x = event.offsetX;
+    pointer.y = event.offsetY;
+    if (!pointer.moved && Math.hypot(pointer.dx, pointer.dy) < 4) return;
+    pointer.moved = true;
+    canvas.classList.add('orbiting');
+    orbit(-pointer.dx * 0.009, -pointer.dy * 0.009);
+    pointer.dx = pointer.dy = 0;
+  });
+  canvas.addEventListener('pointerup', event => {
+    if (pointer?.id !== event.pointerId) return;
+    if (!pointer.moved) {
+      const hit = [...hits].reverse().find(point => Math.hypot(point.x - event.offsetX, point.y - event.offsetY) < 13);
+      if (hit) {
+        selectPoint(hit.id);
+        list.querySelector('[data-id="' + hit.id + '"]')?.scrollIntoView({ block: 'nearest' });
+      }
+    }
+    pointer = null;
+    canvas.classList.remove('orbiting');
+  });
+  canvas.addEventListener('lostpointercapture', () => { pointer = null; canvas.classList.remove('orbiting'); });
+  canvas.addEventListener('keydown', event => {
+    const arrows = { ArrowLeft: [-.12, 0], ArrowRight: [.12, 0], ArrowUp: [0, .12], ArrowDown: [0, -.12] };
+    if (arrows[event.key]) {
+      event.preventDefault();
+      orbit(...arrows[event.key]);
+    }
+  });
+
+  function projection(width, height) {
+    const ca = Math.cos(view.azimuth), sa = Math.sin(view.azimuth);
+    const ce = Math.cos(view.elevation), se = Math.sin(view.elevation);
+    const rotate = ([x, y, z]) => [x * ca - y * sa, (x * sa + y * ca) * se + z * ce, z * se - (x * sa + y * ca) * ce];
+    const rotated = [...floor, ...ceiling].map(rotate);
+    const xs = rotated.map(point => point[0]), ys = rotated.map(point => point[1]);
+    const left = Math.min(...xs), right = Math.max(...xs), bottom = Math.min(...ys), top = Math.max(...ys);
+    const scale = Math.min((width - 62) / (right - left), (height - 102) / (top - bottom)) * view.zoom;
+    return position => {
+      const [x, y, depth] = rotate(position);
+      return [width / 2 + (x - (left + right) / 2) * scale,
+              (height - 16) / 2 - (y - (bottom + top) / 2) * scale, depth];
+    };
+  }
+
+  function stroke(path, color, width = 1, dash = []) {
+    ctx.beginPath();
+    path.forEach(([x, y], index) => index === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.setLineDash(dash);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function label(text, x, y, color, align = 'left') {
+    ctx.fillStyle = color;
+    ctx.textAlign = align;
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, x, y);
+  }
+
+  function arrow(from, to, color) {
+    const angle = Math.atan2(to[1] - from[1], to[0] - from[0]);
+    const wing = offset => [to[0] - 7 * Math.cos(angle + offset), to[1] - 7 * Math.sin(angle + offset)];
+    stroke([wing(-.48), to, wing(.48)], color, 1.4);
+  }
+
+  function drawField(project, width, height) {
+    const base = floor.map(project);
+    ctx.beginPath();
+    base.forEach(([x, y], index) => index === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
+    ctx.closePath();
+    const fill = ctx.createLinearGradient(0, 0, width, height);
+    fill.addColorStop(0, '#274352');
+    fill.addColorStop(1, '#172b37');
+    ctx.fillStyle = fill;
+    ctx.fill();
+
+    const ground = base[0];
+    const top = ceiling.map(project);
+    const gridColor = view.mode === 'side' ? '#2c4655' : '#3b5360';
+    const secondaryGrid = view.mode === 'side' ? '#293f4d' : '#314754';
+    for (let x = 1; x < bounds[0]; x++) {
+      const gridLine = view.mode === 'side' ? [[x, 0, 0], [x, 0, bounds[2]]] : [[x, 0, 0], [x, bounds[1], 0]];
+      stroke(gridLine.map(project), x % 2 ? secondaryGrid : gridColor);
+    }
+    if (view.mode === 'side') {
+      for (let z = .5; z < bounds[2]; z += .5) stroke([[0, 0, z], [bounds[0], 0, z]].map(project), secondaryGrid);
+    } else {
+      for (let y = 1; y < bounds[1]; y++) stroke([[0, y, 0], [bounds[0], y, 0]].map(project), y % 2 ? secondaryGrid : gridColor);
+    }
+    stroke([...base, base[0]], '#6b8791', 1.45);
+    if (view.mode !== 'top') {
+      stroke([...top, top[0]], '#657e8b', 1, [5, 5]);
+      top.forEach((corner, index) => stroke([base[index], corner], '#577280', 1, [5, 5]));
+    }
+
+    ctx.font = '12px Consolas, monospace';
+    const axisEnds = [[bounds[0], 0, 0], [0, bounds[1], 0], [0, 0, bounds[2]]];
+    axisEnds.forEach((end, index) => {
+      const screen = project(end);
+      const dx = screen[0] - ground[0], dy = screen[1] - ground[1];
+      const span = Math.hypot(dx, dy);
+      if (span < 5) return;
+      const color = axisColors[index];
+      stroke([ground, screen], color, 1.6);
+      arrow(ground, screen, color);
+      if (screen[0] < 0 || screen[0] > width || screen[1] < 0 || screen[1] > height) return;
+      const axisLabel = coordinateNames[index] + ' ' + bounds[index] + ' m';
+      const textWidth = ctx.measureText(axisLabel).width;
+      const offsetX = dx < 0 ? -8 - textWidth : 8;
+      const left = Math.max(6, Math.min(width - textWidth - 6, screen[0] + offsetX));
+      const center = Math.max(9, Math.min(height - 9, screen[1] + (index === 2 ? -10 : 12)));
+      label(axisLabel, left, center, color);
+    });
+  }
+
+  function drawRoute(project, width, height) {
+    const ordered = [{ id: null, position: start }, ...points];
+    const screen = ordered.map(point => project(point.position));
+    if (Math.hypot(screen[0][0] - project(origin)[0], screen[0][1] - project(origin)[1]) > 3) {
+      stroke([project(origin), screen[0]], '#b2c5ca', 1.6, [3, 4]);
+    }
+    if (screen.length > 1) {
+      stroke(ordered.map(point => project([point.position[0], point.position[1], 0])), '#4be1c143', 1.3, [3, 4]);
+      for (const point of points) {
+        const [x, y, z] = point.position;
+        if (z > .02) stroke([project([x, y, 0]), project(point.position)], '#8ab2b683', 1, [3, 4]);
+      }
+      stroke(screen, '#07121c', 6);
+      stroke(screen, colors.line, 2.65);
+      for (let index = 1; index < screen.length; index++) {
+        const [from, to] = [screen[index - 1], screen[index]];
+        const span = Math.hypot(to[0] - from[0], to[1] - from[1]);
+        if (span > 37) arrow(from, [from[0] + (to[0] - from[0]) * .62, from[1] + (to[1] - from[1]) * .62], colors.line);
+      }
+    }
+
+    const visiblePoints = screen.map(([x, y, depth], index) => ({ x, y, depth, index, id: ordered[index].id }));
+    const drawOrder = [...visiblePoints].sort((a, b) => a.depth - b.depth);
+    hits = drawOrder.filter(point => point.id !== null);
+    for (const { x, y, index, id } of drawOrder) {
+      const end = index > 0 && index === screen.length - 1;
+      const selected = id !== null && id === editing;
+      ctx.beginPath();
+      if (end) {
+        ctx.moveTo(x, y - 7); ctx.lineTo(x + 7, y); ctx.lineTo(x, y + 7); ctx.lineTo(x - 7, y); ctx.closePath();
+      } else {
+        ctx.arc(x, y, index === 0 ? 6 : 5, 0, Math.PI * 2);
+      }
+      ctx.fillStyle = end ? colors.end : index === 0 ? colors.start : colors.line;
+      ctx.strokeStyle = selected ? '#f5fff8' : colors.ink;
+      ctx.lineWidth = selected ? 2.8 : 1.5;
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    ctx.font = 'bold 12px Consolas, monospace';
+    const occupied = [];
+    const numbered = [...visiblePoints].sort((a, b) => {
+      const priority = point => point.id === editing || point.index === 0 || point.index === screen.length - 1 ? 0 : 1;
+      return priority(a) - priority(b);
+    });
+    for (const { x, y, index } of numbered) {
+      const text = index === 0 ? 'S' : tagAt(index - 1);
+      const length = ctx.measureText(text).width;
+      const options = [[x + 9, y - 12], [x + 9, y + 12], [x - 9 - length, y - 12]];
+      const clear = options.find(([left, center]) =>
+        left >= 2 && left + length < width - 3 && center >= 9 && center <= height - 12 &&
+        !occupied.some(([otherX, otherY, otherWidth]) =>
+          Math.abs(center - otherY) < 14 && left < otherX + otherWidth + 4 && left + length > otherX - 4)
+      );
+      if (clear) {
+        const [left, center] = clear;
+        occupied.push([left, center, length]);
+        ctx.strokeStyle = colors.ink;
+        ctx.lineWidth = 3;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.strokeText(text, left, center);
+        label(text, left, center, text === 'E' ? colors.end : colors.text);
+      }
+    }
+  }
+
+  function render() {
+    if (requestedFrame) return;
+    requestedFrame = requestAnimationFrame(() => {
+      requestedFrame = 0;
+      const width = canvas.clientWidth, height = canvas.clientHeight;
+      if (width < 75 || height < 115) return;
+      const ratio = Math.min(2, window.devicePixelRatio || 1);
+      const pixels = [Math.round(width * ratio), Math.round(height * ratio)];
+      if (canvas.width !== pixels[0] || canvas.height !== pixels[1]) [canvas.width, canvas.height] = pixels;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      const project = projection(width, height);
+      drawField(project, width, height);
+      drawRoute(project, width, height);
+    });
+  }
+
+  new ResizeObserver(render).observe(canvas);
+  update();
+</script>
+</body>
+</html>

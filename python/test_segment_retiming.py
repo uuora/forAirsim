@@ -2,9 +2,10 @@ import unittest
 
 import numpy as np
 
-from fast_reference import decode, ordinary_plan, retimed
+from fast_reference import decode, frozen_phase_timing, nominal_command_bounds, ordinary_plan, retimed
 from prepared_route_planner import prepared_spec
 from segment_retiming import SegmentTimeMap, sampled_motor_forces, search_profiles, tracking_reserves
+from trajectory_research.minvo import control_norm_bound
 
 
 class SegmentRetimingTests(unittest.TestCase):
@@ -39,6 +40,41 @@ class SegmentRetimingTests(unittest.TestCase):
         self.assertNotIn("retiming_profile", old)
         self.assertIsNone(new["retiming_fraction"])
 
+    def test_minvo_bounds_nominal_command_and_slew_on_exported_segments(self):
+        plan = retimed(self.base, self.blocks, .25)
+        curve = decode(plan)
+        explicit = dict(plan, route=dict(plan["route"], retiming={"nominal_bound_basis": "bernstein"}))
+        self.assertEqual(nominal_command_bounds(curve), nominal_command_bounds(decode(explicit)))
+        minvo = dict(plan, route=dict(plan["route"], retiming={"nominal_bound_basis": "minvo"}))
+        minvo_bounds = nominal_command_bounds(decode(minvo))
+        self.assertNotEqual(minvo_bounds, nominal_command_bounds(curve))
+        for piece in curve.segments:
+            times = np.linspace(0., piece.duration_s, 301)
+            for order, bound in enumerate(minvo_bounds, start=1):
+                command = piece.sample(times, order) + .9 * piece.sample(times, order + 1)
+                self.assertLessEqual(np.linalg.norm(command, axis=1).max(), bound + 1.e-10)
+
+    def test_minvo_known_polynomial_has_tighter_hull(self):
+        # 8s(1-s), represented at degree 3 and degree 4.
+        for controls in ([0., 8. / 3, 8. / 3, 0.], [0., 2., 8. / 3, 2., 0.]):
+            bound = control_norm_bound([np.array(controls)[:, None]])
+            self.assertGreaterEqual(bound, 2.)
+            self.assertLess(bound, max(controls))
+
+    def test_frozen_phase_checks_between_nodes_and_keeps_waypoints(self):
+        knots = np.linspace(0., self.knots[-1], 4).tolist()
+        # Positive samples can still yield a negative interior cubic minimum.
+        with self.assertRaisesRegex(ValueError, '正向推进'):
+            frozen_phase_timing(self.base, self.blocks, dict(knots=knots, h=[9., .1, .1, 9.]))
+
+        plan = frozen_phase_timing(self.base, self.blocks, dict(knots=knots, h=[1.44] * 4))
+        curve = decode(plan)
+        self.assertAlmostEqual(curve.duration_s, self.knots[-1] / 1.2)
+        self.assertEqual(plan["retiming_profile"]["mode"], "frozen_cubic")
+        np.testing.assert_allclose(curve.sample(self.knots[1:] / 1.2),
+                                   self.base["route"]["waypoints"], atol=1.e-10)
+        np.testing.assert_allclose(curve.sample([0., curve.duration_s], 1), 0., atol=1.e-10)
+
     def test_via_velocity_is_free_and_terminal_is_at_rest(self):
         weights = [.5, 1., 0., .2]
         timing = SegmentTimeMap(self.solution, self.knots, weights)
@@ -53,6 +89,27 @@ class SegmentRetimingTests(unittest.TestCase):
             for derivative in (0, 1, 2):
                 np.testing.assert_allclose(a.sample(a.duration_s, derivative), b.sample(0., derivative), atol=1.e-8)
         self.assertLess(curve.waypoint_times[-1]["reference_speed_mps"], 1.e-10)
+
+    def test_bspline_retiming_keeps_seed_geometry_and_ordered_waypoints(self):
+        spec = prepared_spec([[8., 0., 5.], [11., 5., 6.], [16., 8., 7.]], policy='pass',
+                             position_only_pass=True)
+        base = ordinary_plan(spec, 'bspline')
+        seed = decode(base)
+        anchors = np.linspace(0., seed.duration_s, 100)
+        solution = dict(anchors=anchors.tolist(), h=(1.6 + .3*np.sin(anchors)).tolist())
+        blocks = [(seed.segments, solution)]
+        fixed = retimed(base, blocks, .125)
+        segmented = retimed(base, blocks, profile=SegmentTimeMap(solution, np.r_[0.,seed.ends], [.125]*4))
+        for plan in (fixed,segmented):
+            self.assertEqual(plan['base_timed_segments'],base['timed_segments'])
+            self.assertNotEqual(plan['timed_segments'],plan['base_timed_segments'])
+            self.assertNotIn('parameters',plan)
+            curve = decode(plan)
+            self.assertLess(curve.duration_s,seed.duration_s)
+            times = [event['arrival_time_s'] for event in curve.waypoint_times]
+            np.testing.assert_allclose(curve.sample(times),spec['waypoints'],atol=1.e-9)
+            np.testing.assert_allclose(curve.sample([0,curve.duration_s],1),0.,atol=1.e-9)
+        np.testing.assert_allclose(decode(fixed).ends,decode(segmented).ends,atol=1.e-10)
 
     def test_search_returns_fastest_checked_feasible_profile(self):
         def evaluate(w):
